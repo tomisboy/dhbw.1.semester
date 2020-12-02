@@ -3,7 +3,7 @@
 int main() {
 
   int x,y;
-    printf("ZAHL 1 eingeben_ \n ");
+    printf("ZAHL 1 eingeben: \n ");
     scanf_s("%i",&x);
     fflush(stdin);
     printf("ZAHL 2 \n");
