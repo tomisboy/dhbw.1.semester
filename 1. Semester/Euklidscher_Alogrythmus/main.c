@@ -9,12 +9,6 @@
 #define NIX void
 #define MEINMACRO a*b/c
 
-typedef struct 
-{
-///....
-}meinEigenerDatentyp;
-
-
 
 
 int main() {
