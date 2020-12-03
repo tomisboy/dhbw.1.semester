@@ -29,8 +29,6 @@ c1 = 0x41;
 
 printf("%c",c1);
 printf("%c",c3);
-
-
 int i1 = 123;
 unsigned int i2 =0xffffffff;
 int i3 = 'A';
