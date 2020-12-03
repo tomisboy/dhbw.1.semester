@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer25.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer27.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="Header_159" HREF="refer18.htm#PToC_159">Anhang H. &Uuml;bersicht &uuml;ber die Include-/Header-Dateien</A></H1>
+<P>Diese &Uuml;bersicht enth&auml;lt u.U. nicht alle Funktionsnamen,
+die in den jeweiligen Dateien enthalten sind.
+<P>
+<P>assert.h
+<P>Die Datei assert.h definiert nur das Test-Makro assert.
+<P>
+<P>
+<P>ctype.h
+<P>ctype.h enth&auml;lt u.a. die folgenden Funktionsprototypen, die
+Integerwerte auf bestimmte Kennzeichen hin untersuchen:
+<PRE>
+isalnum     isdigit     isprint     isupper     toupper
+isalpha     isgraph     ispunct     isxdigit
+iscntrl     islower     isspace     tolower
+</PRE>
+<P>
+<P>
+<P>float.h
+<P>Die Datei float.h enth&auml;lt u.a. Definitionen der Flie&szlig;kommakonstanten,
+z.B. den Wertebereich der einzelnen Flie&szlig;kommadatentypen.
+<P>
+<P>
+<P>limits.h
+<P>Die Datei limits.h enth&auml;lt u.a. Definitionen f&uuml;r integer und
+character.
+<P>
+<P>
+<P>math.h
+<P>Die Datei math.h enth&auml;lt u.a. Funktionsprototypen f&uuml;r mathematische
+Funktionen und Makros:
+<PRE>
+acos         ceil       floor        log10         sqrt
+asin         cos        fmod         modf          tan
+atan         cosh       frexp        pow           tanh
+atan2        exp        ldexp        sin
+bessel       fabs       log          sinh
+</PRE>
+<P>
+<P>
+<P>setjmp.h
+<P>Diese Datei definiert Prototypen f&uuml;r die Funktionen
+<TT>setjmp</TT> und <TT>longjmp</TT> sowie einen Buffertyp, den
+diese beiden Funktionen zum Speichern von Daten ben&ouml;tigen.
+<P>
+<P>
+<P>signal.h
+<P>Diese Datei enth&auml;lt u.a. Prototypen f&uuml;r die Funktionen <TT>signal</TT>
+und <TT>raise</TT> sowie Wertzuordnungen f&uuml;r einzelne Signale.
+<P>
+<P>
+<P>stdarg.h
+<P>Diese Datei enth&auml;lt u.a. Makrodefinitionen, die es erm&ouml;glichen, auf
+Parameter in Funktionen mit variablen Parameterlisten zuzugreifen.
+Die dazugeh&ouml;rigen Funktionen sind <TT>va_arg, va_start</TT> und
+<TT>va_end</TT>.
+<P>
+<P>
+<P>stdio.h
+<P>Diese Datei enth&auml;lt u.a. Prototypen und Makrodefinitionen f&uuml;r die
+Ein- und Ausgabe von Daten. Sie umfa&szlig;t folgende Funktionen:
+<PRE>
+clearerr      fprintf      fwrite       puts         sscanf
+fclose        fputc        getc         remove       tmpfile
+feof          fputs        gets         rename       tmpnam
+ferror        fread        getchar      rewind       ungetc
+fflush        freopen      perror       scanf        vfprintf
+fgetc         fscanf       printf       setbuf       vprintf
+fgets         fseek        putc         setvbuf      vsprintf
+fopen         ftell        putchar      sprintf
+</PRE>
+<P>
+<P>
+<P>stdlib.h
+<P>Diese Datei enth&auml;lt u.a. Prototypen f&uuml;r folgende Funktionen:
+<PRE>
+abort         atol         free         qsort        strtod
+abs           bsearch      getenv       rand         strtol
+atof          calloc       labs         realloc      system
+atoi          exit         malloc       srand
+</PRE>
+<P>
+<P>
+<P>string.h
+<P>Diese Datei enth&auml;lt u.a. Prototypen f&uuml;r die Funktionen zur
+Zeichenkettenbearbeitung.
+<PRE>
+memchr        strcat       strcspn      strncpy      strstr
+memcmp        strchr       strlen       strpbrk      strtok
+memcpy        strcmp       strncat      strrchr
+memset        strcpy       strncmp      strspn
+</PRE>
+<P>
+<P>
+<P><P>
+<P>time.h
+<P>Diese Datei beinhaltet die Prototypen f&uuml;r folgende Funktionen:
+<PRE>
+              asctime      difftime     localtime
+              ctime        gmtime       time
+</PRE>
+<P>Des weiteren befindet sich in dieser Datei die Definition der
+Struktur <TT>tm</TT>, die von einigen der oben genannten Funktionen
+benutzt wird.
+<P>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer25.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer27.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

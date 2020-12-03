@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer09.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer11.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRREPEAT" HREF="refer02.htm#ToC_87">6.0 Wiederholungen - Schleifen</A></H1>
+<A NAME="IDX215"></A>
+<P>Um bestimmte Programmteile wiederholen zu k&ouml;nnen, werden die
+Wiederholungsanweisungen verwendet. Sie gliedern sich auf in:
+<OL TYPE=1>
+<P><LI>while-statement,
+<P><LI>do-while-statement und
+<P><LI>for-statement.
+</OL>
+<P>Allen Schleifen ist gemein, da&szlig; sie sich in einen Schleifenkopf
+(der bei der <TT>do while</TT>-Schleife aus zwei Teilen besteht)
+und einen Schleifenrumpf aufgliedern. Befindet sich mehr als eine
+Anweisung im Schleifenrumpf, m&uuml;ssen diese Anweisungen, die bei jedem
+Schleifendurchlauf ausgef&uuml;hrt werden, in geschweifte Klammern ({})
+eingefa&szlig;t sein.
+<P>
+<HR><H2><A NAME="Header_88" HREF="refer02.htm#ToC_88">6.1 while</A></H2>
+<A NAME="IDX216"></A>
+<A NAME="IDX218"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">while - statement</TH><TR><TD>
+<PRE>
+                                          
+>>--while--(--expression--)--statement--><
+</PRE>
+</TD></TR></TABLE>
+<P>Die <TT>while</TT>-Schleife besteht aus einem Schleifenkopf und
+einem Schleifenrumpf. Im Schleifenkopf befindet sich die Bedingung zur
+Ausf&uuml;hrung eines Schleifendurchlaufs. Im Schleifenrumpf befinden sich
+die Anweisungen, die bei jedem Schleifendurchlauf abgearbeitet werden
+sollen.
+<P>Die while-Schleife ist eine kopfgesteuerte Schleife. Das hei&szlig;t,
+da&szlig; die Bedingung vor dem Schleifendurchlauf auf Wahrheit &uuml;berpr&uuml;ft
+wird. Der Schleifenrumpf wird solange ausgef&uuml;hrt, wie der Ausdruck
+in der Klammer wahr ist.
+<P>Codiert wird die <TT>while</TT>-Schleife folgenderma&szlig;en:
+<PRE>
+   expr1;
+ 
+   while (expr2)
+   {
+      statement;
+      expr3;
+   }
+</PRE>
+<P>Durch <TT>expr1</TT> wird die Kontrollvariable, der Z&auml;hler,
+initialisiert. <TT>expr2</TT> ist die Ausf&uuml;hrungsbedingung und
+<TT>expr3</TT> legt die Ver&auml;nderung der Kontrollvariablen pro
+Schleifendurchlauf fest.
+<P>
+Beispiel:
+<PRE>
+   n = 18;                                 /* Initialisierung der    */
+   i = 1;                                  /* Schleifenvariablen     */
+ 
+   while (i++ &lt;= n)                        /* Start der Schleife     */
+   {
+      printf("Ergebnis: %d\n", i*i);       /* Anweisungen im Rumpf   */
+   }                                       /* Ende der Schleife      */
+</PRE>
+<P>Diese Schleife gibt solange das Ergebnis von <TT>i * i</TT> aus,
+bis <TT>i</TT> den Wert von <TT>n</TT> (18) erreicht hat. Wenn
+<TT>i</TT> den Wert von <TT>n</TT> erreicht hat, wird der letzte
+Schleifendurchlauf gestartet. <TT>i</TT> wird
+bei jedem Schleifendurchlauf um eins erh&ouml;ht.
+<P>
+<HR><H2><A NAME="Header_89" HREF="refer02.htm#ToC_89">6.2 do while</A></H2>
+<A NAME="IDX219"></A>
+<A NAME="IDX221"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">do while - statement</TH><TR><TD>
+<PRE>
+                                                 
+>>--do--statement--while--(--expression--)--&#59;--><
+</PRE>
+</TD></TR></TABLE>
+<P>Die <TT>do while</TT>-Schleife wird ebenfalls solange ausgef&uuml;hrt,
+wie der
+Ausdruck in der Klammer wahr ist. Allerdings wird erst nach dem
+Schleifendurchlauf gepr&uuml;ft, ob die Bedingung wahr ist.
+Es handelt sich somit um eine fu&szlig;gesteuerte Schleife.
+<P>Beispiel:
+<P>
+<PRE>
+   n = 18;
+   i = 1;
+ 
+   do
+   {
+     printf("Ergebnis: %d\n", i*i);
+   } while (i++ &lt;= n);
+</PRE>
+<P>Diese Schleife wird einmal mehr durchlaufen, als die oben
+aufgef&uuml;hrte <TT>while</TT>-Schleife.
+<P>
+<HR><H2><A NAME="Header_90" HREF="refer02.htm#ToC_90">6.3 for</A></H2>
+<A NAME="IDX222"></A>
+<A NAME="IDX224"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">for - statement</TH><TR><TD>
+<PRE>
+                                                                               
+>>--for--(--+---------------+--&#59;--+---------------+--&#59;--+---------------+--)-->
+            |               |     |               |     |               |      
+            +--expression1--+     +--expression2--+     +--expression3--+      
+</PRE>
+<PRE>
+                
+>--statement--><
+</PRE>
+</TD></TR></TABLE>
+<P>Die <TT>for</TT>-Schleife wird h&auml;ufig dann eingesetzt, wenn zu
+Beginn der Schleife bekannt ist, wie oft sie durchlaufen werden soll.
+<UL>
+<P><LI><TT>expression1</TT> stellt die Initialisierung der Z&auml;hlvariable
+dar.
+<P><LI><TT>expression2</TT> stellt die Abbruchbedingung dar.
+<P><LI><TT>expression3</TT> stellt die Ver&auml;nderung der Z&auml;hlvariablen dar.
+</UL>
+Beispiele:
+<PRE>
+<B>aufw&auml;rts z&auml;hlend&#58;</B>
+ 
+                for (i = 1; i &lt;= n; i++)
+                {
+                   ...anweisungen...
+                }
+ 
+ 
+<B>abw&auml;rts z&auml;hlend:</B>
+ 
+                for (i = n; i &gt; n; i--)
+                {
+                   ...anweisungen...
+                }
+</PRE>
+<P>Besonders h&auml;ufig wird die <TT>for</TT>-Schleife zur Verarbeitung
+von Feldern (Arrays) verwendet. Das Beispiel zeigt die
+Initialisierung eines Feldes mit 50 Komponenten:
+<PRE>
+                int zahlenfeld[50];
+                int index = 0, n = 50;
+ 
+                for (index = 0; index &lt; n; index++)
+                {
+                   zahlenfeld[index] = index;
+                }
+</PRE>
+<P><I>Anmerkung: Im Vergleich zu anderen Programmiersprachen sind
+drei Charakteristika bemerkenswert: Zum ersten die Codierweise der
+Addition und zum zweiten die Semikola innerhalb der Klammern!
+Des weiteren ist darauf hinzuweisen, da&szlig; nach der Klammer kein
+Semikolon, sondern nur ein Blockzeichen codiert wird, wenn
+der Schleifenrumpf nicht in den Schleifenkopf integriert
+wird.</I>
+<P>Die Angabe s&auml;mtlicher Ausdr&uuml;cke
+in den Klammern des Schleifenkopfes ist nicht zwingend. Des weiteren
+k&ouml;nnen Anweisungen aus dem Schleifenrumpf h&auml;ufig in den Schleifenkopf
+mit eingebunden werden.
+Die beiden folgenden Codesegmente sind funktionell identisch:
+<P>
+<PRE>
+   int zahlenfeld[50];
+   int index = 0, n = 50;
+ 
+   for (index = 0; index &lt; n; index++)
+   {
+     zahlenfeld[index] = index;
+     printf("\n%d", zahlenfeld[index]);
+   }
+</PRE>
+<P>entspricht
+<PRE>
+   for (index = 0, n = 50; index &lt; n; printf("\n%d", zahlenfeld[index++] = index));
+</PRE>
+<P>Bei derartigen Vereinfachungen sollte man jedoch aufpassen,
+da&szlig; es nicht zu Wechselwirkungen, insbesondere durch das
+Inkrementieren der Z&auml;hlvariable, zwischen den einzelnen
+Operationen kommt.
+<HR><H2><A NAME="HDRBRE" HREF="refer02.htm#ToC_91">6.4 Die Anweisungen break und continue</A></H2>
+<A NAME="IDX225"></A>
+<A NAME="IDX226"></A>
+<P>Die <TT>continue</TT>- und die <TT>break</TT>-Anweisung
+werden ausschlie&szlig;lich bei <TT>switch</TT> (siehe hdref
+refid=case.) und bei
+Schleifen und dort nur im Schleifenrumpf, dem Anweisungsteil,
+genutzt. <TT>break</TT> bewirkt einen sofortigen Abbruch der
+gesamten Schleife.
+Die Durchf&uuml;hrung wird mit dem Befehl nach der abschlie&szlig;enden
+geschweiften Klammer des Schleifenblocks fortgesetzt.
+<P>Bei der <TT>continue</TT>-Anweisung wird nur der aktuelle
+Schleifendurchlauf abgebrochen, d.h. es wird nicht die gesamte
+Schleifenverarbeitung beendet, sondern ausschlie&szlig;lich mit dem
+n&auml;chsten Schleifendurchlauf begonnen.
+<P>Beispiel f&uuml;r <TT>break</TT>:
+<PRE>
+   for (i = 0; i &lt; 21; i++)
+   {
+      if (zeichenkette [i] == '#')
+         break;
+      position++;
+   }
+</PRE>
+<P>Die L&auml;nge der Zeichenkette wird solange hochgez&auml;hlt, bis das Zeichen
+<TT>#</TT> auftaucht.
+<P>Beispiel f&uuml;r <TT>continue</TT>:
+<PRE>
+   for (i = 1; i &lt;= 100; i++)
+   {
+      if (i % 5 == 0) continue;
+      printf("\n%d", i);
+   }
+</PRE>
+<P>Es werden s&auml;mtliche Zahlen von 1 bis inklusive 100 ausgegeben, die
+nicht durch 5 teilbar sind.
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer09.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer11.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

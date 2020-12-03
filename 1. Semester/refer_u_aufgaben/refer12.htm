@@ -1,0 +1,563 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer11.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer13.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRFILE" HREF="refer02.htm#ToC_95">8.0 Dateibehandlung</A></H1>
+<A NAME="IDX236"></A>
+<P>In diesem Kapitel wird  die Arbeit mit Dateien unter C vorgestellt.
+Es wird auf die grundlegenden Funktionen, wie z.B.
+Dateien &ouml;ffnen/schlie&szlig;en, Daten aus Dateien lesen, Daten in
+Dateien schreiben und
+Daten an bestehende Dateien anh&auml;ngen, eingegangen.
+Des weiteren wird auf die Unterschiede in der Benutzung von Text- und
+Bin&auml;rdateien hingewiesen.
+<P>
+<HR><H2><A NAME="Header_96" HREF="refer02.htm#ToC_96">8.1 Datei &ouml;ffnen/schlie&szlig;en</A></H2>
+<A NAME="IDX238"></A>
+<P>
+Bevor Dateien verarbeitet werden k&ouml;nnen, m&uuml;ssen sie von dem Programm
+f&uuml;r die Bearbeitung vorbereitet werden. Diese Vorbereitung nennt man
+Datei &ouml;ffnen. Das Betriebssystem wird veranla&szlig;t, Speicher
+bereitzustellen, in dem Informationen bez&uuml;glich der ge&ouml;ffneten Datei
+abgelegt werden. Nach der Nutzung der Datei mu&szlig; sie wieder
+geschlossen werden, damit die neuen Informationen dauerhaft auf dem
+Datentr&auml;ger gespeichert werden. Anhand eines Beispiels wird die
+Vorgehensweise erl&auml;utert.
+<P>Dieses Beispiel &ouml;ffnet eine Datei und schlie&szlig;t sie wieder,
+wenn der Versuch, sie zu &ouml;ffnen, erfolgreich verlaufen ist:
+<P>
+<PRE>
+   /*  Datei_io.c                             */
+   /*  demonstriert die funktionen zum &ouml;ffnen */
+   /*  und schlie&szlig;en von dateien in c         */
+ 
+   #include &lt;stdio.h&gt;
+ 
+   void main(void)
+   {
+      /* Zeiger f&uuml;r die Datei deklarieren      */
+<A NAME="IDX239"></A>
+      FILE *datei_ptr=NULL;                                (1)
+ 
+      /* Datei &ouml;ffnen und Return-Code annehmen */
+<A NAME="IDX240"></A>
+      datei_ptr = fopen("TEST.TXT","w");                   (2)
+ 
+      /* Return-Code auswerten                 */
+      if (datei_ptr != NULL)
+      {
+         /* wenn kein fehler, datei schlie&szlig;en  */
+<A NAME="IDX241"></A>
+         fclose(datei_ptr);                                (3)
+      }
+   }
+</PRE>
+<P>zu (1): Mit <TT>FILE *datei_ptr;</TT>
+wird ein Zeiger mit dem Namen
+<I>datei_ptr</I> definiert. F&uuml;r jede gleichzeitig ge&ouml;ffnete Datei
+mu&szlig; ein Zeiger mit einem eigenen Namen deklariert werden, dessen Name
+in allen folgenden Operationen (Beispiele hier: (2),(3))
+eingesetzt wird, die sich auf die
+zugeh&ouml;rige Datei beziehen. Die Anweisung kann gelesen werden als:
+<TT>datei_ptr</TT> ist ein Zeiger auf ein Objekt des Typs
+<TT>FILE</TT>, hinter dem sich eine Struktur verbirgt.
+<TT>FILE</TT>
+ist ein vordefinierter Typ aus der Definitionsdatei <TT>stdio.h</TT>,
+der immer gro&szlig; geschrieben wird und Dateizugriffe erm&ouml;glicht.
+<P>zu (2): Die Funktion <TT>fopen()</TT> &ouml;ffnet die Datei
+<TT>TEST.TXT</TT>. Die Syntax der Funktion lautet:
+<BR>
+<TT>zeiger = fopen(dateiname, zugriffsmodus)&#59;</TT>
+<BR>
+<TT>datei_ptr</TT> nimmt den R&uuml;ckgabewert der Funktion
+<TT>fopen()</TT> auf. Dieser ist entweder ein Zeiger auf die
+Dateistruktur der ge&ouml;ffneten Datei oder <TT>NULL</TT>, wenn beim
+&Ouml;ffnen der Datei ein Fehler aufgetreten ist.
+<TT>TEST.TXT</TT> ist der Dateiname der Datei, die ge&ouml;ffnet wird und
+<TT>w</TT> der Zugriffsmodus. 
+<A NAME="IDX242"></A>
+Der Zugriffsmodus
+bestimmt die Art und Weise, in der auf die Datei zugegriffen werden kann.
+Die folgende Liste enth&auml;lt die zul&auml;ssigen Dateizugriffsmodi:
+<BR>
+<DL>
+<P><DT><B>Modus</B>
+<DD><B>Beschreibung</B>
+<P><DT>r
+<DD>Die Datei wird nur zum Lesen ge&ouml;ffnet. Voraussetzung ist, da&szlig; die
+Datei bereits existiert. Ansonsten bekommt der Zeiger
+<TT>NULL</TT> zugewiesen.
+<P><DT>w
+<DD>Eine leere Datei wird zum Schreiben ge&ouml;ffnet. Falls die Datei bereits
+besteht, wird die Dateil&auml;nge auf Null gesetzt. Dies entspricht dem
+L&ouml;schen des Inhaltes der Datei.
+<P><DT>a
+<DD>Die Datei wird nur zum Schreiben ge&ouml;ffnet. Die neuen Daten werden am
+Ende angeh&auml;ngt, wenn die Datei existiert, anderenfalls wird sie erstellt.
+<P><DT>r+
+<DD>Eine existierende Datei wird zum Lesen und Schreiben ge&ouml;ffnet.
+<P><DT>w+
+<DD>Eine Datei wird zum Lesen und zum Schreiben ge&ouml;ffnet und erstellt,
+falls sie noch nicht existiert. Anderenfalls wird der Inhalt gel&ouml;scht.
+<P><DT>a+
+<DD>Eine Datei wird sowohl zum Lesen als auch zum Anh&auml;ngen an das
+Dateiende ge&ouml;ffnet. Existiert sie noch nicht, so wird sie erstellt.
+</DL>
+<P>Au&szlig;er diesen Zugriffsmodi mu&szlig; dem Compiler mitgeteilt werden, ob
+die Datei im bin&auml;ren oder im Text-Modus ge&ouml;ffnet werden soll. Dies
+geschieht durch das Anh&auml;ngen eines <TT>b</TT> f&uuml;r bin&auml;r
+an das K&uuml;rzel f&uuml;r den Zugriffsmodus. F&uuml;r den Zugriff im Text-Modus
+ist kein K&uuml;rzel erforderlich. Dennoch ist es bei einigen Compilern
+m&ouml;glich, ein <TT>t</TT> f&uuml;r den Text-Modus anzuh&auml;ngen. Auf dieses
+K&uuml;rzel sollte jedoch verzichtet werden, um die Portabilit&auml;t des Codes
+zu gew&auml;hrleisten, da einige Compiler dieses K&uuml;rzel nicht unterst&uuml;tzen.
+So compiliert Visual Age C<TT>++</TT>
+f&uuml;r OS/2 ein Programm, das dieses K&uuml;rzel
+enth&auml;lt, zwar anstandslos und ohne Fehlermeldung oder Warnung, beim
+Betrieb des Programms ist dieses dann jedoch nicht in der Lage, Dateien
+zu &ouml;ffnen.
+<P>zu (3): Mit <TT>fclose(datei_ptr);</TT> wird
+die Datei geschlossen.
+Dabei f&uuml;hrt das Betriebssystem eine Reihe von Schritten aus:
+<OL TYPE=1>
+<P><LI>Die zur Zwischenpufferung genutzten Speicher werden geleert und die
+noch nicht gespeicherten Daten auf den Datentr&auml;ger geschrieben.
+<P><LI>Die Verbindung zwischen Datei und Dateizeiger wird unterbrochen,
+so da&szlig; der Zeiger f&uuml;r eine andere Datei verwendet werden kann.
+<P><LI>Der Systembereich der Festplatte (oder eines anderen
+Massenspeichers) wird aktualisiert (Gr&ouml;&szlig;e,
+Position, Datum/Zeitpunkt der letzten Modifikation, etc.).
+</OL>
+<P>
+<HR><H2><A NAME="Header_97" HREF="refer02.htm#ToC_97">8.2 Zeichen und Zeichenketten aus Dateien lesen</A></H2>
+<A NAME="IDX244"></A>
+<P>Um den Inhalt einer
+Datei lesen zu k&ouml;nnen, mu&szlig; sie im Lesezugriff ge&ouml;ffnet
+und eine Variable deklariert werden, die die gelesenen Daten aufnimmt.
+Im folgenden Beispiel wird die Datei <TT>TEST.TXT</TT> ge&ouml;ffnet und die
+Variable <TT>zeichen</TT> zur Aufnahme der Daten deklariert:
+<P>
+<PRE>
+   /*   datei_2.c                                              */
+   /*   demonstriert das lesen von textdaten aus einer datei   */
+   /*                                                          */
+ 
+   #include &lt;stdio.h&gt;
+ 
+ 
+   void main(void)
+   {
+      /* deklaration lokaler variablen */
+      FILE *datei_ptr=NULL;                  /* Dateizeiger   */
+      char datei[12]="TEST.TXT";             /* Dateiname     */
+      char zugriff[3]="r";                   /* Zugriffsmodus */
+      char zeichen;
+ 
+      /* datei oeffnen und return-code auswerten */
+      datei_ptr = fopen(datei , zugriff);
+ 
+      if (datei_ptr == NULL)       /* &ouml;ffnen fehlgeschlagen */
+      {
+        printf("Die Datei %s konnte nicht ge&ouml;ffnet werden!", datei);
+        exit(1);
+      }
+      else                         /* &ouml;ffnen gegl&uuml;ckt */
+      {
+        /* zeichen aus der datei lesen */
+<A NAME="IDX245"></A>
+        zeichen=fgetc(datei_ptr);
+        while (!feof(datei_ptr))
+        {
+<A NAME="IDX246"></A>
+              putchar(zeichen);    /*  zeichen auf der standardausgabe
+                                       ausgeben */
+              zeichen=fgetc(datei_ptr);
+<A NAME="IDX247"></A>
+        }
+ 
+        /* datei schliessen */
+        fclose(datei_ptr);
+        printf("Die Datei %s wurde geschlossen!", datei);
+ 
+      } /* ende &ouml;ffnen gegl&uuml;ckt */
+ 
+   } /* ende main */
+</PRE>
+<P>In diesem Beispiel wird die Dateiverarbeitung vollst&auml;ndig in
+Funktionen ausgelagert. Das Hauptprogramm hat nur noch
+aufrufende und auf Fehler testende Funktion. Die Dateifunktionen
+zum &Ouml;ffnen, Lesen und Schlie&szlig;en wurden bereits erl&auml;utert.
+<P>In der Funktion <TT>datei_lesen()</TT> werden in der
+<TT>while</TT>-Schleife mit <TT>fgetc()</TT> solange einzelne
+Zeichen aus der, mit <TT>datei_ptr</TT> referenzierten, Datei gelesen
+und der Variablen <TT>zeichen</TT> zugewiesen, bis sie den Wert
+<TT>EOF</TT> erreicht hat. Ist das Ende der Datei noch nicht
+erreicht, wird jedes einzelne Zeichen ausgegeben.
+<P><I>Anmerkung&#58; 'Zeichen' wird in der Funktion 'datei_lesen'
+als Integer-Wert deklariert, da es jedes beliebige ASCII-Zeichen
+inklusive dem EOF-Zeichen annehmen k&ouml;nnen mu&szlig;. In einigen C
+Implementierungen liegt der Wert von EOF au&szlig;erhalb des Wertebereichs
+des Typs char, da diese standardm&auml;&szlig;ig unsigned char verwenden.</I>
+<P>Die Funktion <TT>exit(R&uuml;ckgabewert)</TT> beendet das C-Programm mit
+sofortiger Wirkung. Es werden alle Puffer geleert und alle ge&ouml;ffneten
+Dateien automatisch geschlossen. Der R&uuml;ckgabewert <TT>1</TT> gibt dem
+Benutzer bekannt, da&szlig; bei der Ausf&uuml;hrung des Programms ein Fehler
+aufgetreten ist, wobei der R&uuml;ckgabewert nicht ausgegeben, sondern in
+einer sogenannten <I>Umgebungsvariable</I> des Betriebssystems
+(unter DOS z.B. <TT>Errorlevel</TT>) abgelegt wird. Diese
+Umgebungsvariable kann von einem aufrufenden Programm ausgewertet werden.
+<P>
+<P>Beim Lesen von Zeichenketten
+aus einer Datei ergeben sich nur geringf&uuml;gige
+&Auml;nderungen gegen&uuml;ber dem Lesen von einzelnen Zeichen. Zur
+Veranschaulichung soll dennoch das obige Beispiel, mit den notwendigen
+Modifikationen, verwendet werden:
+<P>
+<PRE>
+   /*   zeichenk_lesen.c                                           */
+   /*   demonstriert das lesen von zeichenketten aus einer datei   */
+   /*                                                              */
+ 
+   #include &lt;stdio.h&gt;
+ 
+   FILE *datei_ptr=NULL;
+ 
+   void datei_oeffnen (char datei[], char zugriff[])
+   {
+     datei_ptr = fopen(datei , zugriff);
+     return;
+   }
+ 
+   /* die einzigen unterschiede zwischen dem lesen einzelner zeichen  */
+   /* und dem lesen von strings aus einer datei sind in der funktion  */
+   /* datei_lesen zu finden. es werden andere variablendeklarationen  */
+   /* und die funktion fgets benutzt.                                 */
+   void datei_lesen (void)
+   {
+      char satz[256];
+      do
+      {
+<A NAME="IDX248"></A>
+         satz = fgets(satz, 256, datei_ptr);
+<A NAME="IDX249"></A>
+         fputs(satz, stdout);
+      } while (!feof(datei_ptr));
+     return;
+   }
+ 
+   void datei_schliessen (void)
+   {
+     fclose(datei_ptr);
+     return;
+   }
+ 
+   void main(void)
+   {
+ 
+      char datei[12]="TEST.TXT";
+      char zugriff[3]="r";
+ 
+      datei_oeffnen(datei, zugriff);
+      if (datei_ptr == NULL)
+      {
+        printf("Die Datei %s konnte nicht ge&ouml;ffnet werden!", datei);
+        exit(1);
+      }
+      else
+      {
+        datei_lesen();
+        datei_schliessen();
+        printf("Die Datei %s wurde geschlossen!", datei);
+      }
+   }
+</PRE>
+<P>Die &Auml;nderungen wirken sich nur in der Funktion
+<TT>datei_lesen</TT> aus.
+Statt <TT>fgetc()</TT> wird <TT>fgets()</TT>
+und statt <TT>putchar()</TT> wird <TT>fputs()</TT>
+verwendet. Dabei ist zu bemerken, da&szlig;
+<TT>fgets()</TT> und <TT>fputs()</TT> mehr
+Parameter ben&ouml;tigen, als die Funktionen zur zeichenweisen Behandlung.
+Die Funktion <TT>fgets()</TT> erwartet drei Parameter. Der erste
+Paramater stellt die Adresse des Daten aufnehmenden Feldes dar, der
+zweite Parameter die Gr&ouml;&szlig;e dieses Feldes und der dritte Parameter
+kennzeichnet als Zeiger die Quelle der zu lesenden Zeichenkette.
+<P>Die Angabe des Gr&ouml;&szlig;enparameters ist notwendig, da nicht mehr Zeichen
+eingelesen werden d&uuml;rfen, als <TT>satz</TT> aufnehmen kann. Die Datei
+wird immer bis zum Ende (EOF, End Of File) gelesen und mit Hilfe von
+<TT>fputs()</TT> ausgegeben. Diese Funktion &uuml;bernimmt zwei Parameter.
+Der erste Parameter ist die auszugebende Zeichenkette
+und der zweite Parameter
+bezeichnet die Ausgabe (hier: Standard Output/ i.d.R. der Bildschirm).
+<P>
+<HR><H2><A NAME="Header_98" HREF="refer02.htm#ToC_98">8.3 Zeichen in Dateien schreiben</A></H2>
+<P>Im folgenden werden die Funktionen zum Schreiben von
+einzelnen Zeichen und Zeichenketten vorgestellt. Sie sind
+ohne Probleme in die oben genannten Programme einbindbar.
+<P>Streng genommen ist das Schreiben von Daten
+bereits behandelt worden, nur nicht
+in eine Datei, sondern auf den Bildschirm.
+Der <TT>putc()</TT> Funktion mu&szlig; lediglich
+die Adresse der Datei mit Hilfe des Zeigers
+(<TT>datei_ptr</TT>) gegeben werden.
+<P>In dem folgenden Beispiel wird zum Lesen der Zeichen von der
+Tastatur die Funktion <TT>getchar()</TT> verwendet.
+<P>
+<PRE>
+   void datei_schreiben(void)
+   {
+      char zeichen;
+ 
+      /* solange zeichen einlesen, bis enter gedr&uuml;ckt wird */
+<A NAME="IDX250"></A>
+      while ((zeichen = getchar()) != '\n')
+            /* zeichen in die datei schreiben */
+            putc(zeichen, datei_ptr);
+     return;
+   }
+</PRE>
+<P>
+<P><H3><A NAME="Header_99" HREF="refer02.htm#ToC_99">8.3.1 Zeichenketten in eine Datei schreiben</A></H3>
+<P>Wie beim Lesen von Zeichenketten
+aus einer Datei, sind auch beim Schreiben von Zeichenketten
+in eine Datei einige zus&auml;tzliche Angaben notwendig.
+<P>
+<PRE>
+   void datei_schreiben(void)
+   {
+      char satz[256]
+ 
+      /* satz mit einer maximalen l&auml;nge von 256 zeichen einlesen */
+      fgets(satz, 256, stdin);
+ 
+      /* solange wiederholen, bis in einer leeren zeile enter    */
+      /* gedr&uuml;ckt wird                                           */
+      while(satz[0] == '\n')
+      {
+         /* satz in datei schreiben */
+         fputs(satz, datei_ptr2);
+ 
+         /* neuen satz lesen */
+         fgets(satz, 256, stdin);
+      }
+     return;
+   }
+</PRE>
+<P>Es werden solange S&auml;tze mit einer maximalen Anzahl von 256 Zeichen von
+der Tastatur eingelesen und in die Datei geschrieben, bis in einer leeren
+Zeile die Taste <B>ENTER</B> gedr&uuml;ckt wird.
+<P>Die Funktion <TT>fputs()</TT> schreibt Zeichenketten in die mit
+<TT>datei_ptr2</TT> bezeichnete Datei.
+<P>
+<P><H3><A NAME="Header_100" HREF="refer02.htm#ToC_100">8.3.2 Anh&auml;ngen von Daten an eine bereits vorhandene Datei</A></H3>
+<P>Das Anh&auml;ngen von Daten erfolgt nicht &uuml;ber eine spezielle Funktion,
+sondern &uuml;ber den Zugriffsmodus. Je nachdem, ob die Datei nur zum Anh&auml;ngen
+oder auch zum Lesen ge&ouml;ffnet werden soll, verwendet man
+<TT>a</TT> oder <TT>a+</TT>. Zum Schreiben der Daten werden die
+bereits erw&auml;hnten Funktionen <TT>fputs()</TT> und <TT>putc()</TT>
+verwendet.
+<P>
+<HR><H2><A NAME="Header_101" HREF="refer02.htm#ToC_101">8.4 Das Arbeiten mit bin&auml;ren Dateien</A></H2>
+<A NAME="IDX252"></A>
+<P>Der Unterschied zwischen Text- und Bin&auml;rdateien besteht in den
+unterschiedlichen Informationen, die in ihnen enthalten sind. Textdateien
+enthalten Zeichenfolgen, die f&uuml;r den Menschen verst&auml;ndlich sind. Sie
+bestehen aus alphanumerischen Zeichen, Satzzeichen und einigen
+Steuerzeichen. Diese Art von Dateien kann zeilenorientiert aufgebaut
+sein.
+<P>Bin&auml;rdateien besitzen keine Zeilenstruktur und sind f&uuml;r den
+Menschen in der Regel unverst&auml;ndlich.
+Ein weiterer Unterschied besteht in der Codierung von Zahlen. In
+der bin&auml;ren Datei werden Zahlen abgelegt, wie sie im Hauptspeicher
+vorliegen (z.B. <TT>int</TT> mit 4 Byte in einer bestimmten Reihenfolge)
+und nicht - wie in Textdateien - als eine Folge von Ziffern.
+<P>Bei einer Bin&auml;rdatei sieht der Modus zum &Ouml;ffnen einer Datei
+wie folgt aus:
+<PRE>
+   rb
+   wb
+   ab
+   rb+
+   wb+
+   ab+
+</PRE>
+<P>
+<P><H3><A NAME="Header_102" HREF="refer02.htm#ToC_102">8.4.1 Bin&auml;res Lesen von Integer Daten</A></H3>
+<P>Prinzipiell werden alle Datentypen in Bl&ouml;cken &agrave; 1 Byte gespeichert,
+wobei die Reihenfolge der Bytes im Speicher je nach Betriebssystem
+und Prozessor unterschiedlich sein kann.
+Ein 4 Byte langer Integer mit dem Wert x wird bin&auml;r wie folgt
+dargestellt (Big Endian):
+<PRE>
+11110000 00001111 11111111 00000000
+</PRE>
+<P>Auf bestimmten Systemen werden diese vier Bytes jedoch in umgekehrter
+Reihenfolge abgelegt:
+<PRE>
+00000000 11111111 00001111 11110000
+</PRE>
+<P>Oder auch folgenderma&szlig;en (Little Endian):
+<PRE>
+11111111 00000000 11110000 00001111
+</PRE>
+<A NAME="IDX253"></A>
+<P>Allgemein unterscheidet man die Varianten <I>Little Endian</I>
+(z.B. Intel x86, low Bytes, high Bytes)
+<A NAME="IDX254"></A>
+und <I>Big Endian</I> (z.B. RS/6000, high Bytes, low Bytes).
+<P>Der folgende Beispielcode liest vier Byte aus einer Datei und speichert
+diese als (long) Integer in Abh&auml;ngigkeit einer symbolischen Konstante, die
+die Zielhardware spezifiziert.
+<PRE>
+void readINT32(FILE *file_in, UINT32 *integer)
+{
+  unsigned char p[4];
+ 
+  p[0]=fgetc(file_in); p[1]=fgetc(file_in);
+  p[2]=fgetc(file_in); p[3]=fgetc(file_in);
+ 
+# ifdef RS6000
+  // Big Endian - RS6000
+  *integer=(((((p[0] &lt;&lt; 8) | p[1]) &lt;&lt; 8) | p[2]) &lt;&lt; 8) | p[3];
+# else
+  // Little Endian - DOS, OS/2 on Intel x86
+  *integer=(((((p[3] &lt;&lt; 8) | p[2]) &lt;&lt; 8) | p[1]) &lt;&lt; 8) | p[0];
+# endif
+ 
+  return;
+} //--- end - readINT32()
+</PRE>
+<P>Das folgende Beispiel liest zwei Byte aus einer bin&auml;ren
+Datei und interpretiert sie als short int.
+<PRE>
+void readINT16(FILE *bmp_in, UINT16 *integer)
+{
+  unsigned char p[2];
+ 
+  p[0]=fgetc(bmp_in); p[1]=fgetc(bmp_in);
+ 
+# ifdef RS6000
+  // Big Endian - RS6000
+  *integer=(p[0] &lt;&lt; 8) | p[1]; // Big Endian - AIX
+# else
+  // Little Endian - DOS, OS/2 on Intel x86
+  *integer=(p[1] &lt;&lt; 8) | p[0]; // Little Endian - DOS, OS/2
+#endif
+ 
+  return;
+} //--- end - readINT16()
+</PRE>
+<P>Mit dieser Funktion kann z.B. die H&ouml;he und Breite einer
+Bitmap ausgelesen werden, deren Werte als 19-22. Bytes einer
+Bitmap gespeichert werden. Z.B. ergibt sich aus
+<TT>FD 02 87 01</TT> 765x391 Pixel
+(<TT>02 FD</TT>x<TT>01 87</TT>).
+<P><H3><A NAME="Header_103" HREF="refer02.htm#ToC_103">8.4.2 Bin&auml;res Lesen von Flie&szlig;kommadaten</A></H3>
+<P>F&uuml;r die Darstellung von Flie&szlig;kommazahlen im Speicher existieren
+f&uuml;r fast alle Prozessorsysteme unterschiedliche Varianten, was den
+Datenaustausch erschwert.
+<HR><H2><A NAME="Header_104" HREF="refer02.htm#ToC_104">8.5 Zusammenfassung Lesen/Ausgeben von Daten</A></H2>
+<P>Die folgende Tabelle zeigt die zum Lesen und Augeben
+m&ouml;glichen Funktionen. Auf Funktionen, die noch nicht in den Beispielen
+vorgekommenen sind, wird im Anschlu&szlig; kurz eingegangen.
+<BR>
+<P><B><A NAME="Table_9" HREF="refer03.htm#FT_Table_9">Tabelle 9. Funktionen zum Lesen/Ausgeben</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Schreiben
+</TH><TH ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Lesen
+</TH><TH ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Daten
+</TH></TR><TR>
+<A NAME="IDX255"></A>
+<A NAME="IDX256"></A>
+<A NAME="IDX257"></A>
+<A NAME="IDX258"></A>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">putc(), fputc()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">getc(), fgetc()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Zeichen
+</TD></TR><TR>
+<A NAME="IDX259"></A>
+<A NAME="IDX260"></A>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">fputs()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">fgets()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Zeichenkette
+</TD></TR><TR>
+<A NAME="IDX261"></A>
+<A NAME="IDX262"></A>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">fprintf()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">fscanf()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">formatierte Daten
+</TD></TR><TR>
+<A NAME="IDX263"></A>
+<A NAME="IDX264"></A>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">fwrite()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">fread()
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Block
+</TD></TR></TABLE>
+<P>Die Funktionen <TT>fprintf()</TT> und <TT>fscanf()</TT> werden
+f&uuml;r das &Uuml;bertragen von Feldern mit einer festen L&auml;nge verwendet. Der
+Gebrauch unterscheidet sich nur in der Angabe der Datei von den
+Funktionen <TT>printf()</TT> und <TT>scanf()</TT>.
+<P>
+Beispiel:
+<P>
+<PRE>
+    fprintf(datei_ptr, "Horst ist %d Jahre alt!\n", jahre);
+</PRE>
+<P>Mit dieser Anweisung wird in der angegebenen Datei ein Satz mit
+einer variablen Angabe des Alters abgespeichert und das
+Zeilenendezeichen angef&uuml;gt.
+<P>Die Funktionen <TT>fwrite()</TT> und <TT>fread()</TT> schreiben
+beziehungsweise lesen <TT>n</TT> Datenobjekte der Gr&ouml;&szlig;e
+<TT>size</TT> aus/in einem/n Puffer aus/in die mit <TT>datei_ptr</TT>
+angegebene Datei.
+<P>Beispiel:
+<P>(1) Syntax:
+<P>
+<PRE>
+   fwrite(buffer, size, n, *fp);
+</PRE>
+<P>Diese Anweisung speichert n Objekte der Gr&ouml;&szlig;e <TT>size</TT> aus
+dem Speicherbereich ab der Adresse von <TT>buffer</TT> in die Datei,
+auf die der Dateizeiger <TT>*fp</TT> verweist.
+<P>Anwendung:
+<P>
+<PRE>
+   fwrite(katalog, sizeof(BUCH), 200, datei_ptr);
+</PRE>
+<P>Diese Anweisung speichert 200 Objekte der Gr&ouml;&szlig;e der Struktur
+<TT>BUCH</TT>
+aus dem Speicherbereich ab der Adresse von <TT>katalog</TT> in die
+Datei, auf die der Dateizeiger <TT>datei_ptr</TT> verweist.
+<P>(2) Syntax:
+<P>
+<PRE>
+   fread(buffer, size, n, *fp);
+</PRE>
+<P>Mit dieser Anweisung werden die Daten aus einer Datei in den
+Speicherbereich ab der Adresse von <TT>buffer</TT> geschrieben.
+<TT>size</TT> beschreibt die Gr&ouml;&szlig;e und n die Anzahl der Objekte.
+<P>Anwendung:
+<P>
+<PRE>
+   fread(katalog, sizeof(BUCH), 200, datei_ptr);
+</PRE>
+<P>Mit dieser Anweisung werden die Daten aus einer Datei, auf die der
+Dateizeiger <TT>datei_ptr</TT> verweist, in den
+Speicherbereich ab der Adresse von <TT>katalog</TT> geschrieben.
+Die Gr&ouml;&szlig;e der Objekte soll der Gr&ouml;&szlig;e der Struktur <TT>BUCH</TT>
+entsprechen. Es sollen 200 dieser Objekte gelesen werden.
+<P>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer11.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer13.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

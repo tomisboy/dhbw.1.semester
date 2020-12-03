@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer03.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="Header_1" HREF="#ToC_1">Vorwort</A></H1>
+<P>Dieses Handbuch wurde als Begleitmaterial zu einer Einf&uuml;hrungsschulung
+in die Programmiersprache C entwickelt. Die erste Fassung entstand im
+September 1994 in Zusammenarbeit mit Daniel Matthies im Rahmen einer
+Praxisphase in der BAB Hannover. Eine stark &uuml;berarbeitete Fassung
+entstand im Juni 1997 und enthielt neben Fehlerbereinigungen
+einige neue Kapitel und Abschnitte. Die vorliegende Fassung wurde
+seitdem ebenfalls um einige Abschnitte erweitert und korrigiert.
+<P>
+<P>
+<P>
+Berlin, Februar 2000
+<P>
+Sascha Kliche
+<HR><H1><A NAME="ToC">Inhaltsverzeichnis</A></H1>
+<MENU>
+<P><B><LI><A NAME="ToC_1" HREF="#Header_1">Vorwort</A></B>
+<P><B><LI><A NAME="ToC_2" HREF="refer03.htm#HDRTLIST_START">Tabellen</A></B>
+<P><B><LI><A NAME="ToC_3" HREF="refer04.htm#HDRFIGLIST_START">Abbildungen</A></B>
+<P><B><LI><A NAME="ToC_4" HREF="refer05.htm#HDREINLEIT">1.0 Einleitung</A></B>
+<MENU>
+<LI><A NAME="ToC_5" HREF="refer05.htm#Header_5">1.1 Konventionen</A>
+<LI><A NAME="ToC_6" HREF="refer05.htm#HDRDUMMY">1.2 Aufbau des Handbuches</A>
+<LI><A NAME="ToC_7" HREF="refer05.htm#Header_7">1.3 Historie von C</A>
+<LI><A NAME="ToC_8" HREF="refer05.htm#Header_8">1.4 Vom Quellcode zum lauff&auml;higen Programm</A>
+<LI><A NAME="ToC_9" HREF="refer05.htm#Header_9">1.5 Argumente f&uuml;r den Einsatz der Sprache C</A>
+</MENU>
+<P><B><LI><A NAME="ToC_10" HREF="refer06.htm#HDRGRUND">2.0 Grundlagen der C Programmierung</A></B>
+<MENU>
+<LI><A NAME="ToC_11" HREF="refer06.htm#Header_11">2.1 Zeichensatz</A>
+<LI><A NAME="ToC_12" HREF="refer06.htm#Header_12">2.2 Gro&szlig;- und Kleinschreibung</A>
+<LI><A NAME="ToC_13" HREF="refer06.htm#HDRKEY">2.3 Schl&uuml;sselworte</A>
+<LI><A NAME="ToC_14" HREF="refer06.htm#Header_14">2.4 Formale Grundstruktur</A>
+<MENU>
+<LI><A NAME="ToC_15" HREF="refer06.htm#HDRCOMMENT">2.4.1 Der Einsatz von Kommentaren</A>
+<LI><A NAME="ToC_18" HREF="refer06.htm#Header_18">2.4.2 Formatierung</A>
+</MENU>
+<LI><A NAME="ToC_19" HREF="refer06.htm#Header_19">2.5 Ausdr&uuml;cke</A>
+<LI><A NAME="ToC_20" HREF="refer06.htm#Header_20">2.6 Operatoren</A>
+<MENU>
+<LI><A NAME="ToC_21" HREF="refer06.htm#Header_21">2.6.1 Arithmetische Operatoren</A>
+<LI><A NAME="ToC_22" HREF="refer06.htm#Header_22">2.6.2 Un&auml;re oder monadische Operatoren</A>
+<LI><A NAME="ToC_23" HREF="refer06.htm#HDRVEROP">2.6.3 Vergleichende Operatoren</A>
+<LI><A NAME="ToC_24" HREF="refer06.htm#Header_24">2.6.4 Logische Operatoren</A>
+<LI><A NAME="ToC_25" HREF="refer06.htm#Header_25">2.6.5 Zusammengesetzte Zuweisungsoperatoren</A>
+<LI><A NAME="ToC_26" HREF="refer06.htm#HDRHIERAR">2.6.6 Hierarchie der Operatoren</A>
+<LI><A NAME="ToC_27" HREF="refer06.htm#Header_27">2.6.7 Beispiele zur Verkn&uuml;pfung der Operatoren</A>
+</MENU>
+<LI><A NAME="ToC_28" HREF="refer06.htm#HDRBEZEI">2.7 Bezeichner</A>
+</MENU>
+<P><B><LI><A NAME="ToC_29" HREF="refer07.htm#HDRTYPEN">3.0 Datentypen</A></B>
+<MENU>
+<LI><A NAME="ToC_30" HREF="refer07.htm#Header_30">3.1 Einfache Datentypen</A>
+<MENU>
+<LI><A NAME="ToC_31" HREF="refer07.htm#HDRINT">3.1.1 Ganze Zahlen - Integer</A>
+<LI><A NAME="ToC_36" HREF="refer07.htm#HDRRAT">3.1.2 Rationale Zahlen</A>
+<LI><A NAME="ToC_41" HREF="refer07.htm#HDRCHAR">3.1.3 Textzeichen - char</A>
+</MENU>
+<LI><A NAME="ToC_43" HREF="refer07.htm#Header_43">3.2 H&ouml;here Datenstrukturen</A>
+<MENU>
+<LI><A NAME="ToC_44" HREF="refer07.htm#HDRFELD">3.2.1 Felder - Array - Vektoren</A>
+<LI><A NAME="ToC_50" HREF="refer07.htm#HDRSTRUKT">3.2.2 Strukturen</A>
+<LI><A NAME="ToC_56" HREF="refer07.htm#HDRUNION">3.2.3 Unions</A>
+<LI><A NAME="ToC_57" HREF="refer07.htm#HDRZEI">3.2.4 Zeiger - Pointer</A>
+</MENU>
+<LI><A NAME="ToC_61" HREF="refer07.htm#Header_61">3.3 Weitere Datentypen</A>
+<MENU>
+<LI><A NAME="ToC_62" HREF="refer07.htm#HDRVOID">3.3.1 void</A>
+<LI><A NAME="ToC_63" HREF="refer07.htm#HDRENUM">3.3.2 enum</A>
+</MENU>
+<LI><A NAME="ToC_64" HREF="refer07.htm#Header_64">3.4 Datentypumwandlung</A>
+<MENU>
+<LI><A NAME="ToC_65" HREF="refer07.htm#Header_65">3.4.1 Implizite Datentypumwandlung</A>
+<LI><A NAME="ToC_66" HREF="refer07.htm#Header_66">3.4.2 Explizite Datentypumwandlung</A>
+</MENU>
+<LI><A NAME="ToC_67" HREF="refer07.htm#HDROWNTYPE">3.5 Eigene Typen - typedef</A>
+<LI><A NAME="ToC_68" HREF="refer07.htm#HDRCLASSES">3.6 Speicherklassen</A>
+<MENU>
+<LI><A NAME="ToC_69" HREF="refer07.htm#Header_69">3.6.1 Automatic</A>
+<LI><A NAME="ToC_70" HREF="refer07.htm#HDRSTATIC">3.6.2 Static</A>
+<LI><A NAME="ToC_71" HREF="refer07.htm#HDREXTERN">3.6.3 Extern</A>
+<LI><A NAME="ToC_72" HREF="refer07.htm#Header_72">3.6.4 Register</A>
+</MENU></MENU>
+<P><B><LI><A NAME="ToC_73" HREF="refer08.htm#HDRFUNK">4.0 &Uuml;bersicht &uuml;ber wichtige Funktionen</A></B>
+<MENU>
+<LI><A NAME="ToC_74" HREF="refer08.htm#HDRPRF">4.1 printf - formatierte Ausgabe auf dem Bildschirm</A>
+<MENU>
+<LI><A NAME="ToC_75" HREF="refer08.htm#HDRSPEZI">4.1.1 Erl&auml;uterung des Formatstrings</A>
+<LI><A NAME="ToC_76" HREF="refer08.htm#HDRFLUCHT">4.1.2 Fluchtsymbolzeichen</A>
+</MENU>
+<LI><A NAME="ToC_77" HREF="refer08.htm#Header_77">4.2 scanf - formatiertes Lesen vom Standardeingabeger&auml;t</A>
+<LI><A NAME="ToC_78" HREF="refer08.htm#Header_78">4.3 Eingabe- und Ausgabepuffer leeren</A>
+<LI><A NAME="ToC_79" HREF="refer08.htm#Header_79">4.4 Funktionen zur Bearbeitung von Zeichenketten</A>
+<MENU>
+<LI><A NAME="ToC_80" HREF="refer08.htm#Header_80">4.4.1 Die Funktionen strcpy() und strcat()</A>
+<LI><A NAME="ToC_81" HREF="refer08.htm#Header_81">4.4.2 Auswahl h&auml;ufig benutzter Funktionen zur Zeichenkettenbearbeitung</A>
+</MENU></MENU>
+<P><B><LI><A NAME="ToC_82" HREF="refer09.htm#HDROWN">5.0 Eigene Funktionen</A></B>
+<MENU>
+<LI><A NAME="ToC_83" HREF="refer09.htm#Header_83">5.1 Definition eigener Funktionen</A>
+<LI><A NAME="ToC_84" HREF="refer09.htm#Header_84">5.2 Call by value und call by reference</A>
+<LI><A NAME="ToC_85" HREF="refer09.htm#Header_85">5.3 Prototypen</A>
+<LI><A NAME="ToC_86" HREF="refer09.htm#Header_86">5.4 Variable Anzahl an Parametern beim Funktionsaufruf</A>
+</MENU>
+<P><B><LI><A NAME="ToC_87" HREF="refer10.htm#HDRREPEAT">6.0 Wiederholungen - Schleifen</A></B>
+<MENU>
+<LI><A NAME="ToC_88" HREF="refer10.htm#Header_88">6.1 while</A>
+<LI><A NAME="ToC_89" HREF="refer10.htm#Header_89">6.2 do while</A>
+<LI><A NAME="ToC_90" HREF="refer10.htm#Header_90">6.3 for</A>
+<LI><A NAME="ToC_91" HREF="refer10.htm#HDRBRE">6.4 Die Anweisungen break und continue</A>
+</MENU>
+<P><B><LI><A NAME="ToC_92" HREF="refer11.htm#HDRCHOICE">7.0 Auswahl</A></B>
+<MENU>
+<LI><A NAME="ToC_93" HREF="refer11.htm#Header_93">7.1 if/else</A>
+<LI><A NAME="ToC_94" HREF="refer11.htm#HDRCASE">7.2 switch</A>
+</MENU>
+<P><B><LI><A NAME="ToC_95" HREF="refer12.htm#HDRFILE">8.0 Dateibehandlung</A></B>
+<MENU>
+<LI><A NAME="ToC_96" HREF="refer12.htm#Header_96">8.1 Datei &ouml;ffnen/schlie&szlig;en</A>
+<LI><A NAME="ToC_97" HREF="refer12.htm#Header_97">8.2 Zeichen und Zeichenketten aus Dateien lesen</A>
+<LI><A NAME="ToC_98" HREF="refer12.htm#Header_98">8.3 Zeichen in Dateien schreiben</A>
+<MENU>
+<LI><A NAME="ToC_99" HREF="refer12.htm#Header_99">8.3.1 Zeichenketten in eine Datei schreiben</A>
+<LI><A NAME="ToC_100" HREF="refer12.htm#Header_100">8.3.2 Anh&auml;ngen von Daten an eine bereits vorhandene Datei</A>
+</MENU>
+<LI><A NAME="ToC_101" HREF="refer12.htm#Header_101">8.4 Das Arbeiten mit bin&auml;ren Dateien</A>
+<MENU>
+<LI><A NAME="ToC_102" HREF="refer12.htm#Header_102">8.4.1 Bin&auml;res Lesen von Integer Daten</A>
+<LI><A NAME="ToC_103" HREF="refer12.htm#Header_103">8.4.2 Bin&auml;res Lesen von Flie&szlig;kommadaten</A>
+</MENU>
+<LI><A NAME="ToC_104" HREF="refer12.htm#Header_104">8.5 Zusammenfassung Lesen/Ausgeben von Daten</A>
+</MENU>
+<P><B><LI><A NAME="ToC_105" HREF="refer13.htm#HDRMEMORY">9.0 Speicherverwaltung</A></B>
+<MENU>
+<LI><A NAME="ToC_106" HREF="refer13.htm#Header_106">9.1 Speicherplatz reservieren</A>
+<LI><A NAME="ToC_107" HREF="refer13.htm#Header_107">9.2 Speicherplatz reservieren und initialisieren</A>
+<LI><A NAME="ToC_108" HREF="refer13.htm#Header_108">9.3 Speicherplatzgr&ouml;&szlig;e ver&auml;ndern</A>
+<LI><A NAME="ToC_109" HREF="refer13.htm#Header_109">9.4 Speicherblock freigeben</A>
+<LI><A NAME="ToC_110" HREF="refer13.htm#Header_110">9.5 Verkettete Listen</A>
+<MENU>
+<LI><A NAME="ToC_111" HREF="refer13.htm#Header_111">9.5.1 Doppelt verkettete Liste</A>
+<LI><A NAME="ToC_115" HREF="refer13.htm#Header_115">9.5.2 Einfach verkettete Liste</A>
+</MENU>
+<LI><A NAME="ToC_116" HREF="refer13.htm#Header_116">9.6 Speicherverwaltungsfunktionen f&uuml;r Debugging</A>
+</MENU>
+<P><B><LI><A NAME="ToC_117" HREF="refer14.htm#HDRBS">10.0 Verbindungen zum Betriebssystem</A></B>
+<MENU>
+<LI><A NAME="ToC_118" HREF="refer14.htm#Header_118">10.1 Kommandozeilenparameter auswerten</A>
+<LI><A NAME="ToC_119" HREF="refer14.htm#Header_119">10.2 Betriebssystembefehle ausf&uuml;hren</A>
+<LI><A NAME="ToC_120" HREF="refer14.htm#Header_120">10.3 Programme starten</A>
+</MENU>
+<P><B><LI><A NAME="ToC_121" HREF="refer15.htm#HDRREGEXP">11.0 Regul&auml;re Ausdr&uuml;cke</A></B>
+<MENU>
+<LI><A NAME="ToC_122" HREF="refer15.htm#Header_122">11.1 Spezielle Zeichen in Regular Expressions</A>
+<LI><A NAME="ToC_123" HREF="refer15.htm#Header_123">11.2 Beispiele f&uuml;r regul&auml;re Ausdr&uuml;cke</A>
+<LI><A NAME="ToC_124" HREF="refer15.htm#Header_124">11.3 Quellcodebeispiele f&uuml;r regul&auml;re Ausdr&uuml;cke</A>
+</MENU>
+<P><B><LI><A NAME="ToC_125" HREF="refer16.htm#HDRPREPROC">12.0 Preprocessor-Anweisungen (Direktiven)</A></B>
+<MENU>
+<LI><A NAME="ToC_126" HREF="refer16.htm#Header_126">12.1 Symbolische Konstanten - #define</A>
+<LI><A NAME="ToC_127" HREF="refer16.htm#Header_127">12.2 Makros - #define</A>
+<LI><A NAME="ToC_128" HREF="refer16.htm#Header_128">12.3 &Uuml;bersetzungsabbruch - #error</A>
+<LI><A NAME="ToC_129" HREF="refer16.htm#Header_129">12.4 Einf&uuml;gen von Dateien - #include</A>
+<LI><A NAME="ToC_130" HREF="refer16.htm#Header_130">12.5 #if</A>
+<LI><A NAME="ToC_131" HREF="refer16.htm#Header_131">12.6 #ifdef</A>
+<LI><A NAME="ToC_132" HREF="refer16.htm#Header_132">12.7 #ifndef</A>
+<LI><A NAME="ToC_133" HREF="refer16.htm#Header_133">12.8 #else</A>
+<LI><A NAME="ToC_134" HREF="refer16.htm#Header_134">12.9 #endif</A>
+<LI><A NAME="ToC_135" HREF="refer16.htm#Header_135">12.10 #undef</A>
+<LI><A NAME="ToC_136" HREF="refer16.htm#Header_136">12.11 #elif</A>
+<LI><A NAME="ToC_137" HREF="refer16.htm#Header_137">12.12 #line</A>
+<LI><A NAME="ToC_138" HREF="refer16.htm#Header_138">12.13 #pragma</A>
+</MENU>
+<P><B><LI><A NAME="ToC_139" HREF="refer17.htm#HDRTROUB">13.0 Problembehebung</A></B>
+<P><B><LI><A NAME="ToC_140" HREF="refer18.htm#HDROOP">14.0 Unterschiede zwischen C und C++</A></B>
+<MENU>
+<LI><A NAME="ToC_141" HREF="refer18.htm#Header_141">14.1 Operator&uuml;berladung</A>
+<LI><A NAME="ToC_142" HREF="refer18.htm#Header_142">14.2 Funktions&uuml;berladung</A>
+<LI><A NAME="ToC_143" HREF="refer18.htm#Header_143">14.3 Klassen</A>
+<LI><A NAME="ToC_144" HREF="refer18.htm#Header_144">14.4 Konstruktor und Destruktor</A>
+</MENU></MENU>
+<HR><P><I><B><A NAME="ToC_145" HREF="refer18.htm#Header_145">Anh&auml;nge</A></B></I><BR>
+<MENU>
+<P><B><LI><A NAME="ToC_146" HREF="refer19.htm#Header_146">Anhang A. Schl&uuml;sselworte</A></B>
+<P><B><LI><A NAME="ToC_147" HREF="refer20.htm#Header_147">Anhang B. &Uuml;bersicht &uuml;ber die Datentypen</A></B>
+<P><B><LI><A NAME="ToC_148" HREF="refer21.htm#Header_148">Anhang C. Operatoren</A></B>
+<MENU>
+<LI><A NAME="ToC_149" HREF="refer21.htm#Header_149">C.1 Arithmetische Operatoren</A>
+<LI><A NAME="ToC_150" HREF="refer21.htm#Header_150">C.2 Zusammengesetzte Zuweisungsoperatoren</A>
+<LI><A NAME="ToC_151" HREF="refer21.htm#Header_151">C.3 Un&auml;re Operatoren</A>
+<LI><A NAME="ToC_152" HREF="refer21.htm#Header_152">C.4 Vergleichende Operatoren</A>
+<LI><A NAME="ToC_153" HREF="refer21.htm#Header_153">C.5 Logische Operatoren</A>
+<LI><A NAME="ToC_154" HREF="refer21.htm#Header_154">C.6 Hierarchie der Operatoren</A>
+</MENU>
+<P><B><LI><A NAME="ToC_155" HREF="refer22.htm#Header_155">Anhang D. Formatstring</A></B>
+<P><B><LI><A NAME="ToC_156" HREF="refer23.htm#Header_156">Anhang E. Fluchtsymbolzeichen</A></B>
+<P><B><LI><A NAME="ToC_157" HREF="refer24.htm#Header_157">Anhang F. Funktionen zur Ein-/Ausgabe von Zeichen(-ketten)</A></B>
+<P><B><LI><A NAME="ToC_158" HREF="refer25.htm#Header_158">Anhang G. Funktionen der Standardbibliotheken</A></B>
+<P><B><LI><A NAME="ToC_159" HREF="refer26.htm#Header_159">Anhang H. &Uuml;bersicht &uuml;ber die Include-/Header-Dateien</A></B>
+<P><B><LI><A NAME="ToC_160" HREF="refer27.htm#Header_160">Anhang I. Bedienung der Compiler Tools</A></B>
+<MENU>
+<LI><A NAME="ToC_161" HREF="refer27.htm#Header_161">I.1 Compiler</A>
+<LI><A NAME="ToC_162" HREF="refer27.htm#Header_162">I.2 Linker</A>
+</MENU>
+<P><B><LI><A NAME="ToC_163" HREF="refer28.htm#Header_163">Anhang J. Rechnung mit Bits und Bytes</A></B>
+<P><B><LI><A NAME="ToC_164" HREF="refer29.htm#Header_164">Anhang K. Zeichens&auml;tze</A></B>
+<MENU>
+<LI><A NAME="ToC_165" HREF="refer29.htm#HDRSAS">K.1 Standard ASCII</A>
+<LI><A NAME="ToC_166" HREF="refer29.htm#HDREAS">K.2 Extended ASCII</A>
+<LI><A NAME="ToC_167" HREF="refer29.htm#HDRANSI">K.3 ANSI</A>
+<LI><A NAME="ToC_168" HREF="refer29.htm#HDREBCD">K.4 EBCDIC</A>
+</MENU>
+<P><B><LI><A NAME="ToC_169" HREF="refer30.htm#Header_169">Anhang L. Literaturverzeichnis</A></B>
+<P><B><LI><A NAME="ToC_170" HREF="refer31.htm#Header_170">Anhang M. Online Ressourcen</A></B>
+<MENU>
+<LI><A NAME="ToC_171" HREF="refer31.htm#Header_171">M.1 Ressourcen unter VM</A>
+<LI><A NAME="ToC_172" HREF="refer31.htm#Header_172">M.2 Ressourcen im Internet</A>
+</MENU>
+<P><B><LI><A NAME="ToC_173" HREF="refer32.htm#HDRINDEX_START">Index</A></B>
+</MENU><P>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer03.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer21.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer23.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="Header_155" HREF="refer18.htm#PToC_155">Anhang D. Formatstring</A></H1>
+<A NAME="IDX317"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">scanf() - Formatspezifikation</TH><TR><TD>
+<PRE>
+                                             
+>>--%--+-----+--+----------+--+---+--type--><
+       |     |  |          |  |-h-|          
+       +--*--+  +--Breite--+  |   |          
+                              |-l-|          
+                              |   |          
+                              +-L-+          
+</PRE>
+</TD></TR></TABLE>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">printf() - Formatspezifikation</TH><TR><TD>
+<PRE>
+                                                                     
+>>--%--+---------+--+----------+--+----------------+--+---+--type--><
+       |         |  |          |  |                |  |-h-|          
+       +--flags--+  +--Breite--+  +--.Genauigkeit--+  |   |          
+                                                      |-L-|          
+                                                      |   |          
+                                                      +-l-+          
+</PRE>
+</TD></TR></TABLE>
+<P>Die Formatspezifikationen beginnen mit einem Prozentzeichen (%) und
+enden mit dem Umwandlungszeichen (<I>type</I>; z.B. d, s, c, f oder
+e). Dazwischen k&ouml;nnen folgende Zeichen angef&uuml;hrt werden:
+<OL TYPE=1>
+<P><LI>Folgende Steuerzeichen (<I>flags</I>) in beliebiger Reihenfolge
+<OL TYPE=a>
+<P><LI>'-': linksb&uuml;ndige Ausgabe des Datenelements
+<P><LI>'+': Zahlen werden immer mit Vorzeichen ausgegeben
+<P><LI>'0': leere Stellen im Ausgabefeld mit f&uuml;hrenden/angeh&auml;ngten Nullen
+f&uuml;llen
+</OL>
+<P><LI>eine Zahl, die die minimale Feldbreite festlegt (bei Bedarf
+wird die Feldbreite vergr&ouml;&szlig;ert)
+<P><LI>einen Punkt, der die Feldbreite von der Genauigkeit trennt und
+eine Zahl f&uuml;r die Genauigkeit mit folgender Bedeutung:
+<OL TYPE=a>
+<P><LI>maximale Anzahl von Zeichen f&uuml;r eine Zeichenkette
+<P><LI>Anzahl der Nachkommastellen f&uuml;r Flie&szlig;kommazahlen
+(z.B. <TT>%.0lf</TT>)
+<P><LI>die minimale Anzahl von Ziffern f&uuml;r Ganzzahlenwerte
+</OL>
+<P><LI>die Gr&ouml;&szlig;e des Argumentes
+<UL>
+<P><LI>h - Pr&auml;fix f&uuml;r die Integertypen (d, i, n, o, u, x und X),
+der festlegt, da&szlig; das Argument <TT>short int</TT> oder
+<TT>unsigned short int</TT> ist.
+<P><LI>l - Pr&auml;fix f&uuml;r die Typen d, i, n, o, u, x und X, der festlegt,
+da&szlig; das Argument <TT>long int</TT> oder
+<TT>unsigned long int</TT>ist.
+<P><LI>L - Pr&auml;fix f&uuml;r die Typen e, f und g, der festlegt, da&szlig; das
+Argument <TT>long double</TT> ist.
+</UL>
+<P><LI>Der <I>type</I> kann aus folgenden Zeichen bestehen:
+<DL>
+<P><DT>c
+<DD>f&uuml;r char
+<P><DT>d
+<DD>f&uuml;r signed int (dezimal)
+<P><DT>e
+<DD>f&uuml;r float-Variablen, allerdings wird der Wert in
+Exponentenschreibweise ausgegeben.
+<P><DT>E
+<DD>wie e, aber E f&uuml;r den Exponent statt e
+<P><DT>f
+<DD>f&uuml;r float-Variablen, Ausgabe in Festkommaschreibweise
+<P><DT>g
+<DD>f&uuml;r float-Variablen. Der Compiler entscheidet abh&auml;ngig
+von der L&auml;nge, ob Exponential- oder Festkommadarstellung gew&auml;hlt wird.
+<P><DT>G
+<DD>wie g, aber E f&uuml;r den Exponent statt e
+<P><DT>i
+<DD>f&uuml;r signed int (dezimal)
+<P><DT>n
+<DD>Nummer der Zeichen, die bis jetzt erfolgreich auf die Ausgabe
+geschrieben wurde.
+<P><DT>o
+<DD>f&uuml;r signed int (oktal)
+<P><DT>p
+<DD>f&uuml;r Zeigervariablen
+<P><DT>s
+<DD>f&uuml;r Zeichenketten (char-Felder)
+<P><DT>u
+<DD>f&uuml;r unsigned int (dezimal)
+<P><DT>x
+<DD>f&uuml;r unsigned int (hexadezimal, a-f)
+<P><DT>X
+<DD>f&uuml;r unsigned int (hexadezimal, A-F)
+</DL>
+</OL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer21.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer23.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

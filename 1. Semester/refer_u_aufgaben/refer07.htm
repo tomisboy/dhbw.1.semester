@@ -1,0 +1,1521 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer06.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer08.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRTYPEN" HREF="refer02.htm#ToC_29">3.0 Datentypen</A></H1>
+<A NAME="IDX35"></A>
+<P>Die Aufgabe von Datentypen besteht darin, Speicherbereiche in Bezug
+auf ihre Inhalte zu interpretieren. Der Inhalt dieses Speicherbereiches
+ist zum Beispiel der Wert einer Variablen. Der
+Compiler ben&ouml;tigt nun Informationen dar&uuml;ber, wieviel
+Speicherplatz er f&uuml;r die Variable reservieren mu&szlig;. Dazu mu&szlig; der
+Programmierer ihm den Datentyp der Variablen mitteilen.
+<P>Die L&auml;nge in Bytes, die die einzelnen Datentypen im Speicher
+beanspruchen,
+h&auml;ngt von der verwendeten Hardware und Softwareentwicklungsumgebung ab.
+Die jeweiligen Gr&ouml;&szlig;en sind in den Dateien <TT>LIMITS.H</TT> und
+<TT>FLOAT.H</TT> der verwendeten Entwicklungsumgebung festgelegt. Alle
+hier angegebenen Gr&ouml;&szlig;en gelten f&uuml;r den Compiler der
+IBM C/C<TT>++</TT> FirstStep Tools Version 2.01.
+Die Ermittlung der dezimalen Zahlen aus den bin&auml;ren Angaben
+erfolgt mittels 2<SUP>x</SUP>, wobei x die Anzahl der verwendeten
+Bits darstellt.
+<P>Wie viele andere Programmiersprachen auch, verf&uuml;gt C &uuml;ber
+<I>einfache Datentypen</I> und
+<I>h&ouml;here Datentypen</I>. Bei den
+einfachen Datentypen unterscheidet man die ganzen Zahlen (Integer),
+die rationalen Zahlen (Float) und die Textzeichen
+(Char(acter)), welche in jeweils unterschiedlichen Formen auftreten
+k&ouml;nnen.
+Bei den h&ouml;heren Datentypen unterscheidet man
+Felder (Array), Strukturen, Unions und Pointer.
+H&ouml;here Datentypen werden h&auml;ufig auch als
+<I>komplexe</I> oder <I>strukturierte</I> Datentypen
+bezeichnet. Felder und Strukturen werden auch als zusammengesetzte
+Datentypen bezeichnet.
+<P>
+<HR><H2><A NAME="Header_30" HREF="refer02.htm#ToC_30">3.1 Einfache Datentypen</A></H2>
+<A NAME="IDX37"></A>
+<P>In diesem Abschnitt werden die einfachen Datentypen, ihr
+Verwendungszweck und ihre Deklaration erl&auml;utert.
+<P>
+<P><H3><A NAME="HDRINT" HREF="refer02.htm#ToC_31">3.1.1 Ganze Zahlen - Integer</A></H3>
+<A NAME="IDX38"></A>
+<A NAME="IDX40"></A>
+<P>Der Wertebereich der ganzen Zahlen besteht aus den
+nat&uuml;rlichen Zahlen. Die Integertypen sind weiter untergliedert in
+<BR>
+<PRE>
+     - short int
+ 
+     - int
+</PRE>
+und
+<PRE>
+     - long int
+</PRE>
+<P>Alle Integertypen lassen sich mit Vorzeichen (<TT>signed</TT>)
+oder ohne Vorzeichen (<TT>unsigned</TT>) definieren.
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">Integertypen</TH><TR><TD>
+<PRE>
+                                        
+>>--+----------+--+-+-------+--int-+--><
+    |-unsigned-|  | |-short-|      |    
+    |          |  | |       |      |    
+    +-signed---+  | +-long--+      |    
+                  |                |    
+                  +-+-short-+------+    
+                    |       |           
+                    +-long--+           
+</PRE>
+</TD></TR></TABLE>
+<P>Ganze Zahlen k&ouml;nnen nicht nur in der &uuml;blichen
+dezimalen Schreibweise (z.B. 18), sondern z.B. auch
+in hexadezimaler Schreibweise (z.B. 0xFFFF bzw. 0XFFFF)
+angegeben werden.
+<P><H4><A NAME="Header_32">3.1.1.1 short int</A></H4>
+<A NAME="IDX42"></A>
+<A NAME="IDX45"></A>
+<P>Der Typ <TT>short int</TT> entspricht in der Regel dem Typ
+<TT>int</TT>. Da&szlig; dennoch ein eigener Typ existiert, hat seine
+Ursache darin, da&szlig; in C folgendes definiert ist:
+<P>Gr&ouml;&szlig;e von <TT>short int</TT> &lt;= Gr&ouml;&szlig;e von
+<TT>int</TT>  &&  Gr&ouml;&szlig;e
+von <TT>int</TT> &lt;= Gr&ouml;&szlig;e von <TT>long int</TT>.
+<P>Dies erm&ouml;glicht dem Compilerhersteller festzulegen, ob f&uuml;r
+<TT>short int</TT> weniger Speicherplatz benutzt wird als f&uuml;r
+<TT>int</TT>. Der Compiler der IBM C/C<TT>++</TT>
+FirstStep Tools
+Version 2.01 reserviert zwei Byte (16 Bit) f&uuml;r
+<TT>short int</TT> Daraus resultiert, da&szlig; <TT>signed short int</TT>
+einen Wertebereich von
+-32.768 bis 32.767 (-2<SUP>15</SUP> bis 2<SUP>15</SUP>, das
+16. Bit wird f&uuml;r das Vorzeichen verwendet)
+und <TT>unsigned short int</TT> einen Wertebereich von
+0 bis 65.535 (2<SUP>16</SUP>) zur Verf&uuml;gung stellen.
+<P>
+<P><H4><A NAME="Header_33">3.1.1.2 int</A></H4>
+<A NAME="IDX47"></A>
+<A NAME="IDX50"></A>
+<P>Die Variablen des Typs <TT>int</TT> werden mit vier Byte (32 Bit)
+dargestellt und haben einen Wertebereich von
+-2.147.483.648 bis 2.147.483.647 und somit 2<SUP>31</SUP> Zahlen.
+Mittels der symbolischen Konstante <TT>INT_MIN</TT> kann der
+kleinste Wert (-2.147.483.648) angesprochen werden.
+<PRE>
+                int x;
+</PRE>
+oder
+<PRE>
+                signed int x;
+</PRE>
+<P>Vorzeichenlos:
+<PRE>
+                unsigned int x;
+</PRE>
+<P>Der Wertebereich dieses Datentyps erstreckt sich von 0 bis
+4.294.967.295.
+<P>
+<P><H4><A NAME="Header_34">3.1.1.3 long int</A></H4>
+<A NAME="IDX52"></A>
+<A NAME="IDX55"></A>
+<P>Der Wertebereich des Typs <TT>long int</TT> entspricht dem Wertebereich
+von <TT>int</TT>, da auch dieser Typ mit vier Byte (32 Bit) dargestellt wird.
+<BR>
+Die Deklaration hat folgende Form:
+<P>
+<PRE>
+                long int x;
+</PRE>
+oder
+<PRE>
+                signed int x;
+</PRE>
+<P><TT>long int</TT> kann ebenfalls vorzeichenlos deklariert werden:
+<PRE>
+                unsigned long int x;
+</PRE>
+<P>Einer Konstante des Typs <TT>long int</TT> folgt unmittelbar
+das Zeichen L, z.B. <TT>518346L</TT>, um zu kennzeichnen, da&szlig;
+es sich nicht um eine Variable des Typs <TT>int</TT> handelt.
+<P><H4><A NAME="Header_35">3.1.1.4 long long int</A></H4>
+<A NAME="IDX57"></A>
+<A NAME="IDX60"></A>
+<P>Dieser Datentyp ist nicht vom C Standard abgedeckt, steht aber unter einigen
+Compilern zur Verf&uuml;gung. "IBM C and C++ Compilers" definieren diesen Typ mit
+einer L&auml;nge von 8 Bytes.
+<P><H3><A NAME="HDRRAT" HREF="refer02.htm#ToC_36">3.1.2 Rationale Zahlen</A></H3>
+<A NAME="IDX61"></A>
+<A NAME="IDX62"></A>
+<P>Bei den rationalen Zahlen unterscheidet man ebenfalls verschiedene
+Genauigkeitsstufen, Gr&ouml;&szlig;en- und Wertebereiche):
+<TT>float</TT>, <TT>double</TT> und <TT>long double</TT>
+<P><TT>double</TT> wurde erst durch den ANSI-C-Standard definiert,
+vorher hie&szlig; dieser Datentyp <TT>longfloat</TT>.
+Aus diesem Grund ist der Bezeichner f&uuml;r die
+Formatspezifikation nach wie vor <TT>%lf</TT>.
+<P>Variablen f&uuml;r rationale
+Zahlen sollten stets bei ihrer Deklaration initialisiert
+werden, da f&uuml;r sie nur bestimmte Bitkombinationen erlaubte Werte
+darstellen. Wird dies nicht beachtet, kann es unter OS/2 zum
+Programmabbruch mit dem Fehlercode c009a kommen.
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">Flie&szlig;kommatypen</TH><TR><TD>
+<PRE>
+                       
+>>--+-float-------+--><
+    |             |    
+    |-double------|    
+    |             |    
+    +-long double-+    
+</PRE>
+</TD></TR></TABLE>
+<P>
+<P><H4><A NAME="Header_37">3.1.2.1 Der Typ float</A></H4>
+<A NAME="IDX64"></A>
+<A NAME="IDX67"></A>
+<P>Der Typ <TT>float</TT> wird mit 32 Bit (4 Byte) dargestellt und
+ergibt einen Wertebereich von 1.175*10<SUP>-38</SUP>
+bis 3.4*10<SUP>38</SUP>. Es gibt drei verschiedene M&ouml;glichkeiten
+der Darstellung:
+<OL TYPE=1>
+<P><LI>die Festkomma-Darstellung (z.B. 3.456),
+<P><LI>die Gleit- oder Flie&szlig;komma-Darstellung (z.B. 3.423e7) und
+<P><LI>die Darstellung, bei der der Compiler entscheidet, welche die k&uuml;rzere
+ist.
+</OL>
+<BR>
+Die Darstellungsform hat nur bei der Ein-/Ausgabe von rationalen
+Zahlen Auswirkungen und wird &uuml;ber den Formatstring festgelegt.
+<P>
+Die Deklaration hat folgende Form:
+<P>
+<PRE>
+                float x=0.0;
+</PRE>
+<P>Dieser Typ ist nicht f&uuml;r pr&auml;zise Berechnungen geeignet, da seine
+Genauigkeit bereits nach wenigen Nachkommastellen nachl&auml;&szlig;t. In
+diesem Fall sind die Typen <TT>double</TT> bzw.
+<TT>long double</TT> zu benutzen.
+Beispiel:
+<PRE>
+      float zahl1=0.0, zahl2=0.0, ergebnis=0.0;
+ 
+      scanf("%f+%f",&zahl1,&zahl2);
+      ergebnis=zahl1+zahl2;
+      printf("%f+%f=%f",zahl1,zahl2,ergebnis);
+ 
+ 
+      Eingabe: 85.439+234.34
+      Ausgabe: 85.439003+234.339996=319.778992
+</PRE>
+<P><H4><A NAME="Header_38">3.1.2.2 Der Typ double</A></H4>
+<A NAME="IDX69"></A>
+<A NAME="IDX72"></A>
+<P>Der Typ <TT>double</TT> wird mit 64 Bit (8 Byte) dargestellt und
+erm&ouml;glicht einen Wertebereich von 2.2*10<SUP>-308</SUP> bis
+1.798*10<SUP>308</SUP>.
+<BR>
+Die Deklaration hat folgende Form:
+<P>
+<PRE>
+                double x=0.0;
+</PRE>
+<P>Bei Operationen mit rationalen Zahlen mu&szlig; mindestens eine Zahl ein
+Komma enthalten, da sonst in
+Integer gerechnet wird! Die Rechnung 2700 * 4096 liefert unter DOS ein
+falsches Ergebnis, 2700.0 * 4096 dagegen liefert ein korrektes Ergebnis.
+<P>
+<P><H4><A NAME="Header_39">3.1.2.3 Der Typ long double</A></H4>
+<A NAME="IDX74"></A>
+<A NAME="IDX77"></A>
+<P>Der Typ <TT>long double</TT> wird mit 128 Bit (16 Byte) dargestellt
+und hat einen
+Wertebereich von 3.36*10<SUP>-4932</SUP> bis 1.1897*10<SUP>4932</SUP>.
+<P>
+<P><H4><A NAME="Header_40">3.1.2.4 Floating Point Konstanten</A></H4>
+<A NAME="IDX79"></A>
+<A NAME="IDX81"></A>
+<P>Floating Point Konstanten bestehen aus
+<UL>
+<P><LI>einem integralen Teil
+<P><LI>einem Dezimalpunkt
+<P><LI>einem Bruchteil
+<P><LI>einem Exponenten
+<P><LI>einem optionalen Suffix
+</UL>
+<P>Ein Plus oder ein Minus kann der Konstante vorangehen, ist jedoch nicht
+Teil der Konstante.
+<PRE>
+Floating Point Konstante                        Wert
+     5.3876e4                                   53876
+       4e-11                                0.00000000004
+       1e+5                                    100000
+     7.321E-3                                 0.007321
+      3.2E+4                                    32000
+      0.5e-6                                 0.0000005
+       0.45                                      0.45
+      6.e10                                  60000000000
+</PRE>
+<P><H3><A NAME="HDRCHAR" HREF="refer02.htm#ToC_41">3.1.3 Textzeichen - char</A></H3>
+<A NAME="IDX82"></A>
+<A NAME="IDX84"></A>
+<P>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">Chartypen</TH><TR><TD>
+<PRE>
+                          
+>>--+----------+--char--><
+    |-unsigned-|          
+    |          |          
+    +-signed---+          
+</PRE>
+</TD></TR></TABLE>
+<P>Ein Textzeichen wird in C mit 8 Bit verarbeitet. Dies ergibt
+2<SUP>8</SUP> = 256 verschiedene Zeichen. Diesen
+256 M&ouml;glichkeiten ist unter OS/2 der erweiterte
+ASCII
+<A NAME="Footnote_Used_3" HREF="#Footnote_3" ><SUP>3</SUP></A>
+<A NAME="IDX85"></A>
+<A NAME="IDX87"></A>
+Zeichensatz zugeordnet. Er gliedert sich wie folgt:
+<P>
+<PRE>
+   Zeichen 0   ...  31   Steuerzeichen
+   Zeichen 32  ...  47   Sonderzeichen
+   Zeichen 48  ...  57   Ziffern 0-9
+   Zeichen 58  ...  64   Sonderzeichen
+   Zeichen 65  ...  90   Gro&szlig;buchstaben
+   Zeichen 91  ...  96   Sonderzeichen
+   Zeichen 97  ... 122   Kleinbuchstaben
+   Zeichen 123 ... 127   Sonderzeichen
+   Zeichen 128 ... 255   Zeichen des erweiterten Zeichensatzes
+</PRE>
+<P>Die Zeichen 128 bis 255 h&auml;ngen vom jeweiligen System und der
+verwendeten Code-Tabelle ab. Diese Zeichen werden auch als
+Extended ASCII
+<A NAME="IDX89"></A>
+<A NAME="IDX91"></A>
+(siehe auch <A HREF="refer29.htm#HDREAS">K.2, "Extended ASCII"</A>)
+bezeichnet und umfassen i.d.R. nationale Umlaute
+und Sonderzeichen.
+<P>Im C Quellcode sollten immer die entsprechenden Zeichen
+anstatt der Zeichencodes (z.B. '2' statt 50) verwendet werden,
+da auf vielen Systemen andere Zeichens&auml;tze verwendet werden
+und die Zeichencodes dort eine andere Bedeutung haben.
+Weitere verbreitete Zeichens&auml;tze sind z.B. EBCDIC
+<A NAME="Footnote_Used_4" HREF="#Footnote_4" ><SUP>4</SUP></A>
+<A NAME="IDX92"></A>
+<A NAME="IDX94"></A>
+(Gro&szlig;rechnersysteme,
+z.B. VM), ANSI
+<A NAME="Footnote_Used_5" HREF="#Footnote_5" ><SUP>5</SUP></A>
+(z.B. Windows), Unicode (z.B. diverse UNIX Varianten) und
+ISO Latin 1
+<A NAME="IDX96"></A>
+(z.B. diverse UNIX Varianten).
+<P>Da einige Zeichens&auml;tze wie z.B. Unicode wesentlich mehr
+als nur 256 Zeichen verwalten, existiert noch der Typ
+<TT>wchar_t</TT>,
+<A NAME="IDX97"></A>
+<A NAME="IDX99"></A>
+der mit bis zu vier Byte dargestellt wird,
+um universelle Zeichens&auml;tze abbilden zu k&ouml;nnen.
+<P>Die Deklaration von Variablen oder Konstanten des Typs
+<TT>char</TT> hat folgende Form:
+<P>
+<PRE>
+                unsigned char buchstabe;
+</PRE>
+<P><TT>char</TT> mu&szlig; <TT>unsigned</TT> deklariert werden, wenn
+Zeichen mit einem Code gr&ouml;&szlig;er 127 benutzt werden sollen! Wird
+<TT>char buchstabe;</TT> deklariert, k&ouml;nnen nur Zeichen mit
+Codes von 0 bis 127 benutzt werden. Manche Entwicklungsumgebungen
+definieren <TT>char</TT> grunds&auml;tzlich als <TT>unsigned
+char</TT>.
+<P>
+<P><H4><A NAME="Header_42">3.1.3.1 Zeichenkonstanten und Zeichenkettenkonstanten</A></H4>
+<A NAME="IDX100"></A>
+<A NAME="IDX101"></A>
+<A NAME="IDX103"></A>
+<A NAME="IDX104"></A>
+<P>Konstanten sind Werte, die sich w&auml;hrend des Programmdurchlaufs nicht
+&auml;ndern sollen. Sie k&ouml;nnen bei jedem Datentyp auftreten.
+Bei den Zeichen- und
+den Zeichenkettenkonstanten ist jedoch eine Besonderheit zu beachten.
+<P>(1) Zeichenkonstanten werden in einfache Hochkommata eingeschlossen.
+<BR>
+Beispiele:
+<PRE>
+   'd'
+   'C'
+   '2'
+</PRE>
+<P>
+Diese Zeichenkonstanten werden zum Beispiel in der
+<TT>switch</TT>-Anweisung (siehe dazu Abschnitt <A HREF="refer11.htm#HDRCASE">7.2, "switch"</A>)
+und in Vergleichen verwendet.
+<P>(2) Zeichenkettenkonstanten werden dahingegen in
+Anf&uuml;hrungszeichen eingefa&szlig;t:
+<BR>
+Beispiele:
+<PRE>
+  "Fehler beim &Ouml;ffnen der Datei aufgetreten!"
+  "rc=0"
+  "Bitte eine Zahl eingeben!"
+</PRE>
+<P>Zeichenkettenkonstanten finden besonders h&auml;ufig in der
+<TT>printf</TT>-Anweisung (<A HREF="refer08.htm#HDRPRF">4.1, "printf - formatierte Ausgabe auf dem Bildschirm"</A>) Verwendung. Sie
+k&ouml;nnen beliebige Zeichen enthalten und
+laut ANSI-C-Standard 509 Zeichen lang sein. Diese Zahl ist jedoch
+abh&auml;ngig vom verwendeten Compiler. Es k&ouml;nnen auch
+sog. Fluchtsymbolzeichen (<A HREF="refer08.htm#HDRFLUCHT">4.1.2, "Fluchtsymbolzeichen"</A>)
+aufgenommen werden. Diese gelten nur als ein einzelnes Zeichen. Beim
+Ablegen im Speicher wird das Ende einer Zeichenkettenkonstanten durch
+eine bin&auml;re Null (\0) gekennzeichnet, die automatisch angef&uuml;gt wird.
+<P>
+<HR><H2><A NAME="Header_43" HREF="refer02.htm#ToC_43">3.2 H&ouml;here Datenstrukturen</A></H2>
+<P>In diesem Abschnitt werden die h&ouml;heren Datentypen Feld, Struktur,
+Union und Pointer anhand von ausf&uuml;hrlichen Beispielen vorgestellt.
+<P>
+<P><H3><A NAME="HDRFELD" HREF="refer02.htm#ToC_44">3.2.1 Felder - Array - Vektoren</A></H3>
+<A NAME="IDX105"></A>
+<A NAME="IDX106"></A>
+<A NAME="IDX108"></A>
+<P>Felder sind der erste Variablentyp der h&ouml;heren Datentypen.
+Sie stellen eine aufeinanderfolgende Anordnung von Elementen des
+gleichen Typs dar. Der Zugriff auf die Elemente
+erfolgt mit Hilfe eines Index. Dabei umfa&szlig;t der Wertebereich des
+Index die positiven ganzen Zahlen inklusive der Null.
+Eindimensionale Felder haben genau einen Index,
+mehrdimensionale zwei oder mehr Indizes.
+<P>
+<P><H4><A NAME="Header_45">3.2.1.1 Eindimensionale Felder</A></H4>
+<A NAME="IDX110"></A>
+<P>Ein Feld wird &uuml;ber seine Anfangsadresse im Speicher, die Gr&ouml;&szlig;e
+der Elemente und die Menge der Elemente vollst&auml;ndig definiert.
+<BR>
+Beispiel:
+<P>
+<PRE>
+   int x[3];
+</PRE>
+definiert ein Feld x mit drei Elementen vom Typ Integer
+und der Gr&ouml;&szlig;e 3*4 Byte.
+<P><B><A NAME="FIGEINDIM" HREF="refer04.htm#FT_FIGEINDIM">Abbildung 1. Beispiel f&uuml;r ein eindimensionales Feld</A></B><BR>
+<B><BR><CENTER><IMG SRC="feld1.gif" ALT="Figure feld1 not displayed."></CENTER><BR></B><BR>
+<P>Die Deklaration <TT>int x[3];</TT> bewirkt,
+da&szlig; die Elemente <TT>x[0], x[1]</TT> und
+<TT>x[2]</TT> zur Verf&uuml;gung stehen.
+<TT>x</TT> ist dabei definiert als <TT>x = &x[0]</TT>.
+Es beinhaltet die Speicheradresse des ersten Elementes <TT>x[0]</TT>,
+also einen Zeiger auf die Position des Inhaltes der ersten
+Komponente im Speicher.
+<P>
+<P><H4><A NAME="Header_46">3.2.1.2 Mehrdimensionale Felder</A></H4>
+<A NAME="IDX112"></A>
+<P>F&uuml;r mehrdimensionale Felder werden mehrere Indizes verwendet.
+Typisch ist das zweidimensionale Feld, es wird auch <I>Matrize</I>
+oder <I>Tabelle</I> genannt.
+<P>Die Definition mehrdimensionaler Felder erfolgt, im Gegensatz zu
+den meisten Programmiersprachen, &uuml;ber mehrere, voneinander
+getrennte, eckige Klammern.
+<BR>
+Beispiele:
+<P>(1)
+<PRE>
+              int bildschirm [25] [80];
+</PRE>
+<P>Mit dieser Anweisung wird ein zweidimensionales Feld mit dem
+Namen <I>bildschirm</I> erstellt. Es beinhaltet 25 Zeilen und
+80 Spalten, gen&uuml;gend Platz, um einen kompletten Textbildschirm
+aufzunehmen:
+<P><B><A NAME="FIGTABELLE" HREF="refer04.htm#FT_FIGTABELLE">Abbildung 2. Beispiel f&uuml;r ein zweidimensionales Feld</A></B><BR>
+<B><BR><CENTER><IMG SRC="feld2.gif" ALT="Figure feld2 not displayed."></CENTER><BR></B><BR>
+<P>(2)
+<PRE>
+              int karten [5][4][3];
+</PRE>
+<P>vereinbart ein dreidimensionales Feld mit den Dimensionen
+f&uuml;nf, vier und drei:
+<P><B><A NAME="FIGWUERFEL" HREF="refer04.htm#FT_FIGWUERFEL">Abbildung 3. Beispiel f&uuml;r ein dreidimensionales Feld</A></B><BR>
+<B><BR><CENTER><IMG SRC="feld3.gif" ALT="Figure feld3 not displayed."></CENTER><BR></B><BR>
+<P>
+<P><H4><A NAME="Header_47">3.2.1.3 Initialisierung und Ansprache von Feldern</A></H4>
+<A NAME="IDX114"></A>
+<P>Die folgenden Beispiele illustrieren die Initialisierung ein-, zwei-
+und dreidimensionaler Felder bei deren Deklaration. Am Ende dieses
+Abschnittes befindet sich ein Beispiel f&uuml;r die Initialisierung eines
+zweidimensionalen Feldes mittels einer Schleife.
+<PRE>
+(1)   int datensatz[3] = {28,17,43};
+ 
+                                   /*       Feldelement 0: 28;
+                                            Feldelement 1: 17;
+                                            Feldelement 2: 43;       */
+</PRE>
+<P><B><A NAME="FIGFELD1" HREF="refer04.htm#FT_FIGFELD1">Abbildung 4. Initialisierung eines eindimensionalen Feldes</A></B><BR>
+<B><BR><CENTER><IMG SRC="feld1a.gif" ALT="Figure feld1a not displayed."></CENTER><BR></B><BR>
+<PRE>
+(2)   int matrix[2][3] = {{28,17,43},{9,12,13}};
+ 
+                            /* Feldelemente 0,0 - 0,2: 28,17,43        */
+                            /* Feldelemente 1,0 - 1,2: 9,12,13         */
+</PRE>
+<P><B><A NAME="FIGFELD2" HREF="refer04.htm#FT_FIGFELD2">Abbildung 5. Initialisierung eines zweidimensionalen Feldes</A></B><BR>
+<B><BR><CENTER><IMG SRC="feld2a.gif" ALT="Figure feld2a not displayed."></CENTER><BR></B><BR>
+<PRE>
+(3)   int karten[5][4][3] = {0};   /* alle Feldelemente werden 0 * /
+</PRE>
+<P><B><A NAME="FIGFELD3" HREF="refer04.htm#FT_FIGFELD3">Abbildung 6. Initialisierung eines dreidimensionalen Feldes</A></B><BR>
+<B><BR><CENTER><IMG SRC="feld3a.gif" ALT="Figure feld3a not displayed."></CENTER><BR></B><BR>
+<P>Bei der Ansprache von Feldern mu&szlig; ber&uuml;cksichtigt werden,
+da&szlig; einzelne Elemente angesprochen werden und nicht das gesamte Feld.
+<P>Beispiel:
+<P>Dem Element '0,2' eines Feldes <TT>a</TT>, das zun&auml;chst mittels
+einer Schleife initialisiert wird, wird ein Wert zugewiesen:
+<P>
+<PRE>
+ int a[3][8], i, j;        /* Deklaration eines zweidimensionalen Feldes mit */
+                           /* drei Zeilen mit je acht Spalten                */
+ 
+ for(i=0; i &lt; 3; i++)      /* Start der &auml;u&szlig;eren Schleife f&uuml;r die Zeilen      *
+/
+ {
+    for(j=0; j &lt; 8; j++)   /* Start der inneren Schleife f&uuml;r die Spalten     */
+        a[i][j] = 0;       /* Initialisierung der Spalten + Ende der inneren */
+ }                         /* Ende der &auml;u&szlig;eren Schleife                      */
+ a[0][2] = 6;              /* Zuweisung des Wertes                           */
+</PRE>
+<P>
+<P><H4><A NAME="Header_48">3.2.1.4 &Uuml;bergabe von Feldern an Funktionen</A></H4>
+<P>Bei der &Uuml;bergabe eines Feldes an eine Funktion
+(siehe auch Kapitel <A HREF="refer09.htm#HDROWN">5.0, "Eigene Funktionen"</A>)
+ist zu beachten, da&szlig; nicht das gesamte
+Feld kopiert und &uuml;bergeben werden sollte, sondern nur die Adresse
+des ersten Elementes. Dies hat zur Folge, da&szlig;
+die Menge der Elemente als
+eigenst&auml;ndiger Wert &uuml;bergeben werden mu&szlig;, was die
+Angabe der Menge der Elemente innerhalb der Klammern ( [ ] )
+&uuml;berfl&uuml;ssig macht.
+<P>Beispiel:
+<P>
+<PRE>
+  /*********************************************************************/
+  /*** SUMME.C      summiert die Werte eines Feldes und &uuml;bergibt das ***/
+  /***              Ergebnis an die aufrufende Funktion              ***/
+  /*********************************************************************/
+  #include &lt;stdio.h&gt;
+  double summieren (double a[], int n)      /* Deklarationskopf der    */
+  {                                         /* Funktion 'summieren'    */
+     int i;                                 /* Deklaration der lokalen */
+     double summe=0.0;                      /* Variablen i und s       */
+ 
+     for (i=0; i&lt;n; i++)                    /* Start der Schleife      */
+          summe = summe + a[i];             /* Werte aufsummieren      */
+ 
+  /* for (i=0; i&lt;n; summe +=a[i++]);           w&auml;re auch m&ouml;glich       */
+ 
+     return(summe);                         /* Summe zur&uuml;ckgeben       */
+  }                                         /* Ende der Funktion       */
+ 
+  void main(void)                           /* Start des Hauptprogramms*/
+  {
+   double x1[3] = {2, 4, 9};                /* Deklaration und Initi-  */
+                                            /* alisierung des Feldes   */
+   printf("\nSumme %f\n", summieren(x1,3)); /* Funktionsaufruf und Aus-*/
+                                            /* gabe des Ergebnisses    */
+  }
+</PRE>
+<P>
+<P><H4><A NAME="HDRCHAIN">3.2.1.5 Zeichenketten - Strings</A></H4>
+<A NAME="IDX116"></A>
+<A NAME="IDX117"></A>
+<A NAME="IDX118"></A>
+<P>
+In C gibt es keinen eigenen Datentyp f&uuml;r Zeichenketten. Sie werden als
+Felder (Kapitel <A HREF="#HDRFELD">3.2.1, "Felder - Array - Vektoren"</A>) von <TT>char</TT>-Werten
+behandelt. Die Deklaration
+<P>
+<PRE>
+  char zeichenkette[9];
+</PRE>
+definiert ein Feld mit Speicherplatz f&uuml;r neun Zeichen. Sie k&ouml;nnen wie
+alle Felder mit <TT>zeichenkette[0], zeichenkette[1]</TT>
+bis <TT>zeichenkette[8]</TT> angesprochen werden.
+<P>Zu beachten ist, da&szlig; die letzte Feldkomponente f&uuml;r die bin&auml;re Null
+(\0) reserviert sein mu&szlig;, wenn mit Funktionen zur
+Zeichenkettenbearbeitung
+(z.B. <TT>strcpy()</TT>) gearbeitet werden soll.
+Die obige Deklaration w&uuml;rde dann nur Platz f&uuml;r acht Zeichen bieten!
+Aus diesem Grund sollte immer folgenderma&szlig;en deklariert werden:
+<PRE>
+ 
+  char zeichenkette[9+1];    /* 9 Zeichen + bin&auml;re Null \0 */
+  char zeichenkette2[10];    /* dito                       */
+</PRE>
+<P>
+<P><H3><A NAME="HDRSTRUKT" HREF="refer02.htm#ToC_50">3.2.2 Strukturen</A></H3>
+<A NAME="IDX119"></A>
+<A NAME="IDX121"></A>
+<A NAME="IDX122"></A>
+<P>Im Gegensatz zum Feld werden in einer Struktur Daten
+verschiedenen Typs verbunden.  Diese Verbindungen nach logischen
+Gesichtspunkten werden auch <I>Datensatz</I> genannt.
+<P>Beispiele:
+<P>
+Spielkarte
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Farbe
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Karte
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Punkte
+</TD></TR></TABLE>
+Pferd
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="19%">Alter
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">Geschlecht
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="19%">Herkunft
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="19%">Stall
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="19%">Besitzer
+</TD></TR></TABLE>
+<P>Die Datentypen sind unterschiedlich: Alter = int, Geschlecht =
+char, etc.
+<P>
+<P><P>
+<P><H4><A NAME="Header_51">3.2.2.1 Deklaration von Strukturen</A></H4>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">struct expression</TH><TR><TD>
+<PRE>
+                                                     
+>>--struct--+-identifier------------------------+--><
+            |                                   |    
+            |                    <---------<    |    
+            +-+------------+--{--V-member--+--}-+    
+              +-identifier-+                         
+</PRE>
+</TD></TR></TABLE>
+<P>Im Vereinbarungsteil kennzeichnet das Schl&uuml;sselwort <TT>struct</TT>
+den Beginn einer Strukturdefinition. Die Deklaration der Komponenten
+wird in geschweifte Klammern (<TT>{ }</TT>) eingefa&szlig;t:
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">struct member</TH><TR><TD>
+<PRE>
+                                       
+                    <-,-----------<    
+>>--type specifier--V-declarator--+--><
+</PRE>
+</TD></TR></TABLE>
+<P>
+Beispiel:
+<P>
+<PRE>
+   struct student {
+          char         name[40+1];               /* Nachname           */
+          char         vorname[40+1];            /* Vorname            */
+          int          post_leit_zahl;           /* Postleitzahl       */
+          char         wohnort[40+1];            /* Wohnort            */
+          char         strasse_nr[40+1];         /* Strasse,Hausnummer */
+          char         geb_dat[8+1];             /* Geb_Datum ttmmjjjj */
+          int          mat_nr;                   /* Matrikelnr:        */
+          float        noten[10];                /* Pr&uuml;fungsnoten      */
+   };
+</PRE>
+<P>In dem obigen Beispiel wird ein Datensatz <I>student</I>
+definiert, allerdings noch
+kein Speicherplatz reserviert. Dem Compiler wird hierdurch nur
+der Name <I>student</I> und der Aufbau der Struktur bekannt gemacht.
+<P>Wird eine Variable dieser Struktur ben&ouml;tigt, so kann sie mit
+<P>
+<PRE>
+   struct student stu_daten;
+</PRE>
+<P>
+definiert werden. Es wurde der Datensatz
+<I>stu_daten</I> unter Verwendung der Datenstruktur
+<I>student</I> mit einer
+Gr&ouml;&szlig;e von 221 Byte vereinbart. Die acht Elemente des Datensatzes
+<I>stu_daten</I> sind somit folgende:
+<P><B><A NAME="FIGSTUDENT" HREF="refer04.htm#FT_FIGSTUDENT">Abbildung 7. Datensatz stu_daten</A></B><BR>
+<B><BR><CENTER><IMG SRC="student.gif" ALT="Figure student not displayed."></CENTER><BR></B><BR>
+<P>Um die beiden Schritte Strukturdefinition und
+Datensatzvereinbarung zusammenzufassen, kann folgende Form
+gew&auml;hlt werden:
+<P>
+<PRE>
+   struct student {
+          char         name[40+1];               /* Nachname           */
+          char         vorname[40+1];            /* Vorname            */
+          int          post_leit_zahl;           /* Postleitzahl       */
+          char         wohnort[40+1];            /* Wohnort            */
+          char         strasse_nr[40+1];         /* Strasse,Hausnummer */
+          char         geb_dat[8+1];             /* Geb_Datum ttmmjjjj */
+          int          mat_nr;                   /* Matrikelnr:        */
+          float        noten[10];                /* Pr&uuml;fungsnoten      */
+    } <B>stu_daten</B>&#59;
+</PRE>
+<P>Sollen mehrere Datens&auml;tze mit der gleichen Struktur definiert
+werden, so k&ouml;nnen die Namen dieser Datens&auml;tze durch Kommata
+getrennt hintereinander angegeben werden.
+<P>
+<PRE>
+   struct student {
+          char         name[40+1];               /* Nachname           */
+          char         vorname[40+1];            /* Vorname            */
+          int          post_leit_zahl;           /* Postleitzahl       */
+          char         wohnort[40+1];            /* Wohnort            */
+          char         strasse_nr[40+1];         /* Strasse,Hausnummer */
+          char         geb_dat[8+1];             /* Geb_Datum ttmmjjjj */
+          int          mat_nr;                   /* Matrikelnr:        */
+          float        noten[10];                /* Pr&uuml;fungsnoten      */
+    } <B>stu_daten1</B>, <B>stu_daten2</B>,
+      <B>stu_daten3</B>&#59;
+</PRE>
+<P><H4><A NAME="Header_52">3.2.2.2 Felder von Strukturen</A></H4>
+<A NAME="IDX124"></A>
+<P>Soll ein Feld von Strukturen definiert werden, so ist dem Namen der
+Strukturvariablen die Felddefinition anzuf&uuml;gen:
+<P>
+<PRE>
+   struct student {
+          char         name[40+1];               /* Nachname           */
+          char         vorname[40+1];            /* Vorname            */
+          int          post_leit_zahl;           /* Postleitzahl       */
+          char         wohnort[40+1];            /* Wohnort            */
+          char         strasse_nr[40+1];         /* Strasse,Hausnummer */
+          char         geb_dat[8+1];             /* Geb_Datum ttmmjjjj */
+          int          mat_nr;                   /* Matrikelnr:        */
+          float        noten[10];                /* Pr&uuml;fungsnoten      */
+    } <B>stu_daten[10]&#59;</B>
+</PRE>
+<P>
+<P><H4><A NAME="HDRSTRDEF">3.2.2.3 Strukturen mit Typendefinitionen - typedef</A></H4>
+<A NAME="IDX125"></A>
+<A NAME="IDX127"></A>
+<P>Wem diese zusammengefa&szlig;te Schreibweise zu un&uuml;bersichtlich ist,
+kann der Struktur auch einen eigenen Typ zuweisen:
+<P>
+<PRE>
+   <B>typedef</B>
+ 
+   struct {
+          char         name[40+1];               /* Nachname           */
+          char         vorname[40+1];            /* Vorname            */
+          int          post_leit_zahl;           /* Postleitzahl       */
+          char         wohnort[40+1];            /* Wohnort            */
+          char         strasse_nr[40+1];         /* Strasse,Hausnummer */
+          char         geb_dat[8+1];             /* Geb_Datum ttmmjjjj */
+          int          mat_nr;                   /* Matrikelnr:        */
+          float        noten[10];                /* Pr&uuml;fungsnoten      */
+   } <B>STUDENT</B>&#59;
+</PRE>
+<P>Mit dieser Anweisung wird der Typ <I>Student</I> definiert
+und dem Compiler der Name und der Aufbau bekannt gemacht. Variablen
+k&ouml;nnen jetzt durch
+<P>
+<PRE>
+   STUDENT stu_daten;
+</PRE>
+<P>vereinbart werden. Es ist somit ein neuer Datentyp angelegt
+worden. Um deutlich zu machen, da&szlig; es sich um
+einen neu definierten Typ handelt, sollte der Name
+(z.B. <I>STUDENT</I>) gro&szlig; geschrieben werden.
+<P>
+<P><H4><A NAME="Header_54">3.2.2.4 Zugriff auf Strukturkomponenten</A></H4>
+<A NAME="IDX129"></A>
+<P>Der Zugriff auf einzelne Komponenten einer Struktur in C ist an
+die Vorgehensweise der vollqualifizierten Ansprache in
+Programmiersprachen wie z.B. PL/1 oder Cobol angelehnt:
+<P>
+<PRE>
+   strukturvariable.strukturkomponente
+</PRE>
+<BR>
+Beispiel:
+<P>
+<PRE>
+   strcpy(stu_daten.name, "Meyer");
+   stu_daten.noten[0] = 2;
+</PRE>
+<P>Dem Element <TT>stu_daten.name</TT> wird die Zeichenkette
+<TT>Meyer</TT> und dem Element <TT>stu_daten.noten[0]</TT> wird
+die Zahl 2 zugewiesen.
+<P>Wenn &uuml;ber einen Zeiger (siehe <A HREF="#HDRZEI">3.2.4, "Zeiger - Pointer"</A>) auf
+Strukturkomponenten zugegriffen werden sollen, mu&szlig; folgende
+Syntax verwendet werden:
+<P>
+<PRE>
+   zeiger_auf_struktur-&gt;strukturkomponente
+</PRE>
+<P><H4><A NAME="Header_55">3.2.2.5 Initialisierung von Strukturen</A></H4>
+<A NAME="IDX131"></A>
+<P>Eine Struktur kann entweder direkt bei der Deklaration der
+Struktur oder bei der Deklaration der Strukturvariablen mit
+Werten initialisiert werden.
+<BR>
+Beispiel:
+<P>
+(1)   Bei der Deklaration einer Strukturvariablen:
+<P>
+<PRE>
+   struct datum {
+       int  tag;
+       char monat[10+1];
+       int  jahr;
+   };
+ 
+   struct datum jahr_tag = {1,"Januar",1994};
+</PRE>
+<P>
+(2)   Bei der Deklaration der Struktur:
+<P>
+<PRE>
+   struct datum {
+          int  tag;
+          char monat[10+1];
+          int  jahr;
+   } jahr_tag = {1,"Januar",1994};
+</PRE>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">Hinweis</TH><TR><TD>
+Nur als extern oder static (siehe
+Abschnitt <A HREF="#HDRCLASSES">3.6, "Speicherklassen"</A>)
+definierte Strukturen d&uuml;rfen direkt im Anschlu&szlig; an die Deklaration
+der Struktur initialisiert werden.
+</TD></TR></TABLE>
+<P><P>
+<P><H3><A NAME="HDRUNION" HREF="refer02.htm#ToC_56">3.2.3 Unions</A></H3>
+<A NAME="IDX132"></A>
+<A NAME="IDX134"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">union expression</TH><TR><TD>
+<PRE>
+                                                
+                              <---------<       
+>>--union--+------------+--{--V-member--+--}--><
+           +-identifier-+                       
+</PRE>
+</TD></TR></TABLE>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">union member</TH><TR><TD>
+<PRE>
+                                       
+                    <-,-----------<    
+>>--type specifier--V-declarator--+--><
+</PRE>
+</TD></TR></TABLE>
+<P>Unions bestehen wie Strukturen aus mehreren Komponenten
+unterschiedlichen Datentyps. F&uuml;r eine
+Struktur wird Speicherplatz zur Verf&uuml;gung gestellt, der in seiner Gr&ouml;&szlig;e
+der Summe der Gr&ouml;&szlig;e der Strukturkomponenten entspricht. F&uuml;r eine Union
+wird nur die Speicherkapazit&auml;t reserviert, die notwendig ist, um die
+speicheraufwendigste der Union-Komponenten
+speichern zu k&ouml;nnen. Der Sinn besteht
+darin, Speicherplatz zur Verf&uuml;gung zu stellen, der zu verschiedenen
+Zeiten Werte verschiedenen Datentyps aufnehmen kann.
+<P>Der Speicherplatz jeder Union-Komponente beginnt an der gleichen
+Speicheradresse. Das bedeutet, da&szlig; immer nur der Wert einer
+Union-Komponente gespeichert werden kann,
+der vorherige Wert wird &uuml;berschrieben. Syntaktisch
+unterscheiden sich die Unions nur durch das Schl&uuml;sselwort
+<TT>union</TT> von
+den Strukturen, die Variablendeklaration erfolgt nach dem Muster der
+Strukturvariablendefinition
+und auch der Zugriff erfolgt wie bei den Strukturen &uuml;ber den
+Punktoperator (vollqualifizierte Ansprache). Das folgende Beispiel
+zeigt, wie derselbe Speicherplatz einmal einen Integerwert und einmal
+einen Floatwert zugewiesen bekommt:
+<P>
+<PRE>
+/*******************************************************************/
+/* Programm: Union_1.c                                             */
+/* Datum   : September 1994                                        */
+/* Autor   : Sascha Kliche, Daniel Wolkenhauer                     */
+/* Beschreibung:                                                   */
+/* Die Wirkungsweise und die Verwendung von UNIONS wird an der     */
+/* Zuweisung eines float- und eines integer-Wertes auf denselben   */
+/* Speicherplatz demonstriert.                                     */
+/*******************************************************************/
+ 
+#include &lt;stdio.h&gt;
+ 
+/*
+ * Deklaration der Komponenten der Union
+ */
+union my_union
+{
+   float float_num;
+   int   int_num;
+};
+ 
+void main(void)
+{
+   /*
+    * Deklaration einer Union-Variablen mit der Struktur my_union
+    */
+   union my_union union_komp;
+ 
+   /*
+    * Zuweisung eines Integerwertes und Ausgabe
+    */
+   union_komp.int_num = 23;
+   printf("Der aktuelle Wert der Union-Variablen ist: %d \n",
+           union_komp.int_num);
+ 
+   /*
+    * Zuweisung eines Floatwertes und Ausgabe
+    */
+   union_komp.float_num = 19.87;
+   printf("Der aktuelle Wert der Union-Variablen ist: %f \n",
+           union_komp.float_num);
+}
+</PRE>
+<P>
+<P><H3><A NAME="HDRZEI" HREF="refer02.htm#ToC_57">3.2.4 Zeiger - Pointer</A></H3>
+<A NAME="IDX135"></A>
+<A NAME="IDX136"></A>
+<A NAME="IDX138"></A>
+<P>Zeiger haben in C eine besondere Stellung, sie werden
+intensiver genutzt als in anderen Programmiersprachen.
+Das besondere an ihnen ist,
+da&szlig; sie als Inhalt bzw. Wert die Speicheradresse einer
+anderen Variablen
+<A NAME="Footnote_Used_6" HREF="#Footnote_6" ><SUP>6</SUP></A>
+eines bestimmten Typs aufnehmen.
+Die Variablen eines Programmes stehen im Datenbereich
+ihres Prozesses. Der Proze&szlig;
+sieht die Adressen nicht absolut zum Anfang des
+Hauptspeichers, sondern relativ zur Anfangsadresse
+des Datenbereichs des Prozesses. F&uuml;r einen Proze&szlig;
+ist demnach die Adresse einer Variablen die Nummer
+des ersten Bytes der Variablen relativ zum Beginn des
+Datenbereiches. Ein Pointer hat als Wert diese
+Adresse einer Variablen.
+Pointer werden vereinbart wie Variablen und erhalten
+wie diese Speicherplatz reserviert.
+<P><B><A NAME="FIGPOINTER" HREF="refer04.htm#FT_FIGPOINTER">Abbildung 8. Zeiger</A></B><BR>
+<B><BR><CENTER><IMG SRC="pointer.gif" ALT="Figure pointer not displayed."></CENTER><BR></B><BR>
+<BR>
+<P><B><A NAME="Table_8" HREF="refer03.htm#FT_Table_8">Tabelle 8. Zeiger im Speicher</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="31%">Wert an der Speicheradresse
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">...
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">
+<BR></TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">100
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">
+<BR></TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">...
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">
+<BR></TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">354
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">
+<BR></TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">...
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="31%">Speicheradresse
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">...
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">46
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">50
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">54
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">...
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">96
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">100
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">104
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="8%">...
+</TD></TR></TABLE>
+<P>Aus diesem Beispiel ergibt sich:
+<UL>
+<P><LI>p ist ein Zeiger.
+<P><LI>Der Wert von p ist 100, dieser Wert wird als Adresse
+interpretiert.
+<P><LI>Der Zeiger p zeigt auf den Wert 354, der an der Adresse 100
+gespeichert ist.
+</UL>
+<P>Zeiger k&ouml;nnen einerseits sehr hilfreich sein, stellen
+andererseits ein hohes Risiko dar, da durch Fehler bei der
+Benutzung von Zeigern auf ung&uuml;ltige Speicheradressen
+zugegriffen werden kann. Diese Zugriffe f&uuml;hren unter
+Betriebssystemen mit gesch&uuml;tzten Adre&szlig;r&auml;umen sofort zum
+Programmabsturz. Das einzig sichere ist ein Zeiger auf
+NULL,
+<A NAME="IDX139"></A>
+hier wird garantiert, da&szlig; der Zeiger definitiv auf
+keine Speicherstelle zeigt.
+<P><H4><A NAME="Header_58">3.2.4.1 Vereinbarung von Zeigern</A></H4>
+<A NAME="IDX141"></A>
+<P>Zeiger m&uuml;ssen wie Variablen im Vereinbarungsteil definiert werden.
+Um deutlich zu machen, da&szlig; es sich um einen Zeiger handelt, sollte
+der Bezeichner mit einem p f&uuml;r Pointer oder z f&uuml;r Zeiger beginnen.
+Ein Zeiger wird durch das Zeichen <TT>*</TT> vor dem Bezeichner von
+Variablen unterschieden (Pflicht):
+<P>
+<PRE>
+   int   *zi;    /* Zeiger auf int    */
+   float *zf;    /* Zeiger auf float  */
+</PRE>
+<P>Auch Zeigern wird ein Datentyp zugewiesen. Dieser
+interpretiert den Datentyp der
+Variablen, auf die der Zeiger zeigt, und nicht den eigenen
+Datentyp des Zeigers. Alle Adressen sind vom Typ Integer.
+<P><H4><A NAME="Header_59">3.2.4.2 Anwendung von Zeigern</A></H4>
+<A NAME="IDX143"></A>
+<P>Um die Adresse einer Variablen zu ermitteln und sie dem
+Zeiger zu &uuml;bergeben, verwendet C den un&auml;ren Operator
+<TT>&amp;</TT>.
+<A NAME="IDX144"></A>
+Nach der obigen Vereinbarung ergibt sich nun folgende 
+m&ouml;gliche Zuweisung:
+<P>
+<PRE>
+   int   n, *pi;
+   float x, *pf;
+ 
+      pi = &n;
+      pf = &x;
+</PRE>
+<P>Nach dieser Zuweisung enth&auml;lt <TT>pi</TT> die Adresse
+von <TT>n</TT> und <TT>pf</TT> die Adresse von <TT>x</TT>.
+Den Zugriff auf den Inhalt einer Adresse nennt man
+Dereferenzierung. Mit
+Hilfe der Dereferenzierung ist es m&ouml;glich, nur unter Nutzung der
+Adresse eines anderen Objektes, dessen Wert zu &auml;ndern.
+<P>Beispiel:
+<P>
+<PRE>
+/********************************************************************/
+/* Programm: zeiger.c                                               */
+/* Autor   : Sascha Kliche, Daniel Wolkenhauer                      */
+/* Datum   : September 1994                                         */
+/* Beschreibung:                                                    */
+/* Dieses Programm verdeutlich die Dereferenzierung: den Zugriff    */
+/* auf den Inhalt einer Speicheradresse.                            */
+/********************************************************************/
+#include &lt;stdio.h&gt;
+#include &lt;conio.h&gt;
+ 
+   void main(void)
+   {
+   int  objekt = 0;          /* Int-Variable mit 0 initialisieren      */
+   int *zeiger;              /* Zieger auf Int deklarieren             */
+ 
+      zeiger  = &objekt;     /* (1) Speicheradresse (objekt) an zeiger */
+      objekt  = 4;           /* normale Zuweisung mit dem Wert 4       */
+ 
+      *zeiger = 5;           /* (2) Speicherplatz von objekt = 5       */
+   }
+</PRE>
+<P>In Zeile (1) wird der Zeigervariablen <TT>zeiger</TT> die
+Speicheradresse eines Objekts (hier: der Integervariablen
+<TT>objekt</TT>) &uuml;bergeben. Dem Objekt wird dazu der un&auml;re
+Adre&szlig;operator (&) vorangestellt. Mit seiner Hilfe wird nicht der Wert
+der Variablen <TT>objekt</TT> (zu dieser Zeit = 0) zugewiesen,
+sondern, die Adresse, an der der Wert im Speicher abgelegt ist.
+<P>Die eigentliche Dereferenzierung findet in Zeile (2) statt. Nur mit
+Hilfe der Adresse wird auf einen Speicherinhalt 'zugegriffen'. In
+diesem Fall wird der Inhalt (4) mit einem neuen Wert (5) &uuml;berschrieben.
+<P>Folgende Zuweisungen sind beispielsweise erlaubt:
+<PRE>
+int zahl=3; zahl2=0, *ptr_zahl=NULL, *ptr_zahl2=NULL;
+ 
+ptr_zahl=&zahl;         /* adresse von zahl zuweisen   */
+ptr_zahl2=ptr_zahl;     /* adresse von zahl &uuml;bernehmen */
+zahl=(int)ptr_zahl;     /* adresse von zahl an zahl &uuml;bergeben */
+ 
+*ptr_zahl=5;            /* zahl den wert 5 zuweisen, entspricht zahl=5 */
+zaehl2=*ptr_zahl;       /* wert von zahl an zahl2 &uuml;bergeben            */
+ 
+ptr_zahl2=(int *)*ptr_zahl; /* inhalt von zahl als adresse an
+                               ptr_zahl2 &uuml;bergeben */
+</PRE>
+<P>Ung&uuml;ltig sind beispielsweise folgende Zuweisungen:
+<PRE>
+int zahl=3; zahl2=0, *ptr_zahl=NULL, *ptr_zahl2=NULL;
+ 
+zahl=ptr_zahl;           /* eine adresse kann nicht einer int
+                            variablen &uuml;bergeben werden         */
+*ptr_zahl=&zahl;         /* dito                               */
+ 
+ptr_zahl=*zahl;          /* zahl enth&auml;lt keine adresse         */
+ 
+ptr_zahl2=*ptr_zahl;     /* einem zeiger mu&szlig; eine adresse
+                            &uuml;bergeben werden                   */
+</PRE>
+<P>Beispielprogramm:
+<PRE>
+void main(void)
+{
+  int zahl=3, *ptr_zahl=NULL;
+ 
+  ptr_zahl=&zahl;
+ 
+  printf("\nAdresse von ptr_zahl = %d",&ptr_zahl);
+  printf("\nInhalt von ptr_zahl = %d",ptr_zahl);
+  printf("\nAdresse von zahl = %d",&zahl);
+  printf("\nInhalt von zahl = %d",zahl);
+  printf("\nWert von *ptr_zahl = %d",*ptr_zahl);
+}
+/*
+Ausgabe: (Adressenangaben &auml;ndern sich)
+ 
+Adresse von ptr_zahl = 166004
+Inhalt von ptr_zahl = 166008
+Adresse von zahl = 166008
+Inhalt von zahl = 3
+Wert von *ptr_zahl = 3
+*/
+</PRE>
+<P><H4><A NAME="Header_60">3.2.4.3 Zeiger und Felder</A></H4>
+<A NAME="IDX146"></A>
+<P>Zeiger und Felder sind eng miteinander verbunden. Die Deklaration
+eines Feldes bewirkt, da&szlig; im Heap ein Speicherbereich der angegebenen
+Gr&ouml;&szlig;e reserviert und im Stack ein Zeiger auf diesen Speicherbereich
+hinterlegt wird.
+<PRE>
+char zeichen[10];
+char ptr;
+</PRE>
+<P><TT>zeichen</TT> enth&auml;lt die Adresse von <TT>zeichen[0]</TT>.
+<TT>&zeichen[0];</TT> entspricht also <TT>ptr</TT>.
+<TT>zeichen</TT> entspricht ebenfalls <TT>ptr</TT>.
+Daraus ergibt sich, da&szlig; <TT>&zeichen[0];</TT>
+<TT>zeichen</TT> entspricht. Die Adresse einer Zeichenkette kann
+einem Zeiger auf Zeichen also nur als Adresse eines Elementes der
+Zeichenkette &uuml;bergeben werden (z.B. <TT>ptr=zeichen;</TT> oder
+<TT>ptr=&zeichen[0];</TT> oder <TT>ptr=&zeichen[8];</TT>).
+Hier ist auf die korrekte Benutzung des Adre&szlig;operators (&) zu
+achten.
+<P>&Auml;quivalente Ausdr&uuml;cke:
+<PRE>
+ptr           &zeichen[0]
+ptr           zeichen
+*ptr          zeichen[0]
+*(ptr+1)      zeichen[1]
+*(ptr+n)      zeichen[n]
+ 
+zeichen       &zeichen[0]
+</PRE>
+<P>Das folgende Beispiel demonstriert, wie mittels Zeigerarithmetik
+ein Zeichenfeld mit der Deklaration <TT>char **argv</TT> bzw.
+<TT>char *argv[]</TT> 
+<A NAME="IDX148"></A>
+analysiert werden kann. Das Beispiel
+nutzt Zeiger intensiv und sollte nur dann angewendet werden,
+wenn man es wirklich versteht, da es auch einige Fallstricke
+beinhaltet.
+<P>
+<PRE>
+ 
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+ 
+void main(int argc, char *argv[])
+{
+  int anzparms=0, t_parameter=0;
+  char name_in[255+1], name_out[255+1];
+  char usage[35]="Hier steht ein Hilfekommentar.\0";
+ 
+  argv++;                            /* auf zweiten parameter wechseln    */
+                                     /* erster Parameter ist Programmname */
+  argc--;                            /* anzahl parameter dekrementieren   */
+  while(argc&gt;0)
+  {
+    if (**argv=='-' &#124;&#124; **argv=='/')  /* erstes Zeichen gleich - oder / ?  */
+    {
+      (*argv)++;                     /* ein zeichen weiter                */
+      if(**argv!='\0')               /* zugriff auf zeichen nach - oder / */
+        switch(**argv)
+        {
+          case 'h':
+          {
+            printf("%s",usage);
+            exit(1);
+            break;
+          }
+          case 't': t_parameter=1;
+                    break;
+          default : printf("Unrecognized parameter '-%c' ignored.",**argv);
+                    break;
+        }                            /* ende switch                       */
+    }                                /* ende - oder / im parameter        */
+    else
+    {                                /* dateinamen zuweisen               */
+       anzparms++;
+       if(anzparms&lt;3)
+       {
+         if(anzparms==1) strcpy(name_in,*argv);
+         if(anzparms==2) strcpy(name_out,*argv);
+       }
+       else
+         printf("Unrecognized parameter '%s' ignored.\n",*argv);
+    }                                /* ende dateinamen zuweisen          */
+    argv++;
+    argc--;
+  }                                  /* while argc&gt;0                      */
+}                                    /* ende main                         */
+</PRE>
+<P><B><A NAME="FIGPOINT1" HREF="refer04.htm#FT_FIGPOINT1">Abbildung 9. Zeiger</A></B><BR>
+<B><BR><CENTER><IMG SRC="point1.gif" ALT="Figure point1 not displayed."></CENTER><BR></B><BR>
+<P><B><A NAME="FIGPOINT2" HREF="refer04.htm#FT_FIGPOINT2">Abbildung 10. Zeiger</A></B><BR>
+<B><BR><CENTER><IMG SRC="point2.gif" ALT="Figure point2 not displayed."></CENTER><BR></B><BR>
+<P><P>
+<HR><H2><A NAME="Header_61" HREF="refer02.htm#ToC_61">3.3 Weitere Datentypen</A></H2>
+<P><H3><A NAME="HDRVOID" HREF="refer02.htm#ToC_62">3.3.1 void</A></H3>
+<A NAME="IDX149"></A>
+<A NAME="IDX151"></A>
+<P>Der Datentyp <TT>void</TT> hat keinen Wertebereich und kommt
+immer dann zum Einsatz, wenn kein bestimmter Datentyp erforderlich
+ist bzw. um zu kennzeichnen, da&szlig; Funktionen keine Parameter
+erwarten oder keinen Wert zur&uuml;ckgeben.
+<P><H3><A NAME="HDRENUM" HREF="refer02.htm#ToC_63">3.3.2 enum</A></H3>
+<A NAME="IDX152"></A>
+<A NAME="IDX153"></A>
+<A NAME="IDX155"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">enum</TH><TR><TD>
+<PRE>
+                                                   
+                             <-,-----------<       
+>>--enum--+------------+--{--V-enumerator--+--}--><
+          +-identifier-+                           
+</PRE>
+</TD></TR></TABLE>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">enumerator</TH><TR><TD>
+<PRE>
+                                             
+>>--identifier--+-----------------------+--><
+                +-= constant expression-+    
+</PRE>
+</TD></TR></TABLE>
+<P>Eine Enumeration (Aufz&auml;hlung)
+repr&auml;sentiert eine bestimmte Menge an Werten, die
+der Programmierer definiert. Eine Enumeration ist in C immer vom Typ
+<TT>int</TT>. Die definierten Werte einer Enumeration werden nacheinander
+durchnumeriert und somit auf den Datentyp <TT>int</TT> umgelegt.
+Die Deklaration umfa&szlig;t das Schl&uuml;sselwort <TT>enum</TT> gefolgt von
+einem Bezeichner und einer Liste der Aufz&auml;hlungen (enumerators).
+Die Elemente der Aufz&auml;hlung werden auch enumeration constants genannt.
+Die Liste der Aufz&auml;hlungen wird in geschweifte Klammern eingefa&szlig;t und jede
+Aufz&auml;hlung ist durch ein Komma abgetrennt.
+<BR>
+Beispiel:
+<PRE>
+enum monate { Januar=1, Februar, Maerz, April, Mai, Juni, Juli,
+              August, September, Oktober, November, Dezember };
+</PRE>
+<P>Die Monatsbezeichnungen werden, bei eins beginnend, aufsteigend
+numeriert, Januar=1 bis Dezember=12. Normalerweise beginnt die
+Numerierung mit dem ersten Element bei Null.
+Diese Numerierung erm&ouml;glicht die Benutzung
+der Bezeichnungen anstatt der Nummern im Programmcode. Jedes
+Aufz&auml;hlungselement darf in seinem G&uuml;ltigkeitsbereich nur einmal definiert
+werden.
+<P>Die Numerierung kann bei jedem Element der Aufz&auml;hlungsliste beeinflu&szlig;t
+werden:
+<PRE>
+ enum status { run, create, delete=5, suspend };
+</PRE>
+ Der Datentyp <TT>status</TT> repr&auml;sentiert die folgenden Werte:
+<PRE>
+ Enumeration         Integer
+ Constant            Representation
+ 
+ run                 0
+ create              1
+ delete              5
+ suspend             6
+</PRE>
+<P>Enumeration Variablen werden wie folgt definiert:
+<PRE>
+enum monate { Januar=1, Februar, Maerz, April, Mai, Juni, Juli,
+              August, September, Oktober, November, Dezember } monat1, monat2;
+ 
+enum monate monat3 = April;
+</PRE>
+<P>In diesem Beispiel werden die Variablen <TT>monat1, monat2</TT> und
+<TT>monat3</TT> definiert, wobei der Variablen <TT>monat3</TT> der
+Wert <TT>April</TT> (repr&auml;sentiert die Nummer 4) zugewiesen wird.
+<HR><H2><A NAME="Header_64" HREF="refer02.htm#ToC_64">3.4 Datentypumwandlung</A></H2>
+<A NAME="IDX156"></A>
+<P>Bei der Datentypumwandlung wird danach unterschieden, ob der
+Programmierer regelnd eingreift (explizit) oder ob das System
+von sich aus (implizit) ohne Dazutun des Programmierers eine
+Umwandlung durchf&uuml;hrt.
+<P>
+<P><H3><A NAME="Header_65" HREF="refer02.htm#ToC_65">3.4.1 Implizite Datentypumwandlung</A></H3>
+<A NAME="IDX158"></A>
+<P>Der C-Compiler wandelt verschiedene Datentypen
+grunds&auml;tzlich in festgelegte andere Datentypen um,
+um die M&ouml;glichkeiten des jeweils verwendeten
+Computersystems maximal ausnutzen zu k&ouml;nnen. Welche
+Datentypen in welche umgewandelt werden, ist der Dokumentation
+der jeweiligen Entwicklungsumgebung zu entnehmen.
+<P>Weiterhin gilt, da&szlig; bei der Verwendung von verschiedenen
+Datentypen bei einer Zuweisung das Ergebnis der Berechnung
+rechts vom Gleichheitszeichen immer in den Datentyp des Operanden links
+vom Gleichheitszeichen umgewandelt wird. Dies gilt auch, wenn links mit
+<TT>int</TT>-Werten und rechts mit rationalen Zahlen gerechnet
+wird!
+<P>Abschlie&szlig;end ist zu beachten, da&szlig; beim Zusammentreffen
+verschiedener Datentypen in einer Berechnung immer mit dem
+speicheraufwendigeren gerechnet wird.
+<P>
+<P><H3><A NAME="Header_66" HREF="refer02.htm#ToC_66">3.4.2 Explizite Datentypumwandlung</A></H3>
+<A NAME="IDX159"></A>
+<A NAME="IDX160"></A>
+<A NAME="IDX162"></A>
+<A NAME="IDX163"></A>
+<P>Der Programmierer kann einen Operanden allerdings auch bewu&szlig;t
+ver&auml;ndern. Dazu kann ein sogenannter <I>Cast</I> benutzt werden. Ein
+Cast ist eine Datentypbezeichnung, die dem zu ver&auml;ndernden Operanden
+vorangestellt wird.
+<BR>
+Beispiel:
+<P>
+<PRE>
+   int ganz_1, ganz_2;
+   double  dopp;
+ 
+   dopp = (float)ganz_1 * (long)ganz_2;
+</PRE>
+<P>Die Variablen <TT>ganz_1</TT> und
+<TT>ganz_2</TT> werden als normal-integer
+definiert. Durch den Cast-Operator wird <TT>ganz_1</TT> in eine
+rationale Zahl und <TT>ganz_2</TT> in eine ganze Zahl mit doppelter
+Genauigkeit explizit umgewandelt. Allerdings ver&auml;ndert der
+C-Compiler <TT>ganz_2</TT> eigenst&auml;ndig in den speicheraufwendigeren
+Typ (<TT>float</TT>). <TT>float</TT> wird allerdings gleich
+in <TT>double</TT> konvertiert.
+Das Ergebnis der Berechnung <TT>ganz_1 * ganz_2</TT> w&auml;re
+ohnehin implizit in <TT>double</TT> umgewandelt worden, da es
+sich bei dem links vom Gleichheitszeichen stehenden Operanden um eine
+Gleitkommavariable mit doppelter Genauigkeit handelt.
+<P>
+<HR><H2><A NAME="HDROWNTYPE" HREF="refer02.htm#ToC_67">3.5 Eigene Typen - typedef</A></H2>
+<A NAME="IDX164"></A>
+<A NAME="IDX166"></A>
+<P>Es besteht in C die M&ouml;glichkeit, eigene Datentypen zu
+deklarieren (siehe auch Beispiel in <A HREF="#HDRSTRDEF">3.2.2.3, "Strukturen mit Typendefinitionen - typedef"</A>).
+Dies dient vor allem der &Uuml;bersichtlichkeit, da nicht wirklich neue
+Datentypen erzeugt werden, sondern lediglich alte Datentypen einen
+neuen Namen erhalten. Dazu wird das Schl&uuml;sselwort <TT>typedef</TT>
+verwendet. Der neu vereinbarte Name kann daraufhin als neuer
+Datentypbezeichner verwendet werden.
+<P>
+<PRE>
+   typedef float REAL;
+   typedef int INTEGER;
+   typedef int *PTR_TO_INT;
+</PRE>
+<P>Dadurch werden die Typbezeichner REAL, INTEGER und PTR_TO_INT
+vereinbart. Sie k&ouml;nnen in nachfolgenden Vereinbarungen als
+Datentypbezeichner verwendet werden:
+<P>
+<PRE>
+   REAL x, y;               /* entspr.: float x, y;   */
+   INTEGER a, b,;           /* entspr.: int a, b      */
+   PTR_TO_INT p1, p2;       /* entspr.: int *p1, *p2  */
+</PRE>
+<P>Die Gro&szlig;schreibung dient der Unterscheidung zwischen eigenen und
+C-Datentypbezeichnern und sollte beibehalten werden.
+<HR><H2><A NAME="HDRCLASSES" HREF="refer02.htm#ToC_68">3.6 Speicherklassen</A></H2>
+<A NAME="IDX167"></A>
+<P>Die Speicherklassen definieren genaue Bedingungen f&uuml;r die Art
+und Weise der Speicherung der Daten eines Programmes. Durch diese
+Bedingungen werden
+<UL>
+<P><LI>der G&uuml;ltigkeitsbereich (Programm, Modul, Lokal),
+<P><LI>die Lebensdauer (dauerhaft, Blockdurchlauf) und
+<P><LI>der Speicherort (Stack, Heap)
+<A NAME="IDX168"></A>
+<A NAME="IDX169"></A>
+</UL>
+vorgegeben.
+<P>
+<P><P>
+<P><H3><A NAME="Header_69" HREF="refer02.htm#ToC_69">3.6.1 Automatic</A></H3>
+<A NAME="IDX170"></A>
+<A NAME="IDX172"></A>
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="42%">G&uuml;ltigkeitsbereich:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="58%">Blocklokal
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="42%">Lebensdauer:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="58%">Dauer des Blockdurchlaufs
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="42%">Speicherort:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="58%">Stack (Stapel)
+</TD></TR></TABLE>
+<P>Datenelemente, die nicht explizit einer anderen Speicherklasse
+angeh&ouml;ren und innerhalb eines Blockes, der durch geschweifte Klammern
+eingefa&szlig;t ist, vereinbart werden, werden
+vom Compiler automatisch der Speicherklasse <TT>auto</TT> zugewiesen.
+Diese Datenelemente sind nur in dem Programmteil (Block)
+verf&uuml;gbar, in dem sie definiert werden. Erst bei Aufruf des
+Programmteils wird f&uuml;r sie Speicher auf dem sog. Stack
+reserviert, der beim
+Verlassen allerdings wieder freigegeben wird. Der Inhalt dieses
+Datenelements bleibt nicht bis zum n&auml;chsten Blockaufruf erhalten.
+<P>Hinweis: In der Regel kann der Begriff Block mit dem Begriff
+Funktion
+gleichgesetzt werden, da innerhalb einer Funktion normalerweise kein
+neuer Block definiert wird, was jedoch zul&auml;ssig ist und bei einigen
+Problemstellungen von Vorteil ist. Ein Datenelement
+der Speicherklasse
+<TT>auto</TT> ist somit in der Regel f&uuml;r die Dauer eines
+Funktionsdurchlaufes und nur innerhalb dieser Funktion verf&uuml;gbar.
+<P>Beispiel:
+<P>
+<PRE>
+   auto int a,b,c;    oder
+ 
+        int a,b,c;
+</PRE>
+<P>
+<P><H3><A NAME="HDRSTATIC" HREF="refer02.htm#ToC_70">3.6.2 Static</A></H3>
+<A NAME="IDX173"></A>
+<A NAME="IDX175"></A>
+<P>Bei Datenelementen der Speicherklasse <TT>static</TT>
+unterscheidet man, wo diese definiert wird:
+<P>(1) Innerhalb einer Funktion
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">G&uuml;ltigkeitsbereich:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Blocklokal
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Lebensdauer:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">gesamter Programmdurchlauf
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Speicherort:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Heap
+</TD></TR></TABLE>
+<P>(2) Au&szlig;erhalb einer Funktion
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">G&uuml;ltigkeitsbereich:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Modul
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Lebensdauer:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">gesamter Programmdurchlauf
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Speicherort:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%"> Heap
+</TD></TR></TABLE>
+<P><TT>static</TT> (=dauerhafte) Datenelemente
+k&ouml;nnen innerhalb oder
+au&szlig;erhalb von Funktionen definiert werden.
+Ein weiterer Unterschied zu <TT>auto</TT> Datenelementen
+besteht darin, da&szlig; <TT>static</TT>-Variablen,
+die innerhalb einer
+Funktion vereinbart wurden, nicht aus dem Speicher gel&ouml;scht
+werden, wenn die Funktion beendet wird. Damit stehen die Werte
+bei einem erneuten Funktionsaufruf wieder zur Verf&uuml;gung und
+werden auf dem sog. Heap abgelegt.
+<P>Ein au&szlig;erhalb einer Funktion definiertes
+<TT>static</TT> Datenelement, ist
+in dem ganzen Modul - nicht aber in anderen Modulen, wie
+<TT>extern</TT> Datenelemente - verf&uuml;gbar.
+<P><TT>static</TT> Datenelemente sollten direkt nach den
+Preprozessoranweisungen (z.B. <TT>#include</TT>)
+deklariert werden.
+<P>
+<P><H3><A NAME="HDREXTERN" HREF="refer02.htm#ToC_71">3.6.3 Extern</A></H3>
+<A NAME="IDX176"></A>
+<A NAME="IDX178"></A>
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">G&uuml;ltigkeitsbereich:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Programm
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Lebensdauer:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">gesamter Programmdurchlauf
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Speicherort:
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="50%">Heap
+</TD></TR></TABLE>
+<P>Es besteht die M&ouml;glichkeit, globale Datenelemente in allen
+Modulen zu benutzen. Diese Datenelemente gelten dann f&uuml;r alle
+Module und sind von der
+Speicherklasse <TT>extern</TT>. Innerhalb von anderen
+Modulen kann auf extern definierte Elemente mit einem Verweis
+(siehe Beispiel unten) zugegriffen werden.
+<P>Auch Funktionen sind vom Typ <TT>extern</TT>.
+<P>Beispiel:
+<P>
+<PRE>
+Datei fc1.c
+ 
+   #include &lt;stdio.h&gt;
+ 
+   static int x=99;      /* nur im aktuellen Modul g&uuml;ltig        */
+   int a=1, b=2, c=3;    /* Externe Variablen f&uuml;r alle Module    */
+ 
+   int addieren(void);   /* Funktionsprototyp                    */
+ 
+   void main(void)
+   {
+ 
+      printf("a=%3d b=%3d c=%3d\n", a,b,c);          /* 1  2  3 */
+      printf("a+b+c=%3d\n",addieren());              /*    6    */
+      printf("a=%3d b=%3d c=%3d\n", a,b,c);          /* ?  ?  3 */
+ 
+   }  /* Ende von main */
+ 
+ 
+Datei fc2.c
+ 
+   int addieren(void)
+   {
+      extern int a, b, c;     /* Variablen aus anderem Modul          */
+      static int g;           /* Wert der Var. bleibt erhalten        */
+      int ergebnis;           /* Lokale Variable                      */
+ 
+      g++;
+      ergebnis=a+b+c;
+      a=g;
+      b+=g;
+      return (a+b+c);
+   }  /* Ende addieren */
+ 
+</PRE>
+<P>
+<P><H3><A NAME="Header_72" HREF="refer02.htm#ToC_72">3.6.4 Register</A></H3>
+<A NAME="IDX179"></A>
+<A NAME="IDX181"></A>
+<P>F&uuml;r Datenelemente der Speicherklasse <TT>register</TT>
+gilt dasselbe wie f&uuml;r Datenelemente der Speicherklasse
+<TT>auto</TT>, allerdings werden diese, sofern die Hardware
+dies zul&auml;&szlig;t, in den Prozessorregistern gespeichert. Der
+Zugriff auf die Prozessorregister ist um ein Vielfaches
+schneller, als der Zugriff auf den Hauptspeicher.
+<HR><B> Fu&szlig;noten:</B>
+<DL COMPACT>
+<P><DT><SUP><A NAME="Footnote_3" HREF="#Footnote_Used_3" >3</A></SUP></DT>
+<DD>American National Standard Code for
+Information Interchange, siehe auch
+<A HREF="refer29.htm#HDRSAS">K.1, "Standard ASCII"</A>
+</DD>
+<P><DT><SUP><A NAME="Footnote_4" HREF="#Footnote_Used_4" >4</A></SUP></DT>
+<DD>extended
+binary coded decimal interchange code
+(siehe auch <A HREF="refer29.htm#HDREBCD">K.4, "EBCDIC"</A>)
+</DD>
+<P><DT><SUP><A NAME="Footnote_5" HREF="#Footnote_Used_5" >5</A></SUP></DT>
+<DD>American National Standards Institute
+(siehe auch <A HREF="refer29.htm#HDRANSI">K.3, "ANSI"</A>)
+</DD>
+<P><DT><SUP><A NAME="Footnote_6" HREF="#Footnote_Used_6" >6</A></SUP></DT>
+<DD>Mit Variablen sind hier auch
+komplexe Datentypen wie Strukturen gemeint.
+</DD>
+</DL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer06.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer08.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

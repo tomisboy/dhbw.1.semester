@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer16.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer18.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRTROUB" HREF="refer02.htm#ToC_139">13.0 Problembehebung</A></H1>
+<A NAME="IDX310"></A>
+<P>Die folgende Liste enth&auml;lt eine Auswahl popul&auml;rer
+Fehler der C Programmierung bzw. hilfreiche Hinweise.
+H&auml;ufig sind kaum Ans&auml;tze zu erkennen, warum ein Programm
+sich nicht so verh&auml;lt, wie es sollte.
+<UL>
+<P><LI>Beim Eingeben einer Klammer (egal, ob geschweift, rund oder
+eckig) immer als n&auml;chstes die dazugeh&ouml;rige schlie&szlig;ende Klammer
+eingeben und erst danach die Anweisungen/Ausdr&uuml;cke zwischen
+die Klammern setzen. Dadurch ist automatisch sichergestellt, da&szlig;
+zu jeder ge&ouml;ffneten Klammer auch eine geschlossene geh&ouml;rt.
+<P><LI>Hinter eine geschweifte Klammer einen Kommentar setzen, was
+&uuml;berhaupt geschlossen wird. Dies erleichtert die Lesbarkeit
+bei mehrfach geschachtelten Klammerpaaren.
+<P><LI>Variablen immer bei der Deklaration oder am Anfang eines
+Blocks (vor deren Verwendung) initialisieren.
+<P><LI>Zeichenketten immer vor deren Verwendung per
+Schleife oder memset() initialisieren.
+<P><LI><TT>printf()</TT> entspricht einer gepufferten Ausgabe.
+Falls die
+Ausgabe nicht zu dem gew&uuml;nschten Zeitpunkt erfolgt,
+mu&szlig; diese mit <TT>fflush(stdout);</TT> erzwungen werden.
+<P><LI>Scheint ein Programm Eingabeaufforderungen (z.B.
+<TT>scanf()</TT> oder <TT>getch()</TT>) zu &uuml;berspringen,
+so schafft ein <TT>fflush(stdin);</TT> vor der jeweiligen
+Anweisung oft f&uuml;r Abhilfe.
+<P><LI>Bei <TT>scanf()</TT> sollte die Feldbreite begrenzt werden.
+<P><LI>Bei <TT>scanf()</TT> sollte beachtet werden, da&szlig; Fehleingaben
+zur Zuweisung eines Nullwertes f&uuml;hren k&ouml;nnen. Das bedeutet, da&szlig; die
+Variable nach der Eingabe den Wert Null hat.
+<P><LI>Bei <TT>scanf()</TT> in Verbindung mit einfachen Datentypen
+an den Adre&szlig;operator (&) denken!
+<P><LI>Einer Konstante des Typs <TT>long int</TT> folgt
+unmittelbar das Zeichen L (z.B. <TT>25434L</TT>). Im
+Formatstring von <TT>printf</TT>, <TT>scanf</TT> etc.
+wird dieser Typ jedoch mit dem Zeichen l (z.B.
+<TT>%li</TT>) gekennzeichnet.
+<P><LI>Nach M&ouml;glichkeit immer Funktionsprototypen verwenden, um
+re-declaration Probleme zu vermeiden.
+<P><LI><TT>==</TT> bei Vergleichen verwenden (z.B. if a==1),
+nicht <TT>=</TT>.
+<P><LI><TT>=</TT> bei Zuweisungen verwenden (z.B. anzahl=0),
+nicht <TT>==</TT>.
+<P><LI>Tests auf Buchstaben immer mit dem Zeichen, nie mit dem Code
+(z.B. <TT>if (zeichen&gt;='a' && zeichen&lt;='z')</TT>) durchf&uuml;hren.
+<P><LI>Abh&auml;ngigkeiten bei Verwendung der Operatoren ++ und --
+vermeiden. Vergleiche z.B.:
+<TT>for(i=0;i&lt;20;printf("%d\n",block[i]=i++));</TT>
+<BR>
+und
+<TT>for(i=0;i&lt;20;printf("%d\n",block[i++]=i));</TT>
+<P><LI>Bricht ein Programm mit einer Exception
+<A NAME="Footnote_Used_7" HREF="#Footnote_7" ><SUP>7</SUP></A>
+ab, so ist dies h&auml;ufig ein Hinweis auf ung&uuml;ltige Zugriffsoperationen
+bei Zeichenketten bzw. Zeigern
+(z.B. Zugriff auf das zehnte Element
+einer Zeichenkette, die mit <TT>char xyz[5]</TT>; deklariert wurde).
+<UL>
+<P><LI>Der Abbruchcode c005 (OS/2) wird durch eine ung&uuml;ltige Zeigeroperation
+(s.o.) verursacht.
+<P><LI>Der Abbruchcode c009a (OS/2) wird durch Benutzung eines undefinierten
+bzw. ung&uuml;ltigen Wertes verursacht. Eine der h&auml;ufigsten
+Ursachen ist der Versuch, mit nicht initialisierten float, double
+oder long double Werten zu rechnen. Beispiel:
+<PRE>
+  float zahl;
+  zahl=zahl+1;
+</PRE>
+<P><LI>Der Abbruchcode c009b (OS/2) wird durch Benutzung eines undefinierten
+bzw. ung&uuml;ltigen Wertes verursacht. Eine der h&auml;ufigsten
+Ursachen ist der Versuch, mit nicht initialisierten Integer Werten
+zu rechnen. Eine weitere h&auml;ufige Fehlerquelle ist die Division durch Null.
+Beispiel:
+<PRE>
+  int eingabe, ergebnis;
+  scanf("%d", eingabe);   /* hier fehlt der adre&szlig;operator & */
+  ergebnis = eingabe / 111;
+</PRE>
+</UL>
+<P><LI>Strukturdefinitionen in getrennt compilierten Modulen m&uuml;ssen
+exakt &uuml;bereinstimmen, da der Linker nicht mehr &uuml;berpr&uuml;fen kann,
+ob es z.B. bei der L&auml;nge eines Strings Abweichungen gibt. Der Code
+l&auml;&szlig;t sich zwar compilieren und linken, aber zur Laufzeit kann es
+zu merkw&uuml;rdigem Verhalten kommen (z.B. Pointer, die zwar innerhalb
+einer Funktion noch den korrekten Wert haben, au&szlig;erhalb der Funktion
+aber den Wert NULL haben).
+</UL>
+<HR><B> Fu&szlig;noten:</B>
+<DL COMPACT>
+<P><DT><SUP><A NAME="Footnote_7" HREF="#Footnote_Used_7" >7</A></SUP></DT>
+<DD>Eine Exception
+ist eine, vom Betriebssystem ausgel&ouml;ste, Ausnahmebedingung,
+die den Abbruch der Programmausf&uuml;hrung zur Folge hat, sofern
+keine eigenen Routinen f&uuml;r die Behandlung von Exceptions
+(sog. Exception Handler) geschrieben wurden. Diese Ausnahmebedingung
+ist das Resultat eines Programmfehlers.
+</DD>
+</DL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer16.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer18.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

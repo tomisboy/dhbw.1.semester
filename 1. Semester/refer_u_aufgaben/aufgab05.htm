@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\aufgabe.scr converted by B2h R4.3 (362)        -->
+<!-- (WIN95) on 23 Feb 2000 at 14:32:42                               -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 14:32:18">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 14:32:18">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 14:32:18">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="aufgab04.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab06.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRBM26" HREF="aufgab02.htm#ToC_4">3.0 &Uuml;bungen zu Funktionen, Strukturen und Unions</A></H1>
+<OL TYPE=1>
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion, die den Absolutwert (Wert ohne
+Vorzeichen) eines double-Wertes zur&uuml;ckliefert.
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion "vorzeichen",
+die einen Integer-Wert
+zur&uuml;ckliefert und einen double-Parameter &uuml;bernimmt. Ist der double-Wert
+gr&ouml;&szlig;er Null, soll 1, ist er kleiner Null, soll -1 und ist er gleich
+Null, so soll Null zur&uuml;ckgegeben werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion "hoch",
+die einen double-Wert potenziert
+und das Ergebnis zur&uuml;ckliefert. Der Prototyp sieht
+folgenderma&szlig;en aus&#58;
+<PRE>
+  double hoch(double wert, int potenz);
+</PRE>
+Bei einer Potenz = 0 soll der Wert 1, bei einer negativen Potenz
+der Fehlerwert -1 zur&uuml;ckgegeben werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion, die mehrere Integer-Werte von der
+Tastatur entgegennimmt und den gr&ouml;&szlig;ten zur&uuml;ckliefert.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das zur Berechnung des Durchschnittswertes 
+eine Funktion verwendet. Es ist hierbei unerheblich, ob die Zahlen vom
+Benutzer eingegeben oder der Funktion als Feld &uuml;bergeben werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion, die in einer Zeichenkette
+ein beliebiges Zeichen sucht und es &uuml;berall in dieser Zeichenkette
+durch ein anderes Zeichen ersetzt. Beispiel: Alle e in einem Satz durch
+x ersetzen.
+<BR>
+Benutzen Sie den folgenden Prototyp:
+<PRE>
+void ersetze_zeichen(char *s, char alt, char neu);
+</PRE>
+<P><LI>Aufgabe
+<P>Erweitern Sie die Funktion aus der vorherigen Aufgabe derart, da&szlig;
+Sie angeben k&ouml;nnen ab dem wievielten Vorkommen des Zeichens, das
+gesucht werden soll, ersetzt wird und wieviele darauffolgende Vorkommen
+ersetzt werden. Beispiel: Alle e ab dem zweiten Vorkommen in einem
+Satz durch x ersetzen, maximal jedoch vier mal.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das die B&uuml;cher einer Buchhandlung
+verwalten kann. Dazu wird eine Struktur ben&ouml;tigt, die die Komponenten
+Inventarnummer, Titel, Preis, Mwst und St&uuml;ckzahl f&uuml;r bis zu 100
+B&uuml;cher aufnehmen kann. Es soll zuerst die Mehrwertsteuer eingelesen
+werden und dann in einer Schleife die restlichen B&uuml;cher. Dadurch
+braucht die Mehrwertsteuer nur einmal eingegeben werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion, die ermittelt, der wievielte Tag im Jahr 
+ein gegebenes Datum ist. Sie soll als Parameter Tag, Monat und Jahr 
+bekommen. Achtung: Schaltjahr! 
+<P>Hinweis: Ermitteln Sie die aktuellen Daten für Zeit und Datum mit 
+DosGetDateTime() (OS/2) bzw. GetLocalTime() (Win32). 
+Sehen Sie auch eine M&ouml;glichkeit vor, das Datum manuell anzugeben. 
+<P>Win32:
+<PRE>
+    #include &lt;windows.h&gt;
+     ...
+    SYSTEMTIME SystemTime;       // Strukturvariable anlegen
+     ...
+    GetLocalTime(&SystemTime);   // Funktionsaufruf, der die
+                                 // Strukturvariable mit dem aktuellen
+                                 // Datum und Zeit fuellt
+</PRE>
+<P>Die Elemente in der Struktur SystemTime lauten: 
+<UL COMPACT>
+<LI>wYear 
+<LI>wMonth 
+<LI>wDayOfWeek 
+<LI>wDay 
+<LI>wHour 
+<LI>wMinute 
+<LI>wSecond 
+<LI>wMilliseconds 
+</UL>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das bis zu 100 Girokonten verwalten
+kann. Die Daten eines Kontos sollen mind. Name und Anschrift des
+Inhabers, dessen Geburtsdatum, die Kontonummer
+und den momentanen Kontostand umfassen.
+<P>Beschr&auml;nken Sie das Programm zun&auml;chst auf die Anlage neuer
+Konten (Eingabe) und die Ausgabe der Daten der angelegten Konten.
+Die Anlage neuer Konten umfa&szlig;t die Entgegennahme der Daten per
+Tastatur, das Speichern der Daten in den entsprechenden Variablen
+und eine Ausgabe der eingegebenen Daten zur &Uuml;berpr&uuml;fung auf
+Tippfehler. Im Falle eines Tippfehlers mu&szlig; dieser selbstverst&auml;ndlich
+korrigiert werden k&ouml;nnen. Die Ausgabe der Daten umfa&szlig;t entweder
+die Ausgabe aller angelegten Kontendaten oder eines beliebigen Kontos
+(Auswahl per Kontonummer). Die Art der Ausgabe (alle oder ein
+bestimmtes) mu&szlig; der Benutzer ausw&auml;hlen k&ouml;nnen.
+<P>Hinweis&#58; Man kann sich das Leben leichter machen, indem
+man die Aufgabe zun&auml;chst schrittweise aufgliedert und nicht alles
+auf einmal programmiert.
+</OL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="aufgab04.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab06.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

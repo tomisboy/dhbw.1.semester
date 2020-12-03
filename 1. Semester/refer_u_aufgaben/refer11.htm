@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer10.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer12.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRCHOICE" HREF="refer02.htm#ToC_92">7.0 Auswahl</A></H1>
+<P>Bei der Auswahl sind zwei m&ouml;gliche Varianten zu betrachten&#58;
+<BR>
+<TABLE >
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="13%">1.
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">if/else
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="63%">einfache Auswahl oder Alternativauswahl
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="13%">2.
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">switch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="63%">mehrfache Auswahl (Liste)
+</TD></TR></TABLE>
+<P>
+<HR><H2><A NAME="Header_93" HREF="refer02.htm#ToC_93">7.1 if/else</A></H2>
+<A NAME="IDX227"></A>
+<A NAME="IDX228"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">if - statement</TH><TR><TD>
+<PRE>
+                                                              
+>>--if--(--expression--)--statement--+-------------------+--><
+                                     |                   |    
+                                     +--else--statement--+    
+</PRE>
+</TD></TR></TABLE>
+<P>Die nach <TT>if</TT> in Klammern stehende Bedingung mu&szlig; wahr sein,
+damit die darauffolgende Anweisung ausgef&uuml;hrt wird. Sollen mehrere
+Anweisungen ausgef&uuml;hrt werden, m&uuml;ssen diese in geschweifte Klammern
+({}) eingefa&szlig;t werden.
+Beim if-statement unterscheidet man zwei M&ouml;glichkeiten:
+<OL TYPE=1>
+<P><LI>bedingte Anweisung
+<P>Eine Anweisung oder eine Gruppe von Anweisungen wird nur in dem
+Fall ausgef&uuml;hrt, wenn die Bedingung wahr (ungleich 0) ist.
+<P>1. Beispiel:
+<PRE>
+        if( kontostand &lt;= 0 )
+        {
+          zugriff = 0;
+          printf("Kein Geld auf dem Konto!");
+        }
+</PRE>
+<P>Wenn der Kontostand kleiner oder gleich Null ist, wird der Zugriff
+auf das Konto gesperrt und ein Hinweis ausgegeben.
+<P>2. Beispiel:
+<PRE>
+        if( !kontostand )
+        {
+          zugriff = 0;
+          printf("Exakt 0 DM auf dem Konto!");
+        }
+</PRE>
+<P><LI>Alternativ- oder Zweifachauswahl
+<P>Wenn die Bedingung nicht zutrifft, wird der Anweisungsblock nach
+<TT>else</TT> ausgef&uuml;hrt.
+<P>Beispiel f&uuml;r Alternativ- oder Zweifachauswahl:
+<PRE>
+   if ( alter &gt; 50 )
+   {
+      printf("Bald gibt's Rente!");
+   }
+   else
+   {
+      printf("Nen bischen dauert's noch.");
+   }
+</PRE>
+</OL>
+<P><I>Anmerkung&#58; Wie bei der for-Schleife wird auch hier nach der
+Bedingung kein Semikolon, sondern nur eine geschweifte Klammer
+(Block-Zeichen) gesetzt.</I>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">Achtung</TH><TR><TD>
+Bei Test auf Gleichheit <TT>==</TT> anstatt <TT>=</TT> benutzen!
+</TD></TR></TABLE>
+<P>
+<HR><H2><A NAME="HDRCASE" HREF="refer02.htm#ToC_94">7.2 switch</A></H2>
+<A NAME="IDX229"></A>
+<P>Mit Hilfe der <TT>switch</TT>-Anweisung kann eine Alternative
+unter einer
+Liste von verschiedenen M&ouml;glichkeiten gew&auml;hlt werden. Diese Art
+der bedingten Auswahl w&auml;re auch mit einer <TT>if/else</TT>-Kombination
+erreichbar, allerdings k&auml;me es zu einer Verschachtelung, die auch
+mit guten Kommentaren und guter Strukturierung nicht mehr lesbar
+w&auml;re.
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">switch</TH><TR><TD>
+<PRE>
+                                             
+>>--switch--(--expression--)--switch body--><
+</PRE>
+</TD></TR></TABLE>
+<P>Dem Schl&uuml;sselwort <TT>switch</TT> folgt ein geklammerter Ausdruck,
+dessen Wert f&uuml;r die Auswahl zur Verf&uuml;gung steht. Dem Ausdruck folgt der
+<TT>switch body</TT>, der in einfacher und in komplexer Form
+existiert:
+<P>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">switch body - einfache Form</TH><TR><TD>
+<PRE>
+                                                                    
+>>--+-case label - statement-----------------------------------+--><
+    |                                                          |    
+    +-+------------+--default label--+------------+--statement-+    
+      +-case label-+                 +-case label-+                 
+</PRE>
+</TD></TR></TABLE>
+<P>Die einfache Form enth&auml;lt einen oder mehrere <TT>case</TT>-Zweige
+und einen <TT>default</TT>-Zweig (optional) mit einzelnen
+Anweisungen.
+<P>H&auml;ufig benutzt wird die komplexe Form:
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">switch body - komplexe Form</TH><TR><TD>
+<PRE>
+                                                             
+       <-----------------------------<  <----------------<   
+                                                             
+>>--{--V+--------------------------+-+--V+-------------+-+-->
+        |-type definition----------|     +-case clause-+     
+        |                          |                         
+        |-extern declaration-------|                         
+        |                          |                         
+        +-internal data definition-+                         
+</PRE>
+<PRE>
+                                                
+                       <----------------<       
+                                                
+>--+----------------+--V+-------------+-+--}--><
+   +-default clause-+   +-case clause-+         
+</PRE>
+</TD></TR></TABLE>
+<P>Die komplexe Form besteht ebenfalls aus einem oder mehreren
+<TT>case</TT>-Zweigen und einem (optionalen)
+<TT>default</TT>-Zweig.
+Der Unterschied zur einfachen Form besteht darin, da&szlig; in der komplexen
+Form jeder Zweig Variablendeklarationen enthalten kann.
+<P>Syntax der einfachen Form:
+<A NAME="IDX230"></A>
+<A NAME="IDX231"></A>
+<A NAME="IDX232"></A>
+<PRE>
+   switch ( Ausdruck )
+   {
+ 
+      case konstanter Ausdruck : Anweisung;
+                                 [break;]
+      case konstanter Ausdruck :
+              Anweisung 1;
+              Anweisung 2;
+              ...
+              Anweisung n;
+              [break;]
+      default : Anweisung;
+                [break;]
+   }
+</PRE>
+<P>Syntax der komplexen Form:
+<A NAME="IDX233"></A>
+<A NAME="IDX234"></A>
+<A NAME="IDX235"></A>
+<PRE>
+   switch ( Ausdruck )
+   {
+ 
+      case konstanter Ausdruck : { Anweisung;
+                                   [break;] }
+      case konstanter Ausdruck :
+           {
+              Variablendeklarationen;
+ 
+              Anweisung 1;
+              Anweisung 2;
+              ...
+              Anweisung n;
+              [break;]
+           }
+      default : Anweisung;
+                [break;]
+   }
+</PRE>
+<P>Beispiel:
+<PRE>
+   switch(zeichen)
+   {
+     case 'a': printf("Kleinbuchstabe\n"); break;
+     case 'b': printf("Kleinbuchstabe\n"); break;
+     ...
+     case 'z': printf("Kleinbuchstabe\n"); break;
+     case 'A': printf("Grossbuchstabe\n"); break;
+     case 'B': printf("Grossbuchstabe\n"); break;
+     ...
+     case 'Z': printf("Grossbuchstabe\n"); break;
+     case '0': printf("Ziffer\n"); break;
+     case '1': printf("Ziffer\n"); break;
+     ...
+     case '9': printf("Ziffer\n"); break;
+     default : printf("Anderes Zeichen\n"); break;
+   }
+</PRE>
+<P>In diesem Beispiel wird eine Variable <TT>zeichen</TT>
+(definiert als <TT>char zeichen;</TT>) daraufhin &uuml;berpr&uuml;ft,
+ob es sich um einen Gro&szlig;buchsteben, Kleinbuchstaben oder eine
+Ziffer handelt. Die Zeilen mit ... kennzeichnen lediglich,
+da&szlig; im Beispiel einige Zeilen ausgelassen wurden. Es besteht keine
+M&ouml;glichkeit, Bereiche in der <TT>case</TT>-Bedingung anzugeben.
+<P><TT>break</TT> wurde bereits in Abschnitt <A HREF="refer10.htm#HDRBRE">6.4, "Die Anweisungen break und continue"</A>
+beschrieben. Bei <TT>switch</TT> sorgt dieses Schl&uuml;sselwort daf&uuml;r,
+da&szlig; der <TT>switch</TT>-Durchlauf abgebrochen wird. Wird dieses
+Schl&uuml;sselwort nicht verwendet und der Ausdruck einer der
+<TT>case</TT>-Zweige trifft zu, so durchl&auml;uft das Programm nicht nur
+diesen Zweig, sondern auch s&auml;mtliche nachfolgende, bis es auf ein
+<TT>break</TT> trifft. Dadurch k&ouml;nnen wir uns einigen Aufwand im
+obigen Beispiel sparen:
+<PRE>
+   switch(zeichen)
+   {
+     case 'a':
+     case 'b':
+     ...
+     case 'z': printf("Kleinbuchstabe\n"); break;
+     case 'A':
+     case 'B':
+     ...
+     case 'Z': printf("Grossbuchstabe\n"); break;
+     case '0':
+     case '1':
+     ...
+     case '9': printf("Ziffer\n"); break;
+     default : printf("Anderes Zeichen\n"); break;
+   }
+</PRE>
+<P>Dieses Verhalten von <TT>break</TT> wird auch im n&auml;chsten Beispiel
+zur Ausgabe der Anzahl der Tage eines Monats benutzt.
+Nach Eingabe des Monats soll ausgegeben werden, ob der Monat
+30, 31 oder 28 Tage hat.
+<PRE>
+#include &lt;stdio.h&gt;
+ 
+enum monate { Januar=1, Februar, Maerz, April, Mai, Juni, Juli,
+              August, September, Oktober, November, Dezember } monat;
+ 
+void main(void)
+{
+   int num;
+ 
+   printf("Bitte den gew&uuml;nschten Monat (1-12) eingeben: ");
+   fflush(stdout);
+   scanf("%d", &num);
+   monat=num;
+   switch (monat)
+   {
+     case Januar   :
+     case Maerz    :
+     case Mai      :
+     case Juli     :
+     case August   :
+     case Oktober  :
+     case Dezember : printf("Der Monat hat 31 Tage.\n");    break;
+     case Februar  : printf("Der Monat hat 28/29 Tage.\n"); break;
+     default       : printf("Der Monat hat 30 Tage.\n");    break;
+   } /* Ende switch */
+}  /* Ende main */
+</PRE>
+<P>Wird <TT>Januar, Maerz, Mai, Juli, August</TT> oder
+<TT>Oktober</TT> durch Eingabe der entsprechenden Zahl
+ausgew&auml;hlt, so wird ebenfalls in den Zweig
+<TT>Dezember</TT> verzweigt. Dadurch wird f&uuml;r alle Monate, die 31
+Tage haben, die korrekte Anzahl der Tage mit nur einer Anweisung
+ausgegeben. Die Anweisung <TT>break</TT> beendet den Durchlauf.
+<P>Handelt es sich bei der Eingabe um <TT>Februar</TT>, so verzweigt
+das Programm nicht in die ersten sechs Zweige, sondern erst in den
+Zweig <TT>Februar</TT> und gibt 28 als Anzahl der Tage aus. Die
+Anweisung <TT>break</TT> beendet auch hier den Durchlauf.
+<P>F&uuml;r alle &uuml;brigen Eingaben wird 30 als Anzahl der Tage ausgegeben,
+auch wenn z.B. <TT>Pizza Bringdienst</TT> eingegeben wurde,
+<P>Wird <TT>default</TT> ohne eine folgende Anweisung verwendet,
+so mu&szlig; ein Semikolon folgen:
+<P>
+<PRE>
+default:;
+</PRE>
+<P>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer10.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer12.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

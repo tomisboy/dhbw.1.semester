@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer17.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer19.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDROOP" HREF="refer02.htm#ToC_140">14.0 Unterschiede zwischen C und C++</A></H1>
+<P>C<TT>++</TT> stellt eine Erweiterung der Sprache C um die
+M&ouml;glichkeiten der objektorientierten Programmierung dar. Da es sich
+um eine Erweiterung der Sprache handelt, sind fast alle C-Programme
+auch mit einem C<TT>++</TT>-Compiler
+compilierbar. Des weiteren ist das meiste,
+was f&uuml;r C gilt auch f&uuml;r C<TT>++</TT>
+g&uuml;ltig. In diesem Kapitel soll
+ein &Uuml;berblick &uuml;ber &Auml;nderungen und Erweiterungen gegeben
+werden. Dieses Kapitel dient nicht der Erlernung der
+C<TT>++</TT>-Programmierung&#33;
+<P>Wie bereits erw&auml;hnt, hebt man bei objektorientierten
+Sprachen die Trennung zwischen Daten und Algorithmen weitestgehend
+auf. Es wird nicht versucht, da&szlig; Problem an die Sprache
+anzupassen, sondern die Sprache an das Problem. Das Ziel der
+objektorientierten Programmierung ist die Erstellung von Programmen,
+die leicht wartbar und erweiterbar sind und deren Code
+wiederverwendbar ist.
+<P>Abgesehen von den neuen Eigenschaften und F&auml;higkeiten von
+C<TT>++</TT>
+gibt es einige Unterschiede zwischen C und C<TT>++</TT>,
+die beachtet werden
+m&uuml;ssen, wenn C-Programmteile in C<TT>++</TT>-Programmen
+verwendet werden sollen:
+<OL TYPE=1>
+<P><LI>Variablen k&ouml;nnen in C<TT>++</TT>
+an jeder beliebigen Stelle und nicht
+nur zu Beginn eines Blockes deklariert werden.
+<P><LI>Variablennamen k&ouml;nnen in C<TT>++</TT> beliebig lang sein.
+<P><LI>Zeichenkonstanten sind vom Typ <TT>char</TT> und nicht, wie in
+C, vom Typ <TT>int</TT>.
+<P><LI>Einige Funktionen (wie z.B. <TT>printf()</TT>) sollten durch
+die C<TT>++</TT>&Auml;quivalente (z.B. <TT>cout()</TT>)
+ersetzt werden, welche in der Regel m&auml;chtiger
+sind. Nichtsdestotrotz gelten diese Funktionen nach wie vor.
+<P><LI>Kommentare k&ouml;nnen durch zwei Schr&auml;gstriche (// Kommentar) eingeleitet
+werden. Eine Endmarkierung ist nicht notwendig, da diese Kommentare
+nur bis zum Zeilenende gehen.
+<P><LI>Die Datei <TT>iostream.h</TT> stellt eine Ersatzm&ouml;glichkeit
+f&uuml;r die Datei <TT>stdio.h</TT> dar. Sie enth&auml;lt z.B. die
+Funktion <TT>cout()</TT>, die anstatt von <TT>printf()</TT>
+benutzt werden kann.
+</OL>
+<P>C<TT>++</TT> enth&auml;lt einige neue Eigenschaften,
+die die Sprache flexibler machen. Einige dieser Erweiterungen werden
+in den folgenden Abschnitten vorgestellt.
+<P>
+<HR><H2><A NAME="Header_141" HREF="refer02.htm#ToC_141">14.1 Operator&uuml;berladung</A></H2>
+<P>Operatoren k&ouml;nnen unter C<TT>++</TT>
+neue Bedeutungen zugewiesen werden.
+Welche der Bedeutungen jeweils g&uuml;ltig ist, wird aus dem
+Zusammenhang deutlich. So erh&auml;lt z.B. der links-shift-Operator (&lt;&lt;)
+in der Funktion <TT>cout()</TT> die Eigenschaft, Daten auf die
+Ausgabeeinheit zu leiten. Beispiel:
+<BR>
+<TT>cout &lt;&lt; "&#92;nHeutiger Tag&#58;" &lt;&lt; tag;</TT>
+<P>
+<HR><H2><A NAME="Header_142" HREF="refer02.htm#ToC_142">14.2 Funktions&uuml;berladung</A></H2>
+<P>In einem Programm d&uuml;rfen mehrere Funktionen mit dem gleichen
+Namen vorkommen. Diese Eigenschaft wird auch als
+<I>Polymorphismus</I> bezeichnet. Der Compiler untersucht beim
+jeweiligen Funktionsaufruf nicht nur den Namen sondern auch die
+Argumentenliste und den Zugeh&ouml;rigkeitsbereich (klassenbezogen)
+und entscheidet dann, welche Funktion aufgerufen wird.
+<P>
+<HR><H2><A NAME="Header_143" HREF="refer02.htm#ToC_143">14.3 Klassen</A></H2>
+<P>Klassen sind zentrale Elemente der objektorientierten
+Programmierung. Sie stellen eine Art Struktur dar, beinhalten jedoch
+im Gegensatz zu <TT>struct</TT> nicht nur die Datenelemente der
+Struktur, sondern zus&auml;tzlich die Funktionen, die auf diese
+Datenelemente zugreifen. Des weiteren ist es m&ouml;glich, die Daten und
+die Funktionen, die auf die Daten zugreifen, vor dem Rest des
+Programms zu verbergen. Hierbei handelt es sich um
+<TT>private</TT>-Daten und - Funktionen. Es kann f&uuml;r s&auml;mtliche
+Elemente der Klasse festgelegt werden, ob sie <TT>private</TT> oder
+<TT>public</TT> sein sollen, wobei alle Komponenten
+standardm&auml;&szlig;ig <TT>private</TT> sind.
+<P>Die Definition einer Klasse beinhaltet somit folgende Elemente:
+<OL TYPE=1>
+<P><LI>das Schl&uuml;sselwort <TT>class</TT>,
+<P><LI>den Namen der Klasse,
+<P><LI>die Datenelemente der Klasse,
+<P><LI>die Funktionen der Klasse und
+<P><LI>Informationen dar&uuml;ber, welche Elemente und Methoden <TT>public</TT>
+oder <TT>private</TT> sind. (Gekennzeichnet durch die entsprechenden
+Schl&uuml;sselw&ouml;rter)
+</OL>
+<P>Die Funktionen werden in der Regel als Prototypen in die Klasse
+eingebunden und au&szlig;erhalb der Klasse definiert. Die komplette
+Funktionsdefinition l&auml;&szlig;t sich zwar in eine Klassendefinition
+einbetten, dies wird jedoch nur bei sehr kurzen Funktionen realisiert.
+<P>Werden Klassenfunktionen au&szlig;erhalb einer Klasse definiert, so
+wird durch den Namen der Klasse und zwei Doppelpunkte vor dem
+Funktionsnamen signalisiert, da&szlig; diese Funktionen zu einer
+bestimmten Klasse geh&ouml;ren. (Beispiel siehe unten)
+<P>Diese Klassenfunktionen werden auch als <I>Methoden</I>
+bezeichnet.
+<P>Beispiel f&uuml;r die Definition einer Klasse:
+<P>
+<PRE>
+// Definition einer Klasse
+ 
+class personen
+{
+   private:
+      int nummer;
+      char nachname[40];
+      char vorname[40];
+      float postleitzahl;
+      char wohnort[40];
+      void gehalt&#95;ermitteln();
+   public:
+      void erfassen();
+      void anzeigen();
+};
+ 
+void personen:&#58;erfassen()
+{
+   ...Code...
+}
+</PRE>
+<P><TT>private</TT> und <TT>public</TT> k&ouml;nnen in einer
+Klassendefinition beliebig oft erscheinen; die obige Aufteilung hat
+sich jedoch durchgesetzt. Des weiteren werden die Daten einer Klasse
+in der Regel <TT>private</TT> deklariert und die Methoden
+<TT>public</TT>. Im obigen Beispiel ist die Methode
+<TT>gehalt&#95;ermitteln</TT> auch <TT>private</TT> definiert, da
+sie nach au&szlig;enhin nicht sichtbar sein soll.
+<P>
+<HR><H2><A NAME="Header_144" HREF="refer02.htm#ToC_144">14.4 Konstruktor und Destruktor</A></H2>
+<P>Um Objekte einer Klasse bei ihrer Erzeugung zu initialisieren,
+wird ein
+Konstruktor benutzt. Er hat den gleichen Namen wie die Klasse
+und kann bei der Definition der Klasse angegeben werden.
+<P>Sobald ein Objekt aus dem Speicher entfernt wird,
+wird der Destruktor aufgerufen. Sein Name entspricht
+dem Namen der Klasse mit einer vorangehenden Tilde (&#126;).
+<P>
+<HR><H1><A NAME="Header_145" HREF="refer02.htm#ToC_145">Anh&auml;nge</A></H1>
+<P><A NAME="PToC1" HREF="refer02.htm#ToC">Partial Table-of-Contents</A>
+<MENU>
+<P><B><LI><A NAME="PToC_146" HREF="refer19.htm#Header_146">Anhang A. Schl&uuml;sselworte</A></B>
+<P><B><LI><A NAME="PToC_147" HREF="refer20.htm#Header_147">Anhang B. &Uuml;bersicht &uuml;ber die Datentypen</A></B>
+<P><B><LI><A NAME="PToC_148" HREF="refer21.htm#Header_148">Anhang C. Operatoren</A></B>
+<P><B><LI><A NAME="PToC_155" HREF="refer22.htm#Header_155">Anhang D. Formatstring</A></B>
+<P><B><LI><A NAME="PToC_156" HREF="refer23.htm#Header_156">Anhang E. Fluchtsymbolzeichen</A></B>
+<P><B><LI><A NAME="PToC_157" HREF="refer24.htm#Header_157">Anhang F. Funktionen zur Ein-/Ausgabe von Zeichen(-ketten)</A></B>
+<P><B><LI><A NAME="PToC_158" HREF="refer25.htm#Header_158">Anhang G. Funktionen der Standardbibliotheken</A></B>
+<P><B><LI><A NAME="PToC_159" HREF="refer26.htm#Header_159">Anhang H. &Uuml;bersicht &uuml;ber die Include-/Header-Dateien</A></B>
+<P><B><LI><A NAME="PToC_160" HREF="refer27.htm#Header_160">Anhang I. Bedienung der Compiler Tools</A></B>
+<P><B><LI><A NAME="PToC_163" HREF="refer28.htm#Header_163">Anhang J. Rechnung mit Bits und Bytes</A></B>
+<P><B><LI><A NAME="PToC_164" HREF="refer29.htm#Header_164">Anhang K. Zeichens&auml;tze</A></B>
+<P><B><LI><A NAME="PToC_169" HREF="refer30.htm#Header_169">Anhang L. Literaturverzeichnis</A></B>
+<P><B><LI><A NAME="PToC_170" HREF="refer31.htm#Header_170">Anhang M. Online Ressourcen</A></B>
+<P><B><LI><A NAME="PToC_173" HREF="refer32.htm#HDRINDEX_START">Index</A></B>
+</MENU><P>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer17.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer19.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

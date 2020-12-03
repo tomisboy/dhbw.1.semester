@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\aufgabe.scr converted by B2h R4.3 (362)        -->
+<!-- (WIN95) on 23 Feb 2000 at 14:32:42                               -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 14:32:18">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 14:32:18">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 14:32:18">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="aufgab05.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab07.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRBM27" HREF="aufgab02.htm#ToC_5">4.0 &Uuml;bungen zu Dateien, Switch und Speicherverwaltung</A></H1>
+<OL TYPE=1>
+<P><LI>Aufgabe
+<P>entf&auml;llt
+<P><LI>Aufgabe
+<P>Erweitern Sie die Aufgabe der B&uuml;cherverwaltung aus dem letzten
+Abschnitt so, da&szlig; die
+Informationen zu den B&uuml;chern in einer Datei gespeichert werden.
+<P><LI>Aufgabe
+<P>Erweitern Sie das Programm zur Verwaltung von Girokonten
+dahingehend, da&szlig; die angelegten Konten in einer Datei gespeichert
+werden. Die Ausgabe der Kontendaten mu&szlig; auch die gespeicherten
+Daten ber&uuml;cksichtigen.
+<P>Hinweis&#58; Gliedern Sie die Aufgabe zun&auml;chst schrittweise
+auf.
+<P><LI>Aufgabe
+<P>Stellen Sie &Uuml;berlegungen an, wie im Programm zu Verwaltung
+von Girokonten eine Funktion zum Suchen von Daten und eine
+Funktion zum &Auml;ndern von Daten realisiert werden kann. Eine
+Umsetzung in Programmcode ist nicht erforderlich.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das einzelne Zeichen aus einer
+Textdatei liest. Diese Zeichen sollen hinsichtlich ihrer Beschaffenheit
+(Gro&szlig;-, Kleinbuchstabe, Ziffern, Sonderzeichen) analysiert werden.
+(Anzahl der jeweiligen Zeichen und prozentualer Anteil)
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das den Inhalt zweier Dateien Zeichen
+f&uuml;r Zeichen vergleicht. Die eingelesenen Zeichen sollen mitgez&auml;hlt
+und bei Feststellung eines Unterschieds der Programmablauf abgebrochen
+werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das eine Textdatei kopiert. Das
+Programm erwartet den Namen der Quelldatei und den Namen der Zieldatei
+als Kommandozeilenparameter. Am Ende soll noch die Anzahl der kopierten
+Worte ausgegeben werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das Zeichen aus einer Datei liest und
+pr&uuml;ft, ob es sich um einen Gro&szlig;- oder Kleinbuchstaben handelt.
+Ist es ein Gro&szlig;buchstabe, soll er in einen Kleinbuchstaben,
+und ist es ein
+Kleinbuchstabe, so soll er in einen Gro&szlig;buchstaben umgewandelt werden.
+Diese neuen Zeichen sollen in eine neue Datei geschrieben werden.
+<P><LI>Aufgabe
+<P>Sie bekommen von einem anderen Rechner eine Datei
+&uuml;bergeben. Auf diesem Rechner werden die Zeichen
+nach einem Code verschl&uuml;sselt, der nicht vollst&auml;ndig
+mit dem ASCII-Code &uuml;bereinstimmt. Die interne
+Darstellung der Zeichen ist in der folgenden Tabelle
+enthalten:
+<PRE>
+ASCII       dezimaler Code des
+Zeichen     fremden Rechners
+++++++++++++++++++++++++++++++
+a           48
+b           49
+c           50
+d           51
+e           52
+f           53
+g           54
+h           55
+i           116
+j           117
+k           118
+l           119
+m           56
+n           57
+o           97
+p           98
+q           99
+r           100
+s           101
+t           102
+u           103
+v           104
+w           105
+x           106
+y           107
+z           108
+1           109
+2           110
+3           111
+4           112
+5           113
+6           114
+7           115
+8           120
+9           121
+0           122
+</PRE>
+<P>Das bedeutet, da&szlig; z.B. das Zeichen mit dem Code 116 des fremden
+Rechners ein 'i' sein soll, es wird bei uns aber als 't' dargestellt.
+<P>Beispieldatensatz (siehe T&#58;\C\SATZ.NEU):
+<PRE>
+Dt4e tef 4t9
+T4ef30f49e0fl,
+34d 0g5 4t948
+5d48349 R42794dekef48
+4def4wwf igd34.
+</PRE>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das Geburtsdaten aus einer Datei liest
+und sie mit dem aktuellen Datum vergleicht. Wenn innerhalb der n&auml;chsten 7
+Tage ein Geburtstag ansteht, soll eine Meldung ausgegeben werden, die
+den Namen, das Datum und das Alter der Person ausgibt.
+<P>Hinweis&#58; Daten-Datei mu&szlig; erst angelegt werden!
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das den Inhalt einer Textdatei
+zeilenweise umdreht. Die letzte Zeile soll die erste werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das den Inhalt einer Textdatei
+zeichenweise umdreht. Das erste Zeichen soll das letzte werden.
+<P><LI>Aufgabe
+<P>Erweitern Sie die Funktion zur Berechnung des Durchschnittswertes aus
+dem vorhergehenden Abschnitt so ab, da&szlig; eine beliebige Anzahl an Werten
+eingegeben werden kann und diese f&uuml;r sp&auml;tere Auswertungen im
+Speicher behalten werden.
+<BR>
+Hinweis: Benutzen Sie malloc()/calloc() und realloc()
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm zur Primzahlenberechnung gem&auml;&szlig; dem
+"Sieb des Erathostenes". Grunds&auml;tzlich soll die Obergrenze offen sein.
+<P>Der Algorithmus lautet wie folgt:
+<OL TYPE=a>
+<P><LI>Man schreibe alle Zahlen von 2 bis <I>n</I> auf (1 ist keine Primzahl)
+<P><LI>Sei <I>i</I> die kleinste noch nicht durchgestrichene Zahl. Man streiche
+alle Vielfachen von <I>i</I>.
+<P><LI>Man wiederhole 2, solange bis <I>i*i &gt; n</I> ist.
+<P><LI>Alle nicht durchgestrichenen Zahlen sind Primzahlen.
+</OL>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das HTML Befehle aus einer Datei
+entfernen kann. Als Erweiterung integrieren Sie eine Funktion, die
+die Platzhalter f&uuml;r Sonderzeichen in lesbare Zeichen umsetzt
+(z.B. &amp;auml; in &auml; usw.).
+</OL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="aufgab05.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab07.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer23.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer25.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="Header_157" HREF="refer18.htm#PToC_157">Anhang F. Funktionen zur Ein-/Ausgabe von Zeichen(-ketten)</A></H1>
+<P>fgetc
+<A NAME="IDX319"></A>
+<PRE>
+ Syntax:     int fgetc(FILE *stream);
+ Bibliothek: stdio.h
+ Beispiel:   zeichen = fgetc(filein);
+</PRE>
+<P>Von der mit stream verbundenen Datei wird ein Zeichen gelesen
+und zur&uuml;ckgegeben. Ist das Dateiende erreicht, wird ein negativer Wert
+zur&uuml;ckgeliefert.
+<P>
+<P>
+<P>fgets
+<A NAME="IDX320"></A>
+<PRE>
+ Syntax:     char *fgets(char *buffer, int n, FILE *stream);
+ Bibliothek: stdio.h
+ Beispiel:   fgets(line, 256, filein);
+</PRE>
+<P>Bis zum Erreichen von EOL werden alle Zeichen (inkl. \n), h&ouml;chstens
+jedoch n-1 zeichen, aus der mit stream verbundenen Datei in den Puffer
+<TT>buffer</TT> eingelesen.
+Sind keine Fehler aufgetreten, liefert die Funktion
+einen Zeiger auf den Puffer zur&uuml;ck. Sind Fehler aufgetreten, liefert sie
+einen NULL-Zeiger zur&uuml;ck.
+<P>
+<P>
+<P>fprintf
+<A NAME="IDX321"></A>
+<PRE>
+ Syntax:     int fprintf(FILE *stream, char *format,...);
+ Bibliothek: stdio.h
+ Beispiel:   fprintf(fileout, "%04d. Zeile: %s\n", linenr, line);
+</PRE>
+<P>Gleiche Funktionsweise wie printf(), mit dem Unterschied, da&szlig; die
+Ausgabe auf die mit stream verbundene Datei erfolgt.
+<P>
+<P>
+<P>fputc
+<A NAME="IDX322"></A>
+<PRE>
+ Syntax:     int fputc(int c, FILE *stream);
+ Bibliothek: stdio.h
+ Beispiel:   fputc('x', fileout);
+</PRE>
+<P>Das Zeichen c wird auf die mit stream verbundene Datei geschrieben.
+Treten keine Fehler auf, wird das Zeichen c zur&uuml;ckgeliefert,
+ansonsten EOF.
+<P>
+<P>
+<P>fputs
+<A NAME="IDX323"></A>
+<PRE>
+ Syntax:     int fputs(char *string, FILE *stream);
+ Bibliothek: stdio.h
+ Beispiel:   fputs(line, fileout);
+</PRE>
+<P>Die Zeichenkette string wird (ohne das abschlie&szlig;ende \0) in die mit
+stream verbundene Datei geschrieben. Treten Fehler auf, wird ein Wert
+ungleich 0 zur&uuml;ckgeliefert, ansonsten der Wert 0.
+<P>
+<P>
+<P>getc
+<A NAME="IDX324"></A>
+<PRE>
+ Syntax:     int getc(FILE *stream);
+ Bibliothek: stdio.h
+ Beispiel:   zeichen = getc(filein);
+</PRE>
+<P>Aus der mit stream verbundenen Datei wird das n&auml;chste Zeichen
+gelesen und zur&uuml;ckgegeben. Traten Fehler auf, wird EOF zur&uuml;ckgegeben.
+<P>
+<P>
+<P>getch
+<A NAME="IDX325"></A>
+<PRE>
+ Syntax:     int getch(void);
+ Bibliothek: conio.h
+ Beispiel:   zeichen = getch();
+</PRE>
+<P>Liest ein Zeichen von der Tastatur ein und gibt es zur&uuml;ck. Das
+Programm wird fortgef&uuml;hrt, nachdem eine Taste gedr&uuml;ckt wurde.
+Das eingegebene Zeichen erscheint nicht auf dem Bildschirm.
+<P>
+<P>
+<P>getchar
+<A NAME="IDX326"></A>
+<PRE>
+ Syntax:     int getchar(void);
+ Bibliothek: stdio.h
+ Beispiel:   zeichen = getchar();
+</PRE>
+<P>Von stdin (i.d.R. die Tastatur) wird das n&auml;chste Zeichen gelesen und
+zur&uuml;ckgegeben. Treten Fehler auf, wird EOF zur&uuml;ckgeliefert. Die
+Tastenkombination CTRL-Z (oder STRG-Z) wird als EOF interpretiert.
+<P>
+<P>
+<P>getche
+<A NAME="IDX327"></A>
+<PRE>
+ Syntax:     int getche(void);
+ Bibliothek: conio.h
+ Beispiel:   zeichen = getche();
+</PRE>
+<P>Liest ein Zeichen von der Tastatur, zeigt es auf dem Bildschirm
+an und gibt es zur&uuml;ck. Das Programm wird fortgef&uuml;hrt, nachdem eine
+Taste gedr&uuml;ckt wurde.
+<P>
+<P>
+<P>gets
+<A NAME="IDX328"></A>
+<PRE>
+ Syntax:     char *gets(char *buffer);
+ Bibliothek: stdio.h
+ Beispiel:   gets(line);
+</PRE>
+<P>Von stdin (i.d.R. Tastatur) werden solange Zeichen gelesen,
+bis \n (Return)
+oder EOF eingegeben wird. Die Zeichen werden in <TT>buffer</TT>
+gespeichert.
+Treten Fehler auf, wird ein NULL-Zeiger zur&uuml;ckgegeben, ansonsten ein
+Zeiger auf <TT>buffer</TT>.
+<P>
+<P>
+<P>printf
+<A NAME="IDX329"></A>
+<PRE>
+ Syntax:     int printf(char *format,...);
+ Bibliothek: stdio.h
+ Beispiel:   printf("%04d. Zeile: %s\n",linenr,line);
+</PRE>
+<P>Dient der formatierten Ausgabe von Daten auf stdout
+(i.d.R. der Bildschirm).
+Treten Fehler auf, wird -1 zur&uuml;ckgegeben, ansonsten die Anzahl Zeichen,
+die auf die Ausgabe geschrieben wurden.
+<P>
+<P>
+<P>putc
+<A NAME="IDX330"></A>
+<PRE>
+ Syntax:     int putc(int c, FILE *stream);
+ Bibliothek: stdio.h
+ Beispiel:   putc(zeichen, fileout);
+</PRE>
+<P>Das Zeichen c wird in die mit stream verbundene Datei geschrieben.
+Treten Fehler auf, wird EOF zur&uuml;ckgegeben, ansonsten das Zeichen c.
+<P>
+<P>
+<P>putchar
+<A NAME="IDX331"></A>
+<PRE>
+ Syntax:     int putchar(int c);
+ Bibliothek: stdio.h
+ Beispiel:   putchar(zeichen);
+</PRE>
+<P>Das Zeichen c wird auf die Standardausgabe geschrieben. Treten Fehler
+auf, wird EOF zur&uuml;ckgeliefert, ansonsten das Zeichen c.
+<P>
+<P>
+<P>puts
+<A NAME="IDX332"></A>
+<PRE>
+ Syntax:     int puts(char *string);
+ Bibliothek: stdio.h
+ Beispiel:   puts(line);
+</PRE>
+<P>Die Zeichenkette string wird auf die Standardausgabe geschrieben und
+der Cursor am Anfang der n&auml;chsten Zeile positioniert. Treten Fehler auf,
+wird ein Wert ungleich 0 zur&uuml;ckgegeben, ansonsten der Wert 0.
+<P>
+<P>
+<P>scanf
+<A NAME="IDX333"></A>
+<PRE>
+ Syntax:     int scanf(char *format,...);
+ Bibliothek: stdio.h
+ Beispiel:   scanf("%d",&nummer);
+</PRE>
+<P>Von der Standardeingabe (i.d.R. Tastatur) werden Werte gem&auml;&szlig; der
+Formatspezifikation eingelesen. Treten Fehler auf, wird EOF
+zur&uuml;ckgegeben, ansonsten die Anzahl Zeichen, die eingelesen wurden.
+<P>
+<P>
+<P>sscanf
+<A NAME="IDX334"></A>
+<PRE>
+ Syntax:     int sscanf(char *string, char *format,...);
+ Bibliothek: stdio.h
+ Beispiel:   sscanf(string,"%d",&nummer);
+</PRE>
+<P>Gleiche Funktionsweise wie scanf(), mit dem Unterschied, da&szlig; die
+Werte aus einer Zeichenkette gelesen werden, auf die
+<TT>string</TT> weist.
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer23.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer25.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

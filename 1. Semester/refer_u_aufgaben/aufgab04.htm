@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\aufgabe.scr converted by B2h R4.3 (362)        -->
+<!-- (WIN95) on 23 Feb 2000 at 14:32:42                               -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 14:32:18">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 14:32:18">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 14:32:18">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="aufgab03.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab05.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRBM25" HREF="aufgab02.htm#ToC_3">2.0 &Uuml;bungen zu Feldern, Zeichenketten, Schleifen und if/else</A></H1>
+<OL TYPE=1>
+<P><LI>Aufgabe
+<P>Notieren Sie die nachstehenden Aussagen in der Art, da&szlig; sie als
+while-Schleife in einem C-Programm verwendet werden k&ouml;nnten.
+<UL>
+<P><LI>Solange ergebnis ungleich 5000
+<P><LI>Solange a gleich b
+<P><LI>Solange Zahl kleiner oder gleich x
+<P><LI>Solange a minus b ungleich 200
+<P><LI>Solange a mal b gleich c mal d
+<P><LI>Solange a wahr ist
+<P><LI>Endlosschleife
+</UL>
+<P><LI>Aufgabe
+<P>Sind die folgenden Aussagen wahr oder falsch:
+<OL TYPE=a>
+<P><LI>int a=5,b=18;
+<BR>
+while(a&gt;0 &amp;&amp; b!=18)
+<P><LI>int zahl=10,wert=100;
+<BR>
+if(zahl!=0 || zahl&gt;wert || wert-zahl==90)
+<P><LI>double x=1.0,y=5.7;
+<BR>
+if(x&gt;=.9 &amp;&amp; y&lt;=5.0)
+<P><LI>int n1=1,n2=17;
+<BR>
+while(n1&gt;0 &amp;&amp; n2&gt;0 || n1&gt;n2 &amp;&amp; n2!=17)
+</OL>
+<P><LI>Aufgabe
+<P>Geben Sie f&uuml;r die folgenden for-Schleifen an, wie oft
+sie durchlaufen werden und welche Werte die
+Z&auml;hlvariable dabei annimmt.
+<OL TYPE=a>
+<P><LI>for(zaehler=0;zaehler!=10;zaehler=zaehler+1)
+<P><LI>for(n=10;n&gt;0;n=n-1)
+<P><LI>for(x=1;x&lt;=15;x=x+3)
+<P><LI>for(anfang=0;anfang&lt;3;anfang=anfang+0.5)
+<P><LI>for(i=10;i&lt;0;i=i+2)
+</OL>
+<P><LI>Aufgabe
+<P>Wie oft wird der Text "Hallo Welt" gedruckt?
+<PRE>
+for(x=1; x&lt;6; x=x+1)
+{
+   for(y=2;y&lt;=4;y=y+1)
+      printf("Hallo Welt\n");
+}
+</PRE>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das alle ungeraden Zahlen
+von 1 bis n addiert. Verwenden Sie dazu eine
+for-Schleife. Die Zahl n wird vom Benutzer eingegeben und das Ergebnis
+am Bildschirm ausgegeben.
+<P><LI>Aufgabe
+<P>Das nachstehende Programm gibt ein Dreieck aus Sternen auf dem
+Bildschirm aus. Ver&auml;ndern Sie es derart, da&szlig; das Dreieck auf dem
+Kopf steht.
+<PRE>
+#include &lt;stdio.h&gt;
+ 
+void main(void)
+{
+   int zeile = 0;
+   int spalte= 0;
+ 
+   for (zeile=1; zeile &lt;= 20; zeile++)
+   {
+      for (spalte=1; spalte &lt;= zeile; ++spalte)
+      {
+         printf("*");
+      }  /* ende for spalte */
+ 
+      printf("\n");
+ 
+   }  /* ende for zeile */
+}  /* ende main */
+</PRE>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das die Fakult&auml;t einer eingegebenen
+Zahl errechnet. Verwenden Sie die for-Schleife. (z.B. !4 = 24)
+<P><LI>Aufgabe
+<P>&Auml;ndern Sie das Programm aus der vorhergehenden Aufgabe so ab, da&szlig;
+statt der for- eine while-Schleife verwendet wird.
+<P><LI>Aufgabe
+<P>In einem Programm soll daf&uuml;r gesorgt werden, da&szlig; nur Integer-Werte
+gr&ouml;&szlig;er Null bei der Eingabe zugelassen werden. Schreiben Sie diesen
+Programmteil und nutzen Sie die do-Schleife.
+<P><LI>Aufgabe
+<P>Geben Sie das kleine Einmaleins in tabellarischer
+Form aus.
+<P><LI>Aufgabe
+<P>Es soll der Inhalt einer Gerstenkaltschale berechnet werden. Der Durchmesser
+betr&auml;gt 100mm. Die H&ouml;he variiert von 10 bis 200mm (in 5mm Schritten). Die
+Ausgabe erfolgt am Bildschirm in Litern direkt untereinander (keine
+"Pinkelb&ouml;gen").
+<P><LI>Aufgabe
+<P>Welchen Fehler enth&auml;lt der folgende Ausschnitt?
+<PRE>
+   char puffer[15];
+   strcpy(puffer,"Programmiersprache C");
+</PRE>
+<P><LI>Aufgabe
+<P>Vorgegeben sind folgende Zeichenketten mit den entsprechenden Werten&#58;
+<PRE>
+   kette1: "I sense much fear in you."
+   kette2: "Fear is the path to the dark side."
+   kette3: "Fear leads to anger."
+   kette4: "Anger leads to hate."
+   kette5: "Hate leads to suffering."
+</PRE>
+Definieren Sie ein char Feld "sinnig", das gro&szlig; genug ist,
+die f&uuml;nf Zeichenketten (ohne Zeilenumbruch) aufzunehmen.
+Mit welchen Anweisungen m&uuml;ssen diese Ketten verbunden werden, damit das
+Feld "sinnig" eine bekannte Aussage von Yoda enth&auml;lt?
+<P><LI>Aufgabe
+<P>Was macht das nachstehende Programm?
+<PRE>
+   #include &lt;stdio.h&gt;
+ 
+   void main(void)
+   {
+      char satz[80];
+      int x = 0;
+      int y = 0;
+ 
+      printf("Bitte einen Satz eingeben!\n&gt;&gt;");
+      gets(satz);
+ 
+      while(satz[x] != '\0')
+      {
+         if (satz[x] == 32) y++;
+         x++;
+      }
+     printf("\ny = %d", y);
+   }
+</PRE>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das einen Satz von der Tastatur liest
+und die Anzahl des Buchstabens 'e' in diesem Satz bestimmt. Errechnen
+Sie auch den prozentualen Anteil des Buchstabens an der
+Gesamtbuchstabenanzahl des Satzes.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das einen Satz liest und ohne
+Satzzeichen und Leerstellen wieder ausgibt.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das einen Satz liest und jedes
+Wort in einer eigenen Zeile wieder ausgibt. Die Wortbegrenzung ist das
+Leerzeichen. Am Ende des Programms soll die Anzahl der W&ouml;rter ausgegeben
+werden.
+<P>Hinweis: Ein Satz kann sowohl mit einem Leerzeichen anfangen, als
+auch mit einem enden. Des weiteren k&ouml;nnen zwischen zwei W&ouml;rtern mehrere
+Leerzeichen stehen.
+<P><LI>Aufgabe
+<P>Das folgende Programm soll alle eingegebenen
+Buchstaben in Gro&szlig;buchstaben umwandeln. Warum
+arbeitet es nicht korrekt?
+<PRE>
+#include &lt;stdio.h&gt;
+#include &lt;conio.h&gt;
+void main(void)
+{
+  char zeichen=' ';
+  printf("Das Programm wird durch Eingabe von 0 beendet.\n");
+  do
+  {
+     printf("Zeichen eingeben: ");
+     fflush(stdout);
+     zeichen=getchar();
+     if(zeichen&gt;='a' &amp;&amp; zeichen&lt;='z')
+     {
+       zeichen=zeichen-('a'-'A');
+     }
+     printf("  %c\n",zeichen);
+  } while(zeichen!=0);
+}
+</PRE>
+<P><LI>Aufgabe
+<P>Schreiben Sie das Programm zur Berechnung des
+Benzinverbrauchs aus dem letzten Abschnitt so um, da&szlig; die
+eventuelle Eingabe einer Null durch eine if/else-Abfrage abgefangen
+wird. Dadurch soll eine Division durch Null verhindert werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das die nachstehende Formel berechnet&#58;
+<PRE>
+   f(x)= 4x^2 + 7x + h
+</PRE>
+<P>Der Wert der Variablen x soll von der Tastatur eingelesen werden.
+Wenn x &gt; 7 ist, soll h den Wert 4 annehmen, ist x &lt;= 7, so soll
+h = -3 sein.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das eine ganze Zahl "x"
+vom Benutzer entgegennimmt und das Ergebnis der Berechnung von
+2^x ausgibt. Beachten Sie die Problematik der
+&Uuml;berschreitung/Unterschreitung der Wertebereiche. F&uuml;hren Sie
+die Berechnung, sofern sinnvoll, f&uuml;r Ergebnisvariablen der Typen
+signed|unsigned short int|int|long int, float, double
+und long double durch.
+<P>Erweitern Sie das Programm dahingehend, da&szlig; f&uuml;r den Typ
+long double alle Potenzen von 2^0 bis 2^x
+berechnet und ausgegeben werden.
+</OL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="aufgab03.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab05.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

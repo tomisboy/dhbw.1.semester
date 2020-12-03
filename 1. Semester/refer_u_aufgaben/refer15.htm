@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer14.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer16.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRREGEXP" HREF="refer02.htm#ToC_121">11.0 Regul&auml;re Ausdr&uuml;cke</A></H1>
+<A NAME="IDX295"></A>
+<A NAME="IDX296"></A>
+<P>Regul&auml;re Ausdr&uuml;cke (Regular Expressions) sind Beschreibungen, 
+die der Suche von Mustern in Zeichenketten dienen. Viele Programme im 
+Unix Umfeld nutzen Regular Expressions, z.B. egrep. Dementsprechend 
+bieten die Dokumentation zu diesen Programmen gute Informationen zu
+Regular Expressions, Beispiel auch hier egrep. Regular Expressions
+geh&ouml;ren nicht zum Sprachumfang von ANSI C und sind somit nicht 
+mit jedem Compiler &uuml;bersetzbar. Jeder POSIX oder XPG4 kompatible
+Compiler sollte aber &uuml;ber die entsprechenden Funktionen
+verf&uuml;gen.
+<HR><H2><A NAME="Header_122" HREF="refer02.htm#ToC_122">11.1 Spezielle Zeichen in Regular Expressions</A></H2>
+<BR>
+<TABLE  BORDER>
+<TR>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">Zeichen
+</TH><TH ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Bedeutung
+</TH></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Das n&auml;chste Zeichen seiner Sonderbedeutung berauben und als 
+normales Zeichen betrachten.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;w
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Jedes alphanumerische Zeichen inkl. Unterstrich. Entspricht
+&#91;A-Za-z0-9&#95;&#93;
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;W
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Jedes nicht-alphanumerische Zeichen. 
+Entspricht. &#91;&#94;A-Za-z0-9&#95;&#93;
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;d
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Jede Zahl. Entspricht &#91;0-9&#93;
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;D
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Jedes Zeichen, das keine Zahl ist. Entspricht &#91;&#94;0-9&#93;
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#91;xyz&#93;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Jedes angegebene Zeichen. Ein Bereich kann durch Verwendung des
+&#45; (z.B. &#91;A-Fa-f0-9&#93;) angegeben werden.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#91;&#94;xyz&#93;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Jedes nicht angegebene Zeichen. Ein Bereich kann durch Verwendung des
+&#45; angegeben werden.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#94;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Kennzeichnet den Anfang der Eingabezeile.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#36;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Kennzeichnet das Ende der Eingabezeile.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#42;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">0 oder mehr des vorangegangenen Zeichens.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#43;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">1 oder mehr des vorangegangenen Zeichens. Entspricht &#123;1,&#125;
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#63;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">0 oder 1 des vorangegangenen Zeichens.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#46;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Jedes einzelne Zeichen aus newline.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">x&#124;y
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Entweder 'x' oder 'y'.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#123;n&#125;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Exakt n mal das vorangegangene Zeichen.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#123;n,&#125;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Mind. n mal das vorangegangene Zeichen.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#123;n,m&#125;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Mind. n mal, aber maximal m mal das vorangegangene Zeichen.
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#91;&#92;b&#93;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Backspace
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;B
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">nicht-Wort Grenze
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;c X
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">'x' ist ein Kontrollzeichen
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;f
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Form feed
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;n
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Line feed
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;r
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">carriage return
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;s
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">einzelnes "white space" Zeichen (Leerzeichen, Tabulator, Form feed,
+Line Feed). Entspricht 
+&#91;&#92;f&#92;n&#92;r&#92;t&#92;v&#93;
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;S
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Einzelnes Zeichen, das kein "white space" Zeichen ist. Entspricht 
+&#91;&#94;&#92;f&#92;n&#92;r&#92;t&#92;v&#93;
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;t
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Tabulatorzeichen
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;v
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">Vertikaler Tabulator
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#92;n
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="80%">R&uuml;ckw&auml;rtsreferenz auf einen Substring.
+</TD></TR></TABLE>
+<HR><H2><A NAME="Header_123" HREF="refer02.htm#ToC_123">11.2 Beispiele f&uuml;r regul&auml;re Ausdr&uuml;cke</A></H2>
+<BR>
+<TABLE  BORDER>
+<TR>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">Ausdruck
+</TH><TH ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">Beschreibung
+</TH></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">&lt;/?[a-zA-Z0-9]{1,9}&gt;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">Sucht HTML Befehle mit einer L&auml;nge von bis zu 9 Zeichen
+innerhalb der eckigen Klammern (/ nicht eingerechnet).
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="33%">&#92;(&#91;0-9&#93;&#123;3&#125;&#92;) &#92;d&#123;3&#125;&#45;&#92;d&#123;4&#125;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">Findet US amerikanische Telefonnummern, z.B. (212)-555-1212
+</TD></TR></TABLE>
+<P>Mit Vorsicht zu geniessen sind Konstrukte wie <TT>test*</TT>,
+bei dem DOS Benutzer davon ausgehen w&uuml;rden, da&szlig; alles, was mit
+<TT>test</TT> beginnt, gefunden wird. Um dies zu erreichen mu&szlig;
+man allerdings <TT>test.*</TT> benutzen.
+<HR><H2><A NAME="Header_124" HREF="refer02.htm#ToC_124">11.3 Quellcodebeispiele f&uuml;r regul&auml;re Ausdr&uuml;cke</A></H2>
+<PRE>
+#include &lt;regex.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+ 
+int main(void)
+{
+   regex_t    preg;
+   char       *string = "&lt;TR&gt;&lt;TD&gt;Gesellschaft:&lt;/TD&gt;&lt;TD&gt;IBM Informationssysteme Deutschland GmbH&lt;/TD&gt;&lt;/TR&gt;";
+   char       *pattern = "&lt;/?[a-zA-Z0-9]{1,9}&gt;"; // scan HTML tag up to 9 chars long incl. end tags
+ 
+   int        rc, offset=0;
+   size_t     nmatch = 1;
+   regmatch_t pmatch[1];
+ 
+   if (0 != (rc = regcomp(&preg, pattern, REG_EXTENDED)))
+   {
+      printf("regcomp() failed, returning nonzero (%d)\n", rc);
+      exit(EXIT_FAILURE);
+   }
+ 
+   if (0 != (rc = regexec(&preg, string, nmatch, pmatch, 0)))
+   {
+      printf("Failed to match '%s' with '%s',returning %d.\n",
+      string, pattern, rc);
+   }
+   else
+   {
+     printf("-&gt; offset: %d -&gt; %s\n",offset,string+offset);
+     do
+     {
+      printf("A matched substring \"%.*s\" is found at position %d to %d.\n",
+             pmatch[0].rm_eo - pmatch[0].rm_so, &string[pmatch[0].rm_so+offset],
+             pmatch[0].rm_so, pmatch[0].rm_eo - 1);
+      offset+=pmatch[0].rm_eo;
+      printf("\n-&gt; offset: %d -&gt; %s\n",offset,string+offset);
+     }
+     while(0 == (rc = regexec(&preg, string+offset, nmatch, pmatch, 0)));
+   }
+   regfree(&preg);
+   return 0;
+}
+</PRE>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer14.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer16.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

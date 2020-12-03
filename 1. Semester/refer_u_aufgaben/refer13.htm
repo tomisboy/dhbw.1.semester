@@ -1,0 +1,656 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer12.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer14.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRMEMORY" HREF="refer02.htm#ToC_105">9.0 Speicherverwaltung</A></H1>
+<A NAME="IDX265"></A>
+<P>Die Speicherverwaltungsfunktionen kommen z.B. zum Einsatz, wenn
+die Gr&ouml;&szlig;e des ben&ouml;tigten Speichers unbekannt ist.
+Speicher f&uuml;r Variablen und Konstanten wird bereits vom
+Compiler reserviert und ist dadurch statisch und in seiner Gr&ouml;&szlig;e
+vorgegeben. Im folgenden wird eine Auswahl der zur Verf&uuml;gung
+stehenden Funktionen vorgestellt.
+<HR><H2><A NAME="Header_106" HREF="refer02.htm#ToC_106">9.1 Speicherplatz reservieren</A></H2>
+<A NAME="IDX267"></A>
+<A NAME="IDX268"></A>
+<P>Syntax:
+<PRE>
+void *malloc(size_t size);
+</PRE>
+<P>Die Funktion <TT>malloc</TT> reserviert einen Block
+angegebener Gr&ouml;&szlig;e im Speicher.
+Konnte Speicher reserviert werden, liefert
+<TT>malloc</TT> einen Zeiger auf den
+angelegten Speicherbereich zur&uuml;ck. Konnte kein Speicher
+reserviert werden oder wurde als Gr&ouml;&szlig;e 0 Bytes angegeben,
+wird NULL zur&uuml;ckgegeben.
+<P>Beispiel 1:
+<PRE>
+/* Speicherplatz mit malloc reservieren */
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+ 
+void main(void)
+{
+  char *block=NULL; /* Zeiger auf Zeichen deklarieren */
+  int i;
+ 
+  /* Speicherbereich mit 4000 Bytes reservieren und */
+  /* zur&uuml;ckgegebenen Zeiger in Zeiger auf Zeichen   */
+  /* umwandeln                                      */
+  block=(char *)malloc(4000);
+  if(block!=NULL)
+  {
+    for(i=0;i&lt;4000;block[i++]=' ');
+    printf("Speicherblock angelegt und initialisiert.");
+  }
+  else
+    printf("Speicherblock konnte nicht angelegt werden.");
+}
+</PRE>
+<P>Beispiel 2:
+<PRE>
+/* Speicherplatz mit malloc reservieren */
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+ 
+void main(void)
+{
+  int *block=NULL; /* Zeiger auf Integer deklarieren */
+  int i;
+ 
+  /* Speicherbereich mit 20*32 Bits reservieren und */
+  /* zur&uuml;ckgegebenen Zeiger in Zeiger auf Integer   */
+  /* umwandeln                                      */
+  block=(int *)malloc(20*sizeof(int));
+  if(block!=NULL)
+  {
+    for(i=0;i&lt;20;printf("%d\n",(block[i++]=i)));
+    printf("Speicherblock angelegt und initialisiert.");
+  }
+  else
+    printf("Speicherblock konnte nicht angelegt werden.");
+}
+</PRE>
+<HR><H2><A NAME="Header_107" HREF="refer02.htm#ToC_107">9.2 Speicherplatz reservieren und initialisieren</A></H2>
+<A NAME="IDX270"></A>
+<A NAME="IDX271"></A>
+<P>Syntax:
+<PRE>
+void *calloc(size_t num, size_t size);
+</PRE>
+<P>Die Funktion <TT>calloc</TT> legt
+einen Speicherbereich an und initialisiert diesen mit 0.
+Ansonsten verh&auml;lt sich <TT>calloc</TT> wie
+<TT>malloc</TT>.
+<P>Beispiel:
+<PRE>
+/* Speicherplatz mit calloc reservieren */
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+ 
+void main(void)
+{
+  int *block=NULL; /* Zeiger auf Integer deklarieren */
+  int i;
+ 
+  /* Speicherbereich mit 20*32 Bits reservieren und */
+  /* zur&uuml;ckgegebenen Zeiger in Zeiger auf Integer   */
+  /* umwandeln                                      */
+  block=(int *)calloc(20,sizeof(int));
+  if(block!=NULL)
+  {
+    for(i=0;i&lt;20;printf("Inhalt von %d : %d\n",i,block[i++]));
+    printf("Speicherblock angelegt und initialisiert.");
+  }
+  else
+    printf("Speicherblock konnte nicht angelegt werden.");
+}
+</PRE>
+<HR><H2><A NAME="Header_108" HREF="refer02.htm#ToC_108">9.3 Speicherplatzgr&ouml;&szlig;e ver&auml;ndern</A></H2>
+<A NAME="IDX273"></A>
+<A NAME="IDX274"></A>
+<P>Syntax:
+<PRE>
+void *realloc(void *ptr, size_t size);
+</PRE>
+<P>Die Funktion <TT>realloc</TT> &auml;ndert die Gr&ouml;&szlig;e eines
+bereits angelegten Speicherbereichs. Der Inhalt des
+alten (bei Vergr&ouml;&szlig;erung) bzw. &uuml;brigbleibenden (bei Verkleinerung)
+Speicherbereichs bleibt erhalten.
+Die Funktion <TT>realloc</TT> liefert wie <TT>malloc</TT>
+einen Zeiger auf den Speicherbereich zur&uuml;ck.
+<P>Beispiel:
+<PRE>
+/* Speicherplatz mit calloc reservieren und mit realloc ver&auml;ndern */
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+ 
+void main(void)
+{
+  int *block=NULL; /* Zeiger auf Integer deklarieren */
+  int i;
+ 
+  /* Speicherbereich mit 20*32 Bits reservieren und */
+  /* zur&uuml;ckgegebenen Zeiger in Zeiger auf Integer   */
+  /* umwandeln                                      */
+  block=(int *)calloc(20,sizeof(int));
+  if(block!=NULL)
+  {
+    for(i=0;i&lt;20;printf("Inhalt von %d : %d\n",i,block[i++]));
+    printf("Speicherblock angelegt und initialisiert.\n");
+  }
+  else
+    printf("Speicherblock konnte nicht angelegt werden.");
+ 
+  for(i=0;i&lt;20;block[i++]=i);
+ 
+  /* Speicherblock vergr&ouml;&szlig;ern */
+  block=realloc(block,40*sizeof(int));
+  if(block!=NULL)
+  {
+    for(i=0;i&lt;40;printf("Inhalt von %d : %d\n",i,block[i++]));
+    printf("Speicherblock ge&auml;ndert.\n");
+  }
+ 
+  /* Speicherblock verkleinern */
+  block=realloc(block,10*sizeof(int));
+  if(block!=NULL)
+  {
+    for(i=0;i&lt;10;printf("Inhalt von %d : %d\n",i,block[i++]));
+    printf("Speicherblock ge&auml;ndert.");
+  }
+}
+</PRE>
+<HR><H2><A NAME="Header_109" HREF="refer02.htm#ToC_109">9.4 Speicherblock freigeben</A></H2>
+<A NAME="IDX276"></A>
+<A NAME="IDX277"></A>
+<P>Wird ein reservierter Speicherblock nicht mehr ben&ouml;tigt,
+sollte dieser mit der Funktion <TT>free</TT>
+freigegeben werden, um nicht unn&ouml;tig Speicherplatz
+zu blockieren.
+<P>Syntax:
+<PRE>
+void free(void *ptr);
+</PRE>
+<P>Beispiel:
+<PRE>
+/* Speicherplatz mit malloc reservieren und mit free freigeben */
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+ 
+void main(void)
+{
+  char *block=NULL; /* Zeiger auf Zeichen deklarieren */
+  int i;
+ 
+  /* Speicherbereich mit 4000 Bytes reservieren und */
+  /* zur&uuml;ckgegebenen Zeiger in Zeiger auf Zeichen   */
+  /* umwandeln                                      */
+  block=(char *)malloc(4000);
+  if(block!=NULL)
+  {
+    for(i=0;i&lt;4000;block[i++]=' ');
+    printf("Speicherblock angelegt und initialisiert.");
+  }
+  else
+    printf("Speicherblock konnte nicht angelegt werden.");
+ 
+  /* speicherplatz freigeben */  free(block);
+}
+</PRE>
+<HR><H2><A NAME="Header_110" HREF="refer02.htm#ToC_110">9.5 Verkettete Listen</A></H2>
+<A NAME="IDX278"></A>
+<P>Mittels Zeiger und Speicherverwaltungsfunktionen
+lassen sich effektiv Listen aufbauen, ohne
+vorher zu wissen, wieviel Listenelemente ben&ouml;tigt werden.
+Des weiteren lassen sich flexibel Listenelemente einf&uuml;gen und
+l&ouml;schen.
+<P>Eine Liste besteht aus einer beliebigen Anzahl
+fest definierter Elemente. Diese Elemente sind
+Speicherbereiche, die i.d.R. als Strukturen mit einer
+festen Anzahl an Strukturelementen betrachtet werden.
+Eine derartige Liste kann z.B. zur Verwaltung von Studenten
+benutzt werden. Um eine Verbindung der einzelnen Listenelemente
+untereinander gew&auml;hrleisten zu k&ouml;nnen, werden diese
+&uuml;ber Zeiger miteinander verbunden. Hierbei unterscheidet man
+einfach und doppelt verkettete Listen. Einfach verkettete
+Listen enthalten in der Struktur nur einen Zeiger, der auf
+das nachfolgende Listenelement zeigt (also ein Zeiger auf eine
+Struktur). Eine doppelt verkettete Liste enth&auml;lt in der
+Struktur zus&auml;tzlich einen Zeiger, der auf das vorherige
+Listenelement zeigt.
+<P><B><A NAME="FIGDLISTE" HREF="refer04.htm#FT_FIGDLISTE">Abbildung 11. Doppelt verkettete Liste</A></B><BR>
+<B><BR><CENTER><IMG SRC="liste.gif" ALT="Figure liste not displayed."></CENTER><BR></B><BR>
+<P>Da die doppelt verkettete Liste wesentlich flexibler
+ist als die einfach verkettete Liste, wird auf die
+doppelt verkettete Liste ausf&uuml;hrlich eingegangen und die
+einfach verkettete Liste lediglich der Vollst&auml;ndigkeit
+halber vorgestellt.
+<P><H3><A NAME="Header_111" HREF="refer02.htm#ToC_111">9.5.1 Doppelt verkettete Liste</A></H3>
+<A NAME="IDX280"></A>
+<P>In diesem Abschnitt wird vorgestellt, wie eine
+doppelt verkettete Liste erzeugt, Listenelemente
+hinzugef&uuml;gt und gel&ouml;scht werden.
+<P><H4><A NAME="Header_112">9.5.1.1 Doppelt verkettete Liste erzeugen</A></H4>
+<P>Der Vorgang zur Erzeugung einer doppelt verketteten
+Liste gliedert sich wie folgt:
+<OL TYPE=1>
+<P><LI>Vorbereitungen
+<OL TYPE=a>
+<P><LI>Mittels <TT>typedef</TT> einen Strukturtyp
+definieren, der die Daten eines Listenelements
+aufnimmt.
+<P><LI>Eine Variable dieses Strukturtyps deklarieren.
+<P><LI>Mehrere Pointer dieses Strukturtyps deklarieren:
+<UL>
+<P><LI>Der Pointer <TT>start</TT> dient dazu,
+die Adresse des ersten Listenelements aufzunehmen.
+<P><LI>Der Pointer <TT>ende</TT> dient dazu,
+die Adresse des letzten Listenelements aufzunehmen.
+<P><LI>Der Pointer <TT>momentan</TT> dient dazu,
+die Adresse des aktuellen Listenelements aufzunehmen.
+<P><LI>Der Pointer <TT>zwischen</TT> dient dazu,
+die Adresse des vorherigen Listenelements aufzunehmen.
+</UL>
+<P><LI>Deklarierte Pointer mit NULL initialisieren.
+</OL>
+<P><LI>Erstes Listenelement erzeugen
+<OL TYPE=a>
+<P><LI>Speicher mittels <TT>malloc</TT> reservieren
+(momentan=...)
+<P><LI>Strukturelemente mit Nutzdaten f&uuml;llen.
+<P><LI>Zeiger auf vorheriges Listenelement in der Struktur
+auf NULL setzen.
+<P><LI>Zeiger <TT>start</TT> mit der Adresse des momentanen
+Speicherblocks f&uuml;llen.
+<P><LI>Zeiger <TT>zwischen</TT> mit der Adresse des momentanen
+Speicherblocks f&uuml;llen.
+</OL>
+<P><LI>Weitere Listenelemente erzeugen
+<OL TYPE=a>
+<P><LI>Speicher mittels <TT>malloc</TT> reservieren
+<P><LI>Strukturelemente mit Nutzdaten f&uuml;llen.
+<P><LI>Zeiger auf vorheriges Listenelement in der Struktur
+mit dem Wert des Zeigers <TT>zwischen</TT> f&uuml;llen.
+<P><LI>Zeiger auf vorheriges Listenelement in der Struktur,
+auf die der Zeiger <TT>zwischen</TT> zeigt, mit der
+Adresse des momentanen Speicherblocks f&uuml;llen.
+<P><LI>Zeiger <TT>zwischen</TT> mit der Adresse des momentanen
+Speicherblocks f&uuml;llen.
+</OL>
+<P><LI>Letztes Listenelement erzeugen
+<OL TYPE=a>
+<P><LI>Vorgang wie oben, aber momentan-&gt;danach=NULL
+</OL>
+</OL>
+<PRE>
+/* Doppelt verkettete Liste anlegen und benutzen */
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+ 
+/* Strukturtyp f&uuml;r Listenelement definieren und */
+/* Variable DATEI deklarieren                   */
+typedef struct datei
+{
+  int satznummer;
+  char nachname[20+1];
+  char vorname[20+1];
+  struct datei *davor;
+  struct datei *danach;
+} DATEI;
+ 
+DATEI *momentan, *zwischen, *start, *ende;
+ 
+void speicher_anfordern(void);
+void liste_fuellen(int);
+void liste_ausgeben(void);
+ 
+void main(void)
+{
+  int i;
+ 
+  zwischen=NULL;                             /* Zeiger auf vorheriges Element */
+  for(i=1;i&lt;=3;i++)
+  {
+     speicher_anfordern();
+     liste_fuellen(i);
+     momentan-&gt;davor=zwischen;               /* Zeiger auf vorheriges Element */
+     if(zwischen) zwischen-&gt;danach=momentan; /* zwischen&lt;&gt;NULL, ab 2.Element  */
+     else start=momentan;                    /* zwischen==NULL, nur 1.Element */
+     zwischen=momentan;                      /* momentane Adresse f&uuml;r Zeiger  */
+                                             /* auf vorheriges Element retten */
+  }
+  momentan-&gt;danach=NULL;                     /* Zeiger auf nachfolgendes      */
+                                             /* Element bei letztem Element   */
+  ende=momentan;                             /* Zeiger auf letztes Element    */
+  liste_ausgeben();
+}
+ 
+void speicher_anfordern(void)
+{
+   /* Speicher anfordern und Zeiger per Typecast &auml;ndern */
+   if((momentan=(DATEI *)malloc(sizeof(DATEI))) == NULL)
+   {
+      printf("\nKein Speicherplatz zur Verf&uuml;gung!\n");
+      exit(8);
+   }
+   return;
+}
+ 
+void liste_fuellen(i)
+{
+   int t;
+   /* Strukturelemente mit Nutzdaten f&uuml;llen */
+   momentan-&gt;satznummer=i;
+   strcpy(momentan-&gt;nachname,"Nachname ");
+   for(t=1;t&lt;=i;t++)
+      strcat(momentan-&gt;nachname,"x");
+   strcpy(momentan-&gt;vorname,"Vorname");
+   return;
+}
+ 
+void liste_ausgeben(void)
+{
+   printf("\nListe vorw&auml;rts ausgeben\n");
+   /* Zeiger auf erstem Element positionieren */
+   momentan=start;
+   /* Solange es Elemente gibt, also bis momentan==NULL */
+   while(momentan)
+   {
+      printf("\nSatz %d\nNachname %s\nVorname %s\n",
+             momentan-&gt;satznummer,momentan-&gt;nachname,
+             momentan-&gt;vorname);
+      /* Zeiger auf n&auml;chstem Element positionieren */
+      momentan=momentan-&gt;danach;
+   }
+   printf("\nListe r&uuml;ckw&auml;rts ausgeben\n");
+   /* Zeiger auf letztem Element positionieren */
+   momentan=ende;
+   while(momentan)
+   {
+      printf("\nSatz %d\nNachname %s\nVorname %s\n",
+             momentan-&gt;satznummer,momentan-&gt;nachname,
+             momentan-&gt;vorname);
+      /* Zeiger auf vorherigem Element positionieren */
+      momentan=momentan-&gt;davor;
+   }
+   return;
+}
+</PRE>
+<P><H4><A NAME="Header_113">9.5.1.2 Listenelement einf&uuml;gen</A></H4>
+<P>Das Einf&uuml;gen eines Listenelementes wird durch &Auml;nderung
+der Zeiger des vorhergehenden und des nachfolgenden
+Listenelementes erreicht.
+Die Zeiger <TT>danach</TT> des vorhergehenden
+Listenelementes und <TT>davor</TT> des nachfolgenden
+Listenelementes m&uuml;ssen
+auf das einzuf&uuml;gende Element zeigen.
+Der Zeiger <TT>davor</TT> des einzuf&uuml;genden Elementes
+mu&szlig; auf das vorhergehende Listenelement zeigen und
+der Zeiger <TT>danach</TT> auf das nachfolgende
+Listenelement.
+<P>Der folgende Beispielcode enth&auml;lt nur die neue Funktion
+<TT>liste_einfuegen(void)</TT> und einen Beispielaufruf.
+S&auml;mtliche mit ... angegeben Stellen sind mit dem vorhergehenden
+Quelltext identisch.
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">Hinweis</TH><TR><TD>
+<P>Dieser Beispielcode ist nicht auf alle m&ouml;glichen
+Konstellationen ausgelegt!
+</TD></TR></TABLE>
+<PRE>
+ 
+ . . .
+void liste_einfuegen(void);
+ . . .
+void main(void)
+{
+   . . .
+   ende=momentan;
+   liste_ausgeben();
+ 
+   /* Neues Listenelement einf&uuml;gen */
+   zwischen=start-&gt;danach; /* zeiger vorbereiten, um element zwischen erstem
+                              und zweitem element einzuf&uuml;gen */
+   liste_einfuegen();
+   printf("\n\nListe nach dem Einf&uuml;gen eines Elements an zweiter Position:\n");
+   liste_ausgeben();
+}
+ . . .
+void liste_einfuegen(void)
+{
+   DATEI *hilfszeiger;
+ 
+   /* 1.) Speicher f&uuml;r das neue Listenelement anfordern */
+   speicher_anfordern();         /* momentan erhaelt adresse des neuen elements */
+ 
+   /* 2.) Struktur mit Nutzdaten f&uuml;llen */
+   liste_fuellen(10);
+ 
+   /* 3.) Zeiger aller drei Element 'korrigieren' */
+   hilfszeiger=zwischen-&gt;davor;  /* zeiger auf vorheriges element */
+   momentan-&gt;davor=hilfszeiger;  /* neues element auf vorheriges verweisen lassen */
+   hilfszeiger-&gt;danach=momentan; /* vorheriges element auf neues verweisen lassen */
+   momentan-&gt;danach=zwischen;    /* neues element auf nachfolgendes verweisen lassen */
+   zwischen-&gt;davor=momentan;     /* nachfolgendes auf neues verweisen lassen */
+ 
+   return;
+}
+ . . .
+ 
+</PRE>
+<P><H4><A NAME="Header_114">9.5.1.3 Listenelement l&ouml;schen</A></H4>
+<P>
+<P>Der folgende Beispielcode enth&auml;lt nur die neue Funktion
+<TT>liste_einfuegen(void)</TT> und einen Beispielaufruf.
+S&auml;mtliche mit ... angegeben Stellen sind mit dem vorhergehenden
+Quelltext identisch.
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">Hinweis</TH><TR><TD>
+<P>Dieser Beispielcode ist nicht auf alle m&ouml;glichen
+Konstellationen ausgelegt!
+</TD></TR></TABLE>
+<PRE>
+ 
+ . . .
+void liste_loeschen(void);
+ . . .
+void main(void)
+{
+   . . .
+   ende=momentan;
+   liste_ausgeben();
+ 
+   /* Neues Listenelement einf&uuml;gen */
+   zwischen=start-&gt;danach; /* zeiger vorbereiten, um element zwischen erstem
+                              und zweitem element einzuf&uuml;gen */
+   liste_einfuegen();
+   printf("\n\nListe nach dem Einf&uuml;gen eines Elements an zweiter Position:\n");
+   liste_ausgeben();
+ 
+ 
+   zwischen=start-&gt;danach; /* zeiger vorbereiten, um element zwischen erstem
+                              und zweitem element einzuf&uuml;gen */
+   liste_loeschen();
+   printf("\n\nListe nach dem L&ouml;schen eines Elements an zweiter Position:\n");
+   liste_ausgeben();
+}
+ . . .
+void liste_loeschen(void)
+{
+   DATEI *hilfszeiger;
+ 
+   hilfszeiger=zwischen-&gt;davor; /* zeiger auf element vor dem zu l&ouml;schenden
+                                   element */
+   hilfszeiger-&gt;danach=zwischen-&gt;danach;
+ 
+   hilfszeiger=zwischen-&gt;danach;
+   hilfszeiger-&gt;davor=zwischen-&gt;davor;
+   return;
+}
+ 
+</PRE>
+<P><H3><A NAME="Header_115" HREF="refer02.htm#ToC_115">9.5.2 Einfach verkettete Liste</A></H3>
+<A NAME="IDX282"></A>
+<P>Im Gegensatz zur doppelt verketteten Liste wird bei der
+einfach verketteten Liste nur die Adresse zum nachfolgenden
+Element gesichert.
+<PRE>
+ 
+/* Einfach verkettete Liste anlegen und benutzen */
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+ 
+typedef struct datei
+{
+  int satznummer;
+  char nachname[20+1];
+  char vorname[20+1];
+  struct datei *danach;
+} DATEI;
+ 
+DATEI *momentan, *zwischen, *start;
+ 
+void speicher_anfordern(void);
+void liste_fuellen(int);
+void liste_ausgeben(void);
+ 
+void main(void)
+{
+  int i;
+ 
+  zwischen=NULL;
+  for(i=1;i&lt;=3;i++)
+  {
+     speicher_anfordern();
+     liste_fuellen(i);
+     if(zwischen) zwischen-&gt;danach=momentan; /* zwischen&lt;&gt;NULL, ab 2.Element  */
+     else start=momentan;                    /* zwischen==NULL, nur 1.Element */
+     zwischen=momentan;
+  }
+  momentan-&gt;danach=NULL;
+  liste_ausgeben();
+}
+ 
+void speicher_anfordern(void)
+{
+   if((momentan=(DATEI *)malloc(sizeof(DATEI))) == NULL)
+   {
+      printf("\nKein Speicherplatz zur Verf&uuml;gung!\n");
+      exit(8);
+   }
+   return;
+}
+ 
+void liste_fuellen(i)
+{
+   int t;
+   momentan-&gt;satznummer=i;
+   strcpy(momentan-&gt;nachname,"Nachname ");
+   for(t=1;t&lt;=i;t++)
+      strcat(momentan-&gt;nachname,"x");
+   strcpy(momentan-&gt;vorname,"Vorname");
+   return;
+}
+ 
+void liste_ausgeben(void)
+{
+   momentan=start;
+   while(momentan)
+   {
+      printf("\nSatz %d\nNachname %s\nVorname %s\n",
+             momentan-&gt;satznummer,momentan-&gt;nachname,
+             momentan-&gt;vorname);
+      momentan=momentan-&gt;danach;
+   }
+   return;
+}
+ 
+</PRE>
+<HR><H2><A NAME="Header_116" HREF="refer02.htm#ToC_116">9.6 Speicherverwaltungsfunktionen f&uuml;r Debugging</A></H2>
+<A NAME="IDX283"></A>
+<P>Die folgenden Funktionen stellen einen Ersatz f&uuml;r malloc() und free() dar:
+<PRE>
+void *Malloc(size_t size);
+void Free(char **ptr);
+</PRE>
+<P>Wie anhand der Funktionsprototypen zu sehen ist, ben&ouml;tigt der Aufruf
+von Free() einen anderen Parameter als free().
+<PRE>
+free(puffer);
+</PRE>
+mu&szlig; nun folgenderma&szlig;en aussehen:
+<PRE>
+Free( (char **) &puffer );
+</PRE>
+<P>Die neuen Funktionen Malloc() und Free() geben folgende Funktionen bei ihrem
+Aufruf aus:
+<UL>
+<P><LI>Die Gr&ouml;&szlig;e des Speicherblocks.
+<P><LI>Die Adresse des Speicherblocks.
+<P><LI>Den Namen der Source Code Datei, aus der die Funktion aufgerufen wurde.
+<P><LI>Die Zeile der Source Code Datei, aus der die Funktion aufgerufen wurde.
+</UL>
+<P>Die Funktionen werden jedoch nur dann benutzt, wenn das Symbol
+DEBUG_MEMORY per #define DEBUG_MEMORY definiert wurde. Anderenfalls werden
+alle Aufrufe von Malloc() und Free() durch die Aufrufe
+von malloc() und free() ersetzt.
+<P>Source Code f&uuml;r Malloc():
+<PRE>
+/*----------------------------------------------------------------------------*/
+/* Malloc()                                                                   */
+/*----------------------------------------------------------------------------*/
+#if DEBUG_MEMORY
+ void *Malloc(size_t size, char *srcFile, int srcLine)
+ {
+   void *ptr;
+ 
+   ptr=malloc( size );
+   printf("Allocating %06d bytes of memory at %d in %s at line %05d\n",
+          size, ptr, srcFile, srcLine);
+   return ptr;
+ }
+<A NAME="IDX284"></A>
+<A NAME="IDX285"></A>
+<A NAME="IDX286"></A>
+#define Malloc( val ) Malloc( val, __FILE__, __LINE__)
+#else
+#   define Malloc(val) malloc(val)
+#endif
+/*--- End - Debugversion malloc() ---*/
+</PRE>
+<P>Source Code f&uuml;r Free():
+<PRE>
+/*----------------------------------------------------------------------------*/
+/* Free()                                                                     */
+/*----------------------------------------------------------------------------*/
+#ifdef DEBUG_MEMORY
+ void Free(char **ptr, char *srcFile, int srcLine)
+ {
+   printf("Releasing  %06d bytes of memory at %d in %s at line %05d ",
+           _msize(*ptr), *ptr, srcFile, srcLine);
+   if( *ptr != NULL )
+   {
+      free( *ptr );
+      *ptr = NULL;
+   }
+   printf("-&gt; %d\n",*ptr);
+ }
+#define Free( val ) Free( val, __FILE__, __LINE__);
+#else
+#   define Free(val) free(* val);
+#endif
+/*--- End Debugversion free() ---*/
+</PRE>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer12.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer14.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

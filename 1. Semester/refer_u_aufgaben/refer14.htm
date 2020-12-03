@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer13.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer15.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRBS" HREF="refer02.htm#ToC_117">10.0 Verbindungen zum Betriebssystem</A></H1>
+<P>Von Zeit zu Zeit ist es notwendig, von einem Programm aus ein anderes
+Programm zu starten, Betriebssystembefehle auszuf&uuml;hren oder dem
+Programm beim Aufruf von der Kommandozeile aus Daten
+(sog. <I>Kommandozeilenparameter</I>) mitzugeben.
+<P>In diesem Kapitel werden die dazu ben&ouml;tigten Funktionen vorgestellt
+und anhand von Beispielen verdeutlicht, wie unter C die Verbindung
+zum Betriebssystem hergestellt werden kann. Je nach verwendetem
+Betriebssystem bzw. verwendeter Entwicklungsumgebung werden weitere
+Funktionen zur Verf&uuml;gung gestellt, wie z.B. <TT>DosExecPgm</TT>
+unter OS/2.
+<P>
+<HR><H2><A NAME="Header_118" HREF="refer02.htm#ToC_118">10.1 Kommandozeilenparameter auswerten</A></H2>
+<A NAME="IDX287"></A>
+<P>Eingangs wurde bereits erw&auml;hnt, da&szlig; die
+Funktion <TT>main()</TT> die einzige Funktion ist, die
+Kommandozeilenparameter empfangen kann. Kommandozeilenparameter sind
+Argumente, die beim Programmstart durch Leerzeichen voneinander
+getrennt hinter dem Programmnamen angegeben werden.
+<P>Beispiel:
+<P>
+<PRE>
+DISKCOPY A: B:
+</PRE>
+<P>In diesem Fall wird das Programm <TT>DISKCOPY</TT> aufgerufen,
+dem als Kommandozeilenparameter <TT>A&#58;</TT> und
+<TT>B&#58;</TT> mitgegeben werden. Solche Parameter werden in C
+der Funktion <TT>main()</TT> &uuml;bergeben.
+<P>Die Funktionsweise soll anhand eines einfachen Beispiels
+erl&auml;utert werden:
+<PRE>
+/* KOMPARA.C     liest Kommandozeilenparameter ein und gibt */
+/*               sie aus                                    */
+#include &lt;stdio.h&gt;
+ 
+main(int argc, char *argv[])
+{
+   int zaehler;
+ 
+   if (argc &lt; 2)                  /* Parameter vorhanden ? */
+   {
+      printf("Es wurden keine Kommandozeilenparameter angegeben!\n");
+      exit(4);
+   }
+ 
+   for (zaehler=1; zaehler&lt;argc; zaehler++)
+       printf("\nParameter %d = %s", zaehler, argv[zaehler]);
+}
+</PRE>
+<A NAME="IDX288"></A>
+<A NAME="IDX289"></A>
+<P>Die Funktion <TT>main()</TT> erh&auml;lt vom Betriebssystem zwei
+Parameter: <TT>argc</TT> und <TT>argv[]</TT>.
+<TT>argc</TT> enth&auml;lt die Anzahl der an das Programm
+&uuml;bergebenen Parameter. <TT>argv[]</TT> enth&auml;lt die
+eigentlichen Parameter. Enth&auml;lt <TT>argc</TT> den Wert 1, so
+bedeutet dies, da&szlig; kein Parameter &uuml;bergeben wurde, da
+grunds&auml;tzlich der Programmname als erster Parameter an das Programm
+&uuml;bergeben wird. <TT>argv[0]</TT> enth&auml;lt somit den
+Namen des Programms. Zus&auml;tzlich wird noch der Parameter
+<TT>envp</TT> &uuml;bergeben, der Daten des sog. Environments
+beinhalten kann.
+<P>Die Namen der Variablen sind frei w&auml;hlbar, allerdings stellen
+die oben angegeben Bezeichner einen Quasi-Standard dar.
+<P>Die Deklaration <TT>char *argv[]</TT> bedeutet: Zeiger
+auf Zeiger auf Zeichen. Diese Deklaration ist &auml;quivalent zu
+<TT>char **argv</TT>. <TT>argv</TT> ist ein Zeiger, der auf ein
+Feld zeigt, welches wiederum Zeiger enth&auml;lt, die ihrerseits auf die
+einzelnen Kommandozeilenparameter zeigen. Durch die leeren eckigen
+Klammern wird definiert, da&szlig; das Feld eine unbekannte Anzahl an
+Elementen hat.
+<P>
+<HR><H2><A NAME="Header_119" HREF="refer02.htm#ToC_119">10.2 Betriebssystembefehle ausf&uuml;hren</A></H2>
+<A NAME="IDX290"></A>
+<P>Damit Betriebssystembefehle von einem C-Programm aus aufgerufen
+werden k&ouml;nnen,
+<A NAME="IDX291"></A>
+verwendet C die Funktion <TT>system</TT>. Diese Funktion steht
+sowohl unter DOS als auch unter UNIX zur Verf&uuml;gung und leitet
+s&auml;mtliche Systembefehle, die in der Kommandozeile des Betriebssystems
+eingegeben werden k&ouml;nnen, an das Betriebssystem weiter. Als Argument
+wird der Funktion die Kommandozeile in doppelten Hochkommata
+(<TT>"</TT>) &uuml;bergeben.
+<P>Beispiel:
+<P>
+<PRE>
+    resultat = system("dir c: &gt; dirlist.txt");
+</PRE>
+<P>Die Funktion &uuml;bergibt den R&uuml;ckgabewert des Systembefehls
+(erfolgreich==0, Fehler &lt;&gt;0) an die Variable
+<I>resultat</I>, die daraufhin ausgewertet werden kann.
+<P>
+<HR><H2><A NAME="Header_120" HREF="refer02.htm#ToC_120">10.3 Programme starten</A></H2>
+<A NAME="IDX292"></A>
+<P>Um andere Programme starten zu k&ouml;nnen, verwendet C in
+<A NAME="IDX293"></A>
+<A NAME="IDX294"></A>
+DOS-Umgebungen die Funktionen <TT>spawn()</TT> und <TT>exec()</TT>.
+Die beiden Funktionen unterscheiden sich nur in einem Punkt: bei der
+Verwendung von <TT>spawn()</TT> bleibt das aufrufende Programm im
+Speicher, w&auml;hrend das aufgerufene (child-Prozess) ausgef&uuml;hrt wird.
+Nach Beendigung des aufgerufenen Programms wird die Kontrolle
+an das aufrufende Programm zur&uuml;ckgegeben.
+Bei <TT>exec()</TT> hingegen wird das
+aufrufende Programm im Speicher &uuml;berlagert und nach Beendigung des
+Child-Prozesses auf die Betriebssystemebene zur&uuml;ckgekehrt.
+Da <TT>spawn()</TT>
+mit Hilfe eines Schalters dazu gebracht werden kann, sich wie
+<TT>exec()</TT> zu verhalten, wird in diesem Zusammenhang
+nur auf <TT>spawn()</TT> eingegangen.
+<P>Um eine vorher bekannte Anzahl von Parametern zu &uuml;bergeben,
+wird die Funktion <TT>spawnl()</TT> verwendet. Steht die Anzahl der
+Parameter nicht fest, so ist die Funktion <TT>spawnv()</TT> zu
+benutzen. Im folgenden
+werden die einzelnen Varianten mit deren Syntax aufgef&uuml;hrt.
+<P>Die Funktion <TT>spawnl()</TT> existiert in den folgenden Varianten:
+<PRE>
+  int spawnl(int mode, char *path, char *arg(),..., NULL);
+  int spawnlp(int mode, char *path, char *arg(),..., NULL);
+  int spawnle(int mode, char *path, char *arg(),..., NULL, char *envp[]);
+  int spawnlpe(int mode, char *path, char *arg(),..., NULL, char *envp[]);
+</PRE>
+<P>Auf die Bedeutung der einzelnen Funktionsnamenszus&auml;tze und
+Argumente wird weiter unten eingegangen.
+<P>Die Funktion <TT>spawnv()</TT> existiert in den folgenden Varianten:
+<PRE>
+  int spawnv(int mode, char *path, char *argv[]);
+  int spawnvp(int mode, char *path, char *argv[]);
+  int spawnve(int mode, char *path, char *argv[], char *envp[]);
+  int spawnvpe(int mode, char *path, char *argv[], char *envp[]);
+</PRE>
+<P>Die Zus&auml;tze am Funktionsnamen haben die folgenden Bedeutungen:
+<DL>
+<P><DT><B> Zeichen</B>
+<DD><B> Bedeutung</B>
+<P><DT>p
+<DD>Die <TT>spawn()</TT>-Funktion sucht nach dem aufzurufenden
+Programm nicht nur
+im momentanen Verzeichnis, sondern in s&auml;mtlichen,
+im Betriebssystem mit <TT>PATH</TT> festgelegten Verzeichnissen.
+<P><DT>e
+<DD>erm&ouml;glicht die &Uuml;bergabe eines eigenen Environments (eigene
+Umgebungsvariablen f&uuml;r das aufzurufende Programm.
+</DL>
+<P>Die folgende Aufstellung beschreibt die Parameter, die mitgegeben
+werden:
+<DL>
+<P><DT><TT>mode</TT>
+<DD>legt fest, wie sich das aufrufende Programm
+w&auml;hrend der Ausf&uuml;hrung des aufzurufenden Programmes
+verh&auml;lt. Folgende Angaben sind m&ouml;glich:
+<OL TYPE=1>
+<P><LI><TT>P_WAIT</TT>: das aufrufende Programm bleibt im Speicher, wird
+aber w&auml;hrend der Ausf&uuml;hrung des aufzurufenden Programmes stillgelegt.
+<P><LI><TT>P_NOWAIT</TT>: das aufrufende Programm und das aufzurufende
+Programm werden konkurrierend ausgef&uuml;hrt. Dieser Modus ist nur in
+Multitaskingumgebungen verf&uuml;gbar.
+<P><LI><TT>P_OVERLAY</TT>: das aufrufende Programm wird vom aufzurufenden
+Programm &uuml;berlagert und nach dessen Beendigung nicht weitergef&uuml;hrt.
+Entspricht der Funktion <TT>exec()</TT>.
+</OL>
+<P><DT><TT>path</TT>
+<DD>gibt den Namen des aufzurufenden Programmes an.
+<P><DT><TT>argv</TT>
+<DD>beinhaltet die Argumente, die an das aufzurufende Programm
+&uuml;bergeben werden. <TT>argv[0]</TT> sollte den Namen des aufzurufenden
+Programmes beinhalten. Die weiteren Argumente sind wahlfrei.
+<P><DT><TT>NULL</TT>
+<DD>ist obligatorisch und schlie&szlig;t die Argumentenliste ab.
+<P><DT><TT>envp</TT>
+<DD>ist ein Zeigerfeld, dessen Inhalt &uuml;bergeben wird, um ein Environment
+an das aufzurufende Programm &uuml;bergeben zu k&ouml;nnen. Das h&ouml;chste
+Element des eigentlichen Umgebungsfeldes mu&szlig; <TT>NULL</TT> enthalten.
+</DL>
+<P>Beispiele:
+<DL>
+<P><DT><B> Variante</B>
+<DD><B> Bedeutung</B>
+<P><DT>spawnl(P_WAIT,"c:\\os2\\e.exe","c:\\os2\\e.exe",
+"autoexec.bat",NULL)&#59;
+<DD>
+<P>Das aufzurufende Programm <TT>e.exe</TT> wird geladen und gestartet.
+Durch <TT>P_WAIT</TT> verbleibt das aufrufende Programm im Speicher.
+Der Parameter <TT>autoexec.bat</TT> wird an den Editor <TT>e.exe</TT>
+&uuml;bergeben. Die Wiederholung der Angabe <TT>e.exe</TT> ist notwendig,
+da unter DOS der erste Parameter standardm&auml;&szlig;ig der Programmname des
+aufzurufenden Programmes sein sollte. Das Ende der
+Parameterliste wird durch <TT>NULL</TT> gekennzeichnet.
+<P><DT>spawnlp(P_WAIT,"e.exe","e.exe","autoexec.bat",NULL)&#59;
+<DD>
+<P>Wie oben, nur da&szlig; im aktuellen Verzeichnis und gem&auml;&szlig; der
+<TT>PATH</TT>-Angabe nach dem aufzurufenden Programm
+<TT>e.exe</TT> gesucht wird.
+<P><DT>spawnlpe(P_OVERLAY,"e.exe","e.exe","autoexec.bat",
+NULL, environment)&#59;
+<DD>
+<P>Wie oben, nur da&szlig; im aktuellen Verzeichnis und gem&auml;&szlig; der
+<TT>PATH</TT>-Angabe nach dem aufzurufenden Programm gesucht wird.
+Zus&auml;tzlich werden die Angaben des Zeigers <TT>environment</TT>
+an das Betriebssystem &uuml;bergeben. <TT>environment</TT> mu&szlig; als
+Zeigerfeld vom Typ <TT>char *environment[];</TT> deklariert sein.
+Die Angabe <TT>P_OVERLAY</TT> bewirkt, da&szlig;
+<TT>spawn()</TT> sich wie <TT>exec()</TT> verh&auml;lt.
+</DL>
+<P>Aufgrund der Komplexit&auml;t der Erl&auml;uterungen soll noch ein
+Programmbeispiel angef&uuml;gt werden:
+<P>
+<PRE>
+ /* SPAWN.C                                                        */
+ /* Dieses Programm demonstriert die Verwendungsweise der Funktion */
+ /* spawn() anhand der Variante spawnlp().                         */
+ 
+ #include &lt;stdlib.h&gt;
+ #include &lt;stdio.h&gt;
+ #include &lt;process.h&gt;
+ 
+/* Festlegung des Environments f&uuml;r das aufzurufende Programm */
+char *environment[]=
+ {
+    "TEMP=C:\\",
+    "PATH=C:\\OS2;C:\\OS2\\APPS",
+    NULL
+ };
+ 
+ 
+void main(void)
+{
+/* Deklaration einer lokalen Return-Code-Variablen */
+int res;
+ 
+    /* Aufruf von E.EXE */
+    res = spwanlp(P_WAIT,"e.exe","e.exe","autoexec.bat", NULL,
+                  environment);
+ 
+    /* Aufruf erfolgreich? */
+    if(res)
+       printf("Der Proze&szlig; konnte nicht gestartet werden!");
+    else
+       printf("spwanlp() beendet!");
+ }
+</PRE>
+<P>Das oben abgebildete Beispielprogramm ruft den
+Editor <TT>e.exe</TT> auf und gibt ihm ein eigenes
+Environment und
+Kommandozeilenparameter mit. Nach dem Aufruf wird anhand der Variablen
+<TT>res</TT>, die das Resultat des Aufrufes entgegennimmt,
+&uuml;berpr&uuml;ft, ob der Aufruf erfolgreich war.
+<P>Der folgende Programmcode demonstriert die Verwendung einiger
+spawn Funktionen und wurde der CP Reference (Teil der Dokumentation
+der IBM C/C<TT>++</TT> FirstStep Tools Version 2.01) entnommen.
+<PRE>
+ /************************************************************************
+ 
+ This example shows calls to four of the eight _spawn routines.  When
+ called without arguments from the command line, the program first
+ runs the code for case PARENT.  It spawns a copy of itself, waits for
+ its child to run, then spawns a second child.  The instructions for the
+ child are blocked to run only if argv[0] and one parameter were
+ passed (case CHILD).  In its turn, each child spawns a grandchild as a
+ copy of the same program.  The grandchild instructions are blocked by
+ the existence of two passed parameters. The grandchild is permitted to
+ overlay the child.  Each of the processes prints a message identifying
+ itself.
+ 
+ ************************************************************************/
+ 
+#include  &lt;stdio.h&gt;
+#include  &lt;process.h&gt;
+#define   PARENT        1
+#define   CHILD         2
+#define   GRANDCHILD    3
+ 
+ int main(int argc, char **argv, char **envp)
+ {
+    int    result;
+    char   *args[4];
+ 
+    switch(argc)
+    {
+       case PARENT:
+       /* no argument was passed:  spawn child and wait */
+          result = _spawnle(P_WAIT, argv[0],
+                                argv[0], "one", NULL, envp);
+          if (result)
+              abort();
+          args[0] = argv[0];
+          args[1] = "two";
+          args[2] = NULL;
+ 
+          /* spawn another child, and wait for it */
+          result = _spawnve(P_WAIT, argv[0],
+                       args, envp);
+          if (result)
+              abort();
+          printf("Parent process ended. %d\n",result);
+          _exit(0);
+ 
+       case CHILD:
+          /* one argument passed:  allow grandchild to overlay */
+          printf("child process %s began\n", argv[1]);
+          if (*argv[1] == 'o')            /* child one? */
+          {
+             _spawnl(P_OVERLAY, argv[0],
+                         argv[0], "one", "two", NULL);
+             abort();
+             /* not executed because child was overlaid */
+          }
+          if (*argv[1] == 't')            /* child two? */
+          {
+              args[0] = argv[0];
+              args[1] = "two";
+              args[2] = "one";
+              args[3] = NULL;
+              _spawnv(P_OVERLAY, argv[0], args);
+              abort();
+              /* not executed because child was overlaid */
+          }
+          abort();       /* argument not valid */
+ 
+      case GRANDCHILD:   /* two arguments passed */
+         printf("grandchild %s ran\n", argv[1]);
+         _exit(0);
+    }
+ 
+ /******  The output should be similar to:  *************
+ 
+     child process one began
+     grandchild one ran
+     child process two began
+     grandchild two ran
+     Parent process ended
+ */
+ }
+</PRE>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer13.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer15.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer15.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer17.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRPREPROC" HREF="refer02.htm#ToC_125">12.0 Preprocessor-Anweisungen (Direktiven)</A></H1>
+<P>Der Preprocessor ist ein Programm, welches den Quellcode
+vor der eigentlichen
+&Uuml;bersetzung bearbeitet. Alle Preprocessor-Anweisungen
+beginnen in Spalte eins mit dem Zeichen <TT>#</TT> und geh&ouml;ren nicht
+zum eigentlichen Sprachumfang von C. Sie werden vor dem
+Compilieren verarbeitet. Es stehen folgende
+Anweisungen zur Verf&uuml;gung:
+<PRE>
+ 
+      #define
+      #elif
+      #else
+      #endif
+      #error
+      #if
+      #ifdef
+      #ifndef
+      #include
+      #line
+      #pragma
+      #undef
+</PRE>
+<P>Diese Anweisungen werden in den folgenden Abschnitten anhand von
+Beispielen vorgestellt.
+<P>
+<HR><H2><A NAME="Header_126" HREF="refer02.htm#ToC_126">12.1 Symbolische Konstanten - #define</A></H2>
+<A NAME="IDX297"></A>
+<P>Mit der Anweisung <TT>#define suchtext ersatztext</TT> besteht die
+M&ouml;glichkeit, einer Konstanten einen Namen zuzuordnen. Der
+Preprocessor ersetzt vor dem Compilieren alle Textstellen im
+Programm, die mit <TT>suchtext</TT> &uuml;bereinstimmen,
+durch die in <TT>ersatztext</TT> angegebene Zeichenfolge.
+<P>
+Beispiel:
+<P>
+<PRE>
+   #include &lt;stdio.h&gt;
+   #define PI 3.1425
+ 
+   void main(void)
+   {
+      ... ;
+      erg = (PI * radius) / 2;
+      ...;
+   }
+</PRE>
+<P>S&auml;mtliche Textstellen im Quelltext, die <TT>PI</TT> lauten, werden
+durch <TT>3.1425</TT> ersetzt.
+<P>
+<HR><H2><A NAME="Header_127" HREF="refer02.htm#ToC_127">12.2 Makros - #define</A></H2>
+<A NAME="IDX298"></A>
+<P>Es gibt F&auml;lle, in denen eine abgeschlossene Teilaufgabe so kurz
+ist, da&szlig; es sich nicht lohnt, eine vollst&auml;ndige Funktion daf&uuml;r zu
+programmieren. In diesen F&auml;llen benutzt man ein Makro.
+<P>Die Definition eines Makros hat die Form
+<TT>#define name anweisungen</TT>.
+<P>Beispiel:
+<P>
+<PRE>
+   #include &lt;stdio.h&gt;
+   #define max(A,B)   ((A) &gt; (B) ? (A) : (B))
+ 
+   void main(void)
+   {
+      int zahl_1, zahl_2;
+ 
+      printf("\n\nGeben Sie 2 ganze Zahlen durch ein Komma getrennt ein!\n");
+      scanf("%d,%d", &zahl_1, &zahl_2);
+      printf("Das Maximum dieser beiden Zahlen ist %d\n", max(zahl_1,zahl_2));
+   }
+</PRE>
+<P>Die Definition von <TT>max(A,B)</TT> pr&uuml;ft, ob der Ausdruck
+<TT>A</TT> gr&ouml;&szlig;er als der Ausdruck <TT>B</TT> ist. Ist dies der
+Fall, wird der Ausdruck <TT>A</TT> zur&uuml;ckgegeben, ist dies nicht der
+Fall, so wird der Ausdruck <TT>B</TT> zur&uuml;ckgegeben. An jeder Stelle im
+Quelltext, an der von der Definition <TT>max(A,B)</TT> Gebrauch
+gemacht wird, wird das Makro ausgef&uuml;hrt.
+<P>
+<HR><H2><A NAME="Header_128" HREF="refer02.htm#ToC_128">12.3 &Uuml;bersetzungsabbruch - #error</A></H2>
+<A NAME="IDX299"></A>
+<P>Durch diese Anweisung wird der &Uuml;bersetzungsablauf
+unterbrochen. Diese Anweisung findet vor allem bei
+bedingter Compilierung Anwendung.
+<HR><H2><A NAME="Header_129" HREF="refer02.htm#ToC_129">12.4 Einf&uuml;gen von Dateien - #include</A></H2>
+<A NAME="IDX300"></A>
+<P>C bietet zum Einf&uuml;gen von Dateien in den Quelltext
+die Preprocessor-Anweisung <TT>#include</TT>. Wird der
+Dateiname der einzuf&uuml;genden Datei in Hochkommata eingeschlossen, so
+sucht der Compiler zuerst in der benutzereigenen Bibliothek und dann in
+der Standardbibliothek. Wird der Dateiname hingegen in spitze
+Klammern (&lt;&gt;) eingebettet, so wird sofort und ausschlie&szlig;lich in der
+Standardbibliothek gesucht.
+<P>
+<HR><H2><A NAME="Header_130" HREF="refer02.htm#ToC_130">12.5 #if</A></H2>
+<A NAME="IDX301"></A>
+<P>Syntax: <TT>#if konstanter_ausdruck anweisungen</TT>
+<P>Trifft der Ausdruck zu, wird der, bis zum <TT>#endif</TT>
+folgende Code compiliert.
+<HR><H2><A NAME="Header_131" HREF="refer02.htm#ToC_131">12.6 #ifdef</A></H2>
+<A NAME="IDX302"></A>
+<P>Syntax: <TT>#ifdef ausdruck anweisungen</TT>
+<P>Ist der Ausdruck als Makro vorher definiert worden, wird der
+folgende Code compiliert.
+<HR><H2><A NAME="Header_132" HREF="refer02.htm#ToC_132">12.7 #ifndef</A></H2>
+<A NAME="IDX303"></A>
+<P>Syntax: <TT>#ifndef ausdruck anweisungen</TT>
+<P>Ist der Ausdruck nicht vorher als Makro definiert worden,
+wird der folgende Code compiliert.
+<HR><H2><A NAME="Header_133" HREF="refer02.htm#ToC_133">12.8 #else</A></H2>
+<A NAME="IDX304"></A>
+<P>Syntax: <TT>#else anweisungen</TT>
+<P>Dient bei <TT>#if, #ifdef</TT> und <TT>#ifndef</TT>
+als <TT>else</TT>-Anweisung.
+<HR><H2><A NAME="Header_134" HREF="refer02.htm#ToC_134">12.9 #endif</A></H2>
+<A NAME="IDX305"></A>
+<P>Syntax: <TT>#endif</TT>
+<P>Beendet <TT>#if, #ifdef</TT> oder <TT>#ifndef</TT>.
+<HR><H2><A NAME="Header_135" HREF="refer02.htm#ToC_135">12.10 #undef</A></H2>
+<A NAME="IDX306"></A>
+<P>Syntax: <TT>#undef name_der_definition</TT>
+<P>Vorherige Definition mit <TT>#define</TT> wird annulliert.
+<HR><H2><A NAME="Header_136" HREF="refer02.htm#ToC_136">12.11 #elif</A></H2>
+<A NAME="IDX307"></A>
+<P>Syntax: <TT>#elif ausdruck anweisungen</TT>
+<P>Wenn der Ausdruck von <TT>#if</TT> unwahr und der Ausdruck hinter
+<TT>#elif</TT> wahr ist, dann wird der, bis zum n&auml;chsten
+<TT>#elif</TT> oder <TT>#else</TT>
+auftauchende Code compiliert.
+<HR><H2><A NAME="Header_137" HREF="refer02.htm#ToC_137">12.12 #line</A></H2>
+<A NAME="IDX308"></A>
+<P>Syntax: <TT>#line nummer</TT>
+<P><TT>line</TT> beeinflu&szlig;t die Zeilennummerierung des Quelltextes
+durch den Compiler. Die der Anweisung folgende Zeile wird
+mit der angegebenen Zeilennummer versehen. Im folgenden wird mit
+dieser Zeilennummer weitergez&auml;hlt.
+<HR><H2><A NAME="Header_138" HREF="refer02.htm#ToC_138">12.13 #pragma</A></H2>
+<A NAME="IDX309"></A>
+<P>Synatx: <TT>#pragma zeichen_sequenz</TT>
+<P><TT>pragma</TT> erm&ouml;glicht eine Einbindung von Anweisungen, die
+den Compiler in seinem &Uuml;bersetzungsvorgang beeinflussen. Diese
+Anweisungen sind von Compiler zu Compiler unterschiedlich.
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer15.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer17.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

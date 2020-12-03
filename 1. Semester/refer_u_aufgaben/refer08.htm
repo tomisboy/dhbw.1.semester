@@ -1,0 +1,699 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer07.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer09.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRFUNK" HREF="refer02.htm#ToC_73">4.0 &Uuml;bersicht &uuml;ber wichtige Funktionen</A></H1>
+<P>Im folgenden sollen einige Beispiele f&uuml;r wichtige Funktionen
+vorgestellt werden, die C bereits mitliefert.
+Bei diesen, bereits mitgelieferten Funktionen, handelt es sich um
+sogenannte <I>Standardbibliotheksfunktionen</I>.
+Standardbibliotheksfunktionen sind Funktionen, die C vordefiniert zur
+L&ouml;sung bestimmter Aufgaben zur Verf&uuml;gung stellt. Sie sind in den
+Definitionsdateien
+(auch Include- oder Headerdateien, Dateien mit
+der Erweiterung <TT>h</TT>)
+festgelegt. Einige Verwirrung kann dadurch entstehen, da&szlig;
+es so scheint, als handele es sich um einen Befehl. Dies
+ist leider nicht zu vermeiden, da C auf dem Prinzip der Teilung
+eines Problems in kleine L&ouml;sungsgruppen aufgebaut ist. Dies
+wurde so konsequent durchgehalten, da&szlig; auch die scheinbaren
+Befehle Funktionen darstellen, die aus einem kleinsten
+Grundbefehlssatz (den Schl&uuml;sselw&ouml;rtern, siehe <A HREF="refer06.htm#HDRKEY">2.3, "Schl&uuml;sselworte"</A>) zusammengesetzt sind und durch
+die Eingabe des scheinbaren Befehls nur die Definition der
+Standardbibliotheksfunktion aus der Definitionsdatei eingef&uuml;gt wird.
+Erst beim Linkvorgang wird der entsprechende Code eingebunden.
+<P>
+<HR><H2><A NAME="HDRPRF" HREF="refer02.htm#ToC_74">4.1 printf - formatierte Ausgabe auf dem Bildschirm</A></H2>
+<A NAME="IDX182"></A>
+<P>Die Funktion <TT>printf()</TT> dient zur formatierten Ausgabe von
+Daten jeglicher Art. Es ist z.B. m&ouml;glich, die Form, in der Zahlen
+ausgegeben werden zu beeinflussen.
+<P>Die Syntax von <TT>printf()</TT> lautet:
+<P>
+<STRONG>
+printf(const char <VAR>*format-string</VAR>, <VAR>argument-list</VAR>);
+</STRONG>
+<UL>
+<P><LI><TT>const char</TT> stellt eine Zeichenkonstante dar, die so
+ausgegeben wird, wie sie als Konstante vorliegt. Diese Konstante kann
+sogenannte Fluchtsymbolzeichen (s.u.) beinhalten. Soll das
+Prozentzeichen ausgegeben werden, mu&szlig; es doppelt (%%) in
+der Zeichenkonstante vorkommen, da es ansonsten einen
+Formatstring einleitet.
+<BR>
+<TT>*format string</TT> stellt die Formatspezifikation dar, die
+festlegt, in welchem Format das jeweilige Argument ausgegeben werden
+soll. Diese Formatstrings werden innerhalb der Zeichenkonstante
+verwendet.
+<P><LI>Die <TT>argument-list</TT> benennt die Variablen, die mit der
+Anweisung ausgegeben werden sollen. Die Zuordnung Formatstring zu
+Variable verl&auml;uft von links nach rechts. Das bedeutet, da&szlig; der zuerst
+auftauchende Formatstring dem ersten Datenelement der argument-list
+zugeordnet wird, der zweite Formatstring dem zweiten
+Datenelement u.s.w. Die einzelnen Datenelemente
+werden durch Kommata voneinander getrennt.
+</UL>
+<P>Beispiel:
+<PRE>
+           printf("Das %d. Ergebnis ist : %d\n", nummer, ergebnis);
+</PRE>
+<P><TT>Das Ergebnis ist &#58;</TT> stellt die
+Zeichenkonstante dar, die unver&auml;ndert ausgegeben wird.
+<P><TT>%d</TT> stellt den Formatstring
+dar, der sich aus dem Prozentzeichen (<TT>%</TT>) und
+dem Umwandlungszeichen <TT>d</TT> zusammensetzt.
+Das Prozentzeichen kennzeichnet den Beginn einer
+Formatspezifikation. Das <TT>d</TT> bedeutet, da&szlig; die hinter dem
+Komma stehende Variable als Integervariable
+interpretiert und da&szlig; der Wert der Variablen an der
+durch <TT>d</TT> bezeichneten Stelle ausgegeben werden soll.
+Der Formatstring kann noch weitere Zeichen enthalten, die weiter unten
+vorgestellt werden.
+<P>Dem ersten <TT>%d</TT> wird <TT>nummer</TT> zugeordnet, dem
+zweiten <TT>%d</TT> wird <TT>ergebnis</TT> zugeordnet.
+<P>Wenn Nummer den Wert 4 und Ergebnis den Wert 20 enth&auml;lt, sieht
+die Ausgabe wie folgt aus:
+<P>
+<PRE>
+Das 4. Ergebnis ist : 20
+</PRE>
+<P>Der Cursor steht nach der Ausgabe am Anfang der n&auml;chsten Zeile.
+<P>
+<P><H3><A NAME="HDRSPEZI" HREF="refer02.htm#ToC_75">4.1.1 Erl&auml;uterung des Formatstrings</A></H3>
+<A NAME="IDX184"></A>
+<P>
+<P>Die folgende Formatspezifikation stellt den Aufbau des
+Formatstrings dar.
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">printf() - Formatspezifikation</TH><TR><TD>
+<PRE>
+                                                                     
+>>--%--+---------+--+----------+--+----------------+--+---+--type--><
+       |         |  |          |  |                |  |-h-|          
+       +--flags--+  +--Breite--+  +--.Genauigkeit--+  |   |          
+                                                      |-L-|          
+                                                      |   |          
+                                                      +-l-+          
+</PRE>
+</TD></TR></TABLE>
+<P>Die Formatspezifikationen beginnen mit einem Prozentzeichen (%) und
+enden mit dem Umwandlungszeichen (<I>type</I>; z.B. d, s, c, f oder
+e). Dazwischen k&ouml;nnen folgende Zeichen angef&uuml;hrt werden:
+<OL TYPE=1>
+<P><LI>Folgende Steuerzeichen (<I>flags</I>) in beliebiger Reihenfolge
+<OL TYPE=a>
+<P><LI>'-': linksb&uuml;ndige Ausgabe des Datenelements
+<P><LI>'+': Zahlen werden immer mit Vorzeichen ausgegeben
+<P><LI>'0': leere Stellen im Ausgabefeld mit f&uuml;hrenden/angeh&auml;ngten Nullen
+f&uuml;llen
+</OL>
+<P><LI>eine Zahl, die die minimale Feldbreite festlegt (bei Bedarf
+wird die Feldbreite vergr&ouml;&szlig;ert)
+<P><LI>einen Punkt, der die Feldbreite von der Genauigkeit trennt und
+eine Zahl f&uuml;r die Genauigkeit mit folgender Bedeutung:
+<OL TYPE=a>
+<P><LI>maximale Anzahl von Zeichen f&uuml;r eine Zeichenkette
+<P><LI>Anzahl der Nachkommastellen f&uuml;r Flie&szlig;kommazahlen (z.B. 
+<TT>%.0lf</TT>
+<P><LI>die minimale Anzahl von Ziffern f&uuml;r Ganzzahlenwerte
+</OL>
+<P><LI>die Gr&ouml;&szlig;e des Argumentes
+<UL>
+<P><LI>h - Pr&auml;fix f&uuml;r die Integertypen (d, i, n, o, u, x und X),
+der festlegt, da&szlig; das Argument <TT>short int</TT> oder
+<TT>unsigned short int</TT> ist.
+<P><LI>l - Pr&auml;fix f&uuml;r die Typen d, i, n, o, u, x und X, der festlegt,
+da&szlig; das Argument <TT>long int</TT> oder
+<TT>unsigned long int</TT> ist. Dieser Pr&auml;fix kann ebenfalls
+bei den Typen e, f und g benutzt werden (<TT>double</TT> Typen).
+<P><LI>L - Pr&auml;fix f&uuml;r die Typen e, f und g, der festlegt, da&szlig; das
+Argument <TT>long double</TT> ist.
+</UL>
+<P><LI>Der <I>type</I> kann aus folgenden Zeichen bestehen:
+<DL>
+<P><DT>c
+<DD>f&uuml;r char
+<P><DT>d
+<DD>f&uuml;r signed int (dezimal)
+<P><DT>e
+<DD>f&uuml;r float-Variablen, allerdings wird der Wert in
+Exponentenschreibweise ausgegeben.
+<P><DT>E
+<DD>wie e, aber E f&uuml;r den Exponent statt e
+<P><DT>f
+<DD>f&uuml;r float-Variablen, Ausgabe in Festkommaschreibweise
+<P><DT>g
+<DD>f&uuml;r float-Variablen. Der Compiler entscheidet abh&auml;ngig
+von der L&auml;nge, ob Exponential- oder Festkommadarstellung gew&auml;hlt wird.
+<P><DT>G
+<DD>wie g, aber E f&uuml;r den Exponent statt e
+<P><DT>i
+<DD>f&uuml;r signed int (dezimal)
+<P><DT>n
+<DD>Nummer der Zeichen, die bis jetzt erfolgreich auf die Ausgabe
+geschrieben wurde.
+<P><DT>o
+<DD>f&uuml;r signed int (oktal)
+<P><DT>p
+<DD>f&uuml;r Zeigervariablen
+<P><DT>s
+<DD>f&uuml;r Zeichenketten (char-Felder)
+<P><DT>u
+<DD>f&uuml;r unsigned int (dezimal)
+<P><DT>x
+<DD>f&uuml;r unsigned int (hexadezimal, a-f)
+<P><DT>X
+<DD>f&uuml;r unsigned int (hexadezimal, A-F)
+</DL>
+</OL>
+<P>Die grunds&auml;tzliche Verwendungsweise soll mit Hilfe einiger Beispiele
+an einer Zeichenkette verdeutlicht werden, die Feldbreite der
+Zeichenkette betr&auml;gt 21 Zeichen:
+<TT>EIN-, AUSGABEFUNKTION</TT>
+<P>Die Beispiele sind folgenderma&szlig;en aufgebaut: Nummer des Beispiels,
+Formatstring, Ausgabe. Eine Beschreibung folgt in der jeweils n&auml;chsten
+Zeile. Leerzeichen, die ausgegeben werden, werden durch den
+Unterstrich (<TT>_</TT>) gekennzeichnet.
+<P>
+<PRE>
+(1)  %s            EIN-, AUSGABEFUNKTION
+</PRE>
+<P>Ist kein Feldformat verlangt, hat das Feld die Breite der
+Zeichenkettenkonstante.
+<P>
+<PRE>
+(2)  %21s          EIN-, AUSGABEFUNKTION
+</PRE>
+<P>
+<P>Die Feldbreite entspricht der L&auml;nge der Zeichenkonstante.
+<P>
+<P>
+<PRE>
+(3)  %-21s         EIN-, AUSGABEFUNKTION
+</PRE>
+<P>
+<P>Eine Linksausrichtung ist nicht m&ouml;glich, da die Feldbreite der
+L&auml;nge der Zeichenkettenkonstanten entspricht.
+<P>
+<P>
+<PRE>
+(4)  %15s          EIN-, AUSGABEFUNKTION
+</PRE>
+<P>
+<P>Die Feldbreite von 15 gibt nur den minimalen Wert der Feldbreite
+an.
+<P>
+<P>
+<PRE>
+(5)  %-15s         EIN-, AUSGABEFUNKTION
+</PRE>
+<P>Eine Linksausrichtung ist nicht m&ouml;glich.
+<P>
+<PRE>
+(6)  %25s          ____EIN-, AUSGABEFUNKTION
+</PRE>
+<P>Da die Feldbreite gr&ouml;&szlig;er als die L&auml;nge der
+Zeichenkettenkonstanten ist, wird diese rechtsb&uuml;ndig eingef&uuml;gt.
+<P>
+<PRE>
+(7)  %-25s         EIN-, AUSGABEFUNKTION____
+</PRE>
+<P>Linksausrichtung der Zeichenkettenkonstanten.
+<P>
+<PRE>
+(8)  %25.10s       _______________EIN-, AUSG
+</PRE>
+<P>In ein Feld mit 25 Elementen werden die ersten 10 Zeichen der
+Zeichenkettenkonstanten rechtsb&uuml;ndig ausgegeben.
+<P>
+<PRE>
+(9)  %-25.10s      EIN-, AUSG_______________
+</PRE>
+<P>10 Zeichen der Zeichenkettenkonstanten werden linksb&uuml;ndig
+ausgegeben.
+<P>
+<PRE>
+(10)  %-025.10s     EIN-, AUSG000000000000000
+</PRE>
+<P>Wie oben, allerdings werden Leerstellen mit Nullen aufgef&uuml;llt.
+<P>
+<PRE>
+(11)  %.10s         EIN-, AUSG
+</PRE>
+<P>Die Feldbreite entspricht der geforderten Zeichenanzahl.
+<P>
+<P><H3><A NAME="HDRFLUCHT" HREF="refer02.htm#ToC_76">4.1.2 Fluchtsymbolzeichen</A></H3>
+<A NAME="IDX185"></A>
+<P>In den obigen Beispielen ist mehrfach die Zeichenfolge
+<TT>\n</TT> aufgetreten. Sie
+ist eines von mehreren Fluchtsymbolzeichen,
+auch <I>Escape-Sequenz</I> genannt, die der
+Formatierung der Ausgabe dienen und aus einem Backslash
+(<TT>\</TT>) und einem nachfolgenden Buchstaben bestehen.
+M&ouml;gliche Zeichenfolgen sind:
+<DL>
+<P><DT>- \\
+<DD>gibt den Backslash aus
+<P><DT>- \'
+<DD>gibt das einfache Hochkomma (') aus
+<P><DT>- \"
+<DD>gibt die Anf&uuml;hrungszeichen bzw. das doppelte Hochkomma (") aus
+<A NAME="IDX186"></A>
+<P><DT>- \0
+<DD>Die bin&auml;re Null schlie&szlig;t eine Zeichenkette ab, wird von Funktionen
+zur Zeichenkettenbearbeitung automatisch generiert.
+<P><DT>- \a
+<DD><I>alarm</I>; gibt einen Warnton aus.
+<P><DT>- \b
+<DD><I>backspace</I>; bewegt den Cursor um eine Stelle nach links.
+<P><DT>- \f
+<DD><I>formfeed</I>; veranla&szlig;t einen Seitenvorschub, d.h. da&szlig; der
+nachfolgende Text auf einer neuen Seite ausgegeben wird.
+<A NAME="IDX187"></A>
+<P><DT>- \n
+<DD>markiert einen Zeilenvorschub (<I>new line</I>). Die
+nachfolgende Ein- oder Ausgabe wird in einer neuen Zeile begonnen.
+<A NAME="IDX188"></A>
+<P><DT>- \r
+<DD><I>carriage return</I>/Wagenr&uuml;cklauf; bewegt den Cursor in
+derselben Zeile an den Zeilenanfang.
+<P><DT>- \t
+<DD>setzt ein Tabulatorzeichen. Der folgende Text wird um einen
+definierten Wert, der in der Entwicklungsumgebung eingestellt
+wird, nach rechts verschoben.
+</DL>
+<DL>
+<P><DT><B>Anmerkung:
+</B><DD>Um die Zeichen  <TT>\</TT> und <TT>%</TT>
+darzustellen, werden sie doppelt eingegeben.
+<P><DT><B>Bsp:
+</B><DD><TT>printf("Wechsel in das directory \"C:\\OS2\\APPS\"
+verl&auml;uft ...");</TT> ergibt folgende Ausgabe: <TT>Wechsel
+in das directory "C:\OS2\APPS"</TT> verl&auml;uft...
+</DL>
+<P>
+<HR><H2><A NAME="Header_77" HREF="refer02.htm#ToC_77">4.2 scanf - formatiertes Lesen vom Standardeingabeger&auml;t</A></H2>
+<A NAME="IDX189"></A>
+<P>
+<STRONG>
+scanf(const char <VAR>*format-string</VAR>, <VAR>argument-list</VAR>);
+</STRONG>
+<P>Die Bedeutung der einzelnen Komponenten
+entspricht der von <TT>printf()</TT> (siehe oben).
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">scanf() - Formatspezifikation</TH><TR><TD>
+<PRE>
+                                             
+>>--%--+-----+--+----------+--+---+--type--><
+       |     |  |          |  |-h-|          
+       +--*--+  +--Breite--+  |   |          
+                              |-l-|          
+                              |   |          
+                              +-L-+          
+</PRE>
+</TD></TR></TABLE>
+<P>Der Aufbau soll anhand des folgenden Beispiels erl&auml;utert werden:
+<PRE>
+   Bsp.&#58; scanf("%d", &ergebnis);
+</PRE>
+<P><TT>%d</TT> bezeichnet wie bei der <TT>printf()</TT>-Funktion
+eine Formatspezifikation. Theoretisch gelten alle bei <TT>printf()</TT>
+angesprochenen Formatierungsm&ouml;glichkeiten auch f&uuml;r <TT>scanf()</TT>.
+Dem Benutzer sollte jedoch vor der Eingabe mitgeteilt werden, wieviele
+Zeichen und in welchem Format er die Zeichen eingeben soll.
+<P>Die einzigen Unterschiede liegen bei der Breite des Eingabefeldes,
+des optionalen Sterns (*) und
+den Typen <TT>X, E</TT> und <TT>G</TT>. Die Angabe der Breite bei
+<TT>printf()</TT> gibt die Mindestbreite des Ausgabefeldes
+an. Bei <TT>scanf()</TT> wird hier die maximale Breite des
+Eingabefeldes festgelegt.
+Der optionale Stern nach dem Prozentzeichen unterdr&uuml;ckt die
+Zuweisung des n&auml;chsten Eingabefeldes. Das Feld wird analysiert,
+aber nicht gespeichert.
+Die Typen <TT>X, E</TT> und <TT>G</TT>
+stehen bei <TT>scanf()</TT> nicht zur Verf&uuml;gung.
+<P><TT>&ergebnis</TT> ist zusammengesetzt aus
+<TT>&</TT> und der Variablen <TT>ergebnis</TT>,
+die den zu lesenden Wert aufnimmt. Das <TT>&</TT>-Zeichen
+markiert in C den Zugriff auf eine Adresse
+(siehe auch <A HREF="refer07.htm#HDRZEI">3.2.4, "Zeiger - Pointer"</A>). Die Argumente bei
+<TT>scanf()</TT> m&uuml;ssen Zeiger sein, da sonst die Werte der Variablen
+und nicht deren
+Adressen an <TT>scanf()</TT> &uuml;bergeben werden. Bezeichnern
+von Felder (siehe Abschnitt <A HREF="refer07.htm#HDRFELD">3.2.1, "Felder - Array - Vektoren"</A>) wird kein
+<TT>&</TT> vorangestellt, da sie stets einen Zeiger auf den
+eigentlichen Inhalt darstellen.
+<P>Beispiele
+<PRE>
+1)     int x;
+ 
+       scanf("%5d", &x);
+       Eingabe: 1234567
+</PRE>
+<P><TT>x</TT> bekommt nur die ersten f&uuml;nf Ziffern (12345)
+der Eingabe zugewiesen, da die Feldbreite nicht &uuml;berschritten werden
+darf. Die Ziffern 67 befinden sich jedoch noch im Eingabepuffer der
+Standardeingabe (stdin). Folgt der oben angegebenen Anweisung eine
+weitere, so wartet diese nicht eine erneute Eingabe ab, sondern
+nimmt lediglich das, was bereits im Eingabepuffer steht!
+<P>
+<PRE>
+2)     float zahl1=0.0, zahl2=0.0;
+ 
+       scanf("%5f+%5f", &zahl1, &zahl2);
+       1. Eingabe: 12345+6789
+       2. Eingabe: 123456+123456
+</PRE>
+<P>Die erste Eingabe weist den Variablen die entsprechenden Werte zu.
+Zu beachten ist, da&szlig; hierbei eine komplette Addition eingegeben wird
+und nicht mehrere Werte nacheinander. Diese Form erscheint zun&auml;chst
+sehr komfortabel, birgt aber einige Gefahren in sich. Bei der zweiten
+Eingabe werden lediglich die ersten f&uuml;nf Ziffern (12345) zugewiesen,
+da die Feldbreite nur f&uuml;nf Zeichen betr&auml;gt. Die Zahl 6, das
+Additionszeichen und die Zahlen 123456 befinden sich
+noch im Eingabepuffer. Der Variablen <TT>zahl2</TT> wird jedoch
+kein Wert zugewiesen, sie beh&auml;lt den Initialisierungswert Null.
+<P>
+<PRE>
+3)     char ch;
+ 
+       scanf("%c", &ch);
+       Eingabe: IBM
+</PRE>
+<P><TT>ch</TT> bekommt nur <TT>I</TT> &uuml;bergeben, da eine Variable
+des Typs <TT>char</TT> nur ein Zeichen aufnehmen kann.
+<P>
+<HR><H2><A NAME="Header_78" HREF="refer02.htm#ToC_78">4.3 Eingabe- und Ausgabepuffer leeren</A></H2>
+<A NAME="IDX190"></A>
+<A NAME="IDX191"></A>
+<P>Syntax: <TT>fflush(FILE *);</TT>
+<P>Die Funktion <TT>fflush()</TT> dient zum Leeren der
+Eingabe- bzw. Ausgabepuffer. Beim Leeren des Ausgabepuffers werden
+die noch enthaltenen Daten auf den Bildschirm geschrieben.
+<P>Eingabepuffer leeren:
+<PRE>
+fflush(stdin);
+</PRE>
+<P>Ausgabepuffer leeren:
+<PRE>
+fflush(stdout);
+</PRE>
+<P>Puffer einer Datei leeren:
+<PRE>
+fflush(FILE *);       /* Dateizeiger angeben, z.B. fflush(quelle); */
+</PRE>
+<P>Das Leeren des Ausgabepuffers empfiehlt sich vor jeder
+<TT>scanf()</TT> (oder vergleichbaren)
+Anweisung und das Leeren des Eingabepuffers
+empfiehlt sich nach jeder <TT>scanf()</TT>
+(oder vergleichbaren) Anweisung.
+<HR><H2><A NAME="Header_79" HREF="refer02.htm#ToC_79">4.4 Funktionen zur Bearbeitung von Zeichenketten</A></H2>
+<P>In diesem Abschnitt wird detailliert auf
+die Bearbeitung von Zeichenkettenkonstanten eingegangen.
+Am Ende dieses Abschnittes befindet sich eine
+&Uuml;bersicht &uuml;ber die gebr&auml;uchlichsten Funktionen zur
+Zeichenkettenmanipulation.
+<P>In einem Zeichenfeld soll die Zeichenkette
+<TT>Hallo</TT> gespeichert werden. Im Speicher
+ergibt sich dann folgendes Bild:
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">Element
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">3
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">4
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">5
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">Inhalt
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">H
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">a
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">l
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">l
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">o
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="14%">\0
+</TD></TR></TABLE>
+<P>Die bin&auml;re Null wird von der jeweiligen Zeichenkettenfunktion
+selbstt&auml;tig an das Ende der Zeichenkette gesetzt. Wird eine
+Zeichenkette manuell erzeugt, sollte die bin&auml;re Null aus
+Sicherheitsgr&uuml;nden manuell angef&uuml;gt werden.
+<P>
+<PRE>
+/********************************************************************/
+/* Programm: zeichen.c                                              */
+/* Autor   : Sascha Kliche, Daniel Wolkenhauer                      */
+/* Datum   : September 1994                                         */
+/* Beschreibung:                                                    */
+/* Dieses Programm verdeutlich die automatische Benutzung der       */
+/* bin&auml;ren Null und f&uuml;hrt in einzelne Zeichenkettenfunktionen       */
+/* ein.                                                             */
+/********************************************************************/
+ 
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;                                              (1)
+ 
+void main(void)
+{
+   /* Vereinbarungsteil der lokalen Variablen */
+   char satz[80];                                                (2)
+ 
+   /* Lesen der Zeichenkette */
+   printf("Bitte einen Satz eingeben!\n");
+   gets(satz);                                                   (3)
+ 
+   /* Ausgabe der Zeichenkette */
+   printf("%s\n", satz);
+ 
+   /* Ermitteln der L&auml;nge der Zeichenkette und L&auml;nge ausgeben */
+   printf("Der Satz beinhaltet %i Zeichen!\n", strlen(satz));    (4)
+   printf("satz[4] wird jetzt mit der bin&auml;ren Null gef&uuml;llt.");
+ 
+   /* Das f&uuml;nfte Element mit der bin&auml;ren Null f&uuml;llen. */
+   satz[4]='\0';                                                 (5)
+   printf("%s", satz);
+ 
+   /* Neue L&auml;nge der Zeichenkette ermitteln und ausgeben. */
+   printf("Der Satz besteht nun nur noch aus %i Zeichen!", strlen(satz));
+}
+</PRE>
+<P>(1) F&uuml;r einige der Zeichenketten-Funktionen wird eine eigene
+Standardbibliotheksdatei ben&ouml;tigt. Die entsprechende
+Definitionsdatei hat den Namen <TT>string.h</TT>.
+<P>(2) Die Anweisung <I>char satz[80]&#59;</I> reserviert
+Speicherplatz f&uuml;r 80 Zeichen. Bei der Arbeit mit Funktionen zur
+Zeichenkettenverarbeitung sollte jedoch bedacht werden, da&szlig; diese
+automatisch
+die bin&auml;re Null an das Ende der Zeichenkette anh&auml;ngen. Soll eine
+Zeichenkette mit 80 Zeichen mit Funktionen zur
+Zeichenkettenverarbeitung
+bearbeitet werden, mu&szlig; die Deklaration <TT>char satz[81];</TT>
+lauten.
+<P>(3) Die Funktion <TT>gets()</TT> liest Zeichenketten
+von der Standardeingabe (Tastatur) in das innerhalb der Klammern
+angegebene
+char-Feld. Zus&auml;tzlich setzt es bei Eingabe von <B>ENTER</B>
+automatisch die bin&auml;re Null an das Ende der Zeichenkette.
+<P>(4) Mit Hilfe der Funktion <TT>strlen()</TT> ist es m&ouml;glich, die
+L&auml;nge einer Zeichenkette zu ermitteln. Dabei werden alle Zeichen
+einschlie&szlig;lich der Leerzeichen exklusive der bin&auml;ren Null gez&auml;hlt.
+<P>(5) Durch das F&uuml;llen des f&uuml;nften Elementes mit der bin&auml;ren Null
+wird das Ende der Zeichenkette verlegt. S&auml;mtliche Zeichen hinter dem
+f&uuml;nften Element werden nicht mehr ausgegeben.
+<P>
+<P><H3><A NAME="Header_80" HREF="refer02.htm#ToC_80">4.4.1 Die Funktionen strcpy() und strcat()</A></H3>
+<P>Die Funktionen <TT>strcpy()</TT> und <TT>strcat()</TT> dienen
+zum Kopieren von Zeichenketten in andere Zeichenketten.
+<TT>strcpy()</TT> kopiert Zeichenketten immer an den Anfang von
+Zeichenketten und <TT>strcat()</TT> h&auml;ngt Zeichenketten
+an das Ende anderer Zeichenketten an.
+<P>Die Syntax von <TT>strcpy()</TT> lautet:
+<P>
+<STRONG>
+char *strcpy(char <VAR>*zeichenkette1</VAR>, const char
+<VAR>*zeichenkette2</VAR>);
+</STRONG>
+<P>
+<A NAME="IDX192"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">strcpy()</TH><TR><TD>
+<PRE>
+                                                     
+>>--strcpy--(--zeichenkette1, zeichenkette2--)--&#59;--><
+</PRE>
+</TD></TR></TABLE>
+<P><TT>zeichenkette2</TT> wird in
+<TT>zeichenkette1</TT> kopiert.
+Nach der Anweisung <TT>strcpy(satz, "Sahne");</TT>
+hat der reservierte Platz im Speicher folgendes Aussehen
+(vorausgesetzt,
+die Vereinbarung hatte die Form: <TT>char satz[9]</TT>):
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="18%">Element
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">3
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">4
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">5
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">6
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">7
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">8
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="18%">Inhalt
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">S
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">a
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">h
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">n
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">e
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">\0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">
+<BR></TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">
+<BR></TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">
+<BR></TD></TR></TABLE>
+<P>Die Funktion <TT>strcpy()</TT> h&auml;ngt die bin&auml;re Null automatisch
+an das Ende der Zeichenkette an.
+<P>Um an <TT>zeichenkette1</TT> die Zeichenkette <TT>eis</TT>
+anzuh&auml;ngen, wird die Funktion <TT>strcat</TT> benutzt, die folgende
+Syntax hat:
+<P>
+<STRONG>
+char *strcat(char <VAR>*zeichenkette1</VAR>, const char
+<VAR>*zeichenkette2</VAR>);
+</STRONG>
+<P>
+<A NAME="IDX193"></A>
+<TABLE BORDER WIDTH="100%"><TR><TH ALIGN="LEFT">strcat()</TH><TR><TD>
+<PRE>
+                                                     
+>>--strcat--(--zeichenkette1, zeichenkette2--)--&#59;--><
+</PRE>
+</TD></TR></TABLE>
+<P>Das Ergebnis von
+<P>
+<PRE>
+   strcat(satz, "eis");
+</PRE>
+<P>hat folgende Auswirkung:
+<BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="18%">Element
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">3
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">4
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">5
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">6
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">7
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">8
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="18%">Inhalt
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">S
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">a
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">h
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">n
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">e
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">e
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">i
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">s
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="9%">\0
+</TD></TR></TABLE>
+<P>Mit dem ersten Zeichen des anzuh&auml;ngenden Textes wird die bin&auml;re Null
+&uuml;berschrieben und an das neue Ende gesetzt. Die gleiche Anweisung
+mit <TT>strcpy()</TT> h&auml;tte die ersten vier
+Speicherstellen durch
+<TT>eis\0</TT> ersetzt. Die Speicherstellen f&uuml;nf bis
+neun behalten ihren Wert, werden jedoch von vielen Funktionen nicht
+mehr beachtet, da eine bin&auml;re Null davor steht.
+<P>Wird dem Feld ein Wert zugewiesen, der l&auml;nger als der reservierte
+Speicherplatz ist, so werden
+diese &uuml;berz&auml;hligen Zeichen nicht abgeschnitten, sondern in den
+angrenzenden Speicherbereich geschrieben, so da&szlig; dort andere
+Variablenwerte verloren gehen k&ouml;nnen.
+Der C-Compiler pr&uuml;ft nicht auf ausreichende L&auml;nge der Variable!
+Der Programmierer mu&szlig; daf&uuml;r sorgen, da&szlig; der reservierte
+Speicherbereich gro&szlig; genug f&uuml;r die Aufnahme der Zeichenkette ist,
+anderenfalls kann es zu unvorhergesehenen Fehlern bis hin zu
+Programmabst&uuml;rzen kommen.
+<P><H3><A NAME="Header_81" HREF="refer02.htm#ToC_81">4.4.2 Auswahl h&auml;ufig benutzter Funktionen zur Zeichenkettenbearbeitung</A></H3>
+<P>Die Programmiersprache C bietet in ihren Standardbibliotheken
+verschiedene Funktionen zur Manipulation von Zeichen(ketten) an
+(Auswahl):
+<DL>
+<P><DT><B> C-Funktion</B>
+<DD><B> Erkl&auml;rung</B>
+<A NAME="IDX194"></A>
+<P><DT><TT>tolower (zeichen)</TT>
+<DD>Wandelt <TT>zeichen</TT> in einen Kleinbuchstaben
+um, wenn es ein Gro&szlig;buchstabe ist. Ansonsten wird der
+Kleinbuchstabe unver&auml;ndert zur&uuml;ckgeliefert. (Definitionsdatei:
+<TT>ctype.h</TT>)
+<PRE>
+char klein = 0;
+klein = tolower ('A');
+</PRE>
+<A NAME="IDX195"></A>
+<P><DT><TT>toupper (zeichen)</TT>
+<DD>Wandelt <TT>zeichen</TT> in einen Gro&szlig;buchstaben um, wenn es
+sich um einen Kleinbuchstaben handelt. Ansonsten wird der Gro&szlig;buchstabe
+unver&auml;ndert zur&uuml;ckgeliefert. (Definitionsdatei: <TT>ctype.h</TT>)
+<PRE>
+char gross = 0;
+gross = toupper ('a');
+</PRE>
+<A NAME="IDX196"></A>
+<P><DT><TT>strcat (kette1, kette2)</TT>
+<DD>Kopiert die Zeichenkette <TT>kette2</TT> an das Ende der
+Zeichenkette <TT>kette1</TT>, &uuml;berschreibt dabei die bin&auml;re Null und
+setzt sie an das neue Ende. <TT>strcat</TT> geht davon aus, da&szlig; in
+<TT>kette1</TT> gen&uuml;gend Platz vorhanden ist. Die Funktion liefert
+einen Zeiger auf den Anfang der Gesamtkette als Ergebnis zur&uuml;ck.
+(Definitionsdatei: <TT>string.h</TT>)
+<A NAME="IDX197"></A>
+<P><DT><TT>strncat (kette1, kette2, n)</TT>
+<DD>Kopiert n Zeichen von <TT>kette2</TT> an
+das Ende von <TT>kette1</TT>.
+(Definitionsdatei: <TT>string.h</TT>)
+<A NAME="IDX198"></A>
+<P><DT><TT>strcmp (kette1, kette2)</TT>
+<DD>Vergleicht <TT>kette1</TT> und <TT>kette2</TT>
+byteweise. Es wird ein positiver Wert zur&uuml;ckgeliefert, wenn
+<TT>kette1</TT> gr&ouml;&szlig;er ist als <TT>kette2</TT>,
+ein negativer, wenn sie kleiner ist und Null, wenn sie identisch
+sind. Siehe auch stricmp und strnicmp.
+(Definitionsdatei: <TT>string.h</TT>)
+<A NAME="IDX199"></A>
+<P><DT><TT>strncmp(kette1, kette2, n)</TT>
+<DD>Vergleicht nur n Zeichen in <TT>kette1</TT>
+und <TT>kette2</TT>. Die Bedeutung der R&uuml;ckgabewerte ist identisch
+mit denen von <TT>strcmp</TT>.
+(Definitionsdatei: <TT>string.h</TT>)
+<A NAME="IDX200"></A>
+<P><DT><TT>strlen (kette)</TT>
+<DD>Liefert als R&uuml;ckgabewert die L&auml;nge der Zeichenkette <TT>kette</TT>
+zur&uuml;ck, ohne die bin&auml;re Null mitzuz&auml;hlen.
+(Definitionsdatei: <TT>string.h</TT>)
+<PRE>
+length = strlen(string);
+</PRE>
+<A NAME="IDX201"></A>
+<P><DT><TT>strcpy (kette1, kette2)</TT>
+<DD>Kopiert <TT>kette2</TT> in <TT>kette1</TT>.
+(Definitionsdatei: <TT>string.h</TT>)
+</DL>
+<P>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer07.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer09.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

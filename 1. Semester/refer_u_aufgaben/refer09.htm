@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer08.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer10.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDROWN" HREF="refer02.htm#ToC_82">5.0 Eigene Funktionen</A></H1>
+<A NAME="IDX202"></A>
+<P>Es wurde bereits erw&auml;hnt, da&szlig; Funktionen eigenst&auml;ndig eine definierte
+Aufgabe ausf&uuml;hren und dann die Kontrolle wieder an die
+aufrufende Funktion zur&uuml;ckgeben. Sie sind somit sehr n&uuml;tzlich,
+wenn es darum geht, eine Aufgabe mehrmals innerhalb eines oder
+verschiedener Programme zu erledigen.
+<P>Die Programmierung einer eigenen Funktion wird anhand einer Funktion
+zur Berechnung der Fakult&auml;t dargestellt.
+Der verwendete C-Compiler bietet unter Umst&auml;nden
+keine Funktion zur Berechnung der Fakult&auml;t.
+Diese Berechnung wird jedoch h&auml;ufig ben&ouml;tigt. Die einfachste
+M&ouml;glichkeit besteht nun darin, eine eigene Funktion zu
+formulieren und die L&ouml;sung des Problems somit auszulagern.
+<P>
+<HR><H2><A NAME="Header_83" HREF="refer02.htm#ToC_83">5.1 Definition eigener Funktionen</A></H2>
+<P>Bei der Definition von eigenen Funktionen ist auf den
+G&uuml;ltigkeitsbereich der Variablen zu achten. Siehe dazu auch
+Speicherklassen im Abschnitt <A HREF="refer07.htm#HDRCLASSES">3.6, "Speicherklassen"</A>.
+<P>Eine Funktion besteht aus dem <I>Funktionskopf</I> und dem
+<I>Funktionsrumpf</I>. Der Funktionskopf beinhaltet Informationen
+&uuml;ber den Namen der Funktion, den Typ des R&uuml;ckgabewertes und die
+Parameter, die an die Funktion &uuml;bergeben werden sollen. Der
+Funktionsrumpf beinhaltet die Deklaration lokaler Variablen (optional),
+die Anweisungen, die die Funktion ausf&uuml;hren soll, und die Anweisung zur
+Beendigung der Funktion, die die R&uuml;ckgabevariable enth&auml;lt (optional).
+<P>Ein Beispiel:
+<P>
+<PRE>
+   int fakultaet (int n)         /* Funktionskopf                 */
+   {                             /* Beginn Funktionsrumpf         */
+      int i=0, produkt=1;        /* Deklaration der lokalen Var.  */
+ 
+      for (i=1; i &lt;= n; ++i)
+      produkt *= i;              /* entspricht: produkt=produkt*i */
+      return(produkt);           /* Funktion beenden und den      */
+                                 /* R&uuml;ckgabewert zur&uuml;ckgeben      */
+   }                             /* Ende Funktionsrumpf           */
+</PRE>
+<P><TT>int fakultaet</TT> vereinbart den Typ des Resultats, das von
+der Funktion an die aufrufende Funktion zur&uuml;ckgegeben wird, und den
+Namen der Funktion. Wird kein Resultat zur&uuml;ckgegeben, mu&szlig; vor dem
+Funktionsnamen <TT>void</TT> stehen.
+<P><TT>(int n)</TT> stellt die Parameterliste dar.
+Die Parameterliste beschreibt diejenigen Variablen, die von der
+aufrufenden Funktion an die Funktion <TT>fakultaet</TT> &uuml;bergeben
+werden sollen. Der Funktion <TT>fakultaet</TT> wird
+ein Argument vom Typ <TT>int</TT> beim Aufruf mitgegeben.
+Mehrere Parameter werden durch Kommata getrennt.
+<P>W&uuml;rde es sich um eine Funktion handeln, die keine Variablen &uuml;bergeben
+bekommt, m&uuml;&szlig;te in den Klammern <TT>void</TT> stehen. Dies w&uuml;rde
+bedeuten, da&szlig; die Paramaterliste leer ist.
+<A NAME="IDX203"></A>
+<P>Mit <TT>return(produkt);</TT> wird die Funktion beendet und das
+Resultat  <TT>produkt</TT>  an die aufrufende Funktion zur&uuml;ckgegeben.
+<P>Ein m&ouml;glicher Aufruf w&auml;re:
+<P>
+<PRE>
+fak = fakultaet(7);
+</PRE>
+<P>Das Resultat des Funktionsaufrufes <TT>fakultaet(7)</TT> wird
+durch das Schl&uuml;sselwort <TT>return</TT> an die aufrufende Funktion
+zur&uuml;ckgegeben und dabei der Variablen <TT>fak</TT> zugewiesen.
+<P>Folgt dem Schl&uuml;sselwort <TT>return</TT> kein geklammerter Ausdruck,
+so wird die Funktion beendet und kein Wert zur&uuml;ckgegeben.
+<P>Ein weiteres Beispiel soll die Verwendung des Schl&uuml;sselwortes
+<TT>void</TT> verdeutlichen:
+<P>
+<PRE>
+   void copyright (void)
+ 
+   {
+      printf("%s\n,%s\n,%s\n,%s\n,%s\n",
+      " /***************************************/",
+      " /* Copyright by    DaKliSaWo           */",
+      " /* BAB Hannover    IBM intern          */",
+      " /* (c) 1994                            */",
+      " /***************************************/");
+   }
+</PRE>
+<P>Das erste <TT>void</TT> legt fest, da&szlig; die Funktion
+<TT>copyright</TT> kein Resultat an die aufrufende Funktion zur&uuml;ckgibt.
+Da&szlig; die Funktion keine Argumente erwartet, wird durch das zweite
+<TT>void</TT> in der Parameterliste festgelegt. Der Aufruf lautet:
+<P>
+<PRE>
+   copyright();
+</PRE>
+<P>
+<HR><H2><A NAME="Header_84" HREF="refer02.htm#ToC_84">5.2 Call by value und call by reference</A></H2>
+<A NAME="IDX205"></A>
+<A NAME="IDX206"></A>
+<P>Bei Funktionen unterscheidet man "call by value" Funktionen
+und "call by reference" Funktionen. Die oben vorgestellte
+Funktion <TT>fakultaet</TT> ist eine "call by value"
+Funktion, da an sie der Wert einer Variablen &uuml;bergeben wird.
+Eine "call by reference" Funktion erwartet nicht den Wert
+einer Variablen, sondern deren Adresse in Form eines Zeigers.
+In diesem Fall wird der Wert der Variablen nicht ein zweites
+Mal im Speicher abgelegt und mit dieser Kopie gearbeitet, sondern
+es wird direkt mit dem Original gearbeitet.
+<P>Beispiel f&uuml;r "call by value":
+<PRE>
+int add(int, int);
+ 
+void main(void)
+{
+   int a=3, b=7, ergebnis;
+ 
+   ergebnis = add(a,b);
+   printf("Ergebnis von %d + %d = %d\n",a,b,ergebnis);
+}
+ 
+int add(int x, int y)
+{
+   int ergebnis;
+ 
+   ergebnis = x + y;
+   return(ergebnis);
+}
+</PRE>
+<P>Beispiel f&uuml;r "call by reference" mit R&uuml;ckgabewert per
+<TT>return</TT>:
+<PRE>
+int add(int *, int *);
+ 
+void main(void)
+{
+   int a=3, b=7, ergebnis;
+ 
+   ergebnis = add(&a, &b);
+   printf("Ergebnis von %d + %d = %d\n",a,b,ergebnis);
+}
+ 
+int add(int *x, int *y)
+{
+   int ergebnis;
+ 
+   ergebnis = *x + *y;
+   return(ergebnis);
+}
+</PRE>
+<P>Beispiel f&uuml;r "call by reference" mit R&uuml;ckgabewert per
+Zeiger:
+<PRE>
+void add(int *, int *, int *);
+ 
+void main(void)
+{
+   int a=3, b=7, ergebnis;
+ 
+   add(&a, &b, &ergebnis);
+   printf("Ergebnis von %d + %d = %d\n",a,b,ergebnis);
+}
+ 
+void add(int *x, int *y, int *ergebnis)
+{
+   *ergebnis = *x + *y;
+}
+</PRE>
+<HR><H2><A NAME="Header_85" HREF="refer02.htm#ToC_85">5.3 Prototypen</A></H2>
+<A NAME="IDX208"></A>
+<P>Bei der Definition von Funktionen ist darauf zu achten,
+wo man sie im Quelltext
+definiert. Funktionen, die man vor dem Ort ihres Aufrufes definiert,
+bereiten keine Probleme. Der Compiler, der den Quelltext von oben
+nach unten durchgeht, hat zum Zeitpunkt des Aufrufes die
+Funktionsdefinition bereits analysiert und wei&szlig;, welchen Typ der
+R&uuml;ckgabewert der Funktion hat und wieviele Parameter welchen Typs
+in welcher Reihenfolge von dieser Funktion erwartet werden.
+<P>Wird die Funktion erst nach ihrem ersten Aufruf definiert, so
+nimmt der Compiler an, da&szlig; ihr R&uuml;ckgabewert vom Typ <TT>int</TT>
+ist. Ist in der Definition ein anderer Typ angegeben, so l&auml;uft das
+Programm sp&auml;testens beim Linker auf einen Fehler (z.B. auf einen
+<I>redefinition error</I>). Wie dieses Problem, da&szlig; auch auftritt,
+wenn Funktionen sich gegenseitig aufrufen, umgangen werden kann, wird
+im folgenden erl&auml;utert.
+<P>Um Funktionen nach dem Ort ihres ersten Aufrufes definieren zu
+k&ouml;nnen, bietet C die M&ouml;glichkeit der Prototypen. Prototypen stellen
+eine Vorgehensweise dar, wie dem Compiler zu Beginn des Quelltextes
+mitgeteilt werden kann, welche Funktionen in einem Programm vorkommen,
+welchen Typs ihre R&uuml;ckgabewerte sind, welche Parameter sie erwarten
+und welchen Namen diese Funktionen haben. Dies erm&ouml;glicht dem
+Compiler, die korrekte Verwendung der Funktionen in einem Programm
+zu &uuml;berpr&uuml;fen. Die Prototypen sollten direkt nach den
+Preprocessoranweisungen folgen.
+<P>Folgendes Beispiel demonstriert den Einsatz von Prototypen:
+<P>
+<PRE>
+/*****************************************************************
+ *  proto.c                                                      *
+ *  demonstriert den einsatz von prototypen                      *
+ *****************************************************************/
+ 
+#include &lt;stdio.h&gt;
+ 
+double berechnung(double, double);              /*   Prototyp    */
+ 
+void main(void)
+{
+     double a1=0.0, a2=0.0;
+ 
+     a1=3.14;
+     a2=218;
+ 
+     printf("\nErgebnis = %lf", berechnung(a1,a2));
+}
+ 
+double berechnung(double a1, double a2)
+{
+   return(a1 * a2);
+}
+</PRE>
+<P>In dem obigen Beispiel wird ein Prototyp f&uuml;r die Funktion
+<TT>berechnung</TT> eingef&uuml;hrt. Der Prototyp enth&auml;lt folgende
+Elemente:
+<OL TYPE=1>
+<P><LI>den Typ des R&uuml;ckgabewertes,
+<P><LI>den Namen der Funktion,
+<P><LI>die Typen der Parameter, die die Funktion erwartet, in Klammern und
+<P><LI>ein abschlie&szlig;endes Semikolon.
+</OL>
+<P>Die generelle Verwendung von Prototypen f&uuml;r s&auml;mtliche Funktionen
+in jedem Programm empfiehlt sich aus mehreren Gr&uuml;nden:
+<UL>
+<P><LI>Die Prototypen nehmen wenig Platz ein. In Verbindung mit einem
+Kommentar erm&ouml;glicht eine Reihe von Prototypen eine n&uuml;tzliche
+&Uuml;bersicht &uuml;ber die einzelnen Funktionen, ihren Sinn, den Typ ihres
+R&uuml;ckgabewertes und ihre Parameter in einem Programm. Der Reihe der
+kommentierten Prototypen kann die Funktion <TT>main()</TT> folgen,
+was das Programm sehr &uuml;bersichtlich und leicht lesbar macht. Die
+eigentliche Funktionsdefinition kann im Anschlu&szlig; erfolgen.
+<P><LI>Funktionen k&ouml;nnen nach ihrem ersten Aufruf definiert werden und
+sind dabei nicht auf den Typ <TT>int</TT> f&uuml;r den R&uuml;ckgabewert
+beschr&auml;nkt.
+<P><LI>Funktionen k&ouml;nnen sich gegenseitig aufrufen.
+</UL>
+<P>Die oben genannten Vorteile stellen die wichtigsten Gr&uuml;nde f&uuml;r
+die Verwendung von Prototypen dar. Die Verwendung ist jedoch nicht
+zwingend, s&auml;mtliche Funktionen k&ouml;nnen ohne Prototypen definiert
+werden.
+<HR><H2><A NAME="Header_86" HREF="refer02.htm#ToC_86">5.4 Variable Anzahl an Parametern beim Funktionsaufruf</A></H2>
+<A NAME="IDX210"></A>
+<P>Die bisher vorgestellten M&ouml;glichkeiten sind auf Funktionen mit
+einer fest definierten Anzahl an Parametern begrenzt. Funktionen
+wie <TT>printf</TT> bieten jedoch die M&ouml;glichkeit, sie mit einer
+variablen Anzahl an Parametern aufzurufen:
+<PRE>
+printf("\nAufruf mit einem Parameter.\n");
+printf("\nAufruf mit %d Parametern.\n",2);
+printf("\n%d. Aufruf mit %s Parametern.\n",anzahl,typ);
+</PRE>
+<P>Das folgende Beispiel demonstriert die grunds&auml;tzliche
+Vorgehensweise anhand der Funktion <TT>name</TT>, die
+als Parameter einen Integerwert und eine unbestimmte Anzahl
+an Zeichenketten entgegennimmt.
+<PRE>
+/*
+   Bearbeitung einer unbestimmten Anzahl Parameter, die bei
+   einem Funktionsaufruf angegeben werden.
+*/
+ 
+#include &lt;stdarg.h&gt;
+ 
+int name(int i, ...)
+{
+<A NAME="IDX211"></A>
+  va_list arg_ptr;
+  char *zeichenkette;
+ 
+  /* arg_ptr f&uuml;r Zugriffe durch va_arg und va_end initialisieren */
+  /* i ist der letzte benannte Parameter vor ... und in diesem   */
+  /* Fall der einzige Parameter, der angegeben werden mu&szlig;.       */
+<A NAME="IDX212"></A>
+  va_start(arg_ptr, i);
+ 
+  /* solange einen Parameter holen und in Zeichenkette ablegen, */
+  /* bis keine Parameter mehr vorhanden sind                    */
+<A NAME="IDX213"></A>
+  while((zeichenkette=va_arg(arg_ptr, char*))!='\0')
+  {
+       printf("%s",zeichenkette);
+       i++;
+  }
+ 
+  fflush(stdout);
+ 
+  /* parameter scanning beenden */
+<A NAME="IDX214"></A>
+  va_end(arg_ptr);
+ 
+  return i;
+}
+ 
+void main(void)
+{
+  int i=0;
+ 
+  i=name(200,"Hallo",", dies"," ist ein ","Test.");
+}
+</PRE>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer08.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer10.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

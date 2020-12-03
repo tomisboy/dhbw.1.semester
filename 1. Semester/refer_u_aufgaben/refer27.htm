@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer26.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer28.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="Header_160" HREF="refer18.htm#PToC_160">Anhang I. Bedienung der Compiler Tools</A></H1>
+<A NAME="IDX337"></A>
+<A NAME="IDX338"></A>
+<A NAME="IDX339"></A>
+<A NAME="IDX340"></A>
+<P>Die folgenden Abschnitte enthalten eine Auswahl der
+Kommandozeilenschalter des Compilers
+ICC und der Linker LINK386 und ILINK.
+<HR><H2><A NAME="Header_161" HREF="refer02.htm#ToC_161">I.1 Compiler</A></H2>
+<PRE>
+ICC xyz.c                // compilieren und linken
+ICC xyz.c abc.obj        // compilieren, linken und abc.obj linken
+ICC /c xyz.c             // nur compilieren
+ICC /?                   // Hilfe
+ICC /Fc+                 // nur Syntax Check
+ICC /Ti+                 // Debug information generieren
+ICC /Wall+               // s&auml;mtliche Warnings ausgeben, die m&ouml;glich sind
+ICC /Wgrp                // bestimmte Gruppen von Warnings ausgeben (siehe
+                         // Onlinehilfe)
+ICC /Sa                  // ANSI konform
+ICC /Ss                  // C++ (//) Kommentare erlauben
+ 
+ICC /Gd+                 // dynamische Runtime Library (DLL ben&ouml;tigt)
+ICC /Ge-                 // DLL anstatt EXE erzeugen
+ICC /Gm+                 // Multithreading Libraries
+ICC /Gn+                 // keine Default Libraries im Objektfile
+</PRE>
+<HR><H2><A NAME="Header_162" HREF="refer02.htm#ToC_162">I.2 Linker</A></H2>
+<P>LINK386
+<PRE>
+LINK386 /?                             // Parameter anzeigen
+LINK386 abc.obj;                       // objektfile linken
+LINK386 /PMTYPE&#58;windowcompat xyz.obj   // Programmtyp:
+                                       // OS/2 window compatible
+LINK386 abc+cursor, , MAIN;            // abc.obj und cursor.obj linken und
+                                       // EXE mit dem Namen MAIN.EXE erzeugen
+</PRE>
+<P>ILINK (Visual Age C<TT>++</TT>,
+IBM C and C<TT>++</TT> compilers 3.6)
+<PRE>
+ILINK /PMTYPE&#58;PM abc.obj abc.def       // Objektfile als PM Anwendung linken
+ 
+</PRE>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer26.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer28.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

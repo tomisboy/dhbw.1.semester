@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\aufgabe.scr converted by B2h R4.3 (362)        -->
+<!-- (WIN95) on 23 Feb 2000 at 14:32:42                               -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 14:32:18">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 14:32:18">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 14:32:18">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="aufgab02.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab04.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRBM24" HREF="aufgab02.htm#ToC_2">1.0 &Uuml;bungen zu Variablendeklarationen, Rechnen und printf()/scanf()</A></H1>
+<P>
+<OL TYPE=1>
+<P><LI>Aufgabe
+<P>Welche der nachstehenden Variablendeklarationen sind korrekt?
+<PRE>
+   int a = 2,34;
+   char c = 'd";
+   int d = 's';
+   float fl&auml;che = 12.98;
+   float value = 123.445;
+   int gross = 12345678900000;
+</PRE>
+<P><LI>Aufgabe
+<P>Welche der nachstehenden Zuweisungen sind falsch?
+<PRE>
+a) summe = summe + 12;
+b) a*a = a*5;
+c) 4g = erde + mond;
+d) erg = user + old_wert * 2;
+e) pro = betrag * 1.13;
+</PRE>
+<P><LI>Aufgabe
+<P>Das folgende Programm enth&auml;lt Fehler! Korrigieren Sie es und
+testen Sie es daraufhin auf Lauff&auml;higkeit.
+<PRE>
+*/ Fehlerprogramm /*
+#include &lt;stdio.h&gt;
+ 
+void main(void);
+{
+  int zahl1;
+  int zahl2;
+ 
+  printf("Dieser Text); printf("soll einmal auf dem Bildschirm");
+  printf("erscheinen, wenn die Fehler"\n);
+  printf("bereinigt sind!!!!"),
+  zahl1 == 0;
+  zahl2 == 3;
+ 
+  printf("zahl1 + zahl2 = %d", zahl1 + zahl2);
+)
+</PRE>
+<P><LI>Aufgabe
+<P>Welches Ergebnis liefert das folgende Programm?
+<PRE>
+#include &lt;stdio.h&gt;
+ 
+   void main(void)
+   {
+      printf("4 + 6 / 2 = %d\n", 4+6/2);
+   }
+</PRE>
+<P><LI>Aufgabe
+<P>Welche Ergebnisse liefert das folgende Programm?
+<PRE>
+#include &lt;stdio.h&gt;
+ 
+   void main(void)
+   {
+      int i=0, j=3, k=7;
+ 
+      i = k / j;
+      printf("I = %d", i);
+      i = k % j;
+      printf("I = %d", i);
+   }
+</PRE>
+<P><LI>Aufgabe
+<P>Warum liefert das nachstehende Programm unter Umst&auml;nden ein falsches
+Ergebnis?
+<PRE>
+#include &lt;stdio.h&gt;
+ 
+void main(void)
+{
+   double summe, zahl;
+ 
+   zahl = 10;
+   summe = summe + zahl;
+   summe = summe + zahl;
+   printf("Ergebnis&#58; %lf", summe);
+}
+</PRE>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein C-Programm, das folgenden Text auf dem Bildschirm
+ausgibt&#58;
+<PRE>
+M&ouml;gen
+t&auml;ten wir schon wollen,
+aber K&ouml;nnen
+haben wir uns nicht getraut!
+</PRE>
+<P>Hinweis&#58; Verwenden Sie das NewLine-Zeichen (\n) an den geeigneten
+Stellen.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, in dem die beiden Gleitkommavariablen
+"komma" und "punkt" vereinbart werden. Von der Tastatur
+sollen Ihnen zwei
+Werte zugewiesen und diese danach addiert werden. Die Summe beider Zahlen
+ist auf dem Bildschirm auszugeben.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das den durchschnittlichen Verbrauch
+eines Autos auf 100km errechnet. Die getankten Liter und die gefahrenen
+Kilometer sollen eingegeben werden k&ouml;nnen.
+<P><LI>Aufgabe
+<P>Ein Kondomhersteller verpackt jeweils 111 Kondome pro Karton.
+Schreiben Sie ein Programm, das die Anzahl der hergestellten Kondome
+pro Tag einliest und die Anzahl der ben&ouml;tigten Kartons ausgibt.
+Dabei soll die Zahl der &uuml;brig gebliebenen Kondome, die keinen ganzen
+Karton mehr f&uuml;llen, ebenfalls ausgegeben werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das den Namen des Benutzers und vier seiner
+letzten Noten einliest. Es soll der Notendurchschnitt mit dem Namen
+wieder ausgegeben werden. Kommentieren Sie das Programm
+ausreichend und gestalten Sie die Ausgaben auf dem Bildschirm m&ouml;glichst
+benutzerfreundlich.
+<P><LI>Aufgabe
+<P>&Auml;ndern Sie das folgende Programm derart, da&szlig; die
+Nachkommastellen nicht ausgegeben werden.
+<PRE>
+#include &lt;stdio.h&gt;
+ 
+void main(void)
+{
+  double schlaege, alter;
+ 
+  printf("Herzschl&auml;ge pro Minute: ");
+  fflush(stdout);
+  scanf("%lf",&amp;schlaege);
+  printf("Alter in Jahren: ");
+  fflush(stdout);
+  scanf("%lf",&amp;alter);
+  printf("Ihr Herz hat seit Ihrer Geburt \
+%f mal geschlagen.",schlaege*60*24*365.25*alter);
+}
+</PRE>
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, das eine printf()-Anweisung enth&auml;lt,
+die drei Integer-Werte in Spalten mit einer Breite von 10, 15 und
+20 Zeichen hintereinander in einer Zeile ausgibt.
+</OL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="aufgab02.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab04.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

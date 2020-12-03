@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer04.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer06.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDREINLEIT" HREF="refer02.htm#ToC_4">1.0 Einleitung</A></H1>
+<P>Dieses Handbuch bietet eine Einf&uuml;hrung in die Programmiersprache C sowie
+einen umfassenden &Uuml;berblick &uuml;ber viele Standardfunktionen, die in fast
+jeder Implementation zu finden sind.
+Es wird weder ein Anspruch auf Vollst&auml;ndigkeit
+erhoben, noch werden s&auml;mtliche M&ouml;glichkeiten der Programmiersprache
+C behandelt, da dies den Rahmen dieses Dokumentes sprengen
+w&uuml;rde. Dieses Handbuch ist vielmehr als Erg&auml;nzung zur Einf&uuml;hrungsschulung
+gedacht. Funktionen, Elemente, etc., die in den
+&Uuml;bungsbeispielen vorkommen, werden hier vollst&auml;ndig behandelt.
+Zus&auml;tzlich sind Informationen &uuml;ber wichtige
+Funktionen und Elemente enthalten, die im Rahmen der Schulung
+nicht erw&auml;hnt werden,
+in der Praxis jedoch h&auml;ufig Verwendung finden. Dieses Handbuch orientiert
+sich am ANSI-C Standard und dem
+IBM C/C<TT>++</TT> Compiler Version 3.6 f&uuml;r OS/2, AIX
+und Windows NT(&copy;).
+<P>Die folgende Aufstellung beinhaltet die Themen, die in diesem
+Handbuch keine Erw&auml;;hnung finden bzw. nicht behandelt werden:
+<UL>
+<P><LI>Schl&uuml;sselwort <TT>goto</TT>,
+<P><LI>Schl&uuml;sselwort <TT>volatile</TT> und
+<P><LI>Bit-Operationen
+</UL>
+<P>
+<HR><H2><A NAME="Header_5" HREF="refer02.htm#ToC_5">1.1 Konventionen</A></H2>
+<P>In diesem Handbuch werden bestimmte Hervorhebungen
+zur Identifikation von Informationen benutzt, die im
+folgenden erl&auml;utert werden:
+<DL>
+<P><DT><B>Schriftart</B>
+<DD><B>Verwendung</B>
+<P><DT><TT>Monospaced</TT>
+<DD>Befehle oder Text, der exakt so eingegeben werden mu&szlig;, wie er
+abgebildet ist.
+<P><DT><I>kursiv</I>
+<DD>Neue Begriffe sind kursiv gedruckt. Diese werden bei ihrem ersten
+Vorkommen im Text erl&auml;utert. Ebenfalls kursiv sind Namen und besondere
+Begriffe.
+<P><DT><B>fett</B>
+<DD>Tasten oder Tastenkombinationen werden fett gedruckt.
+</DL>
+<HR><H2><A NAME="HDRDUMMY" HREF="refer02.htm#ToC_6">1.2 Aufbau des Handbuches</A></H2>
+<P>Kapitel <A HREF="#HDREINLEIT">1.0, "Einleitung"</A> enth&auml;lt allgemeine Hinweise zu diesem
+Handbuch, wie z.B. Aufbau des Handbuches und Konventionen.
+<P>In Kapitel <A HREF="refer06.htm#HDRGRUND">2.0, "Grundlagen der C Programmierung"</A> werden grunds&auml;tzliche
+Aspekte der Programmierung in C, wie z.B. der verf&uuml;gbare
+Zeichenvorrat, Operatoren, etc., erl&auml;utert.
+<P>In Kapitel <A HREF="refer07.htm#HDRTYPEN">3.0, "Datentypen"</A> werden die in C verf&uuml;gbaren
+Datentypen aufgef&uuml;hrt und ihre Eigenschaften erl&auml;utert.
+<P>In Kapitel <A HREF="refer08.htm#HDRFUNK">4.0, "&Uuml;bersicht &uuml;ber wichtige Funktionen"</A> werden wichtige Standardfunktionen
+von C besprochen.
+<P>In Kapitel <A HREF="refer09.htm#HDROWN">5.0, "Eigene Funktionen"</A> wird aufgezeigt, wie eigene
+Funktionen in C erstellt und angewendet werden k&ouml;nnen.
+<P>Kapitel <A HREF="refer10.htm#HDRREPEAT">6.0, "Wiederholungen - Schleifen"</A> beschreibt die M&ouml;glichkeiten,
+die C zur Wiederholung von Programmteilen anbietet.
+<P>In Kapitel <A HREF="refer11.htm#HDRCHOICE">7.0, "Auswahl"</A> befinden sich Erl&auml;uterungen
+zur Programmierung von Auswahlentscheidungen.
+<P>Kapitel <A HREF="refer12.htm#HDRFILE">8.0, "Dateibehandlung"</A> beschreibt den Umgang mit Dateien.
+Dies umfa&szlig;t z.B. das &Ouml;ffnen, Lesen und Schreiben von Dateien.
+<P>Kapitel <A HREF="refer14.htm#HDRBS">10.0, "Verbindungen zum Betriebssystem"</A> geht auf die M&ouml;glichkeiten ein,
+Verbindungen zum Betriebssystem aufzubauen, z.B. um Betriebssystembefehle
+ausf&uuml;hren zu k&ouml;nnen.
+<P>Kapitel <A HREF="refer16.htm#HDRPREPROC">12.0, "Preprocessor-Anweisungen (Direktiven)"</A> f&uuml;hrt die in C verf&uuml;gbaren
+Preprocessor-Anweisungen auf.
+<P>Kapitel <A HREF="refer18.htm#HDROOP">14.0, "Unterschiede zwischen C und C++"</A> stellt eine Abgrenzung von C zu
+C<TT>++</TT>
+dar. Es wird auf die grunds&auml;tzlichen Unterschiede und Gemeinsamkeiten von
+C und C<TT>++</TT> eingegangen.
+<P>Im Anhang befinden sich hilfreiche Aufstellungen, &Uuml;bersichten und
+das Literaturverzeichnis.
+<HR><H2><A NAME="Header_7" HREF="refer02.htm#ToC_7">1.3 Historie von C</A></H2>
+<P>Die Programmiersprache C wurde 1972 von Dennis Ritchie in den
+Bell Laboratories in New Jersey (USA) entworfen. Sie basiert auf
+der Programmiersprache B, welche von Ken Thompson aus der
+Sprache BCPL (<B>b</B>asic <B>c</B>ombined
+<B>p</B>rogramming <B>l</B>anguage) abgeleitet wurde.
+Beide Programmierer arbeiteten an der Entwicklung
+des Betriebssystems <I>Unix</I> und waren mit der verwendeten Sprache
+<I>Assembler</I> unzufrieden. Assembler ist sehr schnell, jedoch
+umst&auml;ndlich, schwierig und nicht
+portabel
+<A NAME="Footnote_Used_1" HREF="#Footnote_1" ><SUP>1</SUP></A>
+<A NAME="IDX1"></A>
+Aus diesen Gr&uuml;nden
+entwickelten sie eine schnelle <I>Compilersprache</I>, die auf
+vielen verschiedenen Computersystemen einsetzbar ist.
+<HR><H2><A NAME="Header_8" HREF="refer02.htm#ToC_8">1.4 Vom Quellcode zum lauff&auml;higen Programm</A></H2>
+<A NAME="IDX2"></A>
+<A NAME="IDX3"></A>
+<P>Als Quellcode bezeichnet man eine endlich lang Folge von Befehlen zur
+Umsetzung von Algorithmen.
+Ein Algorithmus ist eine endlich lange Vorschrift, bestehend aus
+Einzelanweisungen. Eine endlich lange Vorschrift hat nicht zwangsweise
+eine endlich lange Laufzeit zur Folge, aber die Beschreibung der
+Vorschrift ist endlich.
+Ein Beispiel f&uuml;r einen Algorithmus ist ein Kochrezept
+("Man nehme...").
+Der Durchf&uuml;hrende kennt die Bedeutung der Einzelanweisungen, welche
+deterministisch, also nicht zuf&auml;llig, abgearbeitet werden.
+<P>Programmiersprachen werden einerseits nach dem Zeitpunkt ihrer
+&Uuml;bersetzung in Maschinensprache
+(Compiler- oder <I>Interpretersprache</I>),
+<A NAME="IDX4"></A>
+<A NAME="IDX5"></A>
+und andererseits nach ihrer Orientierung (prozedurale oder
+objektorientierte Sprache) unterschieden.
+<P>Ein, mit einer Compilersprache (z.B. C) erstelltes Programm ist nach dem
+sog. Link Vorgang, bei dem die verschiedenen Maschinensprachebestandteile
+eines Programms zusammengef&uuml;gt werden, ohne weitere
+Zus&auml;tze eigenst&auml;ndig lauff&auml;hig. Im Gegensatz dazu ist ein, mit einer
+Interpretersprache (z.B. REXX)
+erstelltes Programm nicht ohne den Interpreter selbst
+lauff&auml;hig. Dies liegt daran, da&szlig; der Code vom Interpreter erst
+w&auml;hrend der Laufzeit des Programms &uuml;bersetzt wird, also immer als
+Quellcode vorliegt.
+<BR>
+Eine Mischform stellen Programme dar, die zwar mit einer
+Compilersprache erzeugt werden, aber sogenannte
+<I>Laufzeitbibliotheken</I> (<I>Runtime-Libraries</I>)
+<A NAME="IDX6"></A>
+<A NAME="IDX7"></A>
+zur eigenst&auml;ndigen Verwendbarkeit ben&ouml;tigen, die
+als zus&auml;tzliche Dateien vorliegen m&uuml;ssen.
+<P>Um aus einem C Quellcode ein lauff&auml;higes Programm zu erzeugen,
+mu&szlig; dieser zun&auml;chst &uuml;bersetzt werden, diese Aufgabe &uuml;bernimmt der
+Compiler. Der Compiler durchsucht den Quelltext zun&auml;chst nach
+den sog. Preprozessoranweisungen und f&uuml;hrt diese aus. Dies hat
+z.B. zur Folge, da&szlig; weitere Dateien in die &Uuml;bersetzung mit
+einbezogen werden. Im n&auml;chsten Schritt werden der Quellcode
+und alle hinzugezogenen Dateien auf syntaktische Fehler untersucht
+und - wenn m&ouml;glich - fast vollst&auml;ndig
+in Maschinensprache &uuml;bersetzt. Das Ergebnis
+dieses Vorgangs ist der sog. Objektcode.
+<A NAME="IDX8"></A>
+Nach dem Compilieren mu&szlig; der Linker den erzeugten Objektcode
+mit bereits existierendem Objektcode verbinden und erzeugt
+letztendlich das lauff&auml;hige Programm. Dieser komplette Ablauf
+kann bei komplexen Programmen sehr viel Zeit in Anspruch nehmen,
+so da&szlig; h&auml;ufig nur einzelne Programmteile &uuml;bersetzt und
+getestet werden. Eine weitere M&ouml;glichkeit bietet das sog.
+Prototyping per Interpretersprache. Hierbei werden Algorithmen
+zun&auml;chst in einer Interpretersprache (z.B. REXX) implementiert.
+Dies hat den Vorteil, da&szlig; das Programm, so unvollst&auml;ndig es
+auch ist, aufgerufen und getestet werden kann. Sind die
+Algorithmen (logisch) korrekt, werden sie in die Compilersprache
+umgesetzt.
+<P>Bei C handelt es sich um eine sogenannte
+<A NAME="IDX9"></A>
+<I>prozedurale Sprache</I>. Bei einer prozeduralen Sprache
+unterscheidet man zwischen Daten und Algorithmen, wobei der
+Schwerpunkt auf den Algorithmen liegt. Im Gegensatz zu dieser
+klassischen Gruppe von Programmiersprachen unterscheidet man die
+sogenannten <I>objektorientierten Sprachen</I>, 
+<A NAME="IDX10"></A>
+bei denen die
+Trennung zwischen Daten und Algorithmen aufgehoben ist. Zu dieser Gruppe
+von Programmiersprachen geh&ouml;rt die Sprache C<TT>++</TT>,
+auf die im Kapitel <A HREF="refer18.htm#HDROOP">14.0, "Unterschiede zwischen C und C++"</A> eingegangen wird.
+<P>
+<HR><H2><A NAME="Header_9" HREF="refer02.htm#ToC_9">1.5 Argumente f&uuml;r den Einsatz der Sprache C</A></H2>
+<P>Die Programmiersprache C bietet dem Programmierer ein
+F&uuml;lle von Vorteilen gegen&uuml;ber anderen Programmiersprachen:
+<UL>
+<P><LI>C ist f&uuml;r fast alle Computersysteme erh&auml;ltlich (PC/PS, Home-Computer,
+Mainframe, etc.).
+<P><LI>C ist leicht &uuml;bertragbar auf andere Systeme (gute Portabilit&auml;t).
+<P><LI>Eine Strukturierung der Programme ist in C m&ouml;glich.
+<UL>
+<P><LI>Problemstellungen k&ouml;nnen in C durch Untergliederung in Teilaufgaben
+bearbeitet werden.
+<P><LI>Teilprogramme k&ouml;nnen wieder-/weiterverwendet werden.
+<P><LI>Die Lesbarkeit des Quellcodes wird verbessert.
+</UL>
+<P><LI>Der erzeugte Code ist schnell, aber dennoch kompakt.
+<P><LI>C ist f&uuml;r viele Problembereiche einsetzbar.
+<P><LI>C ist leicht erlernbar.
+</UL>
+<P>Der entstehende Eindruck einer
+&quot;eierlegenden Wollmilchsau&quot; wird f&uuml;r
+diejenigen, die die Sprache erlernen wollen, jedoch durch deren Kryptik
+und Inkonsistenz
+getr&uuml;bt. C zu erlernen ist grunds&auml;tzlich nicht sehr schwer. Den
+Code anderer Programmierer zu verstehen kann jedoch zur Nervenprobe
+werden: C-Programmierer sind vermutlich schreibfaul und C bietet viele
+M&ouml;glichkeiten, Befehle und Funktionen zu kombinieren und abzuk&uuml;rzen.
+<P>Die beiden folgenden Anweisungen leisten das gleiche:
+<P>
+<PRE>
+(1)   return (a &gt; b) ? a : b;
+ 
+(2)   if (a &gt; b) return a;
+         else    return b;
+</PRE>
+<P>&Auml;hnlich ungewohnte Konstruktionen wie (1) erschweren das Verst&auml;ndnis,
+sind aber nach einiger Zeit beinahe selbstverst&auml;ndlich.
+<HR><B> Fu&szlig;noten:</B>
+<DL COMPACT>
+<P><DT><SUP><A NAME="Footnote_1" HREF="#Footnote_Used_1" >1</A></SUP></DT>
+<DD>Portabilit&auml;t bezeichnet die M&ouml;glichkeit,
+den Quellcode eines Programmes
+ohne Modifikation auf mehreren Computersystemen &uuml;bersetzen
+zu lassen.
+</DD>
+</DL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer04.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer06.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

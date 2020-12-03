@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\aufgabe.scr converted by B2h R4.3 (362)        -->
+<!-- (WIN95) on 23 Feb 2000 at 14:32:42                               -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 14:32:18">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 14:32:18">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 14:32:18">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>&Uuml;bungsaufgaben zur Einf&uuml;hrung in C</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="aufgab06.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab08.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRKOMPLEX" HREF="aufgab02.htm#ToC_6">5.0 Komplexere Aufgaben</A></H1>
+<OL TYPE=1>
+<P><LI>Aufgabe
+<P>Erstellen Sie eine Funktion, die in eine Zahl Tausenderpunkte 
+einf&uuml;gt. (Beispiel: 1083456 -&gt; 1.083.456)
+<BR>
+Prototyp:
+<BR>
+int separateThousands(char *string, int zahl);
+<BR>
+R&uuml;ckgabewert: Anzahl der eingef&uuml;gten Punkte
+<P><LI>Aufgabe
+<P>Der Befehl <TT>COMPARE datei1.ext datei2.ext</TT> 
+erm&ouml;glicht unter DOS und OS/2 den bitweisen Vergleich zweier 
+Dateien (hier <TT>datei1.ext</TT> und <TT>datei2.ext</TT>) miteinander.
+Erstellen Sie ein Programm, das wie <TT>COMPARE</TT> Dateien miteinander
+vergleicht. Im Unterschied zu <TT>COMPARE</TT> soll dieses Programm jedoch
+auch mit Wildcards (<TT>*, ?</TT>) umgehen k&ouml;nnen und somit den Vergleich
+mehrerer Dateien erm&ouml;glichen. Des weiteren soll das Programm wahlweise
+auch Unterverzeichnisse (Rekursion) einschlie&szlig;en.
+<P><LI>Aufgabe
+<P>Erstellen Sie einen Satz von Funktionen zur Behandlung von W&ouml;rtern:
+<DL>
+<P><DT><B>words()
+</B><DD>Diese Funktion liefert die Anzahl W&ouml;rter in einer Zeichenkette 
+zur&uuml;ck. Welches Zeichen als Wortbegrenzer gilt soll angegeben werden
+k&ouml;nnen. Der Prototyp k&ouml;nnte wie folgt aussehen:
+<TT>int words(char zeichenkette[], char begrenzer);</TT>
+<P><DT><B>word()
+</B><DD>Diese Funktion liefert das n-te Wort einer Zeichenkette zur&uuml;ck.
+<P><DT><B>wordpos()
+</B><DD>Diese Funktion liefert zur&uuml;ck, das wievielte Wort in einer
+Zeichenkette angegeben wurde. Der Prototyp k&ouml;nnte wie folgt aussehen:
+<TT>int wordpos(char zeichenkette[], char wort[]);</TT>
+<P><DT><B>wordlength()
+</B><DD>Diese Funktion liefert die L&auml;nge des n-ten Wortes zur&uuml;ck.
+<P><DT><B>wordindex()
+</B><DD>Diese Funktion liefert zur&uuml;ck, am wievielten Zeichen einer
+Zeichenkette das n-te Wort beginnt.
+<P><DT><B>worddel()
+</B><DD>Diese Funktion l&ouml;scht das n-te Wort einer Zeichenkette.
+<P><DT><B>wordins()
+</B><DD>Diese Funktion setzt ein neues Wort in eine bestehende Zeichenkette
+nach dem n-ten Wort ein.
+<P><DT><B>wordreplace()
+</B><DD>Diese Funktion ersetzt das n-te Wort in einer Zeichenkette durch ein
+neues.
+</DL>
+<P>Ein Teil dieser Funktionen ist unter REXX verf&uuml;gbar. Diese Funktionen
+setzen untereinander auf, soda&szlig; durch geschickte Aufteilung viel Arbeit
+gespart werden kann.
+<P><LI>Aufgabe
+<P>Erstellen Sie "wasserdichte" Funktionen zum Einf&uuml;gen / L&ouml;schen 
+von Elementen in doppelt verketteten Listen sowie zum Sortieren / L&ouml;schen
+von kompletten doppelt verketteten Listen Listen.
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion, die den Mittelwert aus einer Reihe von
+Zahlen errechnet, die als Parameter &uuml;bergeben werden. Die Anzahl der
+Zahlen soll nicht fest vorgegeben werden, weshalb eine variable Anzahl
+Parameter beim Funktionsaufruf realisiert werden mu&szlig;.
+<P><LI>Aufgabe
+<P>Schreiben Sie eine Funktion, die eine variable Anzahl
+Kommandozeilenparameter in variabler Reihenfolge und mit Gruppierung
+auswerten kann. 
+<BR>
+Beispiel:
+<BR>
+<TT>BM2SAM -wm datei1.in datei1.out -rafhort</TT>
+<BR>
+<TT>BM2SAM</TT> ist der Name des Programmes, alles weitere sind Parameter,
+die in beliebiger Reihenfolge auftreten k&ouml;nnen. Alles, was nicht mit einem
+- oder / beginnt, wird als Dateiname aufgefa&szlig;t. <TT>-wm</TT> ist ein
+Paramter und <TT>-rafhort</TT> ist eine Gruppierung von sechs Parametern
+(lange Notation: <TT>-ra -rf -rh -ro -rr -rt</TT>).
+<P><LI>Aufgabe
+<P>Schreiben Sie ein Programm, welches ASCII Dateien durchbl&auml;ttern kann.
+Sowohl seiten- als auch zeilenweises vor- und zur&uuml;ckbl&auml;ttern soll
+unterst&uuml;tzt werden.
+<P>Am Anfang einer Zeile soll eine f&uuml;nfstellige Zeilenangabe gefolgt von
+einem Doppelpunkt und einem Leerzeichen ausgegeben werden. Danach folgt der
+eigentlich Zeileninhalt. Eine Zeile darf, egal wie lang sie ist, nur
+innerhalb einer Zeile auf dem Bildschirm dargestellt werden, mu&szlig; also
+sp&auml;testens nach 73 Zeichen abgetrennt werden.
+<P><LI>Aufgabe
+<P>Schreiben Sie Funktionen, die die Basisfunktionalit&auml;ten der
+REXX Funktionen <TT>PARSE VALUE</TT> und <TT>PARSE VAR</TT> mit 
+<TT>UPPER/LOWER</TT> bieten.
+<P><LI>Aufgabe
+<P>Schreiben Sie folgende Hilfsfunktionen:
+<DL>
+<P><DT><B>substr()
+</B><DD>Diese Funktion liefert einen Teil einer angegebenen Zeichenkette
+zur&uuml;ck. Der Prototyp k&ouml;nnte wie folgt aussehen:
+<TT>int substr(char zeichenk[], char teil[], int anzahl);</TT>
+<P><DT><B>strip()
+</B><DD>Diese Funktion entfernt alle f&uuml;hrenden und folgenden Leerzeichen
+einer Zeichenkette.
+<BR>
+Beispiel:
+<BR>
+Original: <TT>   Dies ist   eine Testzeichenkette    </TT>
+<BR>
+Ziel: <TT>Dies ist   eine Testzeichenkette</TT>
+<P><DT><B>sstrip()
+</B><DD>Diese Funktion entfernt des weiteren alle mehrfachen Leerzeichen 
+innerhalb einer Zeichenkette.
+<BR>
+Beispiel:
+<BR>
+Original: <TT>   Dies ist   eine Testzeichenkette    </TT>
+<BR>
+Ziel: <TT>Dies ist eine Testzeichenkette</TT>
+<P><DT><B>lastpos()
+</B><DD>Diese Funktion liefert die Position des letzten Auftretens eines
+Zeichens in einer Zeichenkette zur&uuml;ck.
+<P><DT><B>pos()
+</B><DD>Diese Funktion liefert die n&auml;chste Position des Auftretens eines
+Zeichens in einer Zeichenkette zur&uuml;ck. Ein Startwert kann als Parameter
+angegeben werden, mu&szlig; aber nicht. Der Prototyp k&ouml;nnte wie folgt
+aussehen: <TT>int pos(char zeichenkette[], ...);</TT>
+</DL>
+</OL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="aufgab06.htm">Vorheriges Kapitel</A> &#124; <A HREF="aufgab08.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="aufgab02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="#INDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

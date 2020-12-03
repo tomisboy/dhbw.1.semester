@@ -1,0 +1,564 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer24.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer26.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="Header_158" HREF="refer18.htm#PToC_158">Anhang G. Funktionen der Standardbibliotheken</A></H1>
+<A NAME="IDX335"></A>
+<A NAME="IDX336"></A>
+<BR>
+<P><B><A NAME="Table_18" HREF="refer03.htm#FT_Table_18">Tabelle 18. Ein-/Ausgabefunktionen</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">clearerr
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">setzt EOF- und Fehlerindikator einer Datei zur&uuml;ck
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fclose
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schlie&szlig;t eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">feof
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">testet auf EOF
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ferror
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">testet auf Dateifehler
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fflush
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">erzwingt das Speichern des Puffers in eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fgetc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest ein einzelnes Zeichen aus einer Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fgets
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest eine Zeile aus einer Datei in einen Puffer
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fopen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">&ouml;ffnet eine Datei in einem bestimmten Modus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fprintf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt Daten formatiert in eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fputc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt ein einzelnes Zeichen in eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fputs
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt eine Zeichenkette in eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fread
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest mehrere S&auml;tze aus einer Datei in einen Puffer
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">freopen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ordnet einem Stream (Dateizeiger) eine neue Datei zu
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fscanf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest Daten formatiert aus einer Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fseek
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">bewegt den Dateizeiger
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ftell
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt die aktuelle Position des Dateizeigers
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fwrite
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt mehrere S&auml;tze aus einem Puffer in eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">getc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest ein Zeichen von einem Stream
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">getch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest ein Zeichen von der Tastatur
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">conio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">getchar
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest ein Zeichen von der Standardeingabe
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">getche
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest ein Zeichen von der Tastatur und gibt dieses auf dem
+Bildschirm aus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">conio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">gets
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest eine Zeile von der Standardeingabe in einen Puffer
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">perror
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt eine Meldung auf stderr
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">printf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt Daten formatiert auf die Standardausgabe
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">putc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt ein Zeichen auf einen stream
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">putchar
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt ein Zeichen auf die Standardausgabe
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">puts
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt eine Zeile auf die Standardausgabe
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">remove
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">l&ouml;scht eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">rename
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">&auml;ndert den Namen einer Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">rewind
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">setzt den Dateizeiger auf den Anfang zur&uuml;ck
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">scanf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest Daten formatiert von der Standardeingabe
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">setbuf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">definiert einen Ein-/Ausgabe-Puffer f&uuml;r eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">setvbuf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">definiert die Art der Pufferung f&uuml;r eine Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">sprintf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">schreibt Daten formatiert an eine Speicherstelle
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">sscanf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liest Daten formatiert aus einer Zeichenkette
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">tmpfile
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">erzeugt und &ouml;ffnet eine tempor&auml;re Datei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">tmpnam
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">erzeugt einen tempor&auml;ren Dateinamen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ungetc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">R&uuml;ckg&auml;ngigmachen eines vorherigen getc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdio.h
+</TD></TR></TABLE>
+<BR>
+<P><B><A NAME="Table_19" HREF="refer03.htm#FT_Table_19">Tabelle 19. mathematische Funktionen</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">abs
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Absolutwert
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">acos
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Arcuscosinus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">asin
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Arcussinus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">atan
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Arcustangens
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">atan2
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Arcustangens eines Quotienten
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ceil
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">rundet positive Zahlen auf, negative ab
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">cos
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Cosinus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">cosh
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den hyperbolischen Cosinus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">exp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">dient als Exponentialfunktion e<SUP>x</SUP>
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fabs
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Absolutwert einer Flie&szlig;kommazahl
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">floor
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">rundet positive Zahlen ab, negative auf
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">fmod
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Rest einer Flie&szlig;kommaoperation
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">frexp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">bestimmt f&uuml;r float-Werte Mantisse und Exponent zur Basis 2
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ldexp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">berechnet das Produkt aus Mantisse und einer Zweierbasis
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">log
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den nat&uuml;rlichen Logarithmus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">log10
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den dekadischen Logarithmus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">pow
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">berechnet das Ergebnis von Potenzen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">rand
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">erzeugt eine Zufallszahl
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">sin
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Sinus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">sinh
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den hyperbolischen Sinus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">sqrt
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">berechnet die Quadratwurzel
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">srand
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">initialisiert den Zufallsgenerator
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">tan
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den Tangens
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">tanh
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt den hyperbolischen Tangens
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">math.h
+</TD></TR></TABLE>
+<BR>
+<P><B><A NAME="Table_20" HREF="refer03.htm#FT_Table_20">Tabelle 20. Speicherverwaltungsfunktionen</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">calloc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">reserviert Speicherplatz f&uuml;r Felder
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">free
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">gibt Speicherplatz frei
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">malloc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">reserviert Speicherplatz in Bytes
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">realloc
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ver&auml;ndert die Gr&ouml;&szlig;e eines Speicherblockes
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">longjmp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">f&uuml;hrt R&uuml;cksprung zur setjmp-Stelle durch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">setjmp.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">setjmp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">markiert R&uuml;cksprung-Stelle f&uuml;r longjmp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">setjmp.h
+</TD></TR></TABLE>
+<BR>
+<P><B><A NAME="Table_21" HREF="refer03.htm#FT_Table_21">Tabelle 21. Test integer values (ohne deutsche Umlaute)</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isalnum
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf alphanumerisch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isalpha
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf alphabetisch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">iscntrl
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Steuerzeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isdigit
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Ziffern
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isgraph
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Grafikzeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">islower
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Kleinbuchstaben
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isprint
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf druckbare Zeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ispunct
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Satzzeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isspace
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Trennzeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isupper
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Gro&szlig;buchstaben
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">isxdigit
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">pr&uuml;ft auf Hexadezimalziffern
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR></TABLE>
+<BR>
+<P><B><A NAME="Table_22" HREF="refer03.htm#FT_Table_22">Tabelle 22. Umgebungssteuerung</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">abort
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">bricht das Programm mit einer Fehlermeldung ab
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">assert
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">erm&ouml;glicht den Programmabbruch, wenn ein Testergebnis fehlschl&auml;gt
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">
+assert.h
+<BR></TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">exec
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">l&auml;dt und startet ein Programm
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">process.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">exit
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">beendet ein Programm ordnungsgem&auml;&szlig;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">getenv
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt die Werte der Umgebungsvariablen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">int86
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">Interruptaufruf auf x86er-Systemen (z.B. DOS)
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">dos.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">putenv
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">setzt eine neue Umgebungsvariable oder &auml;ndert
+den Wert einer bestehenden
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">raise
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">sendet Signale an das Programm
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">signal.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">signal
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">Funktion zur Behandlung von Interrupts des Betriebssystems
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">
+signal.h
+<BR></TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">spawn
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">l&auml;dt und startet ein Programm
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">process.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">system
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">Betriebssystemkommandos ausf&uuml;hren
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR></TABLE>
+<BR>
+<P><B><A NAME="Table_23" HREF="refer03.htm#FT_Table_23">Tabelle 23. Umwandlungsfunktionen</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">atof
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert ASCII nach float
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">atoi
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert ASCII nach int
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">atol
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert ASCII nach long
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">itoa
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert int nach ASCII
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strtod
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert Zeichenkette nach double
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strtol
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert Zeichenkette nach long
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strtoul
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert Zeichenkette nach unsigned long
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">tolower
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert in Kleinbuchstaben
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">toupper
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert in Gro&szlig;buchstaben
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctype.h
+</TD></TR></TABLE>
+<P>
+<BR>
+<P><B><A NAME="Table_24" HREF="refer03.htm#FT_Table_24">Tabelle 24. Zeichenketten- und Speicherfunktionen</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">bsearch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">f&uuml;hrt bin&auml;re Suche in einem sortierten Feld durch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">memchr
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">sucht in einem bestimmten Speicherbereich nach einem
+Zeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">memcmp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">vergleicht zwei Speicherbereiche miteinander
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">memset
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">initialisiert einen Speicherbereich
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">memcpy
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">kopiert n Bytes innerhalb des Speichers und liefert einen Zeiger
+auf das Ziel zur&uuml;ck
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">qsort
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">sortiert ein Feld nach dem QuickSort-Algorithmus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">stdlib.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strcat
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">verkettet zwei Zeichenketten miteinander
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strchr
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">sucht ein Zeichen innerhalb einer Zeichenkette
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strcmp / stricmp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">vergleicht zwei Zeichenketten miteinander
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strcpy
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">kopiert eine Zeichenkette in einen anderen Speicherbereich
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.
+h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strcspn
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt die Anzahl Zeichen einer Zeichenkette bis zu einem Begren
+zer
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strlen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt die L&auml;nge einer Zeichenkette
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strncat
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">verkettet eine Zeichenkette mit einer Teilzeichenkette
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strncmp / strnicmp
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">vergleicht n Zeichen zweier Zeichenketten
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strncpy
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">kopiert eine Teilzeichenkette in einen anderen
+Speicherbereich
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strpbrk
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">ermittelt die Position des ersten Begrenzerzeichens
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strrchr
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">sucht von rechts nach links in einer Zeichenkette nach einem
+einzelnen Zeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strspn
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">sucht die Position eines nicht zur Vorgabemenge geh&ouml;rigen Zeichens
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strstr
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">sucht eine Teilzeichenkette in einer Zeichenkette
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">strtok
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">f&uuml;hrt eine Token-Suche in einer Zeichenkette durch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">string.h
+</TD></TR></TABLE>
+<P>
+<BR>
+<P><B><A NAME="Table_25" HREF="refer03.htm#FT_Table_25">Tabelle 25. Zeitfunktionen</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">asctime
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert die Time-Struktur in eine Zeichenkette
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">time.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">ctime
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liefert eine Zeichenkette mit Datum und Uhrzeit
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">time.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">difftime
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">liefert die Zeitdifferenz in Sekunden
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">time.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">gmtime
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert die Time-Struktur in "Greenwich mean time"
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">time.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">localtime
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">konvertiert die Time-Struktur in "Local time"
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">time.h
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">time
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="67%">aktualisiert die Time-Struktur
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="17%">time.h
+</TD></TR></TABLE>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer24.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer26.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>

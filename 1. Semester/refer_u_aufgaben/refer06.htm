@@ -1,0 +1,1268 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML><HEAD>
+<TITLE>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</TITLE>
+<!-- Begin Header Records  ========================================== -->
+<!-- d:\doku\creferenz\refer.scr converted by B2h R4.3 (362) (WIN95)  -->
+<!-- on 25 Feb 2000 at 10:59:26                                       -->
+<META HTTP-EQUIV="updated" CONTENT="Wed, 23 Feb 2000 10:24:36">
+<META HTTP-EQUIV="review" CONTENT="Fri, 23 Feb 2001 10:24:36">
+<META HTTP-EQUIV="expires" CONTENT="Sat, 23 Feb 2002 10:24:36">
+</HEAD><BODY>
+<!-- End Header Records  ============================================ -->
+<A NAME="Top_Of_Page"></A>
+<H1>Handbuch zur Schulung &raquo;Einf&uuml;hrung in C&laquo;</H1>
+<B>&#91; <A HREF="#Bot_Of_Page">Zum Ende des Kapitels</A> &#124; <A HREF="refer05.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer07.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B><HR><P> 
+<HR><H1><A NAME="HDRGRUND" HREF="refer02.htm#ToC_10">2.0 Grundlagen der C Programmierung</A></H1>
+<P>In diesem Kapitel werden grundlegende Aspekte der Programmiersprache C
+wie z.B. der zur Verf&uuml;gung stehende Zeichensatz und der
+strukturelle Aufbau eines C Quellcodes vorgestellt.
+Des weiteren wird auf die
+Sensibilit&auml;t bez&uuml;glich Gro&szlig;- und Kleinschreibung sowie auf Kommentare,
+Schl&uuml;sselw&ouml;rter, Operatoren und Bezeichner eingegangen.
+<P>
+<HR><H2><A NAME="Header_11" HREF="refer02.htm#ToC_11">2.1 Zeichensatz</A></H2>
+<A NAME="IDX11"></A>
+<P>Folgende Zeichen sind in einem C Quellcode erlaubt:
+<P><PRE><TT>
+Kleinbuchstaben       : a b c . . . z                 
+<P>                      
+Gro&szlig;buchstaben        : A B C . . . Z                 
+<P>                      
+Ziffern               : 0 1 2 3 4 5 6 7 8 9           
+<P>                      
+Trennzeichen          : z.B. blank, newline, tab      
+</TT></PRE><P>
+<BR>
+<P><B><A NAME="Table_1" HREF="refer03.htm#FT_Table_1">Tabelle 1. Sonderzeichen</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">Zeichen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">englische/amerikanische Bezeichnung
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">+
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">plus sign
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">-
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">minus sign, hyphen
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">*
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">asterisk
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">/
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">forward slash
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">=
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">equal sign
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">(
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">left parenthesis
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">)
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">right parenthesis
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">{
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">left (curly) brace
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">}
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">right (curly) brace
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">[
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">left (square) bracket
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">]
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">right (square) bracket
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&lt;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">left angle bracket
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&gt;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">right angle bracket
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">'
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">single quotation
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">"
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">double quotation
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">!
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">exclamation mark
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">& 
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">ampersand
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">#
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">hash mark, number sign
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">%
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">percent sign
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&#124;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">vertical bar
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">_
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">underscore
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&#94;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">caret, and symbol
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&#126;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">tilde
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">\
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">backslash
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&#46;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">period, dot
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">,
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">comma
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">semicolon
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&#58;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">colon
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">?
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">question mark
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">$
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">dollar sign
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">&#64;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">at sign
+</TD></TR></TABLE>
+<P>Diese Beschr&auml;nkung gilt prinzipiell nicht f&uuml;r Text, den ein Programm
+ausgibt sowie f&uuml;r die Kommentare. Es sollte jedoch aus Gr&uuml;nden der
+Portabilit&auml;t auf Sonderzeichen wie z.B. Umlaute verzichtet werden.
+<HR><H2><A NAME="Header_12" HREF="refer02.htm#ToC_12">2.2 Gro&szlig;- und Kleinschreibung</A></H2>
+<P>Der Compiler ist sehr empfindlich bez&uuml;glich der Gro&szlig;- und
+Kleinschreibung, wenn es um Schl&uuml;sselworte,
+Variablen
+<A NAME="Footnote_Used_2" HREF="#Footnote_2" ><SUP>2</SUP></A>
+oder Funktionen geht. Die
+Schreibweise, die in der Variablendefinition angewandt wird, mu&szlig;
+das gesamte Programm &uuml;ber beibehalten werden. Dies bedeutet, da&szlig; eine
+Variable <TT>GROSS</TT> nicht erkannt wird,
+wenn sie in der Deklaration
+<TT>gROSS</TT> codifiziert wurde.
+Weiterhin sollte darauf geachtet
+werden, da&szlig; Schl&uuml;sselworte
+und Formatspezifikationen immer in
+Kleinbuchstaben (Bsp.: <TT>scanf, fakultaet, %d</TT>)
+geschrieben werden. Dahingegen wird die &Uuml;bersichtlichkeit und
+Lesbarkeit verbessert, indem eigene Typen
+(Abschnitt <A HREF="refer07.htm#HDROWNTYPE">3.5, "Eigene Typen - typedef"</A>)
+in Gro&szlig;buchstaben deklariert werden (Bsp.: <TT>REAL, INTEGER</TT>).
+<P>
+<HR><H2><A NAME="HDRKEY" HREF="refer02.htm#ToC_13">2.3 Schl&uuml;sselworte</A></H2>
+<A NAME="IDX12"></A>
+<P>Schl&uuml;sselworte sind reservierte Worte, die nicht neu definiert
+werden k&ouml;nnen.
+ANSI-C verwendet folgende:
+<PRE>
+auto       break     case      char       const        continue   default    do
+ 
+double     else      enum      extern     float        for        goto       if
+ 
+int        long      register  return     short        signed     sizeof     static
+ 
+struct     switch    typedef   union      unsigned     void       volatile   while
+</PRE>
+<BR>
+<P><B><A NAME="Table_2" HREF="refer03.htm#FT_Table_2">Tabelle 2. Schl&uuml;sselworte</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">auto
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung der Speicherklasse <TT>auto</TT>
+(siehe <A HREF="refer07.htm#HDRCLASSES">3.6, "Speicherklassen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">break
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Beendet die aktuelle Schleife und f&auml;hrt mit der Programmausf&uuml;hrung
+bei der n&auml;chsten Anweisung nach der Schleife fort. Beendet auch
+Anweisungszweige von <TT>switch</TT> Anweisungen.
+(siehe <A HREF="refer10.htm#HDRBRE">6.4, "Die Anweisungen break und continue"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">case
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Anweisungszweig einer <TT>switch</TT> Anweisung.
+(siehe <A HREF="refer11.htm#HDRCASE">7.2, "switch"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">char
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Datentyp f&uuml;r Zeichen und Zeichenketten.
+(siehe <A HREF="refer07.htm#HDRCHAR">3.1.3, "Textzeichen - char"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">const
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer Konstanten.
+(siehe <A HREF="#HDRBEZEI">2.7, "Bezeichner"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">continue
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Bricht den aktuellen Schleifendurchlauf ab und springt zum Ende
+der Schleife.
+(siehe <A HREF="refer10.htm#HDRBRE">6.4, "Die Anweisungen break und continue"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">default
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Anweisungszweig einer <TT>switch</TT> Anweisung, der ausgef&uuml;hrt wird,
+wenn kein <TT>case</TT> Zweig zutrifft bzw. vorher kein <TT>break</TT>
+auftrat.
+(siehe <A HREF="refer11.htm#HDRCASE">7.2, "switch"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">do
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Beginnt eine <TT>do while</TT> Schleife, die Pr&uuml;fung erfolgt am
+Ende eines Schleifendurchlaufs.
+(siehe <A HREF="refer10.htm#HDRREPEAT">6.0, "Wiederholungen - Schleifen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">double
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer rationellen Zahl.
+(siehe <A HREF="refer07.htm#HDRRAT">3.1.2, "Rationale Zahlen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">else
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Alternativzweig einer <TT>if</TT> Anweisung.
+(siehe <A HREF="refer11.htm#HDRCHOICE">7.0, "Auswahl"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">enum
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung eines Aufz&auml;hlungstyps.
+(siehe <A HREF="refer07.htm#HDRENUM">3.3.2, "enum"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">extern
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung externer Bezeichner.
+(siehe <A HREF="refer07.htm#HDRCLASSES">3.6, "Speicherklassen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">float
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer rationellen Zahl.
+(siehe <A HREF="refer07.htm#HDRRAT">3.1.2, "Rationale Zahlen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">for
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Schleife mit Pr&uuml;fung am Anfang eines Schleifendurchlaufs und
+integriertem Z&auml;hler.
+(siehe <A HREF="refer10.htm#HDRREPEAT">6.0, "Wiederholungen - Schleifen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">goto
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Unbedingter Sprung. (wird in diesem Handbuch nicht behandelt)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">if
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Abfrage einer Bedingung.
+(siehe <A HREF="refer11.htm#HDRCHOICE">7.0, "Auswahl"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">int
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer ganzen Zahl.
+(siehe <A HREF="refer07.htm#HDRINT">3.1.1, "Ganze Zahlen - Integer"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">long
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer ganzen Zahl.
+(siehe <A HREF="refer07.htm#HDRINT">3.1.1, "Ganze Zahlen - Integer"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">register
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer Speicherklasse wie <TT>auto</TT>, jedoch
+Register statt Speicher, falls m&ouml;glich.
+(siehe <A HREF="refer07.htm#HDRCLASSES">3.6, "Speicherklassen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">return
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Beendet Funktionen und &uuml;bergibt ggf. einen R&uuml;ckgabewert.
+(siehe <A HREF="refer09.htm#HDROWN">5.0, "Eigene Funktionen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">short
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer ganzen Zahl.
+(siehe <A HREF="refer07.htm#HDRINT">3.1.1, "Ganze Zahlen - Integer"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">signed
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer ganzen Zahl oder eines Zeichens mit Vorzeichen.
+(siehe <A HREF="refer07.htm#HDRINT">3.1.1, "Ganze Zahlen - Integer"</A> bzw. <A HREF="refer07.htm#HDRCHAR">3.1.3, "Textzeichen - char"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">sizeof
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Ermittlung der L&auml;nge eines Operanden.
+(siehe <A HREF="#HDRHIERAR">2.6.6, "Hierarchie der Operatoren"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">static
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer Speicherklasse. Der Speicherbereich wird bei
+Programmbeginn zugeordnet.
+(siehe <A HREF="refer07.htm#HDRCLASSES">3.6, "Speicherklassen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">struct
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer Struktur.
+(siehe <A HREF="refer07.htm#HDRSTRUKT">3.2.2, "Strukturen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">switch
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Beginn einer Auswahl.
+(siehe <A HREF="refer11.htm#HDRCASE">7.2, "switch"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">typedef
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Definition eigener Datentypen.
+(siehe <A HREF="refer07.htm#HDROWNTYPE">3.5, "Eigene Typen - typedef"</A> und <A HREF="refer07.htm#HDRSTRDEF">3.2.2.3, "Strukturen mit Typendefinitionen - typedef"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">union
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung verschiedener Datentypen im selben Speicherbereich.
+(siehe <A HREF="refer07.htm#HDRUNION">3.2.3, "Unions"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">unsigned
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung einer ganzen Zahl oder eines Zeichens ohne Vorzeichen.
+(siehe <A HREF="refer07.htm#HDRINT">3.1.1, "Ganze Zahlen - Integer"</A> bzw. <A HREF="refer07.htm#HDRCHAR">3.1.3, "Textzeichen - char"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">void
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung ohne Typ. (Nichts)
+(siehe <A HREF="refer09.htm#HDROWN">5.0, "Eigene Funktionen"</A>)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">volatile
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Vereinbarung eines unbest&auml;ndigen Datentyps.
+Dieses Schl&uuml;sselwort teilt dem Compiler mit, da&szlig; die bezeichnete
+Variable durch Ereignisse au&szlig;erhalb der Kontrolle des Programms
+ver&auml;ndert werden kann. Der Wert der Variablen mu&szlig; deshlab vor
+jedem Zugriff neu aus dem Hauptspeicher gelesen werden, d.h. er
+darf nicht in einem Prozessorregister gespeichert werden.
+(Wird in diesem Handbuch nicht weiter behandelt.)
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="25%">while
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="75%">Beginn einer <TT>while</TT> oder Ende einer <TT>do while</TT> Schleife.
+(siehe <A HREF="refer11.htm#HDRCHOICE">7.0, "Auswahl"</A>)
+</TD></TR></TABLE>
+<P>Eine Reihe dieser Schl&uuml;sselworte wird in diesem Handbuch ausf&uuml;hrlich
+erl&auml;utert. Zu beachten ist, da&szlig; s&auml;mtliche Zuweisungen,
+Funktionsaufrufe, Variablendeklarationen und eine Reihe der obigen
+Schl&uuml;sselworte mit einem Semikolon abgeschlossen werden m&uuml;ssen.
+<BR>
+Beispiel:
+<PRE>
+return(ergebnis);
+</PRE>
+<P>
+<HR><H2><A NAME="Header_14" HREF="refer02.htm#ToC_14">2.4 Formale Grundstruktur</A></H2>
+<A NAME="IDX13"></A>
+<P>Unter der formalen Grundstruktur versteht man den strukturellen
+Aufbau, der bei jedem C-Programm, welches nach bestimmten Grunds&auml;tzen
+geschrieben wurde, gleich ist. Da C eine relativ
+flexible Gestaltung des Quellcodes zul&auml;&szlig;t, kann dies zu stark
+unterschiedlich aufgebauten Quellcodes f&uuml;hren. Die Einhaltung gewisser
+Standards erh&ouml;ht jedoch die Lesbarkeit des Codes ungemein und sollte
+aus diesem Grund ber&uuml;cksichtigt werden.
+<P>Die &uuml;bliche Grundstruktur stellt sich folgenderma&szlig;en dar:
+<P>
+<PRE>
+       /* Name, Beschreibung */                                 (1)
+ 
+       #include &lt;stdio.h&gt;                                       (2)
+       ...
+ 
+ 
+       Vereinbarungsteil globaler Variablen                     (3)
+       ...
+ 
+ 
+       [typ] funktionsname ([typ]);                             (4a)
+       ...
+ 
+ 
+       [typ] funktionsname ([typ])                              (4b)
+       {
+          Vereinbarungsteil lokaler Variablen
+          ...
+          Anweisungsteil
+          ...
+       }  /* Ende von xy */
+ 
+ 
+ 
+       [typ] main([typ])                                        (5)
+ 
+       {                                                        (6)
+          Vereinbarungsteil lokaler Variablen
+          ...
+          Anweisungsteil
+          ...
+        } /* Ende von main */                                   (6)
+ 
+ 
+ 
+       [typ] funktionsname ([typ])                              (4c)
+       {
+          Vereinbarungsteil lokaler Variablen
+          ...
+          Anweisungsteil
+          ...
+       }  /* Ende von xy */
+</PRE>
+<P>(1) Alle von  <TT>/*</TT>  und  <TT>*/</TT>
+eingeschlossenen Textkomponenten
+stellen Kommentare dar. Zur n&auml;heren Erl&auml;uterung siehe Abschnitt
+<A HREF="#HDRCOMMENT">2.4.1, "Der Einsatz von Kommentaren"</A>.
+<P>(2) <TT>#include</TT> ist eine sog. Preprocessoranweisung.
+Alle Anweisungen, die mit einer Raute (<TT>#</TT>)
+beginnen, werden vom sogenannten <I>Preprocessor</I> ausgef&uuml;hrt
+(siehe auch Abschnitt <A HREF="refer16.htm#HDRPREPROC">12.0, "Preprocessor-Anweisungen (Direktiven)"</A>).
+Die Anweisung  <TT>#include &lt;stdio.h&gt;</TT>  bewirkt, da&szlig; an
+dieser Stelle im Quelltext vor der &Uuml;bersetzung in maschinenlesbaren
+Code die C-Definitionsdatei <TT>stdio.h</TT> eingef&uuml;gt wird. Die
+Definitionsdatei <TT>stdio.h</TT>
+(<B>st</B>an<B>d</B>ard-<B>i</B>nput-<B>o</B>utput)
+bef&auml;higt den Compiler, die korrekte Verwendung der Funktionen zur Ein-
+und Ausgabe zu &uuml;berpr&uuml;fen.
+<P>(3) Der Vereinbarungsteil f&uuml;r globale Variablen schlie&szlig;t an
+die  <TT>#include</TT>-Anweisungen an und
+steht noch vor <TT>main()</TT>.
+Weiterf&uuml;hrende Erl&auml;uterungen
+sind im Abschnitt <A HREF="refer07.htm#HDREXTERN">3.6.3, "Extern"</A> zu finden.
+<P>(4a) In diesem Bereich werden sog. Prototypen f&uuml;r Funktionen
+aufgelistet.
+In C wird f&uuml;r Programmteile, die eine definierte Teilaufgabe
+ausf&uuml;hren, der Begriff <I>function</I> verwendet. In diesem
+Dokument wird die direkte deutsche &Uuml;bersetzung <I>Funktion</I>
+verwendet.
+<P>Eine Funktion ist ein Teilprogramm, das
+im Programmablauf aufgerufen wird, eine bestimmte Aufgabe
+eigenst&auml;ndig ausf&uuml;hrt und dann die Kontrolle wieder an die
+aufrufende Funktion zur&uuml;ckgibt. Sind diese Teilaufgaben auf
+verschiedene, getrennt voneinander compilierbare Dateien
+verteilt, so nennt man jede Datei ein <I>Modul</I> und nicht
+Funktion.
+<P>Es handelt sich bei einer Funktion um ein Unterprogramm, nicht
+um eine mathematische Funktion. In C sind alle Funktionen
+gleichberechtigt, das hei&szlig;t, jede Funktion kann jede andere
+Funktion, mit Ausnahme von <TT>main()</TT>, aufrufen.
+Ruft eine Funktion sich selbst auf, so nennt man das <I>Rekursion</I>.
+<P>Die Prototypen dienen zun&auml;chst einmal dem Compiler als
+Pr&uuml;fliste f&uuml;r s&auml;mtliche Funktionsaufrufe im Hinblick auf korrekte
+Anzahl und Typisierung von Parametern. Funktionsprototypen
+werden durch ein Semikolon nach der Parameterliste abgeschlossen.
+Der eigentliche Funktionscode kann nun folgen (4b) oder am Ende
+der Datei (4c).
+<P>(4b) Eigene Funktionen k&ouml;nnen vor der Hauptfunktion
+<TT>main()</TT> stehen, allerdings spricht einiges dagegen
+(siehe auch <A HREF="refer09.htm#HDROWN">5.0, "Eigene Funktionen"</A>).
+<P>(4c) Eigene Funktionen sollten nach <TT>main()</TT>
+aufgef&uuml;hrt werden und stehen somit hinter der Hauptfunktion.
+Auf jeden Fall ben&ouml;tigen diese Funktionen einen Prototypen (4a).
+<P>(5) <TT>main()</TT> ist ein Beispiel f&uuml;r eine solche Funktion.
+Die Besonderheit besteht darin, da&szlig; <TT>main()</TT> die Verbindung zum
+Betriebssystem herstellt. Bei Aufruf des Programms von der
+Betriebssystemebene aus wird die Funktion
+<TT>main()</TT> gestartet. Diese
+gibt die Kontrolle an untergeordnete Funktionen weiter und
+erh&auml;lt sie zum Schlu&szlig; zur&uuml;ck, um sie an das Betriebssystem
+zur&uuml;ckzugeben. Des weiteren ist <TT>main()</TT> die einzige Funktion,
+die Kommandozeilenparameter empfangen kann.
+<P>(6) Die geschweiften Klammern <TT>{ }</TT> (engl. curly braces,)
+fassen in C mehrere Anweisungen zu einem Block zusammen und k&ouml;nnen diese
+einem Befehl (z.B. <TT>if</TT>) oder einer Funktion zuordnen. Wird der
+Block einer Funktion zugeordnet, so k&ouml;nnen in dem Block auch Variablen
+deklariert werden.
+Die Funktion der Klammern &auml;hnelt der von <TT>Begin</TT> und
+<TT>End</TT> in Pascal oder Cobol.
+Jede Anweisung (Befehl/Schl&uuml;sselwort oder Funktionsaufruf) mu&szlig; durch ein
+Semikolon abgeschlossen werden.
+<P>
+<P><H3><A NAME="HDRCOMMENT" HREF="refer02.htm#ToC_15">2.4.1 Der Einsatz von Kommentaren</A></H3>
+<P>Der C-Compiler ist an einer Formatierung des Quellcodes nicht
+interessiert. Er k&uuml;mmert sich nicht darum, wie der Text im Editor
+eingegeben wurde. Er liest von Semikolon zu Semikolon und von
+Funktion zu Funktion. Dabei ist auch die Menge der Leerzeichen
+unwichtig, sie werden einfach bis auf jeweils eins &uuml;berlesen. Da der
+Compiler keinerlei Anforderungen an die Art und Weise der
+Formatierung des Quellcodes stellt, ist die Gefahr gro&szlig;,
+f&uuml;r Menschen schlecht lesbaren Code zu schreiben.
+<P>Ein Beispiel:
+<PRE>
+#include&lt;stdio.h&gt;
+#include&lt;math.h&gt;
+#include&lt;float.h&gt;
+#define FALSE 0
+void main(void){float a,xalt,xneu;printf("%s,%s,%s","Berechnung der
+Quadratwurzel einer Zahl a\n","nach einem Iterationsverfahren:\n\n",
+"a=\n");scanf("%f",&a);xneu=a;do{xalt=xneu;
+xneu=(xalt+a/xalt)/2.0;}while(fabs(xalt-xneu)&gt;FLT_EPSILON);
+printf("\nWurzel aus a= %8.4f\n",xneu);}
+</PRE>
+<P>Selbst dieses kurze Programm ist nicht ohne weiteres
+f&uuml;r den, der es nicht selbst geschrieben hat, verst&auml;ndlich.
+Durch einfache und wenig aufwendige Ma&szlig;nahmen, insbesondere
+durch Kommentare, l&auml;&szlig;t sich dieses Programm in der Lesbarkeit
+stark verbessern. Die Befehle werden in sp&auml;teren Kapiteln
+erl&auml;utert.
+<P>Das oben abgebildete Beispiel in formatierter Form:
+<PRE>
+/* wurzel.c
+----------------------------------------------------------
+Author: Daniel Wolkenhauer, Sascha Kliche
+Datum : September 1994
+Datei : WURZEL.C
+Beschreibung:
+berechnet die Quadratwurzel einer Zahl gem&auml;&szlig; einer von
+Archimedes stammenden Iterationsformel
+----------------------------------------------------------
+*/
+ 
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#include &lt;float.h&gt;
+ 
+#define FALSE 0
+ 
+void main (void)
+{
+ 
+   float a, xalt, xneu;
+ 
+   printf("%s,%s,%s",
+          "Berechnung der Quadratwurzel einer Zahl a\n",
+          "nach einem Iterationsverfahren :\n\n",
+          "a = \n");
+   scanf("%f",&a);
+ 
+   xneu=a;
+ 
+   do
+   {
+      xalt = xneu;
+      xneu = ( xalt + a/xalt) / 2.0;
+   } while (fabs ( xalt - xneu ) &gt; FLT_EPSILON);
+ 
+   printf("\n Wurzel aus a= %8.4f\n", xneu);
+ 
+}  /* Ende von main */
+</PRE>
+<P>
+<P><H4><A NAME="Header_16">2.4.1.1 Gestaltung von Kommentaren</A></H4>
+<A NAME="IDX14"></A>
+<P>Im folgenden werden einige Beispiele f&uuml;r die m&ouml;gliche Verwendung
+von Kommentaren im Quellcode gezeigt. Zu beachten sind hierbei
+die Zeichenfolgen <TT>/*</TT> und <TT>*/</TT>, die Anfang und
+Ende des Kommentars kennzeichnen.
+<PRE>
+ 
+/* Kommentare */
+ 
+/***************************************************************/
+/* Trennlinie als Kommentar */
+ 
+/*
+ * Kommentar kann auch in dieser
+ * Form geschrieben werden, um ihn
+ * vom Code abzuheben.
+ */
+ 
+/******************************************************
+ *                                                    *
+ *        Kommentar in einer Kommentarbox             *
+ *                                                    *
+ ******************************************************/
+</PRE>
+<P>Manche Compiler erlauben auch die Verwendung der Zeichenfolge
+<TT>//</TT> zur Einleitung eines einzeiligen Kommentars. Diese,
+der Sprache C<TT>++</TT> entstammende Notation l&auml;&szlig;t sich bei
+den IBM C/C<TT>++</TT> FirstStep Tools Version 2.01
+durch den Parameter <TT>/Ss+</TT> aktivieren.
+<PRE>
+// Jeglicher Text nach den Schr&auml;gstrichen wird als
+// Kommentar interpretiert.
+</PRE>
+<P><H4><A NAME="Header_17">2.4.1.2 Was sollte kommentiert werden?</A></H4>
+<P>Folgendes sollte unbedingt kommentiert werden:
+<UL>
+<P><LI>Dateiname, Versionsnummer, Autor, Datum, Datum der letzten &Auml;nderung,
+Zweck des Programms (zu Beginn)
+<P><LI>der Zweck der verwendeten Variablen (bei deren Deklaration)
+<P><LI>die Aufgabe von einzelnen Programmabschnitten, insbesondere von
+Funktionen
+<P><LI>besondere Anweisungen
+<P><LI>spezielle Algorithmen
+</UL>
+<P>Nicht kommentiert werden sollte, was ohnehin offensichtlich ist. In
+den Kommentaren sollten nicht nur die Namen der Variablen auftauchen,
+sondern ebenfalls ihre Aufgabe.
+<P>Zum Abschlu&szlig; soll ein Beispiel den sinnvollen Einsatz eines
+Kommentars zur Information am Programmkopf veranschaulichen:
+<P>
+<PRE>
+/********************************************************************/
+/*        Programm: comment.c                                       */
+/*        Version : 4.2.6b                                          */
+/*        Autor   : Sascha Kliche, Daniel Wolkenhauer               */
+/*        Datum   : September 1994                                  */
+/* letzte &Auml;nderung: 02.09.1994, 14.37h EST                          */
+/*    Beschreibung: Dieses Programm besteht aus diesem Teil und     */
+/*                  zwei weiteren externen Modulen                  */
+/*                  (leerzeil.c/copyride.c). Es demonstriert die    */
+/*                  Verwendung von Kommentaren.                     */
+/********************************************************************/
+</PRE>
+<P><H3><A NAME="Header_18" HREF="refer02.htm#ToC_18">2.4.2 Formatierung</A></H3>
+<P>Zus&auml;tzlich zum Einsatz von Kommentaren gibt es einige
+M&ouml;glichkeiten, die Lesbarkeit des Programmcodes zu steigern.
+Dazu geh&ouml;rt das Einf&uuml;gen von Leerzeilen und Leerzeichen sowie
+eine klare Strukturierung (Prototypen vor main(), Funktionscode
+nach main()).
+<P>Grunds&auml;tzlich sollte jeder Variablendeklaration mind. eine
+Leerzeile folgen.
+Leerzeichen sollten dazu benutzt werden, eine b&uuml;ndige
+Formatierung der Zeilen sicherzustellen.
+Jede Verschachtelung sollte durch mind. zwei Leerzeichen nach
+rechts einger&uuml;ckt werden.
+<P>Der folgende Programmausschnitt demonstriert den sinnvollen
+Einsatz von Kommentaren, Leerzeilen und Leerzeichen.
+<PRE>
+/*------------------------------------------------------------------*/
+/*        Programm: menue.c                                         */
+/*        Version : 1.0.0                                           */
+/*        Autor   : Sascha Kliche                                   */
+/*        Datum   : April 1997                                      */
+/* letzte &Auml;nderung: 02.05.1997, 14.00h EST                          */
+/*    Beschreibung: Dieses Programm stellt Funktionen zum Zeichnen  */
+/*                  und Abfragen von Bildschirmmasken zur           */
+/*                  Verf&uuml;gung, die Men&uuml;s mit Auswahlbalken          */
+/*                  enthalten k&ouml;nnen.                               */
+/*------------------------------------------------------------------*/
+ 
+ 
+/*------------------------------------------------------------------*/
+/* Include-Dateien und Makros/symbolische Konstanten definieren     */
+/*------------------------------------------------------------------*/
+ 
+#include &lt;stdio.h&gt;
+#include &lt;conio.h&gt;
+#include &lt;os2.h&gt;                              /* OS/2 CP Definition */
+ 
+#define INCL_DOSGETDATETIME                   /* OS/2 CP Zeit/Datum */
+ 
+#define ESC 27                                /* Tastaturcodes      */
+#define cursor_up 72
+#define cursor_down 80
+#define cursor_left 75
+#define cursor_right 77
+#define page_up 73
+#define page_down 81
+#define home 71
+#define end 79
+#define insert 82
+#define del 83
+ 
+ 
+/*------------------------------------------------------------------*/
+/* Globale Variablen deklarieren                                    */
+/*------------------------------------------------------------------*/
+ 
+/* Men&uuml;punkte f&uuml;r Hauptauswahlmen&uuml; */
+char mpunkt[5][25]={" 1.   Men&uuml;punkt 1  \0"," 2.   Men&uuml;punkt 2  \0",
+                    " 3.   Men&uuml;punkt 3  \0"," 4.   Men&uuml;punkt 4  \0",
+                    " 5.   Men&uuml;punkt 5  \0"};
+ 
+/* Farben f&uuml;r Textvorder- und -hintergrund; hintergrund+=10 */
+enum cols { black=30, red, green, yellow,
+            blue, magenta, cyan,  white } colors;
+ 
+ 
+/*------------------------------------------------------------------*/
+/* Funktionsprototypen                                              */
+/*------------------------------------------------------------------*/
+ 
+void gotoxy(int, int);          /* Cursor plazieren, x=1-80, y=1-25 */
+void clrscr(void);                            /* Bildschirm l&ouml;schen */
+ 
+/*--- helle Textfarben setzen ---*/
+void color(enum cols forcolors, enum cols backcolors);
+/*--- matte Textfarben setzen ---*/
+void mcolor(enum cols forcolors, enum cols backcolors);
+ 
+/*--- Maske mit Zeit/Datum zeichnen ---*/
+void maske(void);
+/*--- Balken zeichnen; Position neuer balken, Position alter balken */
+void balken(int, int);
+ 
+ 
+/*------------------------------------------------------------------*/
+/* Anfang Hauptprogramm (main)                                      */
+/*------------------------------------------------------------------*/
+ 
+void main(void)
+{
+  /*--- Deklaration lokaler Variablen ---*/
+  int taste=0,           /* Tastencode gedr&uuml;ckte Taste  */
+      position=0,        /* Position des Auswahlbalkens */
+      i=0,               /* Z&auml;hlvariable f&uuml;r Schleifen  */
+      max=5-1;           /* Anzahl Men&uuml;punkte           */
+ 
+  /*--- Bildschirmmaske "Haupschirm" ausgeben ---*/
+  clrscr();
+  color(white,blue);
+  maske();
+  gotoxy(3,23);
+  printf("Beliebige Taste dr&uuml;cken. Ende mit x.");
+  fflush(stdout);
+ 
+  for(i=0;i&lt;=max;i++)    /* Men&uuml;punkte ausgeben */
+  {
+     gotoxy(5,8+i);
+     printf("%24s",mpunkt[i]);
+  }                      /* Ende Men&uuml;punkte ausgeben */
+ 
+  balken(0,0);           /* balken auf erste position setzen */
+ 
+  ...
+ 
+} /* ende main */
+ 
+/*------------------------------------------------------------------*/
+/* Ende Hauptprogramm (main)                                        */
+/*------------------------------------------------------------------*/
+ 
+ 
+/*------------------------------------------------------------------*/
+/* Anfang Funktionen                                                */
+/*------------------------------------------------------------------*/
+ 
+ ...
+ 
+/*------------------------------------------------------------------*/
+/* Ende Funktionen                                                  */
+/*------------------------------------------------------------------*/
+</PRE>
+<P>
+<HR><H2><A NAME="Header_19" HREF="refer02.htm#ToC_19">2.5 Ausdr&uuml;cke</A></H2>
+<A NAME="IDX15"></A>
+<P>Ausdr&uuml;cke setzen sich aus einem oder mehreren Operanden
+<A NAME="IDX16"></A>
+und einem
+Operator zusammen. Operanden k&ouml;nnen Variablen oder Konstanten sein,
+wobei ein Ausdruck sowohl Variablen als auch Konstanten beinhalten kann.
+Die Operatoren werden im folgenden erl&auml;utert.
+<P>Jeder vergleichende Ausdruck (z.B. <TT>if(tag==4)</TT>) wird
+auf die beiden Zust&auml;nde wahr bzw. falsch abgebildet. Da C keine
+Wahrheitsvariablen (sog. boolsche Variablen)
+<A NAME="IDX17"></A>
+unterst&uuml;tzt, werden diese Zust&auml;nde wiederum auf Integerwerte 
+abgebildet. Falsch
+<A NAME="IDX18"></A>
+<A NAME="IDX19"></A>
+wird auf den Wert Null abgebildet und wahr auf einen beliebigen Wert
+ungleich Null. Dies hat zur Folge, da&szlig; bei vergleichenden
+Ausdr&uuml;cken auch direkt Wahrheitswerte benutzt werden k&ouml;nnen:
+z.B.
+<PRE>
+int tag=4;
+ 
+if(tag) printf("Tag ist &lt;&gt; 0.\n");
+else    printf("Tag ist gleich Null.\n");
+</PRE>
+<P>Dementsprechend liefern folgende Ausdr&uuml;cke unterschiedliche
+Wahrheitswerte:
+<PRE>
+int tag=0;
+ 
+(1) if(tag==0) ... else ...
+ 
+(2) if(tag) ... else ...
+ 
+(3) if(!tag) ... else ...
+</PRE>
+<P>Ausdruck (1) pr&uuml;ft, ob <TT>tag</TT> den Wert Null enth&auml;lt.
+Da dies der Fall ist, ist der Ausdruck wahr, also ungleich Null
+und der Ausdruck nach <TT>if</TT> wird ausgef&uuml;hrt.
+Ausdruck (2) wird als Wahrheitswert Null, also falsch, betrachtet.
+Dementsprechend wird der Ausdruck nach <TT>else</TT>
+ausgef&uuml;hrt. Ausdruck (3) wird als Wahrheitswert 'nicht falsch'
+(!0), also wahr, betrachtet. Ausgef&uuml;hrt wird der Ausdruck nach
+<TT>if</TT>. Alles klar?
+<HR><H2><A NAME="Header_20" HREF="refer02.htm#ToC_20">2.6 Operatoren</A></H2>
+<A NAME="IDX20"></A>
+<P>Die Gruppe der Operatoren wird in vier Untergruppen aufgeteilt:
+<UL>
+<P><LI>a) arithmetische Operatoren
+<P><LI>b) un&auml;re oder monadische Operatoren
+<P><LI>c) vergleichende Operatoren
+<P><LI>d) logische Operatoren
+</UL>
+<P>Im Anschlu&szlig; an die Erl&auml;uterung der einzelnen Operatoren wird
+die Hierarchie der Operatoren untereinander aufgezeigt.
+<P>
+<P><H3><A NAME="Header_21" HREF="refer02.htm#ToC_21">2.6.1 Arithmetische Operatoren</A></H3>
+<A NAME="IDX22"></A>
+<P>Mit Hilfe der arithmetischen Operatoren sind
+Gleitkomma-, Festkomma- und ganzzahlige Ausdr&uuml;cke
+zu verarbeiten. In C sind die folgenden f&uuml;nf definiert:
+<PRE>
+                   Addition       :  +
+                   Subtraktion    :  -
+                   Multiplikation :  *
+                   Division       :  /
+                 ( Restwert       :  % )
+</PRE>
+<P>Der Restwert-Operator ist in Klammern gesetzt, weil er nur f&uuml;r
+ganzzahlige Ausdr&uuml;cke verwendet werden darf. Hierbei liefert er
+den ganzzahligen Rest einer Division:
+<P>
+<PRE>
+     10 / 5 = 2      3 / 2 = 1.5     36 / 5 = 7.2
+     10 % 5 = 0      3 % 2 = 1       36 % 5 = 1
+</PRE>
+<P>Wird der Divisions-Operator mit zwei Integer-Werten verkn&uuml;pft,
+so liefert er als Ergebnis wieder einen ganzzahligen Wert zur&uuml;ck:
+<P>
+<PRE>
+      8 / 2 = 4     10 / 4 = 2        1 / 2 = 0
+</PRE>
+<P>
+<P><H3><A NAME="Header_22" HREF="refer02.htm#ToC_22">2.6.2 Un&auml;re oder monadische Operatoren</A></H3>
+<A NAME="IDX24"></A>
+<A NAME="IDX25"></A>
+<P>Un&auml;re oder monadische Operatoren beziehen sich nur auf einen Operaden.
+Normalerweise stehen diese vor dem Operanden, k&ouml;nnen aber auch
+hinter dem Operanden stehen.
+<P>Beispiele f&uuml;r diese Art von Operatoren sind
+<UL>
+<P><LI>das un&auml;re Minus -
+<P><LI>der Autoinkrement-Operator ++
+<P><LI>der Autodekrement-Operator --
+<P><LI>sizeof
+<P><LI>der Typecast
+</UL>
+<P>Steht der Autoinkrement-/Autodekrement-Operator vor dem Operanden,
+so handelt es sich um einen Pr&auml;inkrement bzw. -dekrement. 
+In diesem Fall wird der Wert des Operanden ge&auml;ndert, bevor er
+verwendet wird.
+Steht er nach dem Operanden, so handelt es sich um einen Postinkrement
+bzw. -dekrement.
+In diesem Fall wird der Wert des Operanden ge&auml;ndert, nachdem er
+verwendet wird.
+<BR>
+Beispiele:
+<PRE>
+a = 10;  /* a wird der Wert 10 zugewiesen */
+b = --a; /* b wird der Wert  9 zugewiesen */
+c = a++; /* c wird der Wert  9 zugewiesen, erst dann erhaelt a den wert 10 */
+</PRE>
+<P><H3><A NAME="HDRVEROP" HREF="refer02.htm#ToC_23">2.6.3 Vergleichende Operatoren</A></H3>
+<A NAME="IDX27"></A>
+<P>Die vergleichenden Operatoren pr&uuml;fen auf Gleichheit
+und Ungleichheit:
+<P><PRE><TT>
+a)     Gleichheit:              Ausdruck == Ausdruck                                
+b)     Ungleichheit:            Ausdruck != Ausdruck                                
+a)     Kleiner als:             Ausdruck &lt; Ausdruck                                 
+b)     Kleiner oder gleich:     Ausdruck &lt;= Ausdruck                                
+c)     Gr&ouml;&szlig;er:                  Ausdruck &gt; Ausdruck                                 
+d)     Gr&ouml;&szlig;er oder gleich:      Ausdruck &gt;= Ausdruck                                
+</TT></PRE><P>
+Die Relation liefert den wahr (true) oder falsch (false) zur&uuml;ck. Da es
+in C keine boolschen Variablen gibt, wird f&uuml;r wahr ein Wert ungleich Null (0)
+und f&uuml;r falsch der Wert Null (0) vom Typ Integer zur&uuml;ckgegeben.
+<DL>
+<P><DT><B>Anmerkung zu a)&#58;
+</B><DD>Das einfache Gleichheitszeichen (=)
+erh&auml;lt in C die Aufgabe einer Zuweisung. 
+Der linke Operator einer Zuweisung mu&szlig; ein "Lvalue"
+(eine g&uuml;ltige Speicherstelle wie z.B. eine Variable) sein.
+<BR>
+Bsp.: <TT>a = 4</TT> weist a den Wert vier zu.
+</DL>
+<P>
+<P><H3><A NAME="Header_24" HREF="refer02.htm#ToC_24">2.6.4 Logische Operatoren</A></H3>
+<A NAME="IDX29"></A>
+<P>Bei logischen Operatoren liefert die Relation
+den Wert wahr oder falsch zur&uuml;ck.
+<P>Die logischen Operatoren werden nicht zum Vergleich von Werten,
+sondern zum Vergleich von Wahrheitswerten verwendet:
+<P><PRE><TT>
+a)     !      (logisches NICHT)     
+b)     &amp;&amp;     (logisches UND)       
+c)     &#124;&#124;     (logisches ODER)      
+</TT></PRE><P>
+<P>Die Charakteristik der einzelnen Operatoren wird mit Hilfe der
+Wahrheitstabelle dargestellt (wahr=1, falsch=0).
+<P>zu a) Das logische NICHT ist ein un&auml;rer Operator. Das
+bedeutet, da&szlig; sich der Operator nur auf einen Operanden bezieht.
+<BR>
+<P><B><A NAME="Table_3" HREF="refer03.htm#FT_Table_3">Tabelle 3. Wahrheitstabelle (logisches NICHT)</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="50%">x
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="50%">!x
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="50%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="50%">1
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="50%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="50%">0
+</TD></TR></TABLE>
+<P>zu b) Das logische UND verkn&uuml;pft Ausdr&uuml;cke folgenderma&szlig;en
+miteinander:
+<BR>
+<P><B><A NAME="Table_4" HREF="refer03.htm#FT_Table_4">Tabelle 4. Wahrheitstabelle (logisches UND)</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Wert 1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Wert 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Ergebnis
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD></TR></TABLE>
+<P>zu c) Das logische ODER wird durch folgende Wahrheitstabelle
+dargestellt:
+<BR>
+<P><B><A NAME="Table_5" HREF="refer03.htm#FT_Table_5">Tabelle 5. Wahrheitstabelle (logisches ODER)</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Wert 1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Wert 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Ergebnis
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">0
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">1
+</TD></TR></TABLE>
+<P>
+<P><H3><A NAME="Header_25" HREF="refer02.htm#ToC_25">2.6.5 Zusammengesetzte Zuweisungsoperatoren</A></H3>
+<A NAME="IDX31"></A>
+<P>Die zusammengesetzten Zuweisungsoperatoren dienen nicht nur
+einer verk&uuml;rzten Schreibweise, sie werden auch in
+schnelleren Assemblercode &uuml;bersetzt als die jeweils
+&auml;quivalenten Ausdr&uuml;cken.
+<BR>
+<P><B><A NAME="Table_6" HREF="refer03.htm#FT_Table_6">Tabelle 6. Zusammengesetzte Zuweisungsoperatoren</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Operator
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">Beispiel
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">&Auml;quivalenter Ausdruck
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">+=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index += 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index = index + 2
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">-=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index -= 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index = index - 2
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">*=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index *= 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index = index * 2
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">/=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index /= 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index = index / 2
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">%=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index %= 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">index = index % 2
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">&lt;&lt;=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">result &lt;&lt;= num
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">result = rsult &lt;&lt; num
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">&gt;&gt;=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">form &gt;&gt;= 1
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">form = form &gt;&gt; 1
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">&=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">mask &= 2
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">mask = mask & 2
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">&#94;=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">test &#94;= pre_text
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">test = test &#94;pre_test
+</TD></TR><TR>
+<TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">|=
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">flag |= on
+</TD><TD ALIGN="CENTER" VALIGN="TOP" WIDTH="33%">flag = flag | on
+</TD></TR></TABLE>
+<P>
+<P><H3><A NAME="HDRHIERAR" HREF="refer02.htm#ToC_26">2.6.6 Hierarchie der Operatoren</A></H3>
+<A NAME="IDX33"></A>
+<P>Beim Zusammentreffen mehrerer Operatoren in einer Relation mu&szlig;
+definiert sein, welche Vorrangregeln gelten. Kommen mehrere
+Operatoren gleicher Priorit&auml;t zusammen, so ist in der nachstehenden
+Tabelle die Auswertungsrichtung festgeschrieben.
+<P>Selbst wenn sich jemand diese Priorit&auml;ten merken kann, sollten
+zur besseren Lesbarkeit Klammern gesetzt werden.
+<BR>
+<P><B><A NAME="Table_7" HREF="refer03.htm#FT_Table_7">Tabelle 7. Tabelle der Hierarchie der Operatoren</A></B><BR>
+<TABLE  BORDER>
+<TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">Operatoren
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Verwendung
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">Auswertungsrichtung
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">( )
+<BR>
+[]
+<BR>
+-&gt;
+<BR>
+&#46;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">bildet einen Ausdruck
+<BR>
+bezeichnet ein Feldelement
+<BR>
+w&auml;hlt eine Strukturkomponente aus
+<BR>
+w&auml;hlt eine Strukturkomponente per Zeiger aus
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">++
+<BR>
+--
+<BR>
+-
+<BR>
++
+<BR>
+!
+<BR>
+&#126;
+<BR>
+&amp;
+<BR>
+*
+<BR>
+sizeof
+<BR>
+(typ)
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Inkrementieren
+<BR>
+Dekrementieren
+<BR>
+bildet negativen Wert
+<BR>
+?
+<BR>
+logische Negierung
+<BR>
+bitweises Negieren
+<BR>
+liefert Adresse einer Variablen/Konstanten
+<BR>
+greift &uuml;ber Zeiger auf Variable/Konstante zu
+<BR>
+liefer Gr&ouml;&szlig;e eines Speicherbereiches
+<BR>
+wandelt in angegebenen Typ um (type cast)
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">rechts nach links
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">*
+<BR>
+/
+<BR>
+%
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Multiplizieren
+<BR>
+Dividieren
+<BR>
+Restwert bilden
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">+
+<BR>
+-
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Addieren
+<BR>
+Subtrahieren
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&lt;&lt;
+<BR>
+&gt;&gt;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">verschiebt Bits nach links
+<BR>
+verschiebt Bits nach rechts
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&lt;
+<BR>
+&lt;=
+<BR>
+&gt;
+<BR>
+&gt;=
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Vergleich auf kleiner
+<BR>
+Vergleich auf kleiner gleich
+<BR>
+Vergleich auf gr&ouml;&szlig;er
+<BR>
+Vergleich auf gr&ouml;&szlig;er gleich
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">==
+<BR>
+!=
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Vergleich auf gleich
+<BR>
+Vergleich auf nicht gleich
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&amp;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Bitweises UND
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#94;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Bitweises XOR
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&#124;
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Bitweises ODER
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">&& 
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Logisches UND
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">||
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Logisches ODER
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">? :
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Bedingung
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">rechts nach links
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">=
+<BR>
++=
+<BR>
+-=
+<BR>
+*=
+<BR>
+/=
+<BR>
+&lt;&lt;=
+<BR>
+&gt;&gt;=
+<BR>
+&=
+<BR>
+&#94;=
+<BR>
+&#124;=
+<BR>
+%=
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">einfache Zuweisung
+<BR>
+Addieren und Zuweisen
+<BR>
+Subtrahieren und Zuweisen
+<BR>
+Multiplizieren und Zuweisen
+<BR>
+Dividieren und Zuweisen
+<BR>
+Bits nach links verschieben und zuweisen
+<BR>
+Bits nach rechts verschieben und zuweisen
+<BR>
+Bitweise UND verkn&uuml;pfen und zuweisen
+<BR>
+Bitweise XOR verkn&uuml;pfen und zuweisen
+<BR>
+Bitweise ODER verkn&uuml;pfen und zuweisen
+<BR>
+Restwert bilden und Zuweisen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">rechts nach links
+</TD></TR><TR>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">,
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="60%">Operanden trennen
+</TD><TD ALIGN="LEFT" VALIGN="TOP" WIDTH="20%">links nach rechts
+</TD></TR></TABLE>
+<P>
+<P><H3><A NAME="Header_27" HREF="refer02.htm#ToC_27">2.6.7 Beispiele zur Verkn&uuml;pfung der Operatoren</A></H3>
+<P>Im folgenden sind einige Beispiele f&uuml;r die Verkn&uuml;pfung mehrerer
+Operatoren und deren Bedeutung aufgef&uuml;hrt:
+<P><PRE><TT>
+a)     (c &gt;= 'a') && (c &lt;= 'z')     pr&uuml;ft, ob ein Zeichen ein Kleinbuchstabe ist        
+b)     (d &gt;= 0) && (d &lt;= 9)         pr&uuml;ft, ob ein Zeichen eine Ziffer ist               
+c)     (x &gt; 0) && (y &gt; 0)           pr&uuml;ft, ob x- und y-Koordinate positiv sind          
+</TT></PRE><P>
+<P>
+<HR><H2><A NAME="HDRBEZEI" HREF="refer02.htm#ToC_28">2.7 Bezeichner</A></H2>
+<A NAME="IDX34"></A>
+<P>Ein Bezeichner dient dazu, einer Variablen oder einer Konstanten
+einen eindeutigen Namen zuzuweisen. Variablen und Konstanten
+dienen zum Speichern und Bearbeiten von Daten, wobei die Daten von
+Konstanten w&auml;hrend des Programmlaufes nicht ge&auml;ndert werden k&ouml;nnen.
+In C k&ouml;nnen Konstanten f&uuml;r die Datentypen der ganzen Zahlen, der
+rationalen Zahlen und der Zeichen definiert werden. Der Deklaration
+von Konstanten geht das Schl&uuml;sselwort <TT>const</TT> voran.
+Variablen und Konstanten sind Objekte, die mit Hilfe ihrer Namen
+(Bezeichner), ihrer
+Datentypen und ihrer Gr&ouml;&szlig;e in Byte einen bestimmten
+Speicherbereich im Hauptspeicher ansprechbar macht. F&uuml;r die
+Vergabe der Bezeichner gibt es in C bestimmte Restriktionen:
+<OL TYPE=1>
+<P><LI>Es d&uuml;rfen nur Buchstaben, Ziffern und der Unterstrich benutzt
+werden, keine Umlaute und keine Sonderzeichen. Der Unterstrich sollte
+nach M&ouml;glichkeit nur f&uuml;r eigene Typdefinitionen, nicht aber f&uuml;r eigentliche
+Variablen oder Konstanten benutzt werden, da dieser i.d.R. kennzeichnet,
+da&szlig; der Bezeichner von der Entwicklungsumgebung selbst bereitgestellt wird.
+<P><LI>Das erste Zeichen mu&szlig; immer ein Buchstabe oder der Unterstrich
+sein.
+<P><LI>Ein Bezeichner darf beliebig lang sein. Allerdings sind nach
+ANSI-C nur die ersten 31 Zeichen signifikant, das hei&szlig;t der
+C-Compiler l&auml;&szlig;t weitere Zeichen unber&uuml;cksichtigt.
+<P><LI>Es werden Klein- und Gro&szlig;buchstaben unterschieden.
+<P><LI>Die unter Punkt <A HREF="#HDRKEY">2.3, "Schl&uuml;sselworte"</A>
+angegebenen Schl&uuml;sselw&ouml;rter d&uuml;rfen nicht als
+Bezeichner verwendet werden, da der Compiler sonst nicht
+unterscheiden kann, ob eine Variable bzw. Konstante oder ein Schl&uuml;sselwort
+gemeint ist.
+<P><LI>Ein Bezeichner darf in einem Anweisungsblock
+(eingegrenzt durch geschweifte Klammern) nur einmal vergeben
+werden. Es ist zwar m&ouml;glich, in jedem Anweisungsblock gleiche Bezeichner
+zu benutzen, dies sollte i.d.R. aus Gr&uuml;nden der &Uuml;bersichtlichkeit und
+Verst&auml;ndlichkeit jedoch vermieden werden, wenn es sich nicht um eine
+Z&auml;hlvariable handelt.
+</OL>
+<BR>
+Beispiele:
+<P>
+<PRE>
+        Richtig                      Falsch
+ 
+        wort                         õwort
+        buchSTABE56                  2buchSTABE
+        skanf_var                    scanf
+</PRE>
+<P>Die verschiedenen, in C zur Verf&uuml;gung stehenden, Datentypen werden
+im Kapitel <A HREF="refer07.htm#HDRTYPEN">3.0, "Datentypen"</A> vorgestellt.
+<HR><B> Fu&szlig;noten:</B>
+<DL COMPACT>
+<P><DT><SUP><A NAME="Footnote_2" HREF="#Footnote_Used_2" >2</A></SUP></DT>
+<DD>
+<CITE>Eine Variable ist einfach ein praktischer Ort, an dem man etwas
+unterbringen kann. Ein Ort mit einem Namen, an dem Sie Ihr spezielles
+Etwas wiederfinden, wenn Sie zu einem sp&auml;teren Zeitpunkt nachsehen.
+Wie im richtigen Leben gibt es verschiedene Arten von Orten,
+an denen Dinge gespeichert werden k&ouml;nnen. Die einen sind eher privater
+Natur, w&auml;hrend die anderen der &Ouml;ffentlichkeit zug&auml;nglich sind.
+Einige Orte existieren nur &uuml;ber kurze Zeit, w&auml;hrend andere immer 
+vorhanden sind. Informatiker lieben es, hier vom "Geltungsbereich" von 
+Variablen zu sprechen, aber mehr als das gerade Gesagte ist nicht damit 
+gemeint.</CITE>
+(Programmieren mit Perl; Larry Wall, Tom Christiansen & Randal L.
+Schwartz; O'Reilly Verlag 1997; Deutsche Ausgabe der 2. Auflage)
+<P>Eine singulare Variable ist ein "Skalar", eine plurale Variable ein
+"Array".
+</DD>
+</DL>
+<P><HR><B>&#91; <A HREF="#Top_Of_Page">Zum Anfang des Kapitels</A> &#124; <A HREF="refer05.htm">Vorheriges Kapitel</A> &#124; <A HREF="refer07.htm">N&auml;chstes Kapitel</A> &#124; <A HREF="refer02.htm#ToC">Inhaltsverzeichnis</A> &#124; <A HREF="refer32.htm#HDRINDEX_START">Index</A> &#93;</B> 
+<A NAME="Bot_Of_Page"></A>
+</BODY></HTML>
