@@ -4,9 +4,23 @@
 #include <string.h>
 #include <math.h>
 
+#define PI 3.1415
+// ersetze PI durch 3.1415
+#define NIX void
+#define MEINMACRO a*b/c
+
+typedef struct 
+{
+///....
+}meinEigenerDatentyp;
+
+
+
+
 int main() {
 
   int x,y;
+  printf("%f \n ", PI);
     printf("ZAHL 1 eingeben: \n ");
     scanf_s("%i",&x);
     fflush(stdin);
