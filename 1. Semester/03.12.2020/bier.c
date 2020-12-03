@@ -12,12 +12,12 @@ float grundflaeche;
 float radius = 50;
 grundflaeche = 3.1415*radius*radius;
 
-
+ 
 printf("%f Grundflaeche = ", grundflaeche);
 float volumen = 0;
 for (float i = 0; i < 200; i= i +10 )
 {
-    volumen = ((grundflaeche *i/1000000));
+    volumen = ((grundflaeche *i/1));
     printf("\n Das Volumen Betraegt: %f",volumen );
 }
 
