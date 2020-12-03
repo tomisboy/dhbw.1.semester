@@ -4,17 +4,26 @@
 #include <string.h>
 #include <math.h>
 
-
 int main() {
 
-float f1 = 123.234;
-float f2 = 12.3234;
+float grundflaeche;
+float radius = 50;
+grundflaeche = 3.1415*radius*radius;
 
 
-printf("%f",f2);
-printf("\n%7.2f",f1);
+printf("%f Grundflaeche = ", grundflaeche);
+float volumen = 0;
+for (float i = 0; i < 200; i= i +10 )
+{
+    volumen = ((grundflaeche *i*0.0000001));
+    printf("\n Das Volumen Betraegt: %f",volumen );
+}
 
 
+
+
+
+//noch testen
 printf("\n Fast alle sind flei %c ig",0xe1);
 //printf("\n text=---%s---", text);
 
