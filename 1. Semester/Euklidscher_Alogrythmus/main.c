@@ -16,7 +16,7 @@ int main() {
   int x,y;
   printf("%f \n ", PI);
     printf("ZAHL 1 eingeben: \n ");
-    scanf_s("%i",&x);
+    scanf("%i",&x);
     fflush(stdin);
     printf("ZAHL 2 \n");
     scanf("%i",&y);
