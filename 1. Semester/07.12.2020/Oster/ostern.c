@@ -14,60 +14,44 @@ int main(void)
     restE = 0;
     tage = 0;
     Jahreszahl = 1900;
-char temp;
+    char temp;
 
-
-
-while (Jahreszahl <= 2099)
-{
- for (int i = 0 ; i <= 9; i++)
-    { 
-        Jahreszahl ++;
-        if (Jahreszahl == 1954 || Jahreszahl == 1981)
+    while (Jahreszahl <= 2099)
+    {
+        for (int i = 0; i <= 9; i++)
         {
-            printf("\n Im Jahr %i, gibt es kein Ostern\n", Jahreszahl);
-        }else
-        {
-           // printf("Jahr : %i", Jahreszahl);
-            restA = Jahreszahl % 19;
-            restB = Jahreszahl % 4;
-            //printf("%d",restB);
-            restC = Jahreszahl % 7;
-            //printf("%d",restC);
-            restD = (19 * restA + 24) % 30;
-            //printf("%d",restD);
-            restE = (2 * restB + 4 * restC + 6 * restD + 5) % 7;
-            //printf("%d",restE);
-            tage = restD + restE;
-            //printf("%d",tage);
-
-            if (tage <= 9)
+            Jahreszahl++;
+            if (Jahreszahl == 1954 || Jahreszahl == 1981)
             {
-                starttag = 22;
-                ostertag = starttag + tage;
-                printf("\n Ostern fällt im Jahr %i auf den %i Maerz", Jahreszahl, ostertag);
+                printf("\n Im Jahr %i, gibt es kein Ostern\n", Jahreszahl);
             }
             else
             {
-                starttag = 0;
-                ostertag = starttag + (tage-9);
-                 printf("\n Ostern fällt im Jahr %i auf den %i April", Jahreszahl, ostertag);
+                restA = Jahreszahl % 19;
+                restB = Jahreszahl % 4;
+                restC = Jahreszahl % 7;
+                restD = (19 * restA + 24) % 30;
+                restE = (2 * restB + 4 * restC + 6 * restD + 5) % 7;
+                tage = restD + restE;
 
+                if (tage <= 9)
+                {
+                    starttag = 22;
+                    ostertag = starttag + tage;
+                    printf("\n Ostern fällt im Jahr %i auf den %i März", Jahreszahl, ostertag, 0x84);
+                }
+                else
+                {
+                    starttag = 0;
+                    ostertag = starttag + (tage - 9);
+                    printf("\n Ostern fällt im Jahr %i auf den %i April", Jahreszahl, ostertag);
+                }
             }
-            
-
-            //printf("Enter für weiter");
-         
         }
-        
+        printf("\n-------------- Bitte eine Taste druecken --------------");
+        scanf("%c", &temp);
+        fflush(stdin);
     }
- printf("\n-------------- Bitte eine Taste druecken --------------");
-scanf("%c",&temp);
-fflush(stdin);
-}
-
-    
-  
 
     return (0);
 }
