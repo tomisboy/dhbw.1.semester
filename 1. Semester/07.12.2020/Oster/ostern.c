@@ -41,17 +41,18 @@ int main(void)
                     printf("\n Ostern fällt im Jahr %i auf den %i März", Jahreszahl, ostertag, 0x84);
                 }
                 else
-                {
                     starttag = 0;
                     ostertag = starttag + (tage - 9);
                     printf("\n Ostern fällt im Jahr %i auf den %i April", Jahreszahl, ostertag);
                 }
             }
-        }
+        
         printf("\n-------------- Bitte eine Taste druecken --------------");
         scanf("%c", &temp);
         fflush(stdin);
+}
+return (0);
+
     }
 
-    return (0);
-}
+    
