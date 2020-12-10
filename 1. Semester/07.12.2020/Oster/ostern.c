@@ -20,7 +20,7 @@ int main(void)
     {
         for (int i = 0; i <= 9; i++)
         {
-            Jahreszahl++;
+
             if (Jahreszahl == 1954 || Jahreszahl == 1981)
             {
                 printf("\n Im Jahr %i, gibt es kein Ostern\n", Jahreszahl);
@@ -42,17 +42,16 @@ int main(void)
                 }
                 else
                     starttag = 0;
-                    ostertag = starttag + (tage - 9);
-                    printf("\n Ostern fällt im Jahr %i auf den %i April", Jahreszahl, ostertag);
-                }
+                ostertag = starttag + (tage - 9);
+                printf("\n Ostern fällt im Jahr %i auf den %i April", Jahreszahl, ostertag);
             }
-        
+
+            Jahreszahl++;
+        }
+
         printf("\n-------------- Bitte eine Taste druecken --------------");
         scanf("%c", &temp);
         fflush(stdin);
-}
-return (0);
-
     }
-
-    
+    return (0);
+}
