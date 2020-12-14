@@ -24,13 +24,11 @@ int main(void)
 for ( i = 0; i < 3; i++)
 {
 ersterTeil[i] = bezeichnung[i];
-// debug printf("\n ersten 3 Zeichen: %c ", ersterTeil[i]);
 }
 //schreibe den zweiten block in den "ZweiterTeil Array" 
 for ( i = 0; i < 3; i++)
 {
 zweiterTeil[i] = bezeichnung[i+4];
-// DEBUG printf("\n ersten 3 Zeichen: %c ", zweiterTeil[i]);
 }
 
 //berechnung
