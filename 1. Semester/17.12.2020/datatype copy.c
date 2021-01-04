@@ -21,7 +21,7 @@ int main(void)
     meins *f = &meinArray; // ein Zeiger *f holt sich die adresse von meinArray &
 
     up_x(f); //zeiger wird übergeben
-//up_x(&meinArray); geht auch ees kann nur die ADRESSE übergeben werden
+             //up_x(&meinArray); geht auch ees kann nur die ADRESSE übergeben werden
     up_y(f);
 
     return (42);
