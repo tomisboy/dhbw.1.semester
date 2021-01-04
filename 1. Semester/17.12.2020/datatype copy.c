@@ -31,7 +31,6 @@ void up_x(meins *f)
 {
     f->mat[1][1][2] = 45;
     strcpy(f->name[0], "Hannes");
-    
 }
 
 void up_y(meins *f)

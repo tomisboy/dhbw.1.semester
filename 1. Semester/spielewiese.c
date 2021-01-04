@@ -4,23 +4,20 @@
 #include <string.h>
 #include <math.h>
 
-int main(void) {
+int main(void)
+{
+
+    int a, b, c ;
+
+    printf("ZAHL 1 eingeben: \n ");
+    scanf("%i", &a);
+    fflush(stdin);
+    printf("ZAHL 2 eingeben: \n ");
+    scanf("%i", &b);
 
 
-float kommazahl=0.0;
-float punktzahl=0.0;
-float erg;
+c = a %b;
 
-printf("Kommazahl eingeben: \n");
-scanf_s("%f",&kommazahl);
-fflush(stdin);
-printf("\n punkt getrennte zahl eingeben: \n");
-scanf_s("%f",&punktzahl);
-fflush(stdin);
-
-erg = kommazahl + punktzahl;
-
-printf("\n%f", erg);
-
-return(42);
+printf("MOD = %i ", c);   
+ return (42);
 }
