@@ -9,15 +9,10 @@ int main(void)
 {
     char bereich[1000000+1] = {0};
     int i, j, counter;
-    counter = -2;
+    counter = 0;
     j = 0;
 
     //keine Primzahlen werden werden 1
-    bereich[2] = 0;
-    bereich[3] = 0;
-    bereich[5] = 0;
-    bereich[7] = 0;
-
     for (i = 2; i <= 1000001; i++)
     {
         if (bereich[i] == 0)
@@ -29,7 +24,7 @@ int main(void)
         }
     }
 
-    for (i = 0; i <= 1000001; i++)
+    for (i = 2; i <= 1000001; i++)
     {
         if (bereich[i] == 0)
             counter++;

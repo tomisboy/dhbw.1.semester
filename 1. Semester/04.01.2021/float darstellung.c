@@ -49,18 +49,17 @@ int main(void)
     itoa(charast, charast_array, 2);
     // char arrays zusammenfügen starte  bei Charakteristik:
     int i = 1;
-    for (i = 1; i < strlen(charast_array) - 1; i++) //
+    for (i = 1; i < strlen(charast_array) +1 ; i++) //
     {
         darstellung[i] = charast_array[i - 1];
         darstellung[i] = darstellung[i] - 48;
     }
 
-    int j = 10;
-    // char arrays zusammenfügen starte  bei mantisse:
-    for (j = 10; j < 24; j++) //
+    int j ;    // char arrays zusammenfügen starte  bei mantisse:
+    for (j = 9; j < 24; j++) //
     {
-        darstellung[j] = mantisse[j - 10];
-        darstellung[j] = darstellung[j];
+        darstellung[j] = mantisse[j - 9];
+        //darstellung[j] = darstellung[j];
     }
     int z;
     for (z = 0; z < 32; z++)
