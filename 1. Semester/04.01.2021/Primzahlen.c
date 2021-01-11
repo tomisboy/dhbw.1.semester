@@ -7,30 +7,31 @@
 
 int main(void)
 {
-    char bereich[1000000+1] = {0};
-    int i, j, counter;
-    counter = 0;
-    j = 0;
+    char bereich[100000] = {0};
+    int i = 0 , j= 0, counter=0;
 
     //keine Primzahlen werden werden 1
-    for (i = 2; i <= 1000001; i++)
+    for (i = 2; i < 100000; i++)
     {
         if (bereich[i] == 0)
         {
-            for (j= 2 * i; j <= 1000001; j+=i)
+            for (j= 2 * i; j < 100000; j+=i) 
             {
-                bereich[j] = 1;
-            }
+                bereich[j] = 1; // alle vielfachen einer primzahl Zahl streichen
+            }   // keine Primzahlen werden mit 1 markiert
+         counter++; // 
         }
-    }
 
-    for (i = 2; i <= 1000001; i++)
+        //if (bereich[i] == 0)
+           
+    }
+/*
+    for (i = 2; i <= 1000; i++)
     {
         if (bereich[i] == 0)
             counter++;
     }
-
-    printf("Anzahl der Primzahlen ist %d : ", counter);
-
+*/
+    printf("Anzahl der Primzahlen ist %d", counter);
     return (42);
 }

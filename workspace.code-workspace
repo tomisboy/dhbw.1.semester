@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"*. real c": "c"
+			"*. real c": "c",
+			"cmath": "c"
 		}
 	}
 }
