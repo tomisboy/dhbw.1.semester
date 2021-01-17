@@ -22,14 +22,14 @@ int main(void)
     //Das geht so hier in Visual Studio Codes nicht
     // in C Lion geht das komischerweise.
 
+   
+    char Zahlenbereich[1000000+1] = {0};
     time1 = timeStamp();
-    char Zahlenbereich[1000 + 1] = {0};
-    //keine Primzahlen werden werden 1
-    for (i = 2; i < 1000; i++)
+    for (i = 2; i < 1000000; i++)
     {
         if (Zahlenbereich[i] == 0)
         {
-            for (j = 2 * i; j < 1000; j += i)
+            for (j = 2 * i; j < 1000000; j += i)
             {
                 Zahlenbereich[j] = 1; // alle vielfachen einer primzahl Zahl streichen
             }                         // keine Primzahlen werden mit 1 markiert
@@ -38,7 +38,7 @@ int main(void)
     }
     time2 = timeStamp();
     printf("Anzahl der Primzahlen ist %d", counter);
-    printf("\n Der Computer hat  %.3lf sec. gebraucht", time2 - time1);
+    printf("\n Der Computer hat  %.12lf sec. gebraucht", time2 - time1);
     return (42);
 }
 
@@ -46,7 +46,6 @@ double timeStamp(void)
 {
     struct timeb tb;
     double t;
-
     ftime(&tb);
     t = tb.time + (double)tb.millitm / 1000.0;
     return t;
