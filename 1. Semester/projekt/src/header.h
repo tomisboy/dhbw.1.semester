@@ -3,13 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <conio.h>
 //#include <sys\timeb.h>
 #pragma warning(disable : 4996)
 
 //LIST ELEMENT
 typedef struct m_reservierung
 {
-    char name[20 + 1];      //Name des Kunden
+    char vorname[10 + 1];   
+    char nachname[10 + 1];   //Name des Kunden
     int Kursnummer;  //Reservierte Zimmernummer
     char email[25 + 1];     //Studentenemail
     int ects;          //Bereits erreichte ECTS Punkte

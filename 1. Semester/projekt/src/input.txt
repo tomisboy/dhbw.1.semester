@@ -1,6 +1,10 @@
-Hans, Maier         5601570   hans.maier@uni.de        100
-Peter, Groß         6601680   peter.gross@uni.de       50
-Sabina, Korb        6202640   sabina.korb@uni.de       20
-Sebastian, Kusmaul  5805660   sebastian.kusmaul@uni.de 30
-Kevin, Jahn         5705590   kevin.jahn@uni.de        50
-***Name				Kurs	  EMail					   ECTS
+4343*Name				Kurs	  EMail					       ECTS
+*Hans Maier         
+Hans      Maier     5601570   hans.maier@uni.de            100
+Peter     Gros      6601680   peter.gross@uni.de           50
+Sabina    Korb      6202640   sabina.korb@uni.de           20
+Sebastian Kusmaul   5805660   sebastian.kusmaul@uni.de     30
+Kevin     Jahn      5705590   kevin.jahn@uni.de            50
+*Name				Kurs	  EMail					   ECTS
+*Hans, Maier 
+///324534r5         
