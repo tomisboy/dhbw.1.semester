@@ -17,7 +17,7 @@ typedef struct m_dhler
 typedef struct
 {
     char name[20 + 1];
-    int prn;
+     int prn;
     t_dhler *mom,
         *start,
         *zwischen;

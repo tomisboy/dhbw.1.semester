@@ -17,12 +17,14 @@ char vorname[20*1];
 int pnr;
 float gehalt;
 int farbe[3];
-}stud;
+}stud, boi;
 //}tinf20b[20];
 
 stud.pnr =123;
 stud.gehalt = 7.85;
 stud.farbe[0] = 23;
+
+boi.pnr = 234;
 
 strcpy(stud.name , "Hannes");
 /*

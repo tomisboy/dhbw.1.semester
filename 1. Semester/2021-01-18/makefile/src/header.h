@@ -4,13 +4,14 @@
 #include <string.h>
 #include <math.h>
 #include <sys\timeb.h>
+
 #pragma warning(disable:4996)
 
 
-int main(void) 
-{
-int a ;
+#define PI 42;
+
+extern int gw; 
 
 
-return(42);
-}
+
+int up_addiere(int x, int y);
