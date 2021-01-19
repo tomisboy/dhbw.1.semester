@@ -11,7 +11,7 @@ int main(void)
     f->zwischen = 0;
 
     printf("Willkommen zur Studentenverwaltung\n\n");
-
+// do while ?
     while (ausgwaehlt != 0)
     {
         ausgwaehlt = up_menu(f); //wiederhole solange den aufruf des Menus, bis die 0 Ausgewählt wird, diese Beendet das Programm

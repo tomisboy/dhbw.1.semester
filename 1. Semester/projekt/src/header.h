@@ -12,7 +12,7 @@ typedef struct m_reservierung
 {
     char vorname[10 + 1];   
     char nachname[10 + 1];   //Name des Kunden
-    int Kursnummer;  //Reservierte Zimmernummer
+    int kursnummer;  //Reservierte Zimmernummer
     char email[25 + 1];     //Studentenemail
     int ects;          //Bereits erreichte ECTS Punkte
     struct m_reservierung *davor;
