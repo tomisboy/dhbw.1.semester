@@ -1,0 +1,3 @@
+Hans      Maier     1234567   hans.maier@uni.de             100 
+Peter     Gros      6601680   peter.gross@uni.de            50  
+thomas    alpert    2343      thomas.alpert@uni.de          333 

@@ -37,7 +37,7 @@ int up_menu(t_feld *f)
         break;
 
     case 6:
-        //up_speichern;
+        up_speichern(f);
         break;
     case 7:
         //up_hex();
@@ -75,7 +75,7 @@ void up_anzeige_daten(t_feld *f)
 
 void up_datei_einlesen(t_feld *f)
 {
-    char text[63 + 1];
+    char text[64 + 1];
     FILE *einlesen;
     einlesen = fopen("./src/input.txt", "r"); // "w" , "a" , "b"
 
@@ -97,7 +97,7 @@ void up_datei_einlesen(t_feld *f)
     }
 }
 
-void up_liste_Add(t_feld *f, char text[63 + 1]) // es kommt ein Zeiger f von typ t_feld
+void up_liste_Add(t_feld *f, char text[64 + 1]) // es kommt ein Zeiger f von typ t_feld
 {
     f->mom = (t_reservierung *)malloc(sizeof(t_reservierung)); // holt hauptspeciher
     up_file_struct(f, text);                                   //( inhalt wird in listelemet übertragen)
@@ -110,7 +110,7 @@ void up_liste_Add(t_feld *f, char text[63 + 1]) // es kommt ein Zeiger f von typ
         f->zwischen->danach = f->mom;
     f->zwischen = f->mom;
 }
-void up_file_struct(t_feld *f, char text[63 + 1]) // kopiert inhalt globaler vairable in Listelement
+void up_file_struct(t_feld *f, char text[64 + 1]) // kopiert inhalt globaler vairable in Listelement
 {
 
     char temp[7];
@@ -118,45 +118,39 @@ void up_file_struct(t_feld *f, char text[63 + 1]) // kopiert inhalt globaler vai
     f->mom->vorname[10] = '\0';
 
     strncpy(f->mom->nachname, text + 10, 10);
-    f->mom->vorname[20] = '\0';
+    f->mom->nachname[10] = '\0';
 
     strncpy(temp, text + 20, 10);
     f->mom->kursnummer = atoi(temp); //umwandlung von der Kursnummer, die als char[] durch strncpy kommt, als Int wert umwandeln
 
-    strncpy(f->mom->email, text + 30, 25);
-    f->mom->email[25] = '\0';
-    strncpy(temp, text + 59, 7); //speicher die ECTS Punkte als Chararray speichere (nimm extra 7 um alle werte aus temp[] zu überschreiben )
+    strncpy(f->mom->email, text + 30, 30);
+    f->mom->email[30] = '\0';
+    strncpy(temp, text + 60, 7); //speicher die ECTS Punkte als Chararray speichere (nimm extra 7 um alle werte aus temp[] zu überschreiben )
     f->mom->ects = atoi(temp);   //Umwandeln des ECTS chararrays als INT
 }
-
 void up_eingabe_tastatur(t_feld *f)
 
 {
-    int i;
-    int j;
-    int temp;
-    int fehler;
-    char eingabe;
-    char tmptext[63 + 1];
-    char *zeigertxt = tmptext;
+    int i, j, temp, fehler, eingabe;
+    char tmptext[63 + 1];      //text in dem die ganze eingabe als eine zeile (wie in der Textdatei) gespeichert wird
+    char *zeigertxt = tmptext; // Zeiger auf tmptext für methoden
 
-    char tmpvorname[10 + 1];
-    char *zeigervorname = tmpvorname;
+    char tmpvorname[10 + 1];          //hier wird der eingebenene Vorname gespeichert
+    char *zeigervorname = tmpvorname; //Zeiger auf tmpvorname für methoden
 
-    char tmpnachname[10 + 1];
-    char *zeigernachname = tmpnachname;
+    char tmpnachname[10 + 1];           //hier wird der eingebenene nachname gespeichert
+    char *zeigernachname = tmpnachname; //Zeiger auf tmpnachname für methoden
 
-    char tmpkursnummer[7 + 1];
-    char *zeigerkursnummer = tmpkursnummer;
+    char tmpkursnummer[8 + 1];              //hier wird die eingebenene Kursnummer gespeichert
+    char *zeigerkursnummer = tmpkursnummer; //Zeiger auf tmpkursnummer für methoden
 
-    char tmpects[4 + 1];
-    char *zeigerects = tmpects;
+    char tmpects[5 + 1];        //hier wird die eingebenene ECTS punkzahl gespeichert
+    char *zeigerects = tmpects; //Zeiger auf tmpects für methoden
 
-    char tmpemail[25 + 1];
+    char tmpemail[30 + 1];        //hier wird die email gespeichert
+    char *zeigeremail = tmpemail; //Zeiger auf tmpemail für methoden
 
-    char mailzusatz[7 + 1] = {'@', 'u', 'n', 'i', '.', 'd', 'e'};
-
-    //Fülle alle Arrays mit Leerzeichen, ist fürs Speichen später besser
+    //Fülle alle Arrays mit Leerzeichen, ist fürs Speichen und einlesen später besser
     for (i = 0; i < sizeof(tmptext); i++)
         tmptext[i] = 32;
     for (i = 0; i < sizeof(tmpvorname); i++)
@@ -177,10 +171,10 @@ void up_eingabe_tastatur(t_feld *f)
     {
         do //EINGABE DES VORNAMENS
         {
-            printf("Zuerst bitte den Vornamen (max 10 Zeichen keine Sonderzeichen!!!):  ");
+            printf("Zuerst bitte den Vornamen (max 10 Zeichen keine Sonderzeichen erlaubt!!!):  ");
             fgets(tmpvorname, sizeof(tmpvorname), stdin);
             fflush(stdin);
-            fehler = textueberpruefung(zeigervorname);
+            fehler = textueberpruefung(zeigervorname); //Überprüfung der Eingabe
         } while (fehler != 0);
 
         do //EINGABE DES NACHNAMENS
@@ -188,7 +182,7 @@ void up_eingabe_tastatur(t_feld *f)
             printf("Bitte den Nachnamen (max 10 Zeichen keine Sonderzeichen!!!):  ");
             fgets(tmpnachname, sizeof(tmpnachname), stdin);
             fflush(stdin);
-            fehler = textueberpruefung(zeigernachname);
+            fehler = textueberpruefung(zeigernachname); //Überprüfung der Eingabe
         } while (fehler != 0);
 
         do //EINGABE DER KURSNUMMER
@@ -196,7 +190,7 @@ void up_eingabe_tastatur(t_feld *f)
             printf("Bitte Kursnummer angeben (max 7 Zeichen nur Zahlen erlaubt):  ");
             fgets(tmpkursnummer, sizeof(tmpkursnummer), stdin);
             fflush(stdin);
-            fehler = zahlueberpruefung(zeigerkursnummer);
+            fehler = zahlueberpruefung(zeigerkursnummer); //Überprüfung der Eingabe
         } while (fehler != 0);
 
         do //EINGABE DER ECTS PUNKT
@@ -204,97 +198,55 @@ void up_eingabe_tastatur(t_feld *f)
             printf("Bitte die Anzahl der ECTS Punkte angeben (max 3 Zeichen nur Zahlen erlaubt):  ");
             fgets(tmpects, sizeof(tmpects), stdin);
             fflush(stdin);
-            fehler = zahlueberpruefung(zeigerects);
+            fehler = zahlueberpruefung(zeigerects); //Überprüfung der Eingabe
         } while (fehler != 0);
 
         printf("\n\nWollen Sie weiter Werte eingeben, so drücken Sie jetzt \"j\" \num abzubrechen wählen sie eine beliebige Taste : \n ");
         scanf("%c", &eingabe);
         fflush(stdin);
 
-    } while (eingabe == 'j');
+        emailfeld(zeigervorname, zeigernachname, zeigeremail, sizeof(tmpvorname), sizeof(tmpnachname));
 
-    //EMAIL
-    //tmpvorname sieht nun folgendermaßen aus:
-    //[0]'t'
-    //[1]'h'
-    //[2]''
-    //[3]'\0'
+        // um die eingaben schon in eine Zeile zusammenzufassen gleich,
+        // müssen die einzelnen arrays bereinigt werden
+        // \n und die terminierende 0 wird entfernt
+        bereinige(zeigervorname, sizeof(tmpvorname));
+        bereinige(zeigernachname, sizeof(tmpnachname));
+        bereinige(zeigerkursnummer, sizeof(tmpkursnummer));
+        bereinige(zeigerects, sizeof(tmpects));
 
-    // Wenn der String kleiner als 10 ist muss noch dem \n gesucht werden
-    //strncpy(tmpemail, tmpvorname, sizeof(tmpvorname)-2 );
-    for (i = 0; i < sizeof(tmpvorname) - 1; i++)
-    {
-        if (tmpvorname[i] != 10) // 10 ist \n
-        {
-            tmpemail[i] = tmpvorname[i]; //kopiere den String , bis du fertig bist oder früher schon das \n gefunden hast
-        }
-        else
-            break; // bei vorzeitigen finden des \n wird das kopieren beendet
-    }
+        //nun sind alle eingaben bereining und können hintereinander zusammengefügt werden,
+        //sodass eine "Zeile" Text entsteht und diese wird in tmptext gespeichert
 
-    tmpemail[i] = '.'; // Setze den punkt der e-Mail zwischen vor und nachname
+        strncpy(tmptext, tmpvorname, 10);
+        strncpy(tmptext + 10, tmpnachname, 10);
+        strncpy(tmptext + 20, tmpkursnummer, 7);
+        strncpy(tmptext + 30, tmpemail, 30);
+        strncpy(tmptext + 60, tmpects, 4);
+        tmptext[64] = '\n';
 
-    for (j = 0; j < sizeof(tmpnachname) - 1; j++)
-    {
-        if (tmpnachname[j] != 10) // 10 ist \n
-        {
-            tmpemail[i + 1] = tmpnachname[j]; //kopiere den Nachnahmen an der stelle der email nach dem .
-            i++;                              // gehe an die nächste Stelle des Email Arrays
-        }
-        else
-            break; // bei vorzeitigen finden des \n wird das kopieren beendet
-    }
-    //zusatz @uni.de in den zusammengesetze email hinzufügen an der passenden  stelle
-    for (j = 0; j < 7; j++)
-    {
-        tmpemail[i + 1] = mailzusatz[j];
-        i++;
-    }
-    bereinige(zeigervorname, sizeof(tmpvorname)); // #############
-    bereinige(zeigernachname, sizeof(tmpnachname));
-    bereinige(zeigerkursnummer, sizeof(tmpkursnummer));
-    bereinige(zeigerects, sizeof(tmpects));
+        //Die Eingabe wird nun in einer verkettetn Liste gespeichert:
 
-    //nun sind alle eingaben bereining und können hintereinander zusammengefügt werden, sodass eine "Zeile" Text entsteht.
+        up_liste_Add(f, tmptext); // der Zeiger vom Hautprogramm und temp text wird der Methode übergeben, die die Daten in die Liste speichern soll.
 
-
-    strncpy(tmpvorname, tmptext, 10);
-    tmptext[10] = 23;
-    strncpy(tmpnachname, tmptext + 10, 10);
-    tmptext[20] = 23;
-    strncpy(tmpkursnummer, tmptext + 20, 10);
-    tmptext[30] = 23;
-
-    strncpy((tmpvorname - 1), tmptext + 20, 10);
-    tmptext[30] = 23;
-    //  strncpy(temp, text + 20, 10);
-    //   f->mom->kursnummer = atoi(temp); //umwandlung von der Kursnummer, die als char[] durch strncpy kommt, als Int wert umwandeln
-
-    //   strncpy(f->mom->email, text + 30, 25);
-    //   f->mom->email[25] = '\0';
-    //   strncpy(temp, text + 59, 7); //speicher die ECTS Punkte als Chararray speichere (nimm extra 7 um alle werte aus temp[] zu überschreiben )
-    //   f->mom->ects = atoi(temp);   //Umwandeln des ECTS chararrays als INT
+    } while (eingabe == 'j'); //uum weitere eingaben zu ermöglichen muss einfach 'j' gedrückt werden
 }
-
 void bereinige(char *bekommenerZeiger, int langeArray)
 {
-    // Methode um von bekommenen Char[] das  \n zu entfernen  damit nacher einen ganzen string zubauen
+    // Methode zur Bereinigung von char[] entferne von \n und der terminierenden o
+    // Text verarbeitung dadurch einfacher
     int i;
-    //  int j = sizeof(bekommenerZeiger);
     for (i = 0; i < langeArray; i++)
-        if (bekommenerZeiger[i] == 10) // Wenn innerhalb der 10 stellen ein \n auftaucht wir dieses und die nächste 0 durch ein SPACE ersetzt
-        {
+        if (bekommenerZeiger[i] == 10)     // Wenn innerhalb der 10 stellen ein \n auftaucht wir dieses und die nächste 0 durch ein SPACE ersetzt
+            bekommenerZeiger[i] = 32;      // entferne \n
+        else if (bekommenerZeiger[i] == 0) // enterne die terminierende 0
             bekommenerZeiger[i] = 32;
-            bekommenerZeiger[i + 1] = 32;
-            break;
-        }
-
-    bekommenerZeiger[langeArray-1] = 32; //letzte element des Arrays auch durch ein Leerzeichen ersetzen.
 }
 int textueberpruefung(char *bekommenerZeiger)
 {
+    //Überprüft ob die die getätigte Eingabe ausschließlich alphatetischen buchstaben beinhaltet
+    // gibt einen Fehler zurück.
     int i, fehler;
-
     for (i = 0; i < sizeof(bekommenerZeiger) - 1; i++)
     {
         fehler = 0;
@@ -304,13 +256,10 @@ int textueberpruefung(char *bekommenerZeiger)
         else //es gibt ein zeichen, dass nicht im Alphabet ist ODER das ende \n wurde erreicht.
         {
             if (bekommenerZeiger[i] == '\n') //hier wurde das ende des eingebenen Strings gefunden
-            {
-                // tmpvorname[i] = 32; // '\n' durch ein Leerzeichen ersetzt
-                break; //beendet die forschleife
-            }
+                break;                       //beendet die forschleife
             else
             {
-                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubt Zeichen! Bitte nochmal probieren\n");
+                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen! Bitte nochmal probieren\n");
                 fehler = 1;
                 break;
             }
@@ -319,30 +268,115 @@ int textueberpruefung(char *bekommenerZeiger)
     return fehler;
 }
 int zahlueberpruefung(char *bekommenerZeiger)
-
-
 {
+    //Überprüft ob die die getätigte Eingabe ausschließlich Zahlen beinhaltet
+    // gibt einen Fehler zurück.
     int i, fehler;
     for (i = 0; i < sizeof(bekommenerZeiger) - 1; i++)
     {
-        fehler = 0;
-        if (bekommenerZeiger[i] >= '0' && bekommenerZeiger[i] <= '9') //Überprungung ob es eine Zahl ist
+        fehler = 0;                                                   //setze Fehler (zurück)
+        if (bekommenerZeiger[i] >= '0' && bekommenerZeiger[i] <= '9') //Überprüft die char ob sie Zahlen sind
         {
         }
-        else //es gibt ein zeichen, dass nicht im Alphabet ist ODER das ende \n wurde erreicht.
+        else //es gibt ein zeichen, dass nicht im Alphabet ist ODER das ende "\n" wurde erreicht.
         {
             if (bekommenerZeiger[i] == '\n') //hier wurde das ende des eingebenen Strings gefunden
-            {
-                //tmpkursnummer[i] = 32; // '\n' durch ein Leerzeichen ersetzt
-                break; //beendet die forschleife
-            }
+                break;                       //beendet die forschleife
             else
             {
-                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubt Zeichen! Bitte nochmal probieren\n");
+                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen! Bitte nochmal probieren\n");
                 fehler = 1;
                 break;
             }
         }
     }
     return fehler;
+}
+void emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname)
+{
+    //Methode um aus den gegebenen Infos: Vor und nachname eine den Unientsprechenen Vorschriften gerechten emailadresse zu erstellen
+    // im format vorname.nachname@uni.de
+    char mailzusatz[7 + 1] = {'@', 'u', 'n', 'i', '.', 'd', 'e'};
+    int i, j;
+    //tmpvorname könnte folgerdermaßen aussehen, wenn die eingabe unter 10 Zeichen ist
+    //[0]'t'
+    //[1]'h'
+    //[2]'\n'
+    //[3]'\0'
+
+    // Wenn der char (String) kleiner als 10 existier ein \n vor der terminierenden 0
+    // Dieses \n muss noch beim kopieren nicht beachtet werden
+
+    for (i = 0; i < laengevorname - 1; i++) //kopiere den die einzellenen Char aus vorname in mail , bis du fertig bist oder früher schon das \n gefunden hast
+    {
+        if (zeigervorname[i] != 10) // 10 ist \n .
+            zeigeremail[i] = zeigervorname[i];
+        else
+            break; // bei vorzeitigen finden des \n wird das kopieren beendet
+    }
+
+    zeigeremail[i] = '.'; // Setze den punkt der e-Mail zwischen vor und nachname
+
+    for (j = 0; j < (laengenachname)-1; j++) // mache jetzt der stelle wo du aufgehört hast weiter (i)
+    {
+        if (zeigernachname[j] != 10) // 10 ist \n
+        {
+            zeigeremail[i + 1] = zeigernachname[j]; //kopiere den Nachnamen an der stelle der email nach dem "."
+            i++;                                    // gehe an die nächste Stelle des Email Arrays
+        }
+        else
+            break; // bei vorzeitigen finden des \n wird das kopieren beendet
+    }
+    //zusatz @uni.de in den zusammengesetze email hinzufügen an der passenden  stelle
+    for (j = 0; j < 7; j++)
+    {
+        zeigeremail[i + 1] = mailzusatz[j];
+        i++;
+    }
+}
+
+void up_speichern(t_feld *f)
+{
+    int i;
+    char kurschar[10 + 1];
+    char *kurscharzeiger = kurschar;
+    char etcschar[4 + 1];
+    char *etcscharzeiger = etcschar;
+
+    FILE *einlesen;
+    einlesen = fopen("./src/input1.txt", "w"); //öffnen mit parameter w "leert" die Datei
+
+    if (!einlesen)
+        printf("\n Datei nicht moeglich zu oeffnen");
+
+    f->mom = f->start;
+    // printf("\nVorname         Nachname        Kurs       E-Mail                         ECTS      \n");
+
+    while (f->mom)
+    { //solange mom != 0
+
+        fprintf(einlesen, f->mom->vorname);
+        fprintf(einlesen, f->mom->nachname);
+        for (i = 0; i < sizeof(kurschar); i++)
+            kurschar[i] = 32;                        //letzen wert löschen init // array wieder mit SPACE füllen
+        sprintf(kurschar, "%d", f->mom->kursnummer); //konvertiert das int in ein char[]
+        bereinige(kurscharzeiger, sizeof(kurschar));
+        kurschar[10] = 0; // die null muss am ende stehen
+        fprintf(einlesen, kurschar);
+
+        fprintf(einlesen, f->mom->email);
+
+        for (i = 0; i < sizeof(etcschar); i++)
+            etcschar[i] = 32; //letzen wert löschen init // array wieder mit SPACE füllen
+
+        sprintf(etcschar, "%d", f->mom->ects); //konvertiert das int in ein char[]etcschar
+        bereinige(etcscharzeiger, sizeof(etcschar));
+        etcschar[4] = 0;
+        fprintf(einlesen, etcschar);
+
+        fprintf(einlesen, "\n");
+        printf("\n%-15s %-15s %-10d %-25s %8d", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
+        f->mom = f->mom->danach;
+    }
+    fclose(einlesen);
 }

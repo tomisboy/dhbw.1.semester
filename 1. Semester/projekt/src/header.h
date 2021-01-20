@@ -10,10 +10,10 @@
 //LIST ELEMENT
 typedef struct m_reservierung
 {
-    char vorname[10 + 1];   
-    char nachname[10 + 1];   //Name des Kunden
+    char vorname[15 + 1];   
+    char nachname[15 + 1];   //Name des Kunden
     int kursnummer;  //Reservierte Zimmernummer
-    char email[25 + 1];     //Studentenemail
+    char email[30 + 1];     //Studentenemail
     int ects;          //Bereits erreichte ECTS Punkte
     struct m_reservierung *davor;
     struct m_reservierung *danach;
@@ -36,5 +36,11 @@ void up_hex(t_feld *f);
 
 void up_liste_Add(t_feld *f, char text[63 + 1]);
 void up_struct_liste(t_feld *f);
-//void up_speichern()
+void bereinige(char *bekommenerZeiger, int langeArray);
+int textueberpruefung(char *bekommenerZeiger);
+int zahlueberpruefung(char *bekommenerZeiger);
+
+
+void emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname);
+void up_speichern();
 // SPEICHERN DER DATEI fehlt;
