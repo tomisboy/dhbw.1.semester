@@ -26,8 +26,7 @@ int up_menu(t_feld *f)
         up_eingabe_tastatur(f);
         break;
     case 3:
-        //sortieren
-        //unterscheiden ob nach name oder Kursnummer sortiert haben will(f);
+        up_sortieren(f);
         break;
     case 4:
         up_anzeige_daten(f);
@@ -55,29 +54,29 @@ void up_anzeige_daten(t_feld *f)
     f->mom = f->start; //Starte beim ersten Listenelement
     printf("\nVorname             Nachname            Kurs      E-Mail                                       ECTS\n");
 
-    while (f->mom)                                                                                                              // gehe solange die liste durch bis du das ende = 0 erreichst
-    {                                                                                                                           //solange mom != 0
-        printf("\n%-18s%-18s%-10d%-24s%d", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects); //formatierte Ausgabe der Inhalte des aktuellen Listenelemts
-        f->mom = f->mom->danach;                                                                                                //setzte den Zeiger auf den nachfolger, auf das nächste Listenelement
-        if (zaehler != 25)                                                                                                      //Überprüfe ob bereits 25 Zeilen ausgegeben wurden
-            zaehler++;
+    while (f->mom) // gehe solange die liste durch bis du das ende = 0 erreichst
+    {
+        //Gibt aktuellen Listenelemente formatiert aus
+        printf("\n%-18s%-18s%-10d%-24s%d", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
+        f->mom = f->mom->danach; //setzte den Zeiger auf den nachfolger, auf das nächste Listenelement
+        if (zaehler != 25)       //Überprüfe ob bereits 25 Zeilen ausgegeben wurden
+            zaehler++;           //Zähle die ausgebenen Listen aus
         else
-        {
+        { //Es wurden 25 Zeichen eingelesen
             printf("\nEs wurden die ersten 25 Zeilen ausgegeben\num weitere 25 Zeilen auszugeben bitte mit Enter weiter");
             printf("\nWeiter mit Enter Taste ...");
             getchar();
-            zaehler = 0;
+            zaehler = 0; //Setzte Zähler zurück
         }
     }
     printf("\n\nWeiter mit Enter Taste ...");
     getchar();
 }
-
 void up_datei_einlesen(t_feld *f)
 {
-    char text[99 + 1];
+    char text[99 + 1]; //in diesem Array wird eine ganze Zeile aus der Datei gespeichert
     FILE *einlesen;
-    einlesen = fopen("./src/input.txt", "r"); // "w" , "a" , "b"
+    einlesen = fopen("./src/input.txt", "r"); //Öffnet die Datei zum Lesen "read"
 
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
@@ -85,19 +84,17 @@ void up_datei_einlesen(t_feld *f)
     {
         while (!feof(einlesen))
         {
-            fgets(text, 99, einlesen); // lese 99 zeichen, vorlesen
+            fgets(text, 99, einlesen); // Lese 99 Zeichen der input Datei ein
             if (text[0] >= 'A' && text[0] <= 'Z' || text[0] >= 'a' && text[0] <= 'z')
-                up_liste_Add(f, text);
-            //geh nur in die Schleife wenn der Anfang einer Zeile ein Buchstabe aus dem Alphabet ist
+                up_liste_Add(f, text); //Lese nur ein, wenn das erste Zeichen der Zeile ein Buchstaben oder eine Zahlen ist
         }
-        fclose(einlesen);
+        fclose(einlesen); //schließe Datei
         printf("\n\nDaten wurden erfolgreich eingelesen\n\n");
         printf("\nWeiter mit Enter Taste ...");
         getchar();
     }
 }
-
-void up_liste_Add(t_feld *f, char text[99 + 1]) // es kommt ein Zeiger f von typ t_feld
+void up_liste_Add(t_feld *f, char text[99 + 1])
 {
     f->mom = (t_studenten *)malloc(sizeof(t_studenten)); // Reserviert Hauptspeicher von der Größe des Struct-elements t_studenten für nächstes Listenelement
     up_file_struct(f, text);                             //( inhalt wird in listelemet übertragen)
@@ -112,20 +109,17 @@ void up_liste_Add(t_feld *f, char text[99 + 1]) // es kommt ein Zeiger f von typ
         f->temp->danach = f->mom; //vom Vorgänger, das Zeigerelement "danach" wird der akutell neu erzeugt mom Zeiger       |
     f->temp = f->mom;             //temp Zeiger wird der aktuelle neu erzeugte mom zeiger       <----------------------------
 }
-
 void up_hex(t_feld *f)
 {
-    f->mom = f->start;
-    while (f->mom)
-    {
-        printf("\n %-10s mom Zeiger: %10X   mom DAVOR : %10X  mom DANCH : %10X", f->mom->email, f->mom, f->mom->davor, f->mom->danach);
-
-        f->mom = f->mom->danach;
+    f->mom = f->start; //gehe zum ersten Listenelement
+    while (f->mom)     //wiederhole solange das Ende nicht ereicht wurde
+    {                  //gebe die Zeiger des aktuellen Listenelements aus
+        printf("\n %-10s mom Zeiger: %10X   mom DAVOR : %10X  mom DANACH : %10X", f->mom->email, f->mom, f->mom->davor, f->mom->danach);
+        f->mom = f->mom->danach; //gehe zum
     }
     printf("\nWeiter mit Enter Taste ...");
     getchar();
 }
-
 void up_file_struct(t_feld *f, char text[99 + 1])
 {
     //In dieser Methode wird der eingelesene Text aufgeteil in die Listenelemente:
@@ -162,14 +156,14 @@ void up_speichern(t_feld *f)
     char *etcscharzeiger = etcschar;
 
     FILE *einlesen;
-    einlesen = fopen("./src/input1.txt", "w"); //öffnen mit parameter w "leert" die Datei. Öffnen und leert die datei
+    einlesen = fopen("./src/output.txt", "w"); //öffnen mit parameter w "leert" die Datei. Öffnen und leert die datei
 
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
 
     //Initialisierung der Array, diese werden mit Leerzeichen die als als Trennsymbolen herhalten gefüllt
-    for (i = 0; i < sizeof(kurschar); i++) 
-        kurschar[i] = 32;                 
+    for (i = 0; i < sizeof(kurschar); i++)
+        kurschar[i] = 32;
     for (i = 0; i < sizeof(etcschar); i++)
         etcschar[i] = 32;
 
@@ -182,7 +176,7 @@ void up_speichern(t_feld *f)
         fprintf(einlesen, f->mom->nachname); //schreiben den Nachnamen aus der aktuellen Liste in die Datei
 
         sprintf(kurschar, "%d", f->mom->kursnummer);
-        //Der Befehl sprintf Konvertiert eine Zahl(int) in ein Char Array, sobald die Zahl zuuende umgewandelt wurden ist wird einen terminierende \0 gesetzt
+        //Der Befehl sprintf konvertiert eine Zahl(int) in ein Char Array, sobald die Zahl zuende umgewandelt wurden ist wird einen terminierende \0 gesetzt
         //Diese \0 steht aber nicht ganz am ende dieses Arrays kurschar[10 + 1]
         //Im kurschar[] soll aber bis zur 7.Stelle eine Zahlenfolge (Zeichen pro Stelle) gefolgt von 3 Leerzeichen stehen
         //Beispiel die Zahl 482 wird nach der Konvertierung folgendermaßen abgebildet:
@@ -531,3 +525,129 @@ void up_entferne_datensatz(t_feld *f)
         fflush(stdin);
     } while (taste == 'j');
 }
+
+void up_sortieren(t_feld *f)
+{
+
+    //Allgemeine Regel der Zeigervertauschung:
+    //    www,xxx,yyy,zzz repräsentieren beispielhaft die Zeigeradressen, der Elemente der verketteten Liste
+    // Am Beispiel vertauschen b@uni.de mit c@uni.de
+    //#####################################################################################################################################
+    // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  xxx->zzz[0]
+    // 2.  b@uni.de                                      mom Zeiger:     xxx    mom DAVOR : yyy->zzz[3]	mom DANACH :  zzz->www[1]
+    // 3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : xxx->yyy[4] mom DANACH :  www->xxx[2]
+    // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :        0
+    //######################################################################################################################################
+
+    int tmp;
+    int i, j;
+
+    f->mom = f->start; //gehe auf den Startzeiger
+
+    while (f->mom) // DU STARTET AM LETZEN ELEMENT GERADE gehe solange die liste durch bis du das ende = 0 erreichst
+    {
+        if (f->mom->danach == 0)
+            break;
+
+        // Es gibt 3 Fälle
+        if ((f->mom->davor == 0) && ((f->mom->kursnummer) > (f->mom->danach->kursnummer))) //die ersten 2 werden verglichen
+        {
+
+            //IST
+            // 1.  hans.maier@uni.de     f->mom                             mom Zeiger:     xxx	    mom DAVOR :      0      mom DANACH :  yyy
+            // 2.  b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR :     xxx	    mom DANACH :  zzz
+            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     yyy     mom DANACH :  www
+
+            //soll :
+            //2.   b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR :      0	    mom DANACH :  xxx
+            // 1.  hans.maier@uni.de   f->mom                               mom Zeiger:     xxx	    mom DAVOR :      yyy    mom DANACH :  zzz
+            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :      xxx    mom DANACH :  www
+
+            //Anweisung :
+            // 1.  hans.maier@uni.de    f->mom                              mom Zeiger:     xxx	    mom DAVOR : 0->yyy[2]   mom DANACH :  yyy->zzz[0]
+            // 2.  b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR : xxx-> [3]   mom DANACH :  zzz->xxx[1]
+            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR : yyy->xxx[4] mom DANACH :  www
+            //f->start = f->mom->danach;
+            f->mom = f->mom->danach;
+        }
+
+        if (((f->mom->kursnummer) > (f->mom->danach->kursnummer)) && ((f->mom->danach->danach != 0))) //3. fall werte innerhalb wedern verglichen
+
+        {
+            //Erster Durchgang passe die Nachfolger an:
+            //Folgender Alogrithmus wird verwendet:
+            //#####################################################################################################################################
+            // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  xxx->zzz[0]
+            // 2.  b@uni.de                    [f->mom]          mom Zeiger:     xxx    mom DAVOR : yyy     	mom DANACH :  zzz->www[1]
+            // 3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : xxx         mom DANACH :  www->xxx[2]
+            // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz         mom DANACH :        0
+            //######################################################################################################################################
+            f->mom->davor->danach = f->mom->danach; //xxx->zzz[0]
+            //Von Momentan nach DAVOR (yyy) nach DANACH, kommt man an die Zeigeradresse (xxx), die durch zzz ersetzt werden soll.
+            //Dabei erhält man zzz,indem man von der Momentanen Zeigeradresse nach DANACH geht.
+
+            f->mom->danach = f->mom->danach->danach; //zzz->www[1]
+            //Von Momentan nach DANACH,kommt man an die Zeigeradresse (zzz),  die durch www ersetzt werden soll.
+            //Dabei erhält man www, indem man von der Momentanen Zeigeradresse nach DANACH (ist zur zeit ja noch zzz) geht und bei DANACH geht.
+
+            f->mom->davor->danach->danach = f->mom; //www->xxx[2]
+            //Von Momentan nach DAVOR (yyy) nach DANACH (zzz) nach DANACH kommt man an die Zeigeradresse (www) die durch xxx ersetzt werden soll.
+            //Dabei erhält man xxx durch die Momentanen Zeigeradresse.
+
+            //######################################################################################################################################
+            // ...Erster Durchgang ist nun Durchgelaufen ...
+            //    Sieht dann so aus:
+            //  1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  zzz
+            //  3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : xxx         mom DANACH :  xxx
+            //  2.  b@uni.de   [f->mom]                           mom Zeiger:     xxx   mom DAVOR : yyy         mom DANACH :  www
+            //  4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz         mom DANACH :    0
+            //######################################################################################################################################
+
+            //2.Durchlauf ändere die DAVOR Zeiger
+            //Folgender Alogrithmus wird verwendet:
+            //######################################################################################################################################
+            //    1.  hans.maier@uni.de                          mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  zzz
+            //    3.  c@uni.de                                   mom Zeiger:     zzz	mom DAVOR : xxx->yyy[3] mom DANACH :  xxx
+            //    2.  b@uni.de   [f->mom]                        mom Zeiger:     xxx    mom DAVOR : yyy->zzz[4]	mom DANACH :  www
+            //    4.  a.b@uni.de                                 mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :    0
+            //######################################################################################################################################
+
+            f->mom->davor->danach->davor = f->mom->davor; //xxx->yyy[3]
+            //Der Vorgänger für f->mom liegt bisher ja noch auf yyy von dort aus kommt man über den Nachfolger(DANACH) von yyy (nähmlich zzz)
+            // auf die richtige Zeile an die stelle DAVOR,  diese wird mit yyy ersetzt
+
+            f->mom->davor = f->mom->davor->danach; //yyy->zzz[4]
+            //Der Vorgänger für f->mom liegt bisher ja noch auf yyy, von dieser Zeigeradresse kommt man über den Nachfolger(DANACH) auf zzz
+
+            f->mom->danach->davor = f->mom; //zzz->xxx[5]
+                                            //Der Nachfolger von f->mom (nämlich www) springt an die richtige Zeigeradresse, in dieser muss man den Vorgänger (DAVOR)
+                                            // durch durch den xxx Wert was die Momentane Speicheradresse ist ersetzten.
+            f->mom = f->mom->danach;
+        }
+
+        //if ((f->mom->danach->danach == 0) && ((f->mom->kursnummer) > (f->mom->danach->kursnummer))) // es werden die letzten 2 verglichen
+        {
+
+            //IST
+            // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  yyy
+            // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR :     xxx	    mom DANACH :  zzz
+            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     yyy     mom DANACH :  0
+
+            //soll :
+
+            // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  zzz
+            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     xxx     mom DANACH :  yyy
+            // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR :     zzz	    mom DANACH :  0
+
+            //Anweisung :
+            // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  yyy->zzz[0]
+            // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR : xxx->zzz[3] mom DANACH :  zzz->0 [1]
+            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR : yyy->xxx[4] mom DANACH :  0-> yyy[2]
+            f->mom = f->mom->danach;
+        }
+    }
+
+    i++;
+}
+
+//WÄHLEN ZWISCHEN nach Kursnummer sortieren oder e-Mail

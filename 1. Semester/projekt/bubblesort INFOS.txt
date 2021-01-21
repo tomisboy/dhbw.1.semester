@@ -1,0 +1,93 @@
+
+
+wenn erstes null ist
+    setzte 2 auf start !!
+
+    IST
+    // 1.  hans.maier@uni.de     f->mom                             mom Zeiger:     xxx	    mom DAVOR :      0      mom DANACH :  yyy
+    // 2.  b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR :     xxx	    mom DANACH :  zzz
+    // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     yyy     mom DANACH :  www
+
+    soll :
+
+    //2.   b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR :      0	    mom DANACH :  xxx
+    // 1.  hans.maier@uni.de   f->mom                               mom Zeiger:     xxx	    mom DAVOR :      yyy    mom DANACH :  zzz
+    // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :      xxx    mom DANACH :  www
+
+    Anweisung :
+    // 1.  hans.maier@uni.de    f->mom                              mom Zeiger:     xxx	    mom DAVOR : 0->yyy[2]   mom DANACH :  yyy->zzz[0]
+    // 2.  b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR : xxx-> [3]   mom DANACH :  zzz->xxx[1]
+    // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR : yyy->xxx[4] mom DANACH :  www
+
+
+
+
+ 
+wenn Letztes  null ist
+    setzte 2 auf start !!
+
+    IST
+    // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  yyy
+    // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR :     xxx	    mom DANACH :  zzz
+    // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     yyy     mom DANACH :  0
+
+    soll :
+
+    // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  zzz
+    // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     xxx     mom DANACH :  yyy
+    // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR :     zzz	    mom DANACH :  0
+ 
+    Anweisung :
+    // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  yyy->zzz[0]
+    // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR : xxx->zzz[3] mom DANACH :  zzz->0 [1]
+    // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR : yyy->xxx[4] mom DANACH :  0-> yyy[2]
+
+
+
+
+Wenn zwischendrinne:
+    // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :     XXX
+    // 2.  b@uni.de                                      mom Zeiger:     XXX    mom DAVOR :     yyy	mom DANACH :     zzz
+    // 3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR :     XXX     mom DANACH :     www
+    // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR :     zzz	mom DANACH :        0
+
+    //  tausche vertausche b@uni.de und c@uni.de
+    //  Die Liste sieht nun so aus
+    //  Was hier noch falsch ziegt ist (!) markieren
+    //  Die Mom Zeiger mit "_" werden nie verändert
+
+    // 1.  hans.maier@uni.de                             mom Zeiger:     _yyy	mom DAVOR :          0  mom DANACH :     XXX(!)
+    // 3.  c@uni.de                                      mom Zeiger:     _zzz(!)mom DAVOR :     XXX(!)  mom DANACH :     www(!)
+    // 2.  b@uni.de                                      mom Zeiger:     _XXX(!)mom DAVOR :     yyyq	mom DANACH :     zzz(!)
+    // 4.  a.b@uni.de                                    mom Zeiger:     _www	mom DAVOR :      zzz	mom DANACH :          0
+
+    // Werte mit # sind die Werte die die Zeiger annehmen müssen, damit die vertauschung getauscht wurde
+
+    // 1.  hans.maier@uni.de                             mom Zeiger:     _yyy	mom DAVOR :          0  mom DANACH :     zzz(#)
+    // 3.  c@uni.de                                      mom Zeiger:     _zzz(!)mom DAVOR :     yyy(#)  mom DANACH :     XXX(#)
+    // 2.  b@uni.de                                      mom Zeiger:     _XXX(!)mom DAVOR :     zzz(#)	mom DANACH :     www(#)
+    // 4.  a.b@uni.de                                    mom Zeiger:     _www	mom DAVOR :     XXX(#)	mom DANACH :          0
+
+    //#####################################################################################################################################
+    // 1. Durchlauf ändere die Nachfolger
+    // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  xxx->zzz[0]
+    // 2.  b@uni.de                                      mom Zeiger:     XXX    mom DAVOR : yyy->zzz[3]	mom DANACH :  zzz->www[1]
+    // 3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : XXX->yyy[4] mom DANACH :  www->xxx[2]
+    // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :        0
+
+    //Sieht dann so aus:
+    // // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  zzz
+    //3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : XXX->yyy[3] mom DANACH :  xxx
+    // 2.  b@uni.de                                      mom Zeiger:     XXX    mom DAVOR : yyy->zzz[4]	mom DANACH :  www
+    // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :    0
+
+    //######################################################################################################################################
+
+    2.Durchlauf
+    //######################################################################################################################################
+    // // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  zzz
+    //3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : XXX->yyy[3] mom DANACH :  xxx
+    // 2.  b@uni.de                                      mom Zeiger:     XXX    mom DAVOR : yyy->zzz[4]	mom DANACH :  www
+    // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :    0
+    a.b @uni.de mom Zeiger : www mom DAVOR : zzz mom DANACH : 0
+                                             //######################################################################################################################################

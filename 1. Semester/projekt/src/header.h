@@ -17,8 +17,7 @@ typedef struct m_studenten
     int ects;                  //Bereits erreichte ECTS Punkte
     struct m_studenten *davor;
     struct m_studenten *danach;
-    struct m_studenten *vorvor;   //Vor-Vorgänger Speicher für Methode löschen
-    struct m_studenten *nachnach; //Nach/NAch-Vorgänger Speicher für Methode löschen
+    int index;
 
 } t_studenten;
 
@@ -46,3 +45,6 @@ int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray);
 void up_emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname);
 void up_speichern();
 void up_entferne_datensatz(t_feld *f);
+
+
+void up_sortieren(t_feld *f);
