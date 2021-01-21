@@ -1,32 +1,4 @@
-Hans                Maier               1234567hans.maier@uni.de                            50  
-Hans                Maier               5423344hans.maier@uni.de                            100 
-eee                 vvv                 158hans.maier@uni.de                            100 
-Hans                Maier               1454488hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
-Hans                Maier               1234567hans.maier@uni.de                            100 
-Hans                Maier               5423344hans.maier@uni.de                            100 
-eee                 vvv                 158hans.maier@uni.de                            100 
-Hans                Maier               1454488hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
-Hans                Maier               1234567hans.maier@uni.de                            100 
-Hans                Maier               5423344hans.maier@uni.de                            100 
-eee                 vvv                 158hans.maier@uni.de                            100 
-Hans                Maier               1454488hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
-Hans                Maier               1234567hans.maier@uni.de                            100 
-Hans                Maier               5423344hans.maier@uni.de                            100 
-eee                 vvv                 158hans.maier@uni.de                            100 
-Hans                Maier               1454488hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
-Hans                Maier               1234567hans.maier@uni.de                            100 
-Hans                Maier               5423344hans.maier@uni.de                            100 
-eee                 vvv                 158hans.maier@uni.de                            100 
-Hans                Maier               1454488hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
-Hans                Maier               1234567hans.maier@uni.de                            100 
-Hans                Maier               5423344hans.maier@uni.de                            100 
-eee                 vvv                 158hans.maier@uni.de                            100 
-Hans                Maier               1454488hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
-Hans                Maier               12139hans.maier@uni.de                            100 
+Hans                Maier               1234567   hans.maier@uni.de                            50  
+Hans                Maier               5423344   b.a@uni.de                                   100 
+eee                 vvv                 1589      cccc.maier@uni.de                            100 
+eee                 vvv                 1587777   a.b@uni.de                                   100 

@@ -141,14 +141,16 @@ void up_file_struct(t_feld *f, char text[99 + 1])
     strncpy(f->mom->nachname, text + 20, 20); //kopiert den Nachnamen, von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (nachname)
     f->mom->nachname[20] = '\0';
 
-    strncpy(tempkurs, text + 40, 10);    //Speichert die, an der Stelle 40 stehenden 10 Zeichenelemente, die die Kursnummer abbilden, in ein  char tempkurs[10]
+    strncpy(tempkurs, text + 40, 10);
+    //tempkurs[10] = '\0';         //Speichert die, an der Stelle 40 stehenden 10 Zeichenelemente, die die Kursnummer abbilden, in ein  char tempkurs[10]
     f->mom->kursnummer = atoi(tempkurs); //umwandlung von der Kursnummer, die als char temp[] durch strncpy kommt, als Int wert, und speichts in die aktuelle Liste an die passende Stelle (kursnummer)
 
     strncpy(f->mom->email, text + 50, 45); //kopiert die E-Amil , von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (email)
     f->mom->email[45] = '\0';
 
-    strncpy(tempects, text + 95, 5); //Speichert die, an der Stelle 95 stehenden 5 Zeichenelemente ,die die ECTSPunkte abbilden in ein char temp[]
-    f->mom->ects = atoi(tempects);   //umwandlung von der ECTS, die als char temp[] durch strncpy kommt, als Int wert, und speichts in die aktuelle Liste an die passende Stelle (ects)
+    strncpy(tempects, text + 95, 5);
+    // tempects[5] = '\0';    //Speichert die, an der Stelle 95 stehenden 5 Zeichenelemente ,die die ECTSPunkte abbilden in ein char temp[]
+    f->mom->ects = atoi(tempects); //umwandlung von der ECTS, die als char temp[] durch strncpy kommt, als Int wert, und speichts in die aktuelle Liste an die passende Stelle (ects)
 }
 void up_speichern(t_feld *f)
 {
@@ -159,17 +161,17 @@ void up_speichern(t_feld *f)
     char etcschar[4 + 1]; //für die ausgabe der ECTS Punkte ein Char Array, dieses ist bis jetzt als int in Struc gespeichert
     char *etcscharzeiger = etcschar;
 
-    //Initialisierung der Array, diese werden mit Leerzeichen die als als Trennsymbolen herhalten gefüllt
-    for (i = 0; i < sizeof(kurschar); i++)
-        kurschar[i] = 32;
-    for (i = 0; i < sizeof(etcschar); i++)
-        etcschar[i] = 32;
-
     FILE *einlesen;
     einlesen = fopen("./src/input1.txt", "w"); //öffnen mit parameter w "leert" die Datei. Öffnen und leert die datei
 
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
+
+    //Initialisierung der Array, diese werden mit Leerzeichen die als als Trennsymbolen herhalten gefüllt
+    for (i = 0; i < sizeof(kurschar); i++) 
+        kurschar[i] = 32;                 
+    for (i = 0; i < sizeof(etcschar); i++)
+        etcschar[i] = 32;
 
     f->mom = f->start; //setzte startzeiger auf anfang der Liste
 
@@ -331,12 +333,17 @@ void up_bereinige(char *bekommenerZeiger, int langeArray)
 {
     // Methode zur Bereinigung von char[] entferne von \n und einer vorzeitigen terminierenden \0
     // überprüft ob innerhalb einer char[] bis zur vorletzten stelle ein \n oder eine \0 steht
-    // Wenn ja dann wir dieses Zeichen durch ein " " (Leerzeichen) ersetzt
-    // text verarbeitung dadurch einfacher
+    // Wenn ja dann wir dieses Zeichen und folgende (bis zur vorletzen stelle) durch ein " " (Leerzeichen) ersetzt
+    // Text verarbeitung dadurch einfacher vereinfacht
     int i;
     for (i = 0; i < langeArray - 1; i++)                               //überprüfe bis zur vorletzen element ob eine termierende 0 oder \n vorkommt
         if ((bekommenerZeiger[i] == 10) || (bekommenerZeiger[i] == 0)) // Wenn ein \n oder \0 auftaucht, wir diesesdurch ein Leerezeichen ersetzt
-            bekommenerZeiger[i] = 32;                                  // ersetze ungültiges Zeichen
+        {
+            bekommenerZeiger[i] = 32; // ersetze ungültiges Zeichen
+            break;                    //beendet forschleife an der stelle der vorzeitigen terminierenden null
+        }
+    for (i + 1; i < langeArray - 1; i++) //starte beim abgebrochen index der vorherigen schleife
+        bekommenerZeiger[i] = 32;        // fülle bis an die Vorletzte Stelle alles mit Leerzeichen auf
 
     bekommenerZeiger[i] = '\0'; //An die allerletzte stelle des char[] wird die terminierende \0 gesetzt
 }
@@ -455,7 +462,6 @@ void up_emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, 
         i++;
     }
 }
-
 void up_entferne_datensatz(t_feld *f)
 {
     //gebe E-Mail ein
@@ -465,64 +471,59 @@ void up_entferne_datensatz(t_feld *f)
     char eingabe[45 + 1];
     char tmpeingabe[45 + 1];
     int i;
-    for (i = 0; i < sizeof(eingabe); i++)
-        eingabe[i] = 32;
-    int geloescht=0;;
-    char taste;
+    int geloescht; //Überprüft ob ein Wert gelöscht worden ist
+    char taste;    //eingabetaste für wiederholtes löschen von Datensätzen
 
     do
     {
+        geloescht = 0;
+        for (i = 0; i < sizeof(eingabe); i++) //Fülle den char Array mit Leerzeichen
+            eingabe[i] = 32;                  // muss in der do while passieren, da bei mehrer eingaben
+                                              //das Array neu "leer" gemacht werden sollte
         printf("Bitte geben Sie die E-Mail des zu entfernenden Benutzers\n");
         fgets(eingabe, sizeof(eingabe) - 5, stdin);
         up_bereinige(eingabe, sizeof(eingabe));
-        // printf("%s", f->mom->email);
-
-        //
 
         f->mom = f->start; //gehe auf den Startzeiger
 
         while (f->mom) // DU STARTET AM LETZEN ELEMENT GERADE gehe solange die liste durch bis du das ende = 0 erreichst
         {
-            // strncpy(tmpeingabe, f->mom->email, sizeof(eingabe));
-
             if ((strcmp(eingabe, f->mom->email))) //String compare liefert 0 wenn die Strings gleich sind
             {
             }
             else
             { //Strucelement das gelöscht werden soll wurde gefunden
                 //er gibt 3 möglichkeiten: Das ersten, letzte, oder mittendrinn soll gelöscht werden
-                printf("JAAAA");
 
                 if (f->mom->davor == 0) //Erstes element wurde getroffen
                 {
                     f->mom->danach->davor = 0;
                     f->start = f->mom->danach; // im vorherigen element wird der danach zeiger auf 0 gesetzt
-                      printf("Nutzer %s wurde entfernt", eingabe);
+                    printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                     geloescht = 1;
                     break;
                 }
                 if (f->mom->danach == 0) // Letzes Element wurde getroffen
                 {
                     f->mom->davor->danach = 0;
-                      printf("Nutzer %s wurde entfernt", eingabe);
+                    printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                     geloescht = 1; // im vorherigen element wird der danach zeiger auf 0 gesetzt
                     break;
                 }
 
                 else // Element mittendrinne wurde getroffen
                 {
-                    f->mom->davor->danach = f->mom->danach;
-                    f->mom->danach->davor = f->mom->davor;
-                    printf("Nutzer %s wurde entfernt", eingabe);
+                    f->mom->davor->danach = f->mom->danach; //Setze den Nachfolger des Vorgängers auf den übernächsten Zeiger
+                    f->mom->danach->davor = f->mom->davor;  //Setze den Vorgänger der Nachfolgers auf den vorherigen Zeiger ein Element dahinter
+                    printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                     geloescht = 1;
                     break;
                 }
-                //f->mom = f->mom->danach;
             }
-            f->mom = f->mom->danach;
+            f->mom = f->mom->danach; //Nächstes Element
         }
 
-        if (!geloescht)
+        if (!geloescht) //Alle Listen sind durchgelaufen, es wird überprüft ob was gelöscht wurden
             printf("\nACHTUNG Die E-Mail \t %s \t wurde nicht gefunden, es wurde nichts entfernt\n", eingabe);
 
         printf("\n\nWollen Sie weiter Werte entfernen, oder eine die Eingabe wiederholen, dann Taste: \"j\" \num abzubrechen eine beliebige Taste : \n ");
