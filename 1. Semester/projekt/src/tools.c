@@ -616,7 +616,7 @@ void up_sortieren(t_feld *f)
         zaehler++;
     }
 
-    int start = 0;
+    //  int start = 0;
     f->mom = f->start; //gehe auf den Startzeiger
     ///KURSNUMMER ABSTEIGEND###############################################
     for (i = 0; i < zaehler - 1; i++) // absteigend
@@ -628,52 +628,47 @@ void up_sortieren(t_feld *f)
             // if (strcmp(f->mom->vorname , f->mom->danach->vorname) > 0)
             if (strcmp(f->mom->kursnummer, f->mom->danach->kursnummer) > 0) //ABSTEIGEND
             {
-                int temp = f->mom; //merke dir deine aktuelle position
-                zeiger_tausch(f, f);
-
+                //int temp = f->mom; //merke dir deine aktuelle position
+                zeiger_tausch(f);
+                /*
                 start++;
                 if (start == 1)
                     f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
                 f->mom = temp;
                 f->mom = f->mom->davor;
-                //dadruch dass die Position
+                //dadruch dass die Position*/
+                //f->mom = f->mom->davor;
             }
             f->mom = f->mom->danach;
         }
     }
 }
 
-void zeiger_tausch(t_feld *f, t_feld *p)
+void zeiger_tausch(t_feld *f)
 {
     int zeigerspeichen;
     zeigerspeichen = f->mom; // merke dir die aktuelle position vor der vertauschung
     int temp;
 
-    int start;
-    //t_feld *x = p->mom;
-    //  t_feld *y = p->mom->danach;
-
-    //t_feld *y = f->mom->danach;
-
     //Hier passiert die Magie des Vertauschen 2er aufeinanderfolgenden Elemente einer Liste:
     // Es müssen 6 Zeiger umgebogen werden
-    //Dabei gibt es 2 Fälle zum Beachten dass entweder das erste oder das Letzte element getaucht wird
+    //Dabei gibt es 2 Fälle zum Beachten dass entweder das erste oder das Letzte element getauscht wird
 
     //IST Situation:
-    //######################################################################################
-    //              [6]                              [1]                        [3]
-    //      <---------------------  [ELEMENT]   <-----------    [ELEMENT] <----------------
-    //                              [   x   ]	                [   y   ]
-    //       ---------------------> [ELEMENT]   ----------->    [ELEMENT] ---------------->
-    //              [5]                              [2]                        [4]
+    //##########################################################################################################
+    //              [6]                                     [1]                 [3]
+    //      <---------------------  [ELEMENT  X     ]        <-----------    [ELEMENT  Y           ] <----------------
+    //                              [ x = f->mom    ]	                     [ y = f->mom->danach  ]
+    //       ---------------------> [ELEMENT  X     ]        ----------->    [ELEMENT  Y           ] ---------------->
+    //              [5]                                         [2]                        [4]
 
     //SOLL  Situation:
-    //#####################################################################################
-    //            [6]                              [1]                        [3]
-    //      <---------------------  [ELEMENT]   <-----------    [ELEMENT] <----------------
-    //                              [   y   ]	                [   x   ]
-    //      --------------------->  [ELEMENT]   ----------->    [ELEMENT] ---------------->
-    //              [5]                              [2]                        [4]
+    //###########################################################################################################
+    //              [6]                                        [1]             [3]
+    //      <---------------------  [ELEMENT Y          ]   <-----------    [ELEMENT x     ] <----------------
+    //                              [ y = f->mom->danach]	                [ x = f->mom   ]
+    //      --------------------->  [ELEMENT  Y         ]   ----------->    [ELEMENT x     ] ---------------->
+    //              [5]                                        [2]             [4]
     /*
     //Der vorgänger vom Nachfolger von y wird nur dann 0 wenn da auch einer steht, sonst ist es eben x
     if (y->mom->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
@@ -695,34 +690,44 @@ void zeiger_tausch(t_feld *f, t_feld *p)
     //Nachfolger von y wird x sein
     y->mom->danach = x->mom;
 */
-    temp = p->mom->danach->danach;
+    temp = f->mom->danach->danach;
     //Der vorgänger vom Nachfolger von y wird nur dann 0 wenn da auch einer steht, sonst ist es eben x
-    if (p->mom->danach->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
-        p->mom->danach->danach->davor = p->mom;
+    if (f->mom->danach->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
+        f->mom->danach->danach->davor = f->mom;
 
     //der nachfolger vom vorgänger von x wird nur dann 0 wenn da auc was steht
-    if (p->mom->davor != 0)
-        p->mom->davor->danach = p->mom->danach;
+    if (f->mom->davor != 0)
+        f->mom->davor->danach = f->mom->danach;
 
     //Der Vorgänger von y wird der Vorgänger von x könnte auch eine 0 stehen ist aber egal
-    p->mom->danach->davor = p->mom->davor;
+    f->mom->danach->davor = f->mom->davor;
 
     //Vorgänger von x  wird y
-    p->mom->davor = p->mom->danach;
+    f->mom->davor = f->mom->danach;
 
     //Nachfolger von y wird x sein
-    p->mom->danach->danach = p->mom;
+    f->mom->danach->danach = f->mom;
 
     //Nachfolger von x , wird nachfolger von y // kann auch ruhig eine null sein
-    p->mom->danach = temp;
+    f->mom->danach = temp;
 
-    //start + 1;
-    //if (start == 1)
-    //    f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
-    //dadruch dass die Position
+    /*
+    //''
+    //NEW
+    start + 1;
+    if (start == 1)
+        f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
+                                  // dadruch dass die Position
 
     //WICHTIG. Dadurch, dass wir eine Vertauschung durchgeführt haben, haben wir unseren Zeiger/Index verschoben
     //Dieser muss wieder um eine Stelle zurückgesetzt werden
-    // f->mom = zeigerspeichen;
-    // f->mom = f->mom->davor;
+    f->mom = zeigerspeichen;
+    f->mom = f->mom->davor;
+    */
+
+    if (f->mom->davor->davor == 0)
+        f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
+    f->mom = zeigerspeichen;
+    f->mom = f->mom->davor;
+    //dadruch dass die Position*/
 }

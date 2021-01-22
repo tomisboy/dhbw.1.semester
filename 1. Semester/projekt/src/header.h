@@ -51,4 +51,4 @@ int up_suche_doppelte_elemente(t_feld *f, char *zeigertext);
 
 void up_sortieren(t_feld *f);
 
-void zeiger_tausch(t_feld *x, t_feld *y );
+void zeiger_tausch(t_feld *f);
