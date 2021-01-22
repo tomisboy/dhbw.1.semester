@@ -79,41 +79,29 @@ void up_datei_einlesen(t_feld *f)
     char text[99 + 1];
     char *zeigertext = text; //in diesem Array wird eine ganze Zeile aus der Datei gespeichert
     FILE *einlesen;
-    FILE *einlesen1;
-    einlesen = fopen("./src/input.txt", "r"); //Öffnet die Datei zum Lesen "read"
+    einlesen = fopen("input.txt", "r"); //Öffnet die Datei zum Lesen "read"
     int fehler = 0;
+    int ersteZeile = 0;
 
-    int start = 0; 
-    
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
     else
     {
         while (!feof(einlesen))
         {
-
-            
-            fgets(text, 99, einlesen); // Lese 99 Zeichen der input Datei ein
-             if (text[0] >= 'A' && text[0] <= 'Z' || text[0] >= 'a' && text[0] <= 'z')
+            fgets(text, 99, einlesen);                                                // Lese 99 Zeichen der input Datei ein (eine ganze Zeile)
+            if (text[0] >= 'A' && text[0] <= 'Z' || text[0] >= 'a' && text[0] <= 'z') //Lese ausschließlich Zeilen ein, die mit alpahbetischen Zeichen beginnen
             {
-                if (start == 0)
-                {
+                if (f->start == 0) //Wenn die List leer ist wird der das allererste erste Element geschrieben, ohne zu Überprüfen ob es doppelt vorkommt
                     up_liste_Add(f, text);
-                    start = 1;
-                }
-                
-                fehler = up_entfernen_doppelter_elemente(f,zeigertext);
-                if (fehler == 0 && start ==1) //erste Zeile wird geschrieben
-                {
-                up_liste_Add(f, text); //Lese nur ein, wenn das erste Zeichen der Zeile ein Buchstaben oder eine Zahlen ist
-                fehler = 0;
-                }
-                
+
+                //Überprüfe ob der einzulesende Wert in der Liste bereits vorkommt(Kriterium ist Email die an stelle (zeigertext + 50 steht)
+                fehler = up_suche_doppelte_elemente(f, (zeigertext + 50));
+                if (fehler == 0)           //nur wenn der Wert nicht in den LIsten vorkommt schreibe füge die Zeile den Listen hinzu
+                    up_liste_Add(f, text); //Lese nur ein, wenn das erste Zeichen der Zeile ein Buchstaben oder eine Zahlen ist
             }
         }
         fclose(einlesen); //schließe Datei
-
-    
 
         printf("\n\nDaten wurden erfolgreich eingelesen\n\n");
         printf("\nWeiter mit Enter Taste ...");
@@ -181,7 +169,7 @@ void up_speichern(t_feld *f)
     char *etcscharzeiger = etcschar;
 
     FILE *einlesen;
-    einlesen = fopen("./src/output.txt", "w"); //öffnen mit parameter w "leert" die Datei. Öffnen und leert die datei
+    einlesen = fopen("output.txt", "w"); //öffnen mit parameter w "leert" die Datei. Öffnen und leert die datei
 
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
@@ -219,7 +207,7 @@ void up_eingabe_tastatur(t_feld *f)
     // Vorname      maximal 15 Zeichen (alphanumerisch) werden übernommen
     // Nachname     maximal 15 Zeichen (alphanumerisch) werden übernommen
     // Kursnummer   maximal 7 Zeichen (nur Zahlen) werden übernommen
-    // ECTS        maximal 3 stellige Zahl der ECTS-Punkt Anzahl wird übernommen
+    // ECTS         maximal 3 stellige Zahl der ECTS-Punkt Anzahl wird übernommen
     //die passende E-Mail-Adresse wird automatisch erstellt.
 
     int i, j, temp, fehler;
@@ -411,13 +399,13 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
 {
     //Methode, um aus den gegebenen Infos: Vor und Nachname eine den Uni-entsprechenen Vorschriften gerechten Emailadresse zu erstellen
     //im format vorname.nachname@uni.de
-    //vorname und nachname wir zeichenweise in email geschrieben
+    //vorname und nachname werden zeichenweise in email geschrieben
     //Überprüft auch ob diese E-Mail bereits vorhanden ist und gibt einen Fehler zurück
 
     //Zusatzinfos
     //Es gibt bishier im Programm 2 möglichkeiten wie die char[] (vorname und nachname) gefüllt werden können:
 
-    //1 Fall
+    //1 Fall:
     //das Char Array wurde vollständig gefüllt bis an stelle 15 -->
     //[0]'t'
     //[1]'h'
@@ -433,7 +421,7 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     //tmpvorname könnte folgerdermaßen aussehen, wenn die eingabe unter 10 Zeichen ist
     //[0]'t'
     //[1]'h'
-    //[2]'\n'
+    //[2]'\n'  <-- Vorzeitiges Ende wird mit \n gekennzeichnet
     //[3]'\0'
     //[4]' ' <-- hier kommen noch die 5 Leerzeichen, als Trennungszeichen für die ausgaben später
     //[...]' '
@@ -444,7 +432,7 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     char mailzusatz[7 + 1] = {'@', 'u', 'n', 'i', '.', 'd', 'e'};
     int i, j, fehler = 0;
 
-    for (i = 0; i < (laengevorname - 5 - 1); i++) // gehe bis index 14. Eins vor der Terminierenden null, bis hierhin könnte Text stehen
+    for (i = 0; i < (laengevorname - 5 - 1); i++) // gehe bis index 14 des vornamens. Eins vor der Terminierenden null, bis hierhin könnte Text stehen
     {
         //Kopiere jedes Zeichen vom Vonamen in das E-Mail Feld solange bis man eben entwerder ein vorzeitiges Ende (FALL 2) (\n) gefunden hat,
         //oder man an der Vorletzten stelle ist
@@ -453,10 +441,10 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
         else
             break; // Wird das \n gefundenm, kann direkt abgerochen werden
     }
-    //vorname steht nun in zeigervorname
+    //vorname steht nun in zeigeremail
     zeigeremail[i] = '.'; // Setze den punkt der e-Mail zwischen vor und nachname
 
-    for (j = 0; j < (laengenachname - 5 - 1); j++) // gehe bis index 14. Eins vor der Terminierenden null, bis hierhin könnte Text stehen
+    for (j = 0; j < (laengenachname - 5 - 1); j++) // gehe bis index 14 der nachnames. Eins vor der Terminierenden null, bis hierhin könnte Text stehen
     {
         if (zeigernachname[j] != 10) // 10 ist \n
         {
@@ -467,7 +455,7 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
             break; // Wird das \n gefundenm, kann direkt abgerochen werden
     }
     //zusatz @uni.de wird hinter dem Nachnamen nun noch drangehängt
-    for (j = 0; j < 7; j++)
+    for (j = 0; j < 7; j++) //hänge zeichenweise mit einer for schleife an, da die trennzeichen
     {
         zeigeremail[i + 1] = mailzusatz[j];
         i++;
@@ -476,19 +464,12 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     zeigeremail[45] = '\0'; //terminierende 0 setzen
     f->mom = f->start;      //gehe auf den Startzeiger
 
-    while (f->mom) //Zählt die Anzahl der Listenelemente
-    {
-        if ((strcmp(zeigeremail, f->mom->email))) //String compare liefert 0 wenn die Strings gleich sind
-        {
-        }
-        else
-        {
-            printf("\n\n\tAchtung E-Mail ist bereits vorhanden\n\n\tDieser Benutzer kann nicht angelegt werden !");
+    // Es wird überprüft, ob die E-Mail bereits in der der Liste vorkommt
+    fehler = up_suche_doppelte_elemente(f, zeigeremail);
 
-            fehler = 1;
-            break;
-        }
-        f->mom = f->mom->danach;
+    if (fehler == 1)
+    {
+        printf("\n\n\tAchtung E-Mail ist bereits vorhanden\n\n\tDieser Benutzer kann nicht angelegt werden !");
     }
 
     return fehler;
@@ -562,6 +543,30 @@ void up_entferne_datensatz(t_feld *f)
         fflush(stdin);
     } while (taste == 'j');
 }
+int up_suche_doppelte_elemente(t_feld *f, char *zeigertext)
+{
+    //Methode überprüft, ob die Inhalte der neu eingelesenen Zeile bereits in einer der Listenelementen vorkommt.
+    //Als entscheidendes kriterium,(und übergabe Paramter) wird die E-Mail benutze, da diese einmalig ist und nicht doppelt vorkommen darf/kann.
+
+    int fehler = 1;
+    char temp[45 + 1];                 //Hier wird die E-Mail drinne gespeichert der eingelesenen Zeile
+    f->mom = f->start;                 //setzte startzeiger auf anfang der Liste
+    strncpy(temp, zeigertext, 45 + 1); //Schreibe die E-Mail (eindeutiges Element eines Benutzers) in ein temp
+    temp[45] = '\0';                   //terminierede Null wird gesetzt
+
+    while (f->mom) //gehe alle elemente der Liste durch
+    {
+        if (strcmp(temp, f->mom->email)) //String compare liefert 0 wenn die Strings gleich sind
+            fehler = 0;
+        else
+        {
+            fehler = 1; // wenn die E-Mail aus der aktuell ausgelesen Zeile in bereits einer Liste vorkommt, dann gibt es einen Fehler
+            break;      //breche die Schleife ab
+        }
+        f->mom = f->mom->danach; // geht zum nächsten Listenelement
+    }
+    return fehler;
+}
 
 void up_sortieren(t_feld *f)
 {
@@ -600,7 +605,6 @@ void up_sortieren(t_feld *f)
         {
             zahl1 = atoi(f->mom->kursnummer);
             zahl2 = atoi(f->mom->danach->kursnummer);
-            int a = (int)(f->mom->kursnummer);
             if (zahl1 > zahl2) //ABSTEIGEND
             {
 
@@ -664,26 +668,4 @@ void up_sortieren(t_feld *f)
 
 
 */
-}
-
-int up_entfernen_doppelter_elemente(t_feld *f, char *zeigertext)
-{
-    char temp[45 + 1];
-    f->mom = f->start; //setzte startzeiger auf anfang der Liste
-    strncpy(temp, zeigertext + 50, 46);
-    temp[45] = '\0';
-
-    int fehler = 1;
-    while (f->mom)
-    {
-        if (strcmp(temp, f->mom->email))
-            fehler = 0;
-        else
-        {
-           fehler = 1;
-           break;
-        }
-        f->mom = f->mom->danach;
-    }
-    return fehler;
 }
