@@ -326,7 +326,7 @@ void up_eingabe_tastatur(t_feld *f)
             up_liste_Add(f, tmptext); // der Zeiger vom Hautprogramm und tmptext wird der Methode übergeben, die die Daten in die Liste speichern soll.
         }
 
-        printf("\n\nWollen Sie weiter Werte eingeben oder die Eingabe wiederholen , dann Taste: \"j\"\num abzubrechen eine beliebige Taste :\n ");
+        printf("\n\nWollen Sie weitere Werte eingeben, oder die Eingabe wiederholen , dann Taste: \"j\"\num abzubrechen eine beliebige Taste :\n ");
         scanf("%c", &eingabe);
         fflush(stdin);
     } while ((eingabe == 'j')); //uum weitere eingaben zu ermöglichen muss einfach 'j' gedrückt werden
@@ -483,7 +483,8 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
         }
         else
         {
-            printf("Achtung E-Mail ist bereits vorhanden\n Dieser Benutzer kann nicht angelegt werden");
+            printf("\n\n\tAchtung E-Mail ist bereits vorhanden\n\n\tDieser Benutzer kann nicht angelegt werden !");
+
             fehler = 1;
             break;
         }
