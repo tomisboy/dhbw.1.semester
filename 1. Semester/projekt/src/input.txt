@@ -1,0 +1,47 @@
+*15-           -+5  15             +5   7      +3    40                                   +5
+bene                Maier               1231777   bane.maier@uni.de                            050 <---
+bene                Maier               0123444   sdze.maier@uni.de                            050 
+bene                Maier               5123444   uuze.maier@uni.de                            050
+bene                Maier               4123444   zuze.maier@uni.de                            050
+
+
+bene                Maier               0123444   sdze.maier@uni.de                            050 <--- wird start 
+bene                Maier               1231777   bane.maier@uni.de                            050
+bene                Maier               5123444   uuze.maier@uni.de                            050
+bene                Maier               4123444   zuze.maier@uni.de                            050
+
+
+
+bene                Maier               0123444   sdze.maier@uni.de                            050 
+bene                Maier               1231777   bane.maier@uni.de                            050<---
+bene                Maier               5123444   uuze.maier@uni.de                            050
+bene                Maier               4123444   zuze.maier@uni.de                            050
+
+bene                Maier               0123444   sdze.maier@uni.de                            050 
+bene                Maier               1231777   bane.maier@uni.de                            050
+bene                Maier               5123444   uuze.maier@uni.de                            050<---
+bene                Maier               4123444   zuze.maier@uni.de                            050
+
+
+aktuelle Zeiger = 
+ 
+ sdze.maier@uni.de           mom Zeiger:     B96900   mom DAVOR :     0       mom DANACH :     B96850   
+ bane.maier@uni.de           mom Zeiger:     B96850   mom DAVOR :     B96900  mom DANACH :     B969B0
+ uuze.maier@uni.de           mom Zeiger:     B969B0   mom DAVOR :     B96850  mom DANACH :     B96A60  x
+ zuze.maier@uni.de           mom Zeiger:     B96A60   mom DAVOR :     B969B0  mom DANACH :          0  y
+
+JEDER FUCKIONG SCHRIOTT
+
+
+ 
+ sdze.maier@uni.de           mom Zeiger:     B96900   mom DAVOR :     0       mom DANACH :     B96850   
+ bane.maier@uni.de           mom Zeiger:     B96850   mom DAVOR :     B96900  mom DANACH :     B96A60!   
+ uuze.maier@uni.de           mom Zeiger:     B969B0   mom DAVOR :     B96850  mom DANACH :     B96A60  x
+ zuze.maier@uni.de           mom Zeiger:     B96A60   mom DAVOR :     B969B0  mom DANACH :          0  y
+
+
+
+bene                Maier               0123444   sdze.maier@uni.de                            050 
+bene                Maier               1231777   bane.maier@uni.de                            050
+bene                Maier               4123444   zuze.maier@uni.de                            050
+bene                Maier               5123444   uuze.maier@uni.de                            050<---

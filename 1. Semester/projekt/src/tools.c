@@ -584,10 +584,31 @@ void up_sortieren(t_feld *f)
     int i, j;
     int zaehler = 0;
     int zahl1, zahl2;
-    t_studenten temp;
+    //t_studenten temp;
     f->mom = f->start; //gehe auf den Startzeiger
+    int auswahl;
+    printf("\n Du kannst nach folgenden kriterien sortiren");
+    printf("\n 'v' für die Sortierung des Vornamens'");
+    printf("\n 'n' für die Sortierung des Nornamens'");
+    printf("\n 'k' für die Sortierung der Kursnummer'");
 
-    //  f->temp = f->mom;
+    scanf("%i", &auswahl);
+    fflush(stdin);
+
+    switch (auswahl)
+    {
+    case 'vorname':
+        /* code */
+        break;
+        //case 'nachname':
+        break;
+
+    case 'kursnummer':
+        break;
+
+    default:
+        break;
+    }
 
     while (f->mom) //Zählt die Anzahl der Listenelemente
     {
@@ -595,77 +616,113 @@ void up_sortieren(t_feld *f)
         zaehler++;
     }
 
+    int start = 0;
     f->mom = f->start; //gehe auf den Startzeiger
-
     ///KURSNUMMER ABSTEIGEND###############################################
     for (i = 0; i < zaehler - 1; i++) // absteigend
     {
         f->mom = f->start;
         for (j = 0; j < zaehler - 1; j++)
         {
-            zahl1 = atoi(f->mom->kursnummer);
-            zahl2 = atoi(f->mom->danach->kursnummer);
-            if (zahl1 > zahl2) //ABSTEIGEND
+
+            // if (strcmp(f->mom->vorname , f->mom->danach->vorname) > 0)
+            if (strcmp(f->mom->kursnummer, f->mom->danach->kursnummer) > 0) //ABSTEIGEND
             {
+                int temp = f->mom; //merke dir deine aktuelle position
+                zeiger_tausch(f, f);
 
-                strcpy(temp.vorname, f->mom->vorname);
-                strcpy(temp.nachname, f->mom->nachname);
-                strcpy(temp.kursnummer, f->mom->kursnummer);
-                strcpy(temp.email, f->mom->email);
-                strcpy(temp.ects, f->mom->ects);
-
-                strcpy(f->mom->vorname, f->mom->danach->vorname);
-                strcpy(f->mom->nachname, f->mom->danach->nachname);
-                strcpy(f->mom->kursnummer, f->mom->danach->kursnummer);
-                strcpy(f->mom->email, f->mom->danach->email);
-                strcpy(f->mom->ects, f->mom->danach->ects);
-
-                strcpy(f->mom->danach->vorname, temp.vorname);
-                strcpy(f->mom->danach->nachname, temp.nachname);
-                strcpy(f->mom->danach->kursnummer, temp.kursnummer);
-                strcpy(f->mom->danach->email, temp.email);
-                strcpy(f->mom->danach->ects, temp.ects);
+                start++;
+                if (start == 1)
+                    f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
+                f->mom = temp;
+                f->mom = f->mom->davor;
+                //dadruch dass die Position
             }
             f->mom = f->mom->danach;
         }
     }
+}
 
+void zeiger_tausch(t_feld *f, t_feld *p)
+{
+    int zeigerspeichen;
+    zeigerspeichen = f->mom; // merke dir die aktuelle position vor der vertauschung
+    int temp;
+
+    int start;
+    //t_feld *x = p->mom;
+    //  t_feld *y = p->mom->danach;
+
+    //t_feld *y = f->mom->danach;
+
+    //Hier passiert die Magie des Vertauschen 2er aufeinanderfolgenden Elemente einer Liste:
+    // Es müssen 6 Zeiger umgebogen werden
+    //Dabei gibt es 2 Fälle zum Beachten dass entweder das erste oder das Letzte element getaucht wird
+
+    //IST Situation:
+    //######################################################################################
+    //              [6]                              [1]                        [3]
+    //      <---------------------  [ELEMENT]   <-----------    [ELEMENT] <----------------
+    //                              [   x   ]	                [   y   ]
+    //       ---------------------> [ELEMENT]   ----------->    [ELEMENT] ---------------->
+    //              [5]                              [2]                        [4]
+
+    //SOLL  Situation:
+    //#####################################################################################
+    //            [6]                              [1]                        [3]
+    //      <---------------------  [ELEMENT]   <-----------    [ELEMENT] <----------------
+    //                              [   y   ]	                [   x   ]
+    //      --------------------->  [ELEMENT]   ----------->    [ELEMENT] ---------------->
+    //              [5]                              [2]                        [4]
     /*
+    //Der vorgänger vom Nachfolger von y wird nur dann 0 wenn da auch einer steht, sonst ist es eben x
+    if (y->mom->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
+        y->mom->danach->davor = x->mom;
 
-///KURSNUMMER AUFSTEIGEND###############################################
-    for (i = 0; i < zaehler - 1; i++)  // AUF
-    {
-        f->mom = f->start;
-        for (j = 0; j > zaehler - 1; j++)
-        {
-            zahl1 = atoi(f->mom->kursnummer);
-            zahl2 = atoi(f->mom->danach->kursnummer);
-            int a = (int)(f->mom->kursnummer);
-            if (zahl1 < zahl2)
-            {
+    //der nachfolger vom vorgänger von x wird nur dann 0 wenn da auc was steht
+    if (x->mom->davor != 0)
+        x->mom->davor->davor = y->mom;
 
-                strcpy(temp.vorname, f->mom->vorname);
-                strcpy(temp.nachname, f->mom->nachname);
-                strcpy(temp.kursnummer, f->mom->kursnummer);
-                strcpy(temp.email, f->mom->email);
-                strcpy(temp.ects, f->mom->ects);
+    //Der Vorgänger von y wird der Vorgänger von x könnte auch eine 0 stehen ist aber egal
+    y->mom->davor = x->mom->davor;
 
-                strcpy(f->mom->vorname, f->mom->danach->vorname);
-                strcpy(f->mom->nachname, f->mom->danach->nachname);
-                strcpy(f->mom->kursnummer, f->mom->danach->kursnummer);
-                strcpy(f->mom->email, f->mom->danach->email);
-                strcpy(f->mom->ects, f->mom->danach->ects);
+    //Nachfolger von x , wird nachfolger von y // kann auch ruhig eine null sein
+    x->mom->danach = y->mom->danach;
 
-                strcpy(f->mom->danach->vorname, temp.vorname);
-                strcpy(f->mom->danach->nachname, temp.nachname);
-                strcpy(f->mom->danach->kursnummer, temp.kursnummer);
-                strcpy(f->mom->danach->email, temp.email);
-                strcpy(f->mom->danach->ects, temp.ects);
-            }
-            f->mom = f->mom->danach;
-        }
-    }
+    //Vorgänger von x  wird y
+    x->mom->davor = y->mom;
 
-
+    //Nachfolger von y wird x sein
+    y->mom->danach = x->mom;
 */
+    temp = p->mom->danach->danach;
+    //Der vorgänger vom Nachfolger von y wird nur dann 0 wenn da auch einer steht, sonst ist es eben x
+    if (p->mom->danach->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
+        p->mom->danach->danach->davor = p->mom;
+
+    //der nachfolger vom vorgänger von x wird nur dann 0 wenn da auc was steht
+    if (p->mom->davor != 0)
+        p->mom->davor->danach = p->mom->danach;
+
+    //Der Vorgänger von y wird der Vorgänger von x könnte auch eine 0 stehen ist aber egal
+    p->mom->danach->davor = p->mom->davor;
+
+    //Vorgänger von x  wird y
+    p->mom->davor = p->mom->danach;
+
+    //Nachfolger von y wird x sein
+    p->mom->danach->danach = p->mom;
+
+    //Nachfolger von x , wird nachfolger von y // kann auch ruhig eine null sein
+    p->mom->danach = temp;
+
+    //start + 1;
+    //if (start == 1)
+    //    f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
+    //dadruch dass die Position
+
+    //WICHTIG. Dadurch, dass wir eine Vertauschung durchgeführt haben, haben wir unseren Zeiger/Index verschoben
+    //Dieser muss wieder um eine Stelle zurückgesetzt werden
+    // f->mom = zeigerspeichen;
+    // f->mom = f->mom->davor;
 }

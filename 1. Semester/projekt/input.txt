@@ -1,12 +1,8 @@
 *15-           -+5  15             +5   7      +3    40                                   +5
-bene                Maier               9999999   bane.maier@uni.de                            050
-bene                Maier               9999999   sdze.maier@uni.de                            050
-bene                Maier               9999999   rrre.maier@uni.de                            050
-bene                Maier               9999999   rrre.maier@uni.de                            050
-bene                Maier               9999999   zzze.maier@uni.de                            050
-bene                Maier               9999999   rrre.maier@uni.de                            050
-tene                Maier               8999999   tane.maier@uni.de                            050
-bene                Maier               9999999   oooe.maier@uni.de                            050
-bene                Maier               9999999   zzoe.maier@uni.de                            050
-bene                Maier               9999999   oooe.maier@uni.de                            050
-
+bene                Maier               1231777   bane.maier@uni.de                            050
+bene                Maier               0123444   sdze.maier@uni.de                            050 
+bene                Maier               5123444   uuze.maier@uni.de                            050
+bene                Maier               7123444   zqqe.maier@uni.de                            050
+bene                Maier               8123444   zoze.maier@uni.de                            050
+bene                Maier               2123444   zuze.maier@uni.de                            050
+bene                Maier               4123444   zwze.maier@uni.de                            050
