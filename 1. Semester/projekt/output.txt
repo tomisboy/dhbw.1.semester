@@ -1,0 +1,5 @@
+Qene                Maier               2999999   Qane.maier@uni.de                            050
+Hans                Maier               5999999   hans.maier@uni.de                            050
+vtzz                Maier               7999999   vzzz.maier@uni.de                            050
+tene                Maier               8999999   tane.maier@uni.de                            050
+bene                Maier               9999999   bane.maier@uni.de                            050

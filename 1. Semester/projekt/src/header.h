@@ -47,6 +47,6 @@ int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray);
 int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname);
 void up_speichern();
 void up_entferne_datensatz(t_feld *f);
-int up_entfernen_doppelter_elemente(t_feld *f, char  *zeigertext);
+int up_suche_doppelte_elemente(t_feld *f, char *zeigertext);
 
 void up_sortieren(t_feld *f);
