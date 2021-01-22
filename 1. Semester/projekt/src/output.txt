@@ -1,4 +1,4 @@
-Hans                Maier               1234567   hans.maier@uni.de                            50  
-Hans                Maier               5423344   b.a@uni.de                                   100 
-eee                 vvv                 1589      cccc.maier@uni.de                            100 
-eee                 vvv                 1587777   a.b@uni.de                                   100 
+Hans                Maier               999999    hans.maier@uni.de                             50
+eee                 vvv                 1589      q@uni.de                                     100
+Hans                Maier               51        tb@uni.de                                    100
+Hans                Maier               542       tb@uni.de                                    100

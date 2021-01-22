@@ -12,9 +12,11 @@ typedef struct m_studenten
 {
     char vorname[15 + 5 + 1];  //15 Zeichen + 5 formatierungszeichen
     char nachname[15 + 5 + 1]; //  //nacbhName des  schülers 15 Zeichen + 5 formatierungszeichen
-    int kursnummer;            //die kursnummer als INT gespeichert um bubble sort
+   // int kursnummer;            //die kursnummer als INT gespeichert um bubble sort
+    char kursnummer[7 +3 + 1];
     char email[40 + 5 + 1];    // 40 zeichen + 5 formatierungszeichen
-    int ects;                  //Bereits erreichte ECTS Punkte
+  //int ects;        
+  char ects[3 + 1];          //Bereits erreichte ECTS Punkte
     struct m_studenten *davor;
     struct m_studenten *danach;
     int index;
@@ -42,9 +44,9 @@ void up_bereinige(char *bekommenerZeiger, int langeArray);
 int up_text_ueberpruefung(char *bekommenerZeiger, int langeArray);
 int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray);
 
-void up_emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname);
+int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname);
 void up_speichern();
 void up_entferne_datensatz(t_feld *f);
-
+int up_entfernen_doppelter_elemente(t_feld *f, char  *zeigertext);
 
 void up_sortieren(t_feld *f);

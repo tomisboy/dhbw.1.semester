@@ -1,0 +1,17 @@
+   sprintf(kurschar, "%d", f->mom->kursnummer);
+        //Der Befehl sprintf konvertiert eine Zahl(int) in ein Char Array, sobald die Zahl zuende umgewandelt wurden ist wird einen terminierende \0 gesetzt
+        //Diese \0 steht aber nicht ganz am ende dieses Arrays kurschar[10 + 1]
+        //Im kurschar[] soll aber bis zur 7.Stelle eine Zahlenfolge (Zeichen pro Stelle) gefolgt von 3 Leerzeichen stehen
+        //Beispiel die Zahl 482 wird nach der Konvertierung folgendermaßen abgebildet:
+        //kurschar[0] = '4'
+        //kurschar[1] = '8'
+        //kurschar[2] = '2'
+        //kurschar[3] = '\0'   <-- diese null wird von der funktion gesetzt
+        //kurschar[4] = ' '
+        //kurschar[...] = ' '
+        //kurschar[10] = ' '
+        //wir haben also die Terminierende \0 an der falschen Stelle
+        //diese muss an die letzte stelle und dieses wird mit der nachfolgenden Methode bewerkstellig
+
+
+        

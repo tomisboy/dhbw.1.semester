@@ -57,7 +57,7 @@ void up_anzeige_daten(t_feld *f)
     while (f->mom) // gehe solange die liste durch bis du das ende = 0 erreichst
     {
         //Gibt aktuellen Listenelemente formatiert aus
-        printf("\n%-18s%-18s%-10d%-24s%d", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
+        printf("\n%-18s%-18s%-10s%-24s%s", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
         f->mom = f->mom->danach; //setzte den Zeiger auf den nachfolger, auf das nächste Listenelement
         if (zaehler != 25)       //Überprüfe ob bereits 25 Zeilen ausgegeben wurden
             zaehler++;           //Zähle die ausgebenen Listen aus
@@ -74,21 +74,47 @@ void up_anzeige_daten(t_feld *f)
 }
 void up_datei_einlesen(t_feld *f)
 {
-    char text[99 + 1]; //in diesem Array wird eine ganze Zeile aus der Datei gespeichert
-    FILE *einlesen;
-    einlesen = fopen("./src/input.txt", "r"); //Öffnet die Datei zum Lesen "read"
 
+    //DATEI EINLESEN UND DOPPELTE ENTFERNEN :)
+    char text[99 + 1];
+    char *zeigertext = text; //in diesem Array wird eine ganze Zeile aus der Datei gespeichert
+    FILE *einlesen;
+    FILE *einlesen1;
+    einlesen = fopen("./src/input.txt", "r"); //Öffnet die Datei zum Lesen "read"
+    int fehler = 0;
+
+    int start = 0; 
+    
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
     else
     {
         while (!feof(einlesen))
         {
+
+            
             fgets(text, 99, einlesen); // Lese 99 Zeichen der input Datei ein
-            if (text[0] >= 'A' && text[0] <= 'Z' || text[0] >= 'a' && text[0] <= 'z')
+             if (text[0] >= 'A' && text[0] <= 'Z' || text[0] >= 'a' && text[0] <= 'z')
+            {
+                if (start == 0)
+                {
+                    up_liste_Add(f, text);
+                    start = 1;
+                }
+                
+                fehler = up_entfernen_doppelter_elemente(f,zeigertext);
+                if (fehler == 0 && start ==1) //erste Zeile wird geschrieben
+                {
                 up_liste_Add(f, text); //Lese nur ein, wenn das erste Zeichen der Zeile ein Buchstaben oder eine Zahlen ist
+                fehler = 0;
+                }
+                
+            }
         }
         fclose(einlesen); //schließe Datei
+
+    
+
         printf("\n\nDaten wurden erfolgreich eingelesen\n\n");
         printf("\nWeiter mit Enter Taste ...");
         getchar();
@@ -127,24 +153,23 @@ void up_file_struct(t_feld *f, char text[99 + 1])
 
     //Der eingelesene Text ist eine ganze Zeile und wird der Methode als char text[99 + 1] mitgebenen.
 
-    char tempkurs[10];
-    char tempects[5];
     strncpy(f->mom->vorname, text, 20); //kopiert den Vornamen, von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (vorname)
     f->mom->vorname[20] = '\0';
 
     strncpy(f->mom->nachname, text + 20, 20); //kopiert den Nachnamen, von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (nachname)
     f->mom->nachname[20] = '\0';
 
-    strncpy(tempkurs, text + 40, 10);
+    //  strncpy(tempkurs, text + 40, 10);
     //tempkurs[10] = '\0';         //Speichert die, an der Stelle 40 stehenden 10 Zeichenelemente, die die Kursnummer abbilden, in ein  char tempkurs[10]
-    f->mom->kursnummer = atoi(tempkurs); //umwandlung von der Kursnummer, die als char temp[] durch strncpy kommt, als Int wert, und speichts in die aktuelle Liste an die passende Stelle (kursnummer)
+    //    f->mom->kursnummer = atoi(tempkurs); //umwandlung von der Kursnummer, die als char temp[] durch strncpy kommt, als Int wert, und speichts in die aktuelle Liste an die passende Stelle (kursnummer)
+    strncpy(f->mom->kursnummer, text + 40, 10);
+    f->mom->kursnummer[10] = '\0';
 
     strncpy(f->mom->email, text + 50, 45); //kopiert die E-Amil , von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (email)
     f->mom->email[45] = '\0';
 
-    strncpy(tempects, text + 95, 5);
-    // tempects[5] = '\0';    //Speichert die, an der Stelle 95 stehenden 5 Zeichenelemente ,die die ECTSPunkte abbilden in ein char temp[]
-    f->mom->ects = atoi(tempects); //umwandlung von der ECTS, die als char temp[] durch strncpy kommt, als Int wert, und speichts in die aktuelle Liste an die passende Stelle (ects)
+    strncpy(f->mom->ects, text + 95, 5);
+    f->mom->ects[5] = '\0'; //Speichert die, an der Stelle 95 stehenden 5 Zeichenelemente ,die die ECTSPunkte abbilden in ein char temp[]
 }
 void up_speichern(t_feld *f)
 {
@@ -172,36 +197,12 @@ void up_speichern(t_feld *f)
     while (f->mom)
     { //solange mom != 0 gehe solange jedes Listenelement durch bis das Ende (0) erricht wird
 
-        fprintf(einlesen, f->mom->vorname);  //schreiben den Vornamen aus der aktuellen Liste in die Datei
-        fprintf(einlesen, f->mom->nachname); //schreiben den Nachnamen aus der aktuellen Liste in die Datei
-
-        sprintf(kurschar, "%d", f->mom->kursnummer);
-        //Der Befehl sprintf konvertiert eine Zahl(int) in ein Char Array, sobald die Zahl zuende umgewandelt wurden ist wird einen terminierende \0 gesetzt
-        //Diese \0 steht aber nicht ganz am ende dieses Arrays kurschar[10 + 1]
-        //Im kurschar[] soll aber bis zur 7.Stelle eine Zahlenfolge (Zeichen pro Stelle) gefolgt von 3 Leerzeichen stehen
-        //Beispiel die Zahl 482 wird nach der Konvertierung folgendermaßen abgebildet:
-        //kurschar[0] = '4'
-        //kurschar[1] = '8'
-        //kurschar[2] = '2'
-        //kurschar[3] = '\0'   <-- diese null wird von der funktion gesetzt
-        //kurschar[4] = ' '
-        //kurschar[...] = ' '
-        //kurschar[10] = ' '
-        //wir haben also die Terminierende \0 an der falschen Stelle
-        //diese muss an die letzte stelle und dieses wird mit der nachfolgenden Methode bewerkstelligt
-
-        up_bereinige(kurscharzeiger, sizeof(kurschar)); //das Array muss wieder breinigt werden
-
-        fprintf(einlesen, kurschar); //schreiben die umgewandelte und bereinigt Kursnummer aus der aktuellen Liste in die Datei
-
-        fprintf(einlesen, f->mom->email); //schreiben die Emailaus der aktuellen Liste in die Datei
-
-        sprintf(etcschar, "%d", f->mom->ects); //siehe umwandlung kurschar, selbes problem , terminierende 0 an der falschen stelle. Breinigung durch Methodenaufruf
-        up_bereinige(etcscharzeiger, sizeof(etcschar));
-        fprintf(einlesen, etcschar); //schreiben die umgewandelte und bereinigt ECTS Punktzahl aus der aktuellen Liste in die Datei
-
-        //alle werte in die erste Zeile geschrieben es folgt ein Zeilenumbruch
-        fprintf(einlesen, "\n");
+        fprintf(einlesen, f->mom->vorname);    //schreiben den Vornamen aus der aktuellen Liste in die Datei
+        fprintf(einlesen, f->mom->nachname);   //schreiben den Nachnamen aus der aktuellen Liste in die Datei
+        fprintf(einlesen, f->mom->kursnummer); //schreiben die umgewandelte und bereinigt Kursnummer aus der aktuellen Liste in die Datei
+        fprintf(einlesen, f->mom->email);      //schreiben die Emailaus der aktuellen Liste in die Datei
+        fprintf(einlesen, f->mom->ects);       //schreiben die umgewandelte und bereinigt ECTS Punktzahl aus der aktuellen Liste in die Datei
+        fprintf(einlesen, "\n");               //alle werte in die erste Zeile geschrieben es folgt ein Zeilenumbruch
 
         f->mom = f->mom->danach; //nächsten Listenelement
     }
@@ -278,7 +279,7 @@ void up_eingabe_tastatur(t_feld *f)
 
         do //EINGABE DER KURSNUMMER
         {
-            printf("Bitte Kursnummer angeben (max 7 Zeichen nur Zahlen erlaubt):  ");
+            printf("Bitte Kursnummer angeben (7 Stellige Zahl):  ");
             fgets(tmpkursnummer, sizeof(tmpkursnummer) - 3, stdin); //Nimm 10-3 = 7 Zeichen der Eingabe und speichere es in tmpnachname
             fflush(stdin);
             fehler = up_zahl_ueberpruefung(zeigerkursnummer, sizeof(tmpkursnummer) - 3); //Überprüfung der Eingabe  auf Fehler
@@ -286,42 +287,49 @@ void up_eingabe_tastatur(t_feld *f)
 
         do //EINGABE DER ECTS PUNKT
         {
-            printf("Bitte die Anzahl der ECTS Punkte angeben (max 3 Zeichen nur Zahlen erlaubt):  ");
+            printf("Bitte die Anzahl der ECTS Punkte angeben (3 Zeichen nur Zahlen erlaubt):  ");
             fgets(tmpects, sizeof(tmpects), stdin); //3 Zeichen der Eingabe und speichere es in tmpects
             fflush(stdin);
             fehler = up_zahl_ueberpruefung(zeigerects, sizeof(tmpects)); //Überprüfung der Eingabe  auf Fehler
         } while (fehler != 0);
 
-        //Setze die E-Mail anhand des vor und nachnames zusammen
-        up_emailfeld(zeigervorname, zeigernachname, zeigeremail, sizeof(tmpvorname), sizeof(tmpnachname));
+        fehler = 0; //fehlercode wurde zurückgesetzt falls einmal eine Fehleingaben passierte wird der nun resettet:
 
-        // um die eingaben schon in eine Zeile zusammenzufassen gleich,
-        // müssen die einzelnen arrays bereinigt werden
-        // \n und die terminierende 0 wird entfernt, wenn sie vor dem eigentlichen ende des Stings kommt:
-        up_bereinige(zeigervorname, sizeof(tmpvorname));
-        up_bereinige(zeigernachname, sizeof(tmpnachname));
-        up_bereinige(zeigerkursnummer, sizeof(tmpkursnummer));
-        up_bereinige(zeigerects, sizeof(tmpects));
+        //Setze die E-Mail anhand des vor und nachnames zusammen dies ist das entscheidene merkmal eines users(primary Key)
+        //Überprüfe auch gleich ob diese E-Mail bereits vorkam
+        fehler = up_emailfeld(f, zeigervorname, zeigernachname, zeigeremail, sizeof(tmpvorname), sizeof(tmpnachname));
 
-        //nun sind alle Eingaben bereining und können hintereinander zusammengefügt werden,
-        //sodass eine "Zeile" Text entsteht und diese wird in tmptext gespeichert
+        if (fehler == 0) //mache nur weiter wenn e-mail überprüfung eine 0 liefert wenn es keine doppelt vorkommende email gibt
+        {
 
-        strncpy(tmptext, tmpvorname, 20);         //Kopiere nun den Inhalt von tmpvorname bis stelle 15 stehen buchstaben dann folgen 5 Leerzeichen (als Trennzeichen)
-        strncpy(tmptext + 20, tmpnachname, 20);   //Hänge nun den Inhalt von tmpnachname  (bis stelle 15 stehen buchstaben dann folgen 5 Leerzeichen (als Trennzeichen)) an die passende stelle im String
-        strncpy(tmptext + 40, tmpkursnummer, 10); //Hänge nun den Inhalt von tmpkursnummer (bis stelle 7 stehen zahlen dann folen 3 Leerzeichen (als Trennzeichen))  an die passende stelle im String
-        strncpy(tmptext + 50, tmpemail, 45);      //Hänge nun den Inhalt von tmpemail (bis stelle 45 steht die E-Mail dann folgen 5 Leerzeichen (als Trennzeichen)) an die passende stelle im String
-        strncpy(tmptext + 95, tmpects, 5);        //Hänge nun den Inhalt von tmpects (bis stelle 15 stehen buchstaben dann folgen 5 Leerzeichen (als Trennzeichen)) an die passende stelle im String
-        tmptext[99] = '\0';                       //Markiere das ente der char Arrays
+            // um die eingaben schon in eine Zeile zusammenzufassen gleich,
+            // müssen die einzelnen arrays bereinigt werden
+            // \n und die terminierende 0 wird entfernt, wenn sie vor dem eigentlichen ende des Stings kommt:
+            up_bereinige(zeigervorname, sizeof(tmpvorname));
+            up_bereinige(zeigernachname, sizeof(tmpnachname));
+            up_bereinige(zeigerkursnummer, sizeof(tmpkursnummer));
+            up_bereinige(zeigerects, sizeof(tmpects));
 
-        //Die Eingabe ist nun genau so in dem Format wie sie in der input.txt (pro Zeile) steht.
-        //daruch kann diese eingabe als Parameter für die up_liste_Add übergeben werden um sie in die verkette Liste zu speichern
-        //Die Einga
-        up_liste_Add(f, tmptext); // der Zeiger vom Hautprogramm und tmptext wird der Methode übergeben, die die Daten in die Liste speichern soll.
+            //nun sind alle Eingaben bereining und können hintereinander zusammengefügt werden,
+            //sodass eine "Zeile" Text entsteht und diese wird in tmptext gespeichert
 
-        printf("\n\nWollen Sie weiter Werte eingeben, dann Taste: \"j\" \num abzubrechen eine beliebige Taste : \n ");
+            strncpy(tmptext, tmpvorname, 20);         //Kopiere nun den Inhalt von tmpvorname bis stelle 15 stehen buchstaben dann folgen 5 Leerzeichen (als Trennzeichen)
+            strncpy(tmptext + 20, tmpnachname, 20);   //Hänge nun den Inhalt von tmpnachname  (bis stelle 15 stehen buchstaben dann folgen 5 Leerzeichen (als Trennzeichen)) an die passende stelle im String
+            strncpy(tmptext + 40, tmpkursnummer, 10); //Hänge nun den Inhalt von tmpkursnummer (bis stelle 7 stehen zahlen dann folen 3 Leerzeichen (als Trennzeichen))  an die passende stelle im String
+            strncpy(tmptext + 50, tmpemail, 45);      //Hänge nun den Inhalt von tmpemail (bis stelle 45 steht die E-Mail dann folgen 5 Leerzeichen (als Trennzeichen)) an die passende stelle im String
+            strncpy(tmptext + 95, tmpects, 5);        //Hänge nun den Inhalt von tmpects (bis stelle 15 stehen buchstaben dann folgen 5 Leerzeichen (als Trennzeichen)) an die passende stelle im String
+            tmptext[99] = '\0';                       //Markiere das ente der char Arrays
+
+            //Die Eingabe ist nun genau so in dem Format wie sie in der input.txt (pro Zeile) steht.
+            //daruch kann diese eingabe als Parameter für die up_liste_Add übergeben werden um sie in die verkette Liste zu speichern
+            //Die Einga
+            up_liste_Add(f, tmptext); // der Zeiger vom Hautprogramm und tmptext wird der Methode übergeben, die die Daten in die Liste speichern soll.
+        }
+
+        printf("\n\nWollen Sie weiter Werte eingeben oder die Eingabe wiederholen , dann Taste: \"j\"\num abzubrechen eine beliebige Taste :\n ");
         scanf("%c", &eingabe);
         fflush(stdin);
-    } while (eingabe == 'j'); //uum weitere eingaben zu ermöglichen muss einfach 'j' gedrückt werden
+    } while ((eingabe == 'j')); //uum weitere eingaben zu ermöglichen muss einfach 'j' gedrückt werden
 }
 void up_bereinige(char *bekommenerZeiger, int langeArray)
 {
@@ -354,13 +362,21 @@ int up_text_ueberpruefung(char *bekommenerZeiger, int langeArray)
         }
         else //es gibt ein zeichen, dass nicht im Alphabet ist ODER das ende \n wurde erreicht.
         {
-            if (bekommenerZeiger[i] == '\n') //hier wurde das ende des eingebenen Strings gefunden
-                break;                       //beendet die forschleife
+
+            if (bekommenerZeiger[0] == '\n') //Aller erstes element ist falsch (Bei der Eingabe wurde nur ENTER gedrückt)
+            {
+                fehler = 1;
+                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen!\nBitte nochmal probieren\n");
+                break; //beendet die forschleife
+            }
+            else if (bekommenerZeiger[i] == '\n') //hier wurde das ende des eingebenen Strings gefunden
+                break;                            //beendet die forschleife
+
             else
             {
                 printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen!\nBitte nochmal probieren\n");
                 fehler = 1;
-                break;
+                break; //beendet die forschleife
             }
         }
     }
@@ -377,25 +393,26 @@ int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray)
         if (bekommenerZeiger[i] >= '0' && bekommenerZeiger[i] <= '9') //Überprüft die einzelnen Zeichenob sie Zahlen sind
         {
         }
-        else // Dieser Fall tritt ein, wenn es ein Zeichen gibt, dass nicht im numerisch ist ODER das ende "\n" wurde erreicht.
+        else
         {
-            if (bekommenerZeiger[i] == '\n') //hier wurde das ende des eingebenen Strings gefunden
-                break;                       //beendet die forschleife
-            else
+            if (bekommenerZeiger[i] == '\n') //Sobald ein \n gefunden wurde bedeutet dies, das Char Array ist nicht vollständig gefüllt!
             {
-                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen!\nBitte nochmal probieren\n");
-                fehler = 1;
+                fehler = 1; // Fehler weil char array nicht die notwendige Anzahl der Stellen erfüllt
+                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen! Oder enthielt zu wenig Stellen\n ");
+                printf("Sie müssen %d Stellen angeben (Wenn Eingabe kleiner als %d Stellen ist, geben sie 0 an den Anfang\n", langeArray - 1, langeArray - 1);
+                printf("\nBitte nochmal probieren\n");
                 break;
-            }
+            } //dieser Fall titt ein wenn nicht alle Stellen gefüllt worden sind
         }
     }
     return fehler;
 }
-void up_emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname)
+int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zeigeremail, int laengevorname, int laengenachname)
 {
     //Methode, um aus den gegebenen Infos: Vor und Nachname eine den Uni-entsprechenen Vorschriften gerechten Emailadresse zu erstellen
     //im format vorname.nachname@uni.de
     //vorname und nachname wir zeichenweise in email geschrieben
+    //Überprüft auch ob diese E-Mail bereits vorhanden ist und gibt einen Fehler zurück
 
     //Zusatzinfos
     //Es gibt bishier im Programm 2 möglichkeiten wie die char[] (vorname und nachname) gefüllt werden können:
@@ -425,7 +442,7 @@ void up_emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, 
     //Trittfall 2 auf muss beim kopieren nur zu der Stelle geschehen, bis das '\n' kommt
 
     char mailzusatz[7 + 1] = {'@', 'u', 'n', 'i', '.', 'd', 'e'};
-    int i, j;
+    int i, j, fehler = 0;
 
     for (i = 0; i < (laengevorname - 5 - 1); i++) // gehe bis index 14. Eins vor der Terminierenden null, bis hierhin könnte Text stehen
     {
@@ -455,6 +472,25 @@ void up_emailfeld(char *zeigervorname, char *zeigernachname, char *zeigeremail, 
         zeigeremail[i + 1] = mailzusatz[j];
         i++;
     }
+
+    zeigeremail[45] = '\0'; //terminierende 0 setzen
+    f->mom = f->start;      //gehe auf den Startzeiger
+
+    while (f->mom) //Zählt die Anzahl der Listenelemente
+    {
+        if ((strcmp(zeigeremail, f->mom->email))) //String compare liefert 0 wenn die Strings gleich sind
+        {
+        }
+        else
+        {
+            printf("Achtung E-Mail ist bereits vorhanden\n Dieser Benutzer kann nicht angelegt werden");
+            fehler = 1;
+            break;
+        }
+        f->mom = f->mom->danach;
+    }
+
+    return fehler;
 }
 void up_entferne_datensatz(t_feld *f)
 {
@@ -474,7 +510,7 @@ void up_entferne_datensatz(t_feld *f)
         for (i = 0; i < sizeof(eingabe); i++) //Fülle den char Array mit Leerzeichen
             eingabe[i] = 32;                  // muss in der do while passieren, da bei mehrer eingaben
                                               //das Array neu "leer" gemacht werden sollte
-        printf("Bitte geben Sie die E-Mail des zu entfernenden Benutzers\n");
+        printf("Bitte geben Sie die E-Mail des zu entfernenden Benutzers ein\n");
         fgets(eingabe, sizeof(eingabe) - 5, stdin);
         up_bereinige(eingabe, sizeof(eingabe));
 
@@ -528,6 +564,7 @@ void up_entferne_datensatz(t_feld *f)
 
 void up_sortieren(t_feld *f)
 {
+    //WÄHLEN ZWISCHEN nach Kursnummer sortieren oder e-Mail
 
     //Allgemeine Regel der Zeigervertauschung:
     //    www,xxx,yyy,zzz repräsentieren beispielhaft die Zeigeradressen, der Elemente der verketteten Liste
@@ -538,116 +575,114 @@ void up_sortieren(t_feld *f)
     // 3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : xxx->yyy[4] mom DANACH :  www->xxx[2]
     // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :        0
     //######################################################################################################################################
-
-    int tmp;
     int i, j;
+    int zaehler = 0;
+    int zahl1, zahl2;
+    t_studenten temp;
+    f->mom = f->start; //gehe auf den Startzeiger
+
+    //  f->temp = f->mom;
+
+    while (f->mom) //Zählt die Anzahl der Listenelemente
+    {
+        f->mom = f->mom->danach;
+        zaehler++;
+    }
 
     f->mom = f->start; //gehe auf den Startzeiger
 
-    while (f->mom) // DU STARTET AM LETZEN ELEMENT GERADE gehe solange die liste durch bis du das ende = 0 erreichst
+    ///KURSNUMMER ABSTEIGEND###############################################
+    for (i = 0; i < zaehler - 1; i++) // absteigend
     {
-        if (f->mom->danach == 0)
-            break;
-
-        // Es gibt 3 Fälle
-        if ((f->mom->davor == 0) && ((f->mom->kursnummer) > (f->mom->danach->kursnummer))) //die ersten 2 werden verglichen
+        f->mom = f->start;
+        for (j = 0; j < zaehler - 1; j++)
         {
+            zahl1 = atoi(f->mom->kursnummer);
+            zahl2 = atoi(f->mom->danach->kursnummer);
+            int a = (int)(f->mom->kursnummer);
+            if (zahl1 > zahl2) //ABSTEIGEND
+            {
 
-            //IST
-            // 1.  hans.maier@uni.de     f->mom                             mom Zeiger:     xxx	    mom DAVOR :      0      mom DANACH :  yyy
-            // 2.  b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR :     xxx	    mom DANACH :  zzz
-            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     yyy     mom DANACH :  www
+                strcpy(temp.vorname, f->mom->vorname);
+                strcpy(temp.nachname, f->mom->nachname);
+                strcpy(temp.kursnummer, f->mom->kursnummer);
+                strcpy(temp.email, f->mom->email);
+                strcpy(temp.ects, f->mom->ects);
 
-            //soll :
-            //2.   b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR :      0	    mom DANACH :  xxx
-            // 1.  hans.maier@uni.de   f->mom                               mom Zeiger:     xxx	    mom DAVOR :      yyy    mom DANACH :  zzz
-            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :      xxx    mom DANACH :  www
+                strcpy(f->mom->vorname, f->mom->danach->vorname);
+                strcpy(f->mom->nachname, f->mom->danach->nachname);
+                strcpy(f->mom->kursnummer, f->mom->danach->kursnummer);
+                strcpy(f->mom->email, f->mom->danach->email);
+                strcpy(f->mom->ects, f->mom->danach->ects);
 
-            //Anweisung :
-            // 1.  hans.maier@uni.de    f->mom                              mom Zeiger:     xxx	    mom DAVOR : 0->yyy[2]   mom DANACH :  yyy->zzz[0]
-            // 2.  b@uni.de                                                 mom Zeiger:     yyy     mom DAVOR : xxx-> [3]   mom DANACH :  zzz->xxx[1]
-            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR : yyy->xxx[4] mom DANACH :  www
-            //f->start = f->mom->danach;
-            f->mom = f->mom->danach;
-        }
-
-        if (((f->mom->kursnummer) > (f->mom->danach->kursnummer)) && ((f->mom->danach->danach != 0))) //3. fall werte innerhalb wedern verglichen
-
-        {
-            //Erster Durchgang passe die Nachfolger an:
-            //Folgender Alogrithmus wird verwendet:
-            //#####################################################################################################################################
-            // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  xxx->zzz[0]
-            // 2.  b@uni.de                    [f->mom]          mom Zeiger:     xxx    mom DAVOR : yyy     	mom DANACH :  zzz->www[1]
-            // 3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : xxx         mom DANACH :  www->xxx[2]
-            // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz         mom DANACH :        0
-            //######################################################################################################################################
-            f->mom->davor->danach = f->mom->danach; //xxx->zzz[0]
-            //Von Momentan nach DAVOR (yyy) nach DANACH, kommt man an die Zeigeradresse (xxx), die durch zzz ersetzt werden soll.
-            //Dabei erhält man zzz,indem man von der Momentanen Zeigeradresse nach DANACH geht.
-
-            f->mom->danach = f->mom->danach->danach; //zzz->www[1]
-            //Von Momentan nach DANACH,kommt man an die Zeigeradresse (zzz),  die durch www ersetzt werden soll.
-            //Dabei erhält man www, indem man von der Momentanen Zeigeradresse nach DANACH (ist zur zeit ja noch zzz) geht und bei DANACH geht.
-
-            f->mom->davor->danach->danach = f->mom; //www->xxx[2]
-            //Von Momentan nach DAVOR (yyy) nach DANACH (zzz) nach DANACH kommt man an die Zeigeradresse (www) die durch xxx ersetzt werden soll.
-            //Dabei erhält man xxx durch die Momentanen Zeigeradresse.
-
-            //######################################################################################################################################
-            // ...Erster Durchgang ist nun Durchgelaufen ...
-            //    Sieht dann so aus:
-            //  1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  zzz
-            //  3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : xxx         mom DANACH :  xxx
-            //  2.  b@uni.de   [f->mom]                           mom Zeiger:     xxx   mom DAVOR : yyy         mom DANACH :  www
-            //  4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz         mom DANACH :    0
-            //######################################################################################################################################
-
-            //2.Durchlauf ändere die DAVOR Zeiger
-            //Folgender Alogrithmus wird verwendet:
-            //######################################################################################################################################
-            //    1.  hans.maier@uni.de                          mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  zzz
-            //    3.  c@uni.de                                   mom Zeiger:     zzz	mom DAVOR : xxx->yyy[3] mom DANACH :  xxx
-            //    2.  b@uni.de   [f->mom]                        mom Zeiger:     xxx    mom DAVOR : yyy->zzz[4]	mom DANACH :  www
-            //    4.  a.b@uni.de                                 mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :    0
-            //######################################################################################################################################
-
-            f->mom->davor->danach->davor = f->mom->davor; //xxx->yyy[3]
-            //Der Vorgänger für f->mom liegt bisher ja noch auf yyy von dort aus kommt man über den Nachfolger(DANACH) von yyy (nähmlich zzz)
-            // auf die richtige Zeile an die stelle DAVOR,  diese wird mit yyy ersetzt
-
-            f->mom->davor = f->mom->davor->danach; //yyy->zzz[4]
-            //Der Vorgänger für f->mom liegt bisher ja noch auf yyy, von dieser Zeigeradresse kommt man über den Nachfolger(DANACH) auf zzz
-
-            f->mom->danach->davor = f->mom; //zzz->xxx[5]
-                                            //Der Nachfolger von f->mom (nämlich www) springt an die richtige Zeigeradresse, in dieser muss man den Vorgänger (DAVOR)
-                                            // durch durch den xxx Wert was die Momentane Speicheradresse ist ersetzten.
-            f->mom = f->mom->danach;
-        }
-
-        //if ((f->mom->danach->danach == 0) && ((f->mom->kursnummer) > (f->mom->danach->kursnummer))) // es werden die letzten 2 verglichen
-        {
-
-            //IST
-            // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  yyy
-            // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR :     xxx	    mom DANACH :  zzz
-            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     yyy     mom DANACH :  0
-
-            //soll :
-
-            // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  zzz
-            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR :     xxx     mom DANACH :  yyy
-            // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR :     zzz	    mom DANACH :  0
-
-            //Anweisung :
-            // 1.  hans.maier@uni.de                                        mom Zeiger:     xxx	    mom DAVOR :     www     mom DANACH :  yyy->zzz[0]
-            // 2.  b@uni.de                f->mom                           mom Zeiger:     yyy     mom DAVOR : xxx->zzz[3] mom DANACH :  zzz->0 [1]
-            // 3.  c@uni.de                                                 mom Zeiger:     zzz	    mom DAVOR : yyy->xxx[4] mom DANACH :  0-> yyy[2]
+                strcpy(f->mom->danach->vorname, temp.vorname);
+                strcpy(f->mom->danach->nachname, temp.nachname);
+                strcpy(f->mom->danach->kursnummer, temp.kursnummer);
+                strcpy(f->mom->danach->email, temp.email);
+                strcpy(f->mom->danach->ects, temp.ects);
+            }
             f->mom = f->mom->danach;
         }
     }
 
-    i++;
+    /*
+
+///KURSNUMMER AUFSTEIGEND###############################################
+    for (i = 0; i < zaehler - 1; i++)  // AUF
+    {
+        f->mom = f->start;
+        for (j = 0; j > zaehler - 1; j++)
+        {
+            zahl1 = atoi(f->mom->kursnummer);
+            zahl2 = atoi(f->mom->danach->kursnummer);
+            int a = (int)(f->mom->kursnummer);
+            if (zahl1 < zahl2)
+            {
+
+                strcpy(temp.vorname, f->mom->vorname);
+                strcpy(temp.nachname, f->mom->nachname);
+                strcpy(temp.kursnummer, f->mom->kursnummer);
+                strcpy(temp.email, f->mom->email);
+                strcpy(temp.ects, f->mom->ects);
+
+                strcpy(f->mom->vorname, f->mom->danach->vorname);
+                strcpy(f->mom->nachname, f->mom->danach->nachname);
+                strcpy(f->mom->kursnummer, f->mom->danach->kursnummer);
+                strcpy(f->mom->email, f->mom->danach->email);
+                strcpy(f->mom->ects, f->mom->danach->ects);
+
+                strcpy(f->mom->danach->vorname, temp.vorname);
+                strcpy(f->mom->danach->nachname, temp.nachname);
+                strcpy(f->mom->danach->kursnummer, temp.kursnummer);
+                strcpy(f->mom->danach->email, temp.email);
+                strcpy(f->mom->danach->ects, temp.ects);
+            }
+            f->mom = f->mom->danach;
+        }
+    }
+
+
+*/
 }
 
-//WÄHLEN ZWISCHEN nach Kursnummer sortieren oder e-Mail
+int up_entfernen_doppelter_elemente(t_feld *f, char *zeigertext)
+{
+    char temp[45 + 1];
+    f->mom = f->start; //setzte startzeiger auf anfang der Liste
+    strncpy(temp, zeigertext + 50, 46);
+    temp[45] = '\0';
+
+    int fehler = 1;
+    while (f->mom)
+    {
+        if (strcmp(temp, f->mom->email))
+            fehler = 0;
+        else
+        {
+           fehler = 1;
+           break;
+        }
+        f->mom = f->mom->danach;
+    }
+    return fehler;
+}
