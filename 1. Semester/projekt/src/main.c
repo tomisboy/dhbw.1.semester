@@ -8,7 +8,7 @@ int main(void)
 
     f->mom = 0;
     f->start = 0;
-    f->zwischen = 0;
+    f->temp = 0;
 
     printf("Willkommen zur Studentenverwaltung\n\n");
 // do while ?

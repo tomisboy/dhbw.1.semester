@@ -1,0 +1,60 @@
+   sprintf(kurschar, "%d", f->mom->kursnummer);
+        //Der Befehl sprintf konvertiert eine Zahl(int) in ein Char Array, sobald die Zahl zuende umgewandelt wurden ist wird einen terminierende \0 gesetzt
+        //Diese \0 steht aber nicht ganz am ende dieses Arrays kurschar[10 + 1]
+        //Im kurschar[] soll aber bis zur 7.Stelle eine Zahlenfolge (Zeichen pro Stelle) gefolgt von 3 Leerzeichen stehen
+        //Beispiel die Zahl 482 wird nach der Konvertierung folgendermaßen abgebildet:
+        //kurschar[0] = '4'
+        //kurschar[1] = '8'
+        //kurschar[2] = '2'
+        //kurschar[3] = '\0'   <-- diese null wird von der funktion gesetzt
+        //kurschar[4] = ' '
+        //kurschar[...] = ' '
+        //kurschar[10] = ' '
+        //wir haben also die Terminierende \0 an der falschen Stelle
+        //diese muss an die letzte stelle und dieses wird mit der nachfolgenden Methode bewerkstellig
+
+
+            t_feld *x = p->mom;
+    t_feld *y = p->mom->danach;
+
+    //t_feld *y = f->mom->danach;
+
+    //Hier passiert die Magie des Vertauschen 2er aufeinanderfolgenden Elemente einer Liste:
+    // Es müssen 6 Zeiger umgebogen werden
+    //Dabei gibt es 2 Fälle zum Beachten dass entweder das erste oder das Letzte element getaucht wird
+
+    //IST Situation:
+    //################################################################
+    //              [6]                              [1]                        [3]
+    //      <---------------------  [ELEMENT]   <-----------    [ELEMENT] <----------------
+    //                              [   x   ]	                [   y   ]
+    //       ---------------------> [ELEMENT]   ----------->    [ELEMENT] ---------------->
+    //              [5]                              [2]                        [4]
+
+    //SOLL  Situation:
+    //################################################################
+    //            [6]                              [1]                        [3]
+    //      <---------------------  [ELEMENT]   <-----------    [ELEMENT] <----------------
+    //                              [   y   ]	                [   x   ]
+    //      --------------------->  [ELEMENT]   ----------->    [ELEMENT] ---------------->
+    //              [5]                              [2]                        [4]
+
+    //Der vorgänger vom Nachfolger von y wird nur dann 0 wenn da auch einer steht, sonst ist es eben x
+    if (p->mom->danach->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
+        p->mom->danach->danach->davor = p->mom;
+
+    //der nachfolger vom vorgänger von x wird nur dann 0 wenn da auc was steht
+    if (p->mom->davor != 0)
+        p->mom->davor->davor = p->mom->danach;
+
+    //Der Vorgänger von y wird der Vorgänger von x könnte auch eine 0 stehen ist aber egal
+    p->mom->danach->davor = p->mom->davor;
+
+    //Nachfolger von x , wird nachfolger von y // kann auch ruhig eine null sein
+    p->mom->danach = p->mom->danach->danach;
+
+    //Vorgänger von x  wird y
+    p->mom->davor = p->mom->danach;
+
+    //Nachfolger von y wird x sein
+    p->mom->danach->danach = p->mom;

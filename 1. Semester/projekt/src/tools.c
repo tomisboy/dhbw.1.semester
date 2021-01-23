@@ -1,8 +1,10 @@
 #include "header.h"
 int up_menu(t_feld *f)
 {
+    int key;
     int auswahl;
-    printf("\nDu kannst folgene Auswahl treffen:\n (Die Eingabe \"0\" beendet das Programm)\n");
+    printf("\n\tWillkommen im Hauptprogramm\n");
+    printf("\nDu kannst folgene Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
     printf("\n 1: Einlesen der input.txt (Dies speichert automatisch die Felder in verketten Listen");
     printf("\n 2: Manuelles eingeben von Daten");
     printf("\n 3: Sortierung");
@@ -10,6 +12,9 @@ int up_menu(t_feld *f)
     printf("\n 5: Entfernen eines Datensatzes ");
     printf("\n 6: Speichern der Datei");
     printf("\n 7: Anzeige der Zeiger");
+    printf("\n 8: Verschluesseln");
+    printf("\n 9: Entschluesseln");
+
     printf("\n \n Gebe nun bitte eine Zahl ein:\t");
     scanf("%i", &auswahl);
     fflush(stdin);
@@ -41,7 +46,12 @@ int up_menu(t_feld *f)
     case 7:
         up_hex(f);
         break;
-
+    case 8:
+        key = verschluesseln(f);
+        break;
+    case 9:
+        entschluesseln(f, key);
+        break;
     default:
         break;
     }
@@ -89,8 +99,8 @@ void up_datei_einlesen(t_feld *f)
     {
         while (!feof(einlesen))
         {
-            fgets(text, 99, einlesen);                                                // Lese 99 Zeichen der input Datei ein (eine ganze Zeile)
-            if (text[0] >= 'A' && text[0] <= 'Z' || text[0] >= 'a' && text[0] <= 'z') //Lese ausschließlich Zeilen ein, die mit alpahbetischen Zeichen beginnen
+            fgets(text, 99, einlesen);            // Lese 99 Zeichen der input Datei ein (eine ganze Zeile)
+            if (text[0] >= 'A' && text[0] <= 'Z') //Lese ausschließlich Zeilen ein, die mit Großbuchtaben (alpahbetischen Zeichen) beginnen
             {
                 if (f->start == 0) //Wenn die List leer ist wird der das allererste erste Element geschrieben, ohne zu Überprüfen ob es doppelt vorkommt
                     up_liste_Add(f, text);
@@ -105,6 +115,7 @@ void up_datei_einlesen(t_feld *f)
 
         printf("\n\nDaten wurden erfolgreich eingelesen\n\n");
         printf("\nWeiter mit Enter Taste ...");
+
         getchar();
     }
 }
@@ -113,7 +124,7 @@ void up_liste_Add(t_feld *f, char text[99 + 1])
     f->mom = (t_studenten *)malloc(sizeof(t_studenten)); // Reserviert Hauptspeicher von der Größe des Struct-elements t_studenten für nächstes Listenelement
     up_file_struct(f, text);                             //( inhalt wird in listelemet übertragen)
 
-    //Hier passiert werden die Zeiger listen verknüpfungen erstellt
+    //Hier werden die Zeiger listen verknüpfungen erstellt
 
     f->mom->davor = f->temp;      //Von aktelle neu erzeugtem mom element das Feld davor ist temp, was der vorgänger ist ----
     f->mom->danach = 0;           //Von aktelle neu erzeugtem mom element das Feld danach wird 0 gesetzt.                   |
@@ -175,16 +186,19 @@ void up_speichern(t_feld *f)
         printf("\n Datei nicht moeglich zu oeffnen");
 
     //Initialisierung der Array, diese werden mit Leerzeichen die als als Trennsymbolen herhalten gefüllt
+    up_char_init(kurscharzeiger, sizeof(kurschar));
+    up_char_init(etcscharzeiger, sizeof(etcschar));
+
+    /*
     for (i = 0; i < sizeof(kurschar); i++)
         kurschar[i] = 32;
     for (i = 0; i < sizeof(etcschar); i++)
         etcschar[i] = 32;
-
+*/
     f->mom = f->start; //setzte startzeiger auf anfang der Liste
 
     while (f->mom)
-    { //solange mom != 0 gehe solange jedes Listenelement durch bis das Ende (0) erricht wird
-
+    {                                          //solange mom != 0 gehe solange jedes Listenelement durch bis das Ende (0) erricht wird
         fprintf(einlesen, f->mom->vorname);    //schreiben den Vornamen aus der aktuellen Liste in die Datei
         fprintf(einlesen, f->mom->nachname);   //schreiben den Nachnamen aus der aktuellen Liste in die Datei
         fprintf(einlesen, f->mom->kursnummer); //schreiben die umgewandelte und bereinigt Kursnummer aus der aktuellen Liste in die Datei
@@ -231,8 +245,15 @@ void up_eingabe_tastatur(t_feld *f)
     char *zeigeremail = tmpemail; //Zeiger auf tmpemail für methoden
 
     //Fülle alle Arrays mit Leerzeichen, diese Zeichen sind für das getrennte ausgeben (trennungszeichen) da.
-    for (i = 0; i < sizeof(tmptext); i++)
-        tmptext[i] = 32;
+
+    up_char_init(tmptext, sizeof(tmptext));
+    up_char_init(tmpnachname, sizeof(tmpnachname));
+    up_char_init(tmpemail, sizeof(tmpemail));
+    up_char_init(tmpkursnummer, sizeof(tmpkursnummer));
+    up_char_init(tmpects, sizeof(tmpects));
+
+    /* //for (i = 0; i < sizeof(tmptext); i++)
+    //  tmptext[i] = 32;
     for (i = 0; i < sizeof(tmpvorname); i++)
         tmpvorname[i] = 32;
     for (i = 0; i < sizeof(tmpnachname); i++)
@@ -243,12 +264,14 @@ void up_eingabe_tastatur(t_feld *f)
         tmpkursnummer[i] = 32;
     for (i = 0; i < sizeof(tmpects); i++)
         tmpects[i] = 32;
-
+        
+*/
     printf("\nWillkommen zur Eingabe von neuen Studenten\nweiter mit Enter ...\n");
     getchar(); //warte auf ENTER
 
     do
     {
+
         do //EINGABE DES VORNAMENS
         {
             printf("Zuerst bitte den Vornamen (max 15 Alphabetische-Zeichen keine Sonderzeichen erlaubt!!!):  ");
@@ -259,7 +282,7 @@ void up_eingabe_tastatur(t_feld *f)
 
         do //EINGABE DES NACHNAMENS
         {
-            printf("Bitte den Nachnamen (max 15 Alphabetische-Zeichen keine Sonderzeichen!!!):  ");
+            printf("Bitte den Nachnamen (max 15 Alphabetische-Zeichen keine Sonderzeichen erlaubt!!!):  ");
             fgets(tmpnachname, sizeof(tmpnachname) - 5, stdin); //Nimm 15 Zeichen der Eingabe und speichere es in tmpnachname
             fflush(stdin);
             fehler = up_text_ueberpruefung(zeigernachname, (sizeof(tmpnachname) - 5)); //Überprüfung der Eingabe  auf Fehler
@@ -312,11 +335,13 @@ void up_eingabe_tastatur(t_feld *f)
             //daruch kann diese eingabe als Parameter für die up_liste_Add übergeben werden um sie in die verkette Liste zu speichern
             //Die Einga
             up_liste_Add(f, tmptext); // der Zeiger vom Hautprogramm und tmptext wird der Methode übergeben, die die Daten in die Liste speichern soll.
+            printf("\nFolgender Student wurde erfolgreich eingelegt \n%s\n%s\n%s\n", f->mom->vorname, f->mom->nachname, f->mom->email);
         }
 
-        printf("\n\nWollen Sie weitere Werte eingeben, oder die Eingabe wiederholen , dann Taste: \"j\"\num abzubrechen eine beliebige Taste :\n ");
+        printf("\n\nWollen Sie weitere Werte eingeben, oder die Eingabe wiederholen , dann Taste: \"j\"\num abzubrechen eine beliebige Taste :\n");
         scanf("%c", &eingabe);
         fflush(stdin);
+
     } while ((eingabe == 'j')); //uum weitere eingaben zu ermöglichen muss einfach 'j' gedrückt werden
 }
 void up_bereinige(char *bekommenerZeiger, int langeArray)
@@ -345,16 +370,19 @@ int up_text_ueberpruefung(char *bekommenerZeiger, int langeArray)
     for (i = 0; i < langeArray - 1; i++)
     {
         fehler = 0;
+        //Erstes Zeichen wird in Großbuchstaben umgewandelt
+        if (bekommenerZeiger[0] >= 'a' && bekommenerZeiger[0] <= 'z')
+            bekommenerZeiger[0] = bekommenerZeiger[0] - 32; //gehe 32 schritte im Acsi Code zurück
+
         if (bekommenerZeiger[i] >= 'A' && bekommenerZeiger[i] <= 'Z' || bekommenerZeiger[i] >= 'a' && bekommenerZeiger[i] <= 'z')
         {
         }
         else //es gibt ein zeichen, dass nicht im Alphabet ist ODER das ende \n wurde erreicht.
         {
-
             if (bekommenerZeiger[0] == '\n') //Aller erstes element ist falsch (Bei der Eingabe wurde nur ENTER gedrückt)
             {
                 fehler = 1;
-                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen!\nBitte nochmal probieren\n");
+                printf("\nACHTUNG: Bitte gebe etwas ein\n");
                 break; //beendet die forschleife
             }
             else if (bekommenerZeiger[i] == '\n') //hier wurde das ende des eingebenen Strings gefunden
@@ -362,7 +390,7 @@ int up_text_ueberpruefung(char *bekommenerZeiger, int langeArray)
 
             else
             {
-                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen!\nBitte nochmal probieren\n");
+                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen! \t %c \t \nBitte nochmal probieren\n", bekommenerZeiger[i]);
                 fehler = 1;
                 break; //beendet die forschleife
             }
@@ -386,11 +414,18 @@ int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray)
             if (bekommenerZeiger[i] == '\n') //Sobald ein \n gefunden wurde bedeutet dies, das Char Array ist nicht vollständig gefüllt!
             {
                 fehler = 1; // Fehler weil char array nicht die notwendige Anzahl der Stellen erfüllt
-                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen! Oder enthielt zu wenig Stellen\n ");
+                printf("\nEingaben enthielt zu wenig Stellen\n ");
                 printf("Sie müssen %d Stellen angeben (Wenn Eingabe kleiner als %d Stellen ist, geben sie 0 an den Anfang\n", langeArray - 1, langeArray - 1);
                 printf("\nBitte nochmal probieren\n");
                 break;
-            } //dieser Fall titt ein wenn nicht alle Stellen gefüllt worden sind
+            }
+            else
+            {
+                fehler = 1;
+                printf("\nACHTUNG: Ein Eingabe erhielt ein nicht erlaubtes Zeichen! \t %c \t \nBitte nochmal probieren\n", bekommenerZeiger[i]);
+                break;
+            }
+            //dieser Fall titt ein wenn nicht alle Stellen gefüllt worden sind
         }
     }
     return fehler;
@@ -476,72 +511,107 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
 }
 void up_entferne_datensatz(t_feld *f)
 {
-    //gebe E-Mail ein
-    //sucher nach e-mail
-    /// vom voränger Zeiger muss der nachfolger auf den übernächsten gesetzt werden
-    // vom nachfolger Zeiger muss der voränger auf den vor vor letzten Zeiger
-    char eingabe[45 + 1];
-    char tmpeingabe[45 + 1];
-    int i;
-    int geloescht; //Überprüft ob ein Wert gelöscht worden ist
-    char taste;    //eingabetaste für wiederholtes löschen von Datensätzen
+    int auswahl;
+    /////////
 
-    do
+    printf("\n Was willstdu entfernen");
+    printf("\n '1' Fure die leerung aller Listenelemente");
+    printf("\n '2' für die Entfernung einzelner Bentutzer");
+    printf("\n '3' Fure die leerung aller Listenelemente\n");
+
+    scanf("%i", &auswahl);
+    fflush(stdin);
+
+    switch (auswahl)
     {
-        geloescht = 0;
-        for (i = 0; i < sizeof(eingabe); i++) //Fülle den char Array mit Leerzeichen
-            eingabe[i] = 32;                  // muss in der do while passieren, da bei mehrer eingaben
-                                              //das Array neu "leer" gemacht werden sollte
-        printf("Bitte geben Sie die E-Mail des zu entfernenden Benutzers ein\n");
-        fgets(eingabe, sizeof(eingabe) - 5, stdin);
-        up_bereinige(eingabe, sizeof(eingabe));
+    case 1:
+    {
+        f->mom = 0;
+        f->start = 0;
+        f->temp = 0;
+        break;
+    }
 
-        f->mom = f->start; //gehe auf den Startzeiger
+    case 2:
+    {
+        ///////
+        //gebe E-Mail ein
+        //sucher nach e-mail
+        /// vom voränger Zeiger muss der nachfolger auf den übernächsten gesetzt werden
+        // vom nachfolger Zeiger muss der voränger auf den vor vor letzten Zeiger
+        char eingabe[45 + 1];
+        char tmpeingabe[45 + 1];
+        int i;
+        int geloescht; //Überprüft ob ein Wert gelöscht worden ist
+        char taste;    //eingabetaste für wiederholtes löschen von Datensätzen
 
-        while (f->mom) // DU STARTET AM LETZEN ELEMENT GERADE gehe solange die liste durch bis du das ende = 0 erreichst
+        do
         {
-            if ((strcmp(eingabe, f->mom->email))) //String compare liefert 0 wenn die Strings gleich sind
+            geloescht = 0;
+            for (i = 0; i < sizeof(eingabe); i++) //Fülle den char Array mit Leerzeichen
+                eingabe[i] = 32;                  // muss in der do while passieren, da bei mehrer eingaben
+                                                  //das Array neu "leer" gemacht werden sollte
+            printf("Bitte geben Sie die E-Mail des zu entfernenden Benutzers ein\n");
+            fgets(eingabe, sizeof(eingabe) - 5, stdin);
+            up_bereinige(eingabe, sizeof(eingabe));
+
+            f->mom = f->start; //gehe auf den Startzeiger
+
+            while (f->mom) // DU STARTET AM LETZEN ELEMENT GERADE gehe solange die liste durch bis du das ende = 0 erreichst
             {
+                if ((strcmp(eingabe, f->mom->email))) //String compare liefert 0 wenn die Strings gleich sind
+                {
+                }
+                else
+                { //Strucelement das gelöscht werden soll wurde gefunden
+                    //er gibt 3 möglichkeiten: Das ersten, letzte, oder mittendrinn soll gelöscht werden
+
+                    f->mom->email[0] = '0'; //leert das E-Mail feld, damit die E-Mail nicht mehr in einer Liste steht
+                    if (f->mom->davor == 0) //Erstes element wurde getroffen
+                    {
+                        f->mom->danach->davor = 0;
+                        f->start = f->mom->danach; // im vorherigen element wird der danach zeiger auf 0 gesetzt
+                        f->temp = f->mom;
+                        printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
+                        geloescht = 1;
+                        break;
+                    }
+                    if (f->mom->danach == 0) // Letzes Element wurde getroffen
+                    {
+                        f->mom->davor->danach = 0;
+                        f->temp = f->mom->davor; //<-- Wichtig das vorletzte Element wird nun das zwischen element,
+                        //damit beim löschen des Letzten elements immer noch welche hinzugefügt werden können, durch up_liste_Add
+                        printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
+                        geloescht = 1; // im vorherigen element wird der danach zeiger auf 0 gesetzt
+                        break;
+                    }
+
+                    else // Element mittendrinne wurde getroffen
+                    {
+                        f->mom->davor->danach = f->mom->danach; //Setze den Nachfolger des Vorgängers auf den übernächsten Zeiger
+                        f->mom->danach->davor = f->mom->davor;  //Setze den Vorgänger der Nachfolgers auf den vorherigen Zeiger ein Element dahinter
+
+                        printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
+                        geloescht = 1;
+                        break;
+                    }
+                }
+                f->mom = f->mom->danach; //Nächstes Element
             }
-            else
-            { //Strucelement das gelöscht werden soll wurde gefunden
-                //er gibt 3 möglichkeiten: Das ersten, letzte, oder mittendrinn soll gelöscht werden
 
-                if (f->mom->davor == 0) //Erstes element wurde getroffen
-                {
-                    f->mom->danach->davor = 0;
-                    f->start = f->mom->danach; // im vorherigen element wird der danach zeiger auf 0 gesetzt
-                    printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
-                    geloescht = 1;
-                    break;
-                }
-                if (f->mom->danach == 0) // Letzes Element wurde getroffen
-                {
-                    f->mom->davor->danach = 0;
-                    printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
-                    geloescht = 1; // im vorherigen element wird der danach zeiger auf 0 gesetzt
-                    break;
-                }
+            if (!geloescht) //Alle Listen sind durchgelaufen, es wird überprüft ob was gelöscht wurden
+                printf("\nACHTUNG Die E-Mail \t %s \t wurde nicht gefunden, es wurde nichts entfernt\n", eingabe);
 
-                else // Element mittendrinne wurde getroffen
-                {
-                    f->mom->davor->danach = f->mom->danach; //Setze den Nachfolger des Vorgängers auf den übernächsten Zeiger
-                    f->mom->danach->davor = f->mom->davor;  //Setze den Vorgänger der Nachfolgers auf den vorherigen Zeiger ein Element dahinter
-                    printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
-                    geloescht = 1;
-                    break;
-                }
-            }
-            f->mom = f->mom->danach; //Nächstes Element
-        }
+            printf("\n\nWollen Sie weiter Werte entfernen, oder eine die Eingabe wiederholen, dann Taste: \"j\" \num abzubrechen eine beliebige Taste : \n ");
+            scanf("%c", &taste);
+            fflush(stdin);
+        } while (taste == 'j');
+        break;
+    }
 
-        if (!geloescht) //Alle Listen sind durchgelaufen, es wird überprüft ob was gelöscht wurden
-            printf("\nACHTUNG Die E-Mail \t %s \t wurde nicht gefunden, es wurde nichts entfernt\n", eingabe);
-
-        printf("\n\nWollen Sie weiter Werte entfernen, oder eine die Eingabe wiederholen, dann Taste: \"j\" \num abzubrechen eine beliebige Taste : \n ");
-        scanf("%c", &taste);
-        fflush(stdin);
-    } while (taste == 'j');
+    default:
+        break;
+    }
 }
 int up_suche_doppelte_elemente(t_feld *f, char *zeigertext)
 {
@@ -567,83 +637,178 @@ int up_suche_doppelte_elemente(t_feld *f, char *zeigertext)
     }
     return fehler;
 }
-
 void up_sortieren(t_feld *f)
 {
-    //WÄHLEN ZWISCHEN nach Kursnummer sortieren oder e-Mail
+    int i, j, zaehler = 0;
 
-    //Allgemeine Regel der Zeigervertauschung:
-    //    www,xxx,yyy,zzz repräsentieren beispielhaft die Zeigeradressen, der Elemente der verketteten Liste
-    // Am Beispiel vertauschen b@uni.de mit c@uni.de
-    //#####################################################################################################################################
-    // 1.  hans.maier@uni.de                             mom Zeiger:     yyy	mom DAVOR :          0  mom DANACH :  xxx->zzz[0]
-    // 2.  b@uni.de                                      mom Zeiger:     xxx    mom DAVOR : yyy->zzz[3]	mom DANACH :  zzz->www[1]
-    // 3.  c@uni.de                                      mom Zeiger:     zzz	mom DAVOR : xxx->yyy[4] mom DANACH :  www->xxx[2]
-    // 4.  a.b@uni.de                                    mom Zeiger:     www	mom DAVOR : zzz->xxx[5] mom DANACH :        0
-    //######################################################################################################################################
-    int i, j;
-    int zaehler = 0;
-    int zahl1, zahl2;
-    //t_studenten temp;
-    f->mom = f->start; //gehe auf den Startzeiger
     int auswahl;
-    printf("\n Du kannst nach folgenden kriterien sortiren");
-    printf("\n 'v' für die Sortierung des Vornamens'");
-    printf("\n 'n' für die Sortierung des Nornamens'");
-    printf("\n 'k' für die Sortierung der Kursnummer'");
+    f->mom = f->start;
+    while (f->mom) //Zählt die Anzahl der Listenelemente
+    {
+        f->mom = f->mom->danach;
+        zaehler++;
+    }
+    f->mom = f->start; //gehe auf den Startzeiger
+
+    printf("\n Du kannst nach folgenden Kriterien sortieren");
+    printf("\n '1' für die Sortierung des Vornamens");
+    printf("\n '2' für die Sortierung des Nachnames");
+    printf("\n '3' für die Sortierung der Kursnummer\n");
 
     scanf("%i", &auswahl);
     fflush(stdin);
 
     switch (auswahl)
     {
-    case 'vorname':
-        /* code */
-        break;
-        //case 'nachname':
-        break;
+    case 1:
+    {
+        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' für aufsteigend\n\t'2' für absteigend\n");
+        do
+        {
+            scanf("%i", &auswahl);
+            fflush(stdin);
+        } while (auswahl != 1 && auswahl != 2);
 
-    case 'kursnummer':
+        if (auswahl == 1) ///KURSNUMMER ABSTEIGEND###############################################
+        {
+            f->mom = f->start; //gehe auf den Startzeiger
+            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            for (i = 0; i < zaehler - 1; i++) // absteigend
+            {
+                f->mom = f->start;
+                for (j = 0; j < zaehler - 1; j++)
+                {
+                    if (strcmp(f->mom->vorname, f->mom->danach->vorname) > 0)
+                        zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
+                    f->mom = f->mom->danach;
+                }
+            }
+            printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
+            printf("\n\nWeiter mit Enter Taste ...");
+            getchar();
+        }
+        else ///KURSNUMMER AUFTEIGEND###############################################
+        {
+            f->mom = f->start; //gehe auf den Startzeiger
+            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            for (i = 0; i < zaehler - 1; i++) // austeigend
+            {
+                f->mom = f->start;
+                for (j = 0; j < zaehler - 1; j++)
+                {
+                    if (strcmp(f->mom->vorname, f->mom->danach->vorname) < 0)
+                        zeiger_tausch(f); //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
+                    f->mom = f->mom->danach;
+                }
+            }
+            printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
+            printf("\n\nWeiter mit Enter Taste ...");
+            getchar();
+        }
         break;
+    }
+    case 2:
+    {
+        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' für aufsteigend\n\t'2' für absteigend\n");
+        do
+        {
+            scanf("%i", &auswahl);
+            fflush(stdin);
+        } while (auswahl != 1 && auswahl != 2);
+
+        if (auswahl == 1) ///KURSNUMMER ABSTEIGEND###############################################
+        {
+            f->mom = f->start; //gehe auf den Startzeiger
+            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            for (i = 0; i < zaehler - 1; i++) // absteigend
+            {
+                f->mom = f->start;
+                for (j = 0; j < zaehler - 1; j++)
+                {
+                    if (strcmp(f->mom->nachname, f->mom->danach->nachname) > 0)
+                        zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
+                    f->mom = f->mom->danach;
+                }
+            }
+            printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
+            printf("\n\nWeiter mit Enter Taste ...");
+            getchar();
+        }
+        else ///KURSNUMMER AUFTEIGEND###############################################
+        {
+            f->mom = f->start; //gehe auf den Startzeiger
+            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            for (i = 0; i < zaehler - 1; i++) // austeigend
+            {
+                f->mom = f->start;
+                for (j = 0; j < zaehler - 1; j++)
+                {
+                    if (strcmp(f->mom->nachname, f->mom->danach->nachname) < 0)
+                        zeiger_tausch(f); //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
+                    f->mom = f->mom->danach;
+                }
+            }
+            printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
+            printf("\n\nWeiter mit Enter Taste ...");
+            getchar();
+        }
+
+        break;
+    }
+
+    case 3:
+    {
+        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' für aufsteigend\n\t'2' für absteigend\n");
+        do
+        {
+            scanf("%i", &auswahl);
+            fflush(stdin);
+        } while (auswahl != 1 && auswahl != 2);
+
+        if (auswahl == 1) ///KURSNUMMER ABSTEIGEND###############################################
+        {
+            f->mom = f->start; //gehe auf den Startzeiger
+            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            for (i = 0; i < zaehler - 1; i++) // absteigend
+            {
+                f->mom = f->start;
+                for (j = 0; j < zaehler - 1; j++)
+                {
+                    if (strcmp(f->mom->kursnummer, f->mom->danach->kursnummer) > 0)
+                        zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
+                    f->mom = f->mom->danach;
+                }
+            }
+            printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
+            printf("\n\nWeiter mit Enter Taste ...");
+            getchar();
+        }
+        else ///KURSNUMMER AUFTEIGEND###############################################
+        {
+            f->mom = f->start; //gehe auf den Startzeiger
+            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            for (i = 0; i < zaehler - 1; i++) // austeigend
+            {
+                f->mom = f->start;
+                for (j = 0; j < zaehler - 1; j++)
+                {
+                    if (strcmp(f->mom->kursnummer, f->mom->danach->kursnummer) < 0)
+                        zeiger_tausch(f);    //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
+                    f->mom = f->mom->danach; //Nächstes Element
+                }
+            }
+            printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
+            printf("\n\nWeiter mit Enter Taste ...");
+            getchar();
+        }
+
+        break;
+    }
 
     default:
         break;
     }
-
-    while (f->mom) //Zählt die Anzahl der Listenelemente
-    {
-        f->mom = f->mom->danach;
-        zaehler++;
-    }
-
-    //  int start = 0;
-    f->mom = f->start; //gehe auf den Startzeiger
-    ///KURSNUMMER ABSTEIGEND###############################################
-    for (i = 0; i < zaehler - 1; i++) // absteigend
-    {
-        f->mom = f->start;
-        for (j = 0; j < zaehler - 1; j++)
-        {
-
-            // if (strcmp(f->mom->vorname , f->mom->danach->vorname) > 0)
-            if (strcmp(f->mom->kursnummer, f->mom->danach->kursnummer) > 0) //ABSTEIGEND
-            {
-                //int temp = f->mom; //merke dir deine aktuelle position
-                zeiger_tausch(f);
-                /*
-                start++;
-                if (start == 1)
-                    f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
-                f->mom = temp;
-                f->mom = f->mom->davor;
-                //dadruch dass die Position*/
-                //f->mom = f->mom->davor;
-            }
-            f->mom = f->mom->danach;
-        }
-    }
 }
-
 void zeiger_tausch(t_feld *f)
 {
     int zeigerspeichen;
@@ -655,42 +820,29 @@ void zeiger_tausch(t_feld *f)
     //Dabei gibt es 2 Fälle zum Beachten dass entweder das erste oder das Letzte element getauscht wird
 
     //IST Situation:
-    //##########################################################################################################
-    //              [6]                                     [1]                 [3]
-    //      <---------------------  [ELEMENT  X     ]        <-----------    [ELEMENT  Y           ] <----------------
-    //                              [ x = f->mom    ]	                     [ y = f->mom->danach  ]
-    //       ---------------------> [ELEMENT  X     ]        ----------->    [ELEMENT  Y           ] ---------------->
-    //              [5]                                         [2]                        [4]
+
+    //####################################################################################################################
+    //              [6]                                     [1]                 [3]                                     //
+    //      <---------------------  [ELEMENT  X     ]        <-----------    [ELEMENT  Y           ] <----------------  //
+    //                              [ x = f->mom    ]	                     [ y = f->mom->danach  ]                    //
+    //       ---------------------> [ELEMENT  X     ]        ----------->    [ELEMENT  Y           ] ---------------->  //
+    //              [5]                                         [2]                        [4]                          //
+    //####################################################################################################################
 
     //SOLL  Situation:
-    //###########################################################################################################
-    //              [6]                                        [1]             [3]
-    //      <---------------------  [ELEMENT Y          ]   <-----------    [ELEMENT x     ] <----------------
-    //                              [ y = f->mom->danach]	                [ x = f->mom   ]
-    //      --------------------->  [ELEMENT  Y         ]   ----------->    [ELEMENT x     ] ---------------->
-    //              [5]                                        [2]             [4]
+    //####################################################################################################################
+    //              [6]                                        [1]             [3]                                      //
+    //      <---------------------  [ELEMENT Y          ]   <-----------    [ELEMENT x     ] <----------------          //
+    //                              [ y = f->mom->danach]	                [ x = f->mom   ]                            //
+    //      --------------------->  [ELEMENT  Y         ]   ----------->    [ELEMENT x     ] ---------------->          //
+    //              [5]                                        [2]             [4]                                      //
+    //####################################################################################################################
     /*
-    //Der vorgänger vom Nachfolger von y wird nur dann 0 wenn da auch einer steht, sonst ist es eben x
-    if (y->mom->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
-        y->mom->danach->davor = x->mom;
+    */
+    // x stellt des erste element dar, das mit y getauscht wird
+    //x = f->mom  (das aktuelle Listenelement )  y= f->mom->danach (das nächste Listenelement)
 
-    //der nachfolger vom vorgänger von x wird nur dann 0 wenn da auc was steht
-    if (x->mom->davor != 0)
-        x->mom->davor->davor = y->mom;
-
-    //Der Vorgänger von y wird der Vorgänger von x könnte auch eine 0 stehen ist aber egal
-    y->mom->davor = x->mom->davor;
-
-    //Nachfolger von x , wird nachfolger von y // kann auch ruhig eine null sein
-    x->mom->danach = y->mom->danach;
-
-    //Vorgänger von x  wird y
-    x->mom->davor = y->mom;
-
-    //Nachfolger von y wird x sein
-    y->mom->danach = x->mom;
-*/
-    temp = f->mom->danach->danach;
+    temp = f->mom->danach->danach; //Nachfolger von y muss zwischengespeichert werden
     //Der vorgänger vom Nachfolger von y wird nur dann 0 wenn da auch einer steht, sonst ist es eben x
     if (f->mom->danach->danach != 0) // !(mach nicht nach dir kommt nichts mehr du bist letzten )
         f->mom->danach->danach->davor = f->mom;
@@ -711,23 +863,87 @@ void zeiger_tausch(t_feld *f)
     //Nachfolger von x , wird nachfolger von y // kann auch ruhig eine null sein
     f->mom->danach = temp;
 
-    /*
-    //''
-    //NEW
-    start + 1;
-    if (start == 1)
-        f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
-                                  // dadruch dass die Position
+    //Setzte den Startwert auf das, möglicherweise neu an die erste Stelle verschobenen Listenelement
+    if (f->mom->davor->davor == 0) //
+        f->start = f->mom->davor;  // setzte erste anfang auf richtig stelle
 
-    //WICHTIG. Dadurch, dass wir eine Vertauschung durchgeführt haben, haben wir unseren Zeiger/Index verschoben
-    //Dieser muss wieder um eine Stelle zurückgesetzt werden
+    //Da nach dieser Method in der Forschleife der Index wieder hochgezählt wird,
+    //muss dieses um eine stelle reduziert werden.
+    //der Momentanzeiger liegt ja bisher auf dem nächste index  (eben durch die Vertauschung)
+    //damit nun nicht doppelt hochgezählt wird wird der hier reduziert und erst auserhalb der Methode hochgezählt)
     f->mom = zeigerspeichen;
     f->mom = f->mom->davor;
-    */
+}
+int verschluesseln(t_feld *f)
+{
+    //E-Mail wird verschlüsselt
 
-    if (f->mom->davor->davor == 0)
-        f->start = f->mom->davor; // setzte erste anfang auf richtig stelle
-    f->mom = zeigerspeichen;
-    f->mom = f->mom->davor;
-    //dadruch dass die Position*/
+    const MOD = 60;
+
+    int i, eingabe_key, key;
+    printf("Code zum Verschluesseln eingeben\n");
+    scanf("%i", &eingabe_key);
+    fflush(stdin);
+
+    // Für die berechnung des wertes das auf den klartext addiert wird
+    f->mom = f->start;
+    key = eingabe_key % MOD + 65; // 65 weil, verschlüsseltes Zeichen, soll kein @ enthalten, daher fangen wir beim asci code 1 weiter an
+    //Algorithumu
+    //Cäsar Verfahren addiere auf den char ASCI wert eine geheime Zahl drauf. Daruf wird ein anderes Zeichen ausgegeben
+
+    while (f->mom) // gehe die Liste durch
+    {
+        for (i = 0; i < 45; i++)
+        {
+            if (f->mom->email[i] == 64) //Verschlüssele solange du bis auf das @ Zeichen triffst
+                break;
+            else
+                f->mom->email[i] = f->mom->email[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung )
+        }
+        f->mom = f->mom->danach;
+    }
+    printf("\n alle E-Mails wurden verschluesselt,\n");
+    printf("\n\nWeiter mit Enter Taste ...");
+    getchar();
+    return eingabe_key;
+}
+void entschluesseln(t_feld *f, int key)
+{
+    const MOD = 60; // Für die berechnung des wertes das auf den klartext addiert wird
+
+    int i, eingabe_key;
+    printf("Code zum Entschluesseln eingeben\n");
+    scanf("%i", &eingabe_key);
+    fflush(stdin);
+
+    f->mom = f->start; //setzte start
+    if (key == eingabe_key)
+    {
+        key = key % MOD + 65;
+        while (f->mom) //Geht die Liste durch
+        {
+            for (i = 0; i < 45; i++) //ENTSCHLÜSSLEN
+            {
+                if (f->mom->email[i] == 64) // wenn du das "Klartext" "@" findest kannst du aufhören zu entschlüsseln
+                    break;
+                else
+                    f->mom->email[i] = f->mom->email[i] - key; //entschlüsselung . Ziehe den zum verschlüsselung addierten wert nun wieder ab
+            }
+            f->mom = f->mom->danach;
+        }
+
+        printf("\n alle E-Mails wurden entschluesselt,\n");
+        printf("\n\nWeiter mit Enter Taste ...");
+        getchar();
+    }
+    else
+        printf("Der Code War falsch");
+}
+
+up_char_init(char *array, int lange)
+{
+    //Fülle Char arrays mit Leerzeichen
+    int i;
+    for (i = 0; i < lange; i++)
+        array[i] = 32;
 }

@@ -15,7 +15,7 @@ bene                Maier               4123444   zuze.maier@uni.de             
 bene                Maier               0123444   sdze.maier@uni.de                            050 
 bene                Maier               1231777   bane.maier@uni.de                            050<---
 bene                Maier               5123444   uuze.maier@uni.de                            050
-bene                Maier               4123444   zuze.maier@uni.de                            050
+bene                Maier               4123444   zuze.maier@uni.de                             050
 
 bene                Maier               0123444   sdze.maier@uni.de                            050 
 bene                Maier               1231777   bane.maier@uni.de                            050
