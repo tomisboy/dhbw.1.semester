@@ -57,7 +57,6 @@ int up_menu(t_feld *f)
     }
     return (auswahl);
 }
-
 void up_anzeige_daten(t_feld *f)
 {
     int zaehler = 0;
@@ -252,20 +251,6 @@ void up_eingabe_tastatur(t_feld *f)
     up_char_init(tmpkursnummer, sizeof(tmpkursnummer));
     up_char_init(tmpects, sizeof(tmpects));
 
-    /* //for (i = 0; i < sizeof(tmptext); i++)
-    //  tmptext[i] = 32;
-    for (i = 0; i < sizeof(tmpvorname); i++)
-        tmpvorname[i] = 32;
-    for (i = 0; i < sizeof(tmpnachname); i++)
-        tmpnachname[i] = 32;
-    for (i = 0; i < sizeof(tmpemail); i++)
-        tmpemail[i] = 32;
-    for (i = 0; i < sizeof(tmpkursnummer); i++)
-        tmpkursnummer[i] = 32;
-    for (i = 0; i < sizeof(tmpects); i++)
-        tmpects[i] = 32;
-        
-*/
     printf("\nWillkommen zur Eingabe von neuen Studenten\nweiter mit Enter ...\n");
     getchar(); //warte auf ENTER
 
@@ -822,20 +807,20 @@ void zeiger_tausch(t_feld *f)
     //IST Situation:
 
     //####################################################################################################################
-    //              [6]                                     [1]                 [3]                                     //
+    //              [6]                                           [1]                                      [3]          //
     //      <---------------------  [ELEMENT  X     ]        <-----------    [ELEMENT  Y           ] <----------------  //
     //                              [ x = f->mom    ]	                     [ y = f->mom->danach  ]                    //
     //       ---------------------> [ELEMENT  X     ]        ----------->    [ELEMENT  Y           ] ---------------->  //
-    //              [5]                                         [2]                        [4]                          //
+    //              [5]                                         [2]                                        [4]          //
     //####################################################################################################################
 
     //SOLL  Situation:
     //####################################################################################################################
-    //              [6]                                        [1]             [3]                                      //
+    //              [6]                                        [1]                                  [3]                 //
     //      <---------------------  [ELEMENT Y          ]   <-----------    [ELEMENT x     ] <----------------          //
     //                              [ y = f->mom->danach]	                [ x = f->mom   ]                            //
     //      --------------------->  [ELEMENT  Y         ]   ----------->    [ELEMENT x     ] ---------------->          //
-    //              [5]                                        [2]             [4]                                      //
+    //              [5]                                        [2]                                  [4]                 //
     //####################################################################################################################
     /*
     */
@@ -882,8 +867,11 @@ int verschluesseln(t_feld *f)
 
     int i, eingabe_key, key;
     printf("Code zum Verschluesseln eingeben\n");
-    scanf("%i", &eingabe_key);
+    scanf("%d", &eingabe_key);
     fflush(stdin);
+
+    if (eingabe_key < 0)
+        eingabe_key = eingabe_key * (-1);
 
     // Für die berechnung des wertes das auf den klartext addiert wird
     f->mom = f->start;
@@ -913,8 +901,11 @@ void entschluesseln(t_feld *f, int key)
 
     int i, eingabe_key;
     printf("Code zum Entschluesseln eingeben\n");
-    scanf("%i", &eingabe_key);
+    scanf("%d", &eingabe_key);
     fflush(stdin);
+
+    if (eingabe_key < 0)
+        eingabe_key = eingabe_key * (-1);
 
     f->mom = f->start; //setzte start
     if (key == eingabe_key)
@@ -939,8 +930,7 @@ void entschluesseln(t_feld *f, int key)
     else
         printf("Der Code War falsch");
 }
-
-up_char_init(char *array, int lange)
+void up_char_init(char *array, int lange)
 {
     //Fülle Char arrays mit Leerzeichen
     int i;

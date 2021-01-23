@@ -56,4 +56,4 @@ void zeiger_tausch(t_feld *f);
 int verschluesseln(t_feld *f);
 void entschluesseln(t_feld *f, int key);
 
-up_char_init(char *array, int lange);
+void up_char_init(char *array, int lange);
