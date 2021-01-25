@@ -175,36 +175,32 @@ void up_speichern(t_feld *f)
     //Mehode um Inhalte der Struckturierten Liste in ein output.txt File zu schreiben. output.txt muss vorhanden sein
 
     int i;
-    char kurschar[10 + 1]; //für die ausgabe der kursnummer ein Char Array,
-    char *kurscharzeiger = kurschar;
-
-    char etcschar[4 + 1]; //für die ausgabe der ECTS Punkte ein Char Array
-    char *etcscharzeiger = etcschar;
-
     FILE *einlesen;
-    einlesen = fopen("output.txt", "w"); //öffnen mit parameter w "leert" die Datei. Öffnen und leert die datei
+    einlesen = fopen("output.txt", "w+"); //öffnen und erstelltmit parameter w "leert" die Datei. Öffnen und leert die datei
 
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
+    else
+    {
+        //Initialisierung der Array, diese werden mit Leerzeichen die als als Trennsymbolen herhalten gefüllt
+        //  up_char_init(kurscharzeiger, sizeof(kurschar));
+        //  up_char_init(etcscharzeiger, sizeof(etcschar));
 
-    //Initialisierung der Array, diese werden mit Leerzeichen die als als Trennsymbolen herhalten gefüllt
-    up_char_init(kurscharzeiger, sizeof(kurschar));
-    up_char_init(etcscharzeiger, sizeof(etcschar));
+        f->mom = f->start; //setzte startzeiger auf anfang der Liste
 
-    f->mom = f->start; //setzte startzeiger auf anfang der Liste
+        while (f->mom)
+        {                                          //solange mom != 0 gehe solange jedes Listenelement durch bis das Ende (0) erricht wird
+            fprintf(einlesen, f->mom->vorname);    //schreiben den Vornamen aus der aktuellen Liste in die Datei
+            fprintf(einlesen, f->mom->nachname);   //schreiben den Nachnamen aus der aktuellen Liste in die Datei
+            fprintf(einlesen, f->mom->kursnummer); //schreiben die umgewandelte und bereinigt Kursnummer aus der aktuellen Liste in die Datei
+            fprintf(einlesen, f->mom->email);      //schreiben die Emailaus der aktuellen Liste in die Datei
+            fprintf(einlesen, f->mom->ects);       //schreiben die umgewandelte und bereinigt ECTS Punktzahl aus der aktuellen Liste in die Datei
+            fprintf(einlesen, "\n");               //alle werte in die erste Zeile geschrieben es folgt ein Zeilenumbruch
 
-    while (f->mom)
-    {                                          //solange mom != 0 gehe solange jedes Listenelement durch bis das Ende (0) erricht wird
-        fprintf(einlesen, f->mom->vorname);    //schreiben den Vornamen aus der aktuellen Liste in die Datei
-        fprintf(einlesen, f->mom->nachname);   //schreiben den Nachnamen aus der aktuellen Liste in die Datei
-        fprintf(einlesen, f->mom->kursnummer); //schreiben die umgewandelte und bereinigt Kursnummer aus der aktuellen Liste in die Datei
-        fprintf(einlesen, f->mom->email);      //schreiben die Emailaus der aktuellen Liste in die Datei
-        fprintf(einlesen, f->mom->ects);       //schreiben die umgewandelte und bereinigt ECTS Punktzahl aus der aktuellen Liste in die Datei
-        fprintf(einlesen, "\n");               //alle werte in die erste Zeile geschrieben es folgt ein Zeilenumbruch
-
-        f->mom = f->mom->danach; //nächsten Listenelement
+            f->mom = f->mom->danach; //nächsten Listenelement
+        }
+        fclose(einlesen); //Datei wird geschlossen
     }
-    fclose(einlesen); //Datei wird geschlossen
 }
 void up_eingabe_tastatur(t_feld *f)
 

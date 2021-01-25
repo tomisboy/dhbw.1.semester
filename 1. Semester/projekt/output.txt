@@ -1,4 +1,3 @@
-Thom                Bio                 3242452   Thom.Bio@uni.de                              432
 Markus              Singer              1100000   Markus.Singer@uni.de                         050
 Hans                Maier               1200000   Hans.Maier@uni.de                            050
 Nico                Pos                 0900400   Nico.Pos@uni.de                              090
