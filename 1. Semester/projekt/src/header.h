@@ -17,7 +17,7 @@ typedef struct m_studenten
   char ects[3 + 1]; //Bereits erreichte ECTS Punkte
   struct m_studenten *davor;
   struct m_studenten *danach;
-  
+
 } t_studenten;
 
 typedef struct
@@ -33,10 +33,10 @@ void up_datei_einlesen(t_feld *f);
 void up_eingabe_tastatur(t_feld *f);
 void up_bubble(int *f);
 void up_anzeige_daten(t_feld *f);
-void up_hex(t_feld *f);
+void zeiger_anzeigen(t_feld *f);
 
-void up_liste_Add(t_feld *f, char text[99 + 1]);
-void up_struct_liste(t_feld *f);
+void up_neues_Listenelement(t_feld *f, char text[99 + 1]);
+void up_text_zu_Liste(t_feld *f,char text[99 + 1]);
 void up_bereinige(char *bekommenerZeiger, int langeArray);
 int up_text_ueberpruefung(char *bekommenerZeiger, int langeArray);
 int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray);

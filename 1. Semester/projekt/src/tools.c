@@ -1,8 +1,8 @@
 #include "header.h"
 int up_menu(t_feld *f)
 {
-    int passwort;
-    int auswahl;
+    int passwort, auswahl;
+    // system("cls");
     printf("\n\tWillkommen im Hauptprogramm\n");
     printf("\nDu kannst folgene Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
     printf("\n 1: Einlesen der input.txt (Dies speichert automatisch die Felder in verketten Listen");
@@ -39,12 +39,11 @@ int up_menu(t_feld *f)
     case 5:
         up_entferne_datensatz(f);
         break;
-
     case 6:
         up_speichern(f);
         break;
     case 7:
-        up_hex(f);
+        up_zeiger_anzeigen(f);
         break;
     case 8:
         passwort = up_verschluesseln(f);
@@ -72,7 +71,7 @@ void up_anzeige_daten(t_feld *f)
             zaehler++;           //Zähle die ausgebenen Listen aus
         else
         { //Es wurden 25 Zeichen eingelesen
-            printf("\nEs wurden die ersten 25 Zeilen ausgegeben\num weitere 25 Zeilen auszugeben bitte mit Enter weiter");
+            printf("\n\nEs wurden die 25 Zeilen ausgegeben\num weitere 25 Zeilen auszugeben bitte mit Enter weiter");
             printf("\nWeiter mit Enter Taste ...");
             getchar();
             zaehler = 0; //Setzte Zähler zurück
@@ -84,13 +83,12 @@ void up_anzeige_daten(t_feld *f)
 void up_datei_einlesen(t_feld *f)
 {
 
-    //DATEI EINLESEN UND DOPPELTE ENTFERNEN :)
+    //DATEI EINLESEN UND DOPPELTE ENTFERNEN
     char text[99 + 1];
     char *zeigertext = text; //in diesem Array wird eine ganze Zeile aus der Datei gespeichert
     FILE *einlesen;
     einlesen = fopen("input.txt", "r"); //Öffnet die Datei zum Lesen "read"
     int fehler = 0;
-    int ersteZeile = 0;
 
     if (!einlesen)
         printf("\n Datei nicht moeglich zu oeffnen");
@@ -102,23 +100,22 @@ void up_datei_einlesen(t_feld *f)
             if (text[0] >= 'A' && text[0] <= 'Z') //Lese ausschließlich Zeilen ein, die mit Großbuchtaben (alpahbetischen Zeichen) beginnen
             {
                 if (f->start == 0) //Wenn die List leer ist wird der das allererste erste Element geschrieben, ohne zu Überprüfen ob es doppelt vorkommt
-                    up_liste_Add(f, text);
+                    up_neues_Listenelement(f, text);
 
                 //Überprüfe ob der einzulesende Wert in der Liste bereits vorkommt(Kriterium ist Email die an stelle (zeigertext + 50 steht)
                 fehler = up_suche_doppelte_elemente(f, (zeigertext + 50));
-                if (fehler == 0)           //nur wenn der Wert nicht in den LIsten vorkommt schreibe füge die Zeile den Listen hinzu
-                    up_liste_Add(f, text); //Lese nur ein, wenn das erste Zeichen der Zeile ein Buchstaben oder eine Zahlen ist
+                if (fehler == 0)                     //nur wenn der Wert nicht in den LIsten vorkommt schreibe füge die Zeile den Listen hinzu
+                    up_neues_Listenelement(f, text); //Lese nur ein, wenn das erste Zeichen der Zeile ein Buchstaben oder eine Zahlen ist
             }
         }
         fclose(einlesen); //schließe Datei
 
         printf("\n\nDaten wurden erfolgreich eingelesen\n\n");
         printf("\nWeiter mit Enter Taste ...");
-
         getchar();
     }
 }
-void up_liste_Add(t_feld *f, char text[99 + 1])
+void up_neues_Listenelement(t_feld *f, char text[99 + 1])
 {
 
     f->mom = (t_studenten *)malloc(sizeof(t_studenten)); // Reserviert Hauptspeicher von der Größe des Struct-elements t_studenten für nächstes Listenelement
@@ -127,7 +124,7 @@ void up_liste_Add(t_feld *f, char text[99 + 1])
         printf("Achtung es konnte, kein Speicher reserviert werden, Element wurde nicht gespeichert!!");
     else
     {
-        up_file_struct(f, text); //( inhalt wird in listelemet übertragen)
+        up_text_zu_Liste(f, text); //( inhalt wird in listelemet übertragen)
 
         //Hier werden die Zeiger listen verknüpfungen erstellt
 
@@ -137,10 +134,10 @@ void up_liste_Add(t_feld *f, char text[99 + 1])
             f->start = f->mom;        //erstes Element der Liste wird festgelegt                                                |
         else                          //                                                                                        |
             f->temp->danach = f->mom; //vom Vorgänger, das Zeigerelement "danach" wird der akutell neu erzeugt mom Zeiger       |
-        f->temp = f->mom;
-    } //temp Zeiger wird der aktuelle neu erzeugte mom zeiger       <----------------------------
+        f->temp = f->mom;             //temp Zeiger wird der aktuelle neu erzeugte mom zeiger       <----------------------------
+    }
 }
-void up_hex(t_feld *f)
+void up_zeiger_anzeigen(t_feld *f)
 {
     f->mom = f->start; //gehe zum ersten Listenelement
     while (f->mom)     //wiederhole solange das Ende nicht ereicht wurde
@@ -151,7 +148,7 @@ void up_hex(t_feld *f)
     printf("\nWeiter mit Enter Taste ...");
     getchar();
 }
-void up_file_struct(t_feld *f, char text[99 + 1])
+void up_text_zu_Liste(t_feld *f, char text[99 + 1])
 {
     //In dieser Methode wird der eingelesene Text aufgeteil in die Listenelemente:
     //vorname, nachname, kursnummer, email, ects gespeichert
@@ -164,25 +161,24 @@ void up_file_struct(t_feld *f, char text[99 + 1])
     strncpy(f->mom->nachname, text + 20, 20); //kopiert den Nachnamen, von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (nachname)
     f->mom->nachname[20] = '\0';
 
-    //  strncpy(tempkurs, text + 40, 10);
-    //tempkurs[10] = '\0';         //Speichert die, an der Stelle 40 stehenden 10 Zeichenelemente, die die Kursnummer abbilden, in ein  char tempkurs[10]
-    //    f->mom->kursnummer = atoi(tempkurs); //umwandlung von der Kursnummer, die als char temp[] durch strncpy kommt, als Int wert, und speichts in die aktuelle Liste an die passende Stelle (kursnummer)
-    strncpy(f->mom->kursnummer, text + 40, 10);
+    strncpy(f->mom->kursnummer, text + 40, 10); //kopiert die Kursnummer, von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (kurnummer)
     f->mom->kursnummer[10] = '\0';
 
-    strncpy(f->mom->email, text + 50, 45); //kopiert die E-Amil , von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (email)
+    strncpy(f->mom->email, text + 50, 45); //kopiert die E-Mail , von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (email)
     f->mom->email[45] = '\0';
 
     strncpy(f->mom->ects, text + 95, 5);
-    f->mom->ects[5] = '\0'; //Speichert die, an der Stelle 95 stehenden 5 Zeichenelemente ,die die ECTSPunkte abbilden in ein char temp[]
+    f->mom->ects[5] = '\0'; //Speichert die, an der Stelle 95 stehenden 5 Zeichenelemente ,die die ECTSPunkte abbilden in die aktuelle Liste an die passende Stelle (ects)
 }
 void up_speichern(t_feld *f)
 {
+    //Mehode um Inhalte der Struckturierten Liste in ein output.txt File zu schreiben. output.txt muss vorhanden sein
+
     int i;
-    char kurschar[10 + 1]; //für die ausgabe der kursnummer ein Char Array, dieses ist bis jetzt als int in Struc gespeichert
+    char kurschar[10 + 1]; //für die ausgabe der kursnummer ein Char Array,
     char *kurscharzeiger = kurschar;
 
-    char etcschar[4 + 1]; //für die ausgabe der ECTS Punkte ein Char Array, dieses ist bis jetzt als int in Struc gespeichert
+    char etcschar[4 + 1]; //für die ausgabe der ECTS Punkte ein Char Array
     char *etcscharzeiger = etcschar;
 
     FILE *einlesen;
@@ -195,12 +191,6 @@ void up_speichern(t_feld *f)
     up_char_init(kurscharzeiger, sizeof(kurschar));
     up_char_init(etcscharzeiger, sizeof(etcschar));
 
-    /*
-    for (i = 0; i < sizeof(kurschar); i++)
-        kurschar[i] = 32;
-    for (i = 0; i < sizeof(etcschar); i++)
-        etcschar[i] = 32;
-*/
     f->mom = f->start; //setzte startzeiger auf anfang der Liste
 
     while (f->mom)
@@ -252,17 +242,18 @@ void up_eingabe_tastatur(t_feld *f)
 
     //Fülle alle Arrays mit Leerzeichen, diese Zeichen sind für das getrennte ausgeben (trennungszeichen) da.
 
-    up_char_init(tmptext, sizeof(tmptext));
-    up_char_init(tmpnachname, sizeof(tmpnachname));
-    up_char_init(tmpemail, sizeof(tmpemail));
-    up_char_init(tmpkursnummer, sizeof(tmpkursnummer));
-    up_char_init(tmpects, sizeof(tmpects));
-
     printf("\nWillkommen zur Eingabe von neuen Studenten\nweiter mit Enter ...\n");
     getchar(); //warte auf ENTER
 
     do
     {
+        //Initiesierung der char Arrays für die Eingaben, muss vor jeder eingabe geschrieben/überschrieben werden
+        up_char_init(tmptext, sizeof(tmptext));
+        up_char_init(tmpvorname, sizeof(tmptext));
+        up_char_init(tmpnachname, sizeof(tmpnachname));
+        up_char_init(tmpemail, sizeof(tmpemail));
+        up_char_init(tmpkursnummer, sizeof(tmpkursnummer));
+        up_char_init(tmpects, sizeof(tmpects));
 
         do //EINGABE DES VORNAMENS
         {
@@ -307,7 +298,7 @@ void up_eingabe_tastatur(t_feld *f)
 
             // um die eingaben schon in eine Zeile zusammenzufassen gleich,
             // müssen die einzelnen arrays bereinigt werden
-            // \n und die terminierende 0 wird entfernt, wenn sie vor dem eigentlichen ende des Stings kommt:
+            // \n und die terminierende 0 wird entfernt, wenn sie vor dem eigentlichen Ende des Stings kommt:
             up_bereinige(zeigervorname, sizeof(tmpvorname));
             up_bereinige(zeigernachname, sizeof(tmpnachname));
             up_bereinige(zeigerkursnummer, sizeof(tmpkursnummer));
@@ -324,9 +315,8 @@ void up_eingabe_tastatur(t_feld *f)
             tmptext[99] = '\0';                       //Markiere das ente der char Arrays
 
             //Die Eingabe ist nun genau so in dem Format wie sie in der input.txt (pro Zeile) steht.
-            //daruch kann diese eingabe als Parameter für die up_liste_Add übergeben werden um sie in die verkette Liste zu speichern
-            //Die Einga
-            up_liste_Add(f, tmptext); // der Zeiger vom Hautprogramm und tmptext wird der Methode übergeben, die die Daten in die Liste speichern soll.
+            //daruch kann diese eingabe als Parameter für die up_neues_Listenelement übergeben werden, um sie in die verkette Liste zu speichern
+            up_neues_Listenelement(f, tmptext); // der Zeiger vom Hautprogramm und tmptext wird der Methode übergeben, die die Daten in die Liste speichern soll.
             printf("\nFolgender Student wurde erfolgreich eingelegt \n%s\n%s\n%s\n", f->mom->vorname, f->mom->nachname, f->mom->email);
         }
 
@@ -345,14 +335,14 @@ void up_bereinige(char *bekommenerZeiger, int langeArray)
     int i;
     for (i = 0; i < langeArray - 1; i++)                               //überprüfe bis zur vorletzen element ob eine termierende 0 oder \n vorkommt
         if ((bekommenerZeiger[i] == 10) || (bekommenerZeiger[i] == 0)) // Wenn ein \n oder \0 auftaucht, wir diesesdurch ein Leerezeichen ersetzt
-        {
-            bekommenerZeiger[i] = 32; // ersetze ungültiges Zeichen
-            break;                    //beendet forschleife an der stelle der vorzeitigen terminierenden null
-        }
-    for (i + 1; i < langeArray - 1; i++) //starte beim abgebrochen index der vorherigen schleife
+            bekommenerZeiger[i] = 32;
+    bekommenerZeiger[i] = '\0'; // ersetze ungültiges Zeichen
+    //break;                    //beendet forschleife an der stelle der vorzeitigen terminierenden null
+    //}
+    /* for (i + 1; i < langeArray - 1; i++) //starte beim abgebrochen index der vorherigen schleife
         bekommenerZeiger[i] = 32;        // fülle bis an die Vorletzte Stelle alles mit Leerzeichen auf
-
-    bekommenerZeiger[i] = '\0'; //An die allerletzte stelle des char[] wird die terminierende \0 gesetzt
+*/
+    //bekommenerZeiger[i] = '\0'; //An die allerletzte stelle des char[] wird die terminierende \0 gesetzt
 }
 int up_text_ueberpruefung(char *bekommenerZeiger, int langeArray)
 {
@@ -398,7 +388,7 @@ int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray)
     for (i = 0; i < langeArray - 1; i++)
     {
         fehler = 0;                                                   //setze Fehler (zurück)
-        if (bekommenerZeiger[i] >= '0' && bekommenerZeiger[i] <= '9') //Überprüft die einzelnen Zeichenob sie Zahlen sind
+        if (bekommenerZeiger[i] >= '0' && bekommenerZeiger[i] <= '9') //Überprüft die einzelnen Zeichen ob sie Zahlen sind
         {
         }
         else
@@ -463,8 +453,8 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     {
         //Kopiere jedes Zeichen vom Vonamen in das E-Mail Feld solange bis man eben entwerder ein vorzeitiges Ende (FALL 2) (\n) gefunden hat,
         //oder man an der Vorletzten stelle ist
-        if (zeigervorname[i] != 10) // 10 ist \n .
-            zeigeremail[i] = zeigervorname[i];
+        if (zeigervorname[i] != 10)            // 10 ist \n .
+            zeigeremail[i] = zeigervorname[i]; //Kopiere nun die Zeichen des Vornamens in die E-Mail
         else
             break; // Wird das \n gefundenm, kann direkt abgerochen werden
     }
@@ -482,41 +472,37 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
             break; // Wird das \n gefundenm, kann direkt abgerochen werden
     }
     //zusatz @uni.de wird hinter dem Nachnamen nun noch drangehängt
-    for (j = 0; j < 7; j++) //hänge zeichenweise mit einer for schleife an, da die trennzeichen
+    for (j = 0; j < 7; j++) //hänge zeichenweise mit einer for schleife die E-Mail domaine an
     {
         zeigeremail[i + 1] = mailzusatz[j];
-        i++;
+        i++; //es muss auch der index von Zeigermail hochgezählt werden
     }
 
     zeigeremail[45] = '\0'; //terminierende 0 setzen
-    f->mom = f->start;      //gehe auf den Startzeiger
+
+    f->mom = f->start; //gehe auf den Startzeiger
 
     // Es wird überprüft, ob die E-Mail bereits in der der Liste vorkommt
     fehler = up_suche_doppelte_elemente(f, zeigeremail);
 
     if (fehler == 1)
-    {
         printf("\n\n\tAchtung E-Mail ist bereits vorhanden\n\n\tDieser Benutzer kann nicht angelegt werden !");
-    }
 
     return fehler;
 }
 void up_entferne_datensatz(t_feld *f)
 {
     int auswahl;
-    /////////
-
     printf("\n Was willstdu entfernen");
     printf("\n '1' Fure die leerung aller Listenelemente");
     printf("\n '2' für die Entfernung einzelner Bentutzer");
-    printf("\n '3' Fure die leerung aller Listenelemente\n");
 
     scanf("%i", &auswahl);
     fflush(stdin);
 
     switch (auswahl)
     {
-    case 1:
+    case 1: //ALLE LISTENELENTE WERDEN GELÖSCHT
     {
         f->mom = f->start;
         while (f->mom)
@@ -536,9 +522,9 @@ void up_entferne_datensatz(t_feld *f)
     {
         ///////
         //gebe E-Mail ein
-        //sucher nach e-mail
-        /// vom voränger Zeiger muss der nachfolger auf den übernächsten gesetzt werden
-        // vom nachfolger Zeiger muss der voränger auf den vor vor letzten Zeiger
+        //suche nach e-mail
+        ///vom voränger Zeiger muss der nachfolger auf den übernächsten gesetzt werden
+        //vom nachfolger Zeiger muss der voränger auf den vor vor letzten Zeiger
         char eingabe[45 + 1];
         char tmpeingabe[45 + 1];
         int i;
@@ -553,7 +539,7 @@ void up_entferne_datensatz(t_feld *f)
                                                   //das Array neu "leer" gemacht werden sollte
             printf("Bitte geben Sie die E-Mail des zu entfernenden Benutzers ein\n");
             fgets(eingabe, sizeof(eingabe) - 5, stdin);
-            up_bereinige(eingabe, sizeof(eingabe));
+            up_bereinige(eingabe, sizeof(eingabe)); //wandel die eingebene E-Mail in ein format um wie sie in der Liste stehen könnte
 
             f->mom = f->start; //gehe auf den Startzeiger
 
@@ -564,14 +550,14 @@ void up_entferne_datensatz(t_feld *f)
                 }
                 else
                 { //Strucelement das gelöscht werden soll wurde gefunden
-                    //er gibt 3 möglichkeiten: Das ersten, letzte, oder mittendrinn soll gelöscht werden
+                    //es gibt 3 möglichkeiten: Das ersten, letzte, oder mittendrinn soll gelöscht werden
 
                     f->mom->email[0] = '0'; //leert das E-Mail feld, damit die E-Mail nicht mehr in einer Liste steht
                     if (f->mom->davor == 0) //Erstes element wurde getroffen
                     {
 
-                        f->mom->danach->davor = 0;
-                        f->start = f->mom->danach; // im vorherigen element wird der danach zeiger auf 0 gesetzt
+                        f->mom->danach->davor = 0; // im vorherigen element wird der danach zeiger auf 0 gesetzt
+                        f->start = f->mom->danach; //neues Startelement wird gesetzt
                         printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                         geloescht = 1;
                         free(f->mom);
@@ -581,8 +567,8 @@ void up_entferne_datensatz(t_feld *f)
                     {
 
                         f->mom->davor->danach = 0;
-                        f->temp = f->mom->davor; //<-- Wichtig das vorletzte Element wird nun das zwischen element,
-                        //damit beim löschen des Letzten elements immer noch welche hinzugefügt werden können, durch up_liste_Add
+                        f->temp = f->mom->davor; //<-- Wichtig das vorletzte Element wird nun das zwischen element.
+                        //damit beim löschen des Letzten elements immer noch welche hinzugefügt werden können, durch up_neues_Listenelement
                         printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                         geloescht = 1; // im vorherigen element wird der danach zeiger auf 0 gesetzt
                         free(f->mom);
@@ -622,7 +608,7 @@ int up_suche_doppelte_elemente(t_feld *f, char *zeigertext)
     //Methode überprüft, ob die Inhalte der neu eingelesenen Zeile bereits in einer der Listenelementen vorkommt.
     //Als entscheidendes kriterium,(und übergabe Paramter) wird die E-Mail benutze, da diese einmalig ist und nicht doppelt vorkommen darf/kann.
 
-    int fehler = 1;
+    int fehler = 0;
     char temp[45 + 1];                 //Hier wird die E-Mail drinne gespeichert der eingelesenen Zeile
     f->mom = f->start;                 //setzte startzeiger auf anfang der Liste
     strncpy(temp, zeigertext, 45 + 1); //Schreibe die E-Mail (eindeutiges Element eines Benutzers) in ein temp
@@ -646,6 +632,7 @@ void up_sortieren(t_feld *f)
     int i, j, zaehler = 0;
 
     int auswahl;
+
     f->mom = f->start;
     while (f->mom) //Zählt die Anzahl der Listenelemente
     {

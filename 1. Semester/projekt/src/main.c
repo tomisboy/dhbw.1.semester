@@ -14,12 +14,12 @@
 //  an Stelle des E-Mail stehen max 45 Zeichen, zusammengesetzt aus dem vornamen.nachnamen mit der Zusaz "@uni.de" Es folgen 5 Leerzeichen
 //  an Stelle der ECTS-Punkte steht eine 3 stellige Zahl (mit 0 gefüllt, wenn die Zahl kleiner ist)   Es folgt ein Zeilenumbruch
 
-//BEISPIEL INPUT.txt
+//BEISPIEL input.txt
 // [15           ][5  ][15           ][ 5 ][7    ][3][45                                     [5  ][3][\n]
 // [VORNAME]           [NACHNAME]          [KURS ]   [E-MAIL]                                      [ECTS]   
 // Markus              Singer              1100000   Markus.Singer@uni.de                          050
 
-
+// input.txt und output.txt müssen sowohl vorhanden in dem selben pfad liegen in dem die main.exe läuft
 
 //Folgende mindestanforderungungs Funktionen sind gegeben:
 //  1.  Einlesen einer Datei und Schreiben der Inhalte in eine Verkette Liste
@@ -64,7 +64,7 @@
 
 int main(void)
 {
-    int ausgwaehlt = 1;
+    int auswahl = 1;
     t_feld feld;       // erstell ein "Objekt" feld vom TYP des Structurelements
     t_feld *f = &feld; //erstelle den Zeiger *f
 
@@ -74,12 +74,7 @@ int main(void)
     f->temp = 0;
 
     printf("Willkommen zur Studentenverwaltung\n\n");
-    // do while ?
-    while (ausgwaehlt != 0)
-    {
-        ausgwaehlt = up_menu(f); //wiederhole solange den aufruf des Menus, bis die 0 Ausgewählt wird, diese Beendet das Programm
-    }
+    while (auswahl != 0)
+        auswahl = up_menu(f); //wiederhole solange den aufruf des Menus, bis die 0 Ausgewählt wird, diese Beendet das Programm
     return (42);
 }
-//Einlesen funktioniert
-//Eingabe mit fehlerüberpüfung mich gemacht werden
