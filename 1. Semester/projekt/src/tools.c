@@ -1,7 +1,7 @@
 #include "header.h"
 int up_menu(t_feld *f)
 {
-    int key;
+    int passwort;
     int auswahl;
     printf("\n\tWillkommen im Hauptprogramm\n");
     printf("\nDu kannst folgene Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
@@ -47,10 +47,10 @@ int up_menu(t_feld *f)
         up_hex(f);
         break;
     case 8:
-        key = verschluesseln(f);
+        passwort = up_verschluesseln(f);
         break;
     case 9:
-        entschluesseln(f, key);
+        up_entschluesseln(f, passwort);
         break;
     default:
         break;
@@ -59,14 +59,14 @@ int up_menu(t_feld *f)
 }
 void up_anzeige_daten(t_feld *f)
 {
-    int zaehler = 0;
+    int index = 0, zaehler = 0;
     f->mom = f->start; //Starte beim ersten Listenelement
-    printf("\nVorname             Nachname            Kurs      E-Mail                                       ECTS\n");
-
+    printf("\n  Vorname             Nachname             Kurs       E-Mail                                       ECTS    Index");
+    printf("\n________________________________________________________________________________________________________________");
     while (f->mom) // gehe solange die liste durch bis du das ende = 0 erreichst
     {
         //Gibt aktuellen Listenelemente formatiert aus
-        printf("\n%-18s%-18s%-10s%-24s%s", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
+        printf("\n|%-18s|%-18s|%-10s|%-24s|%s|%7d|", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects, index += 1);
         f->mom = f->mom->danach; //setzte den Zeiger auf den nachfolger, auf das nächste Listenelement
         if (zaehler != 25)       //Überprüfe ob bereits 25 Zeilen ausgegeben wurden
             zaehler++;           //Zähle die ausgebenen Listen aus
@@ -120,18 +120,25 @@ void up_datei_einlesen(t_feld *f)
 }
 void up_liste_Add(t_feld *f, char text[99 + 1])
 {
+
     f->mom = (t_studenten *)malloc(sizeof(t_studenten)); // Reserviert Hauptspeicher von der Größe des Struct-elements t_studenten für nächstes Listenelement
-    up_file_struct(f, text);                             //( inhalt wird in listelemet übertragen)
 
-    //Hier werden die Zeiger listen verknüpfungen erstellt
+    if (f->mom == 0) //es konnte kein Speicher reserviert werden
+        printf("Achtung es konnte, kein Speicher reserviert werden, Element wurde nicht gespeichert!!");
+    else
+    {
+        up_file_struct(f, text); //( inhalt wird in listelemet übertragen)
 
-    f->mom->davor = f->temp;      //Von aktelle neu erzeugtem mom element das Feld davor ist temp, was der vorgänger ist ----
-    f->mom->danach = 0;           //Von aktelle neu erzeugtem mom element das Feld danach wird 0 gesetzt.                   |
-    if (f->temp == 0)             //erster Fall temp ist noch von der Initi auf 0                                           |
-        f->start = f->mom;        //erstes Element der Liste wird festgelegt                                                |
-    else                          //                                                                                        |
-        f->temp->danach = f->mom; //vom Vorgänger, das Zeigerelement "danach" wird der akutell neu erzeugt mom Zeiger       |
-    f->temp = f->mom;             //temp Zeiger wird der aktuelle neu erzeugte mom zeiger       <----------------------------
+        //Hier werden die Zeiger listen verknüpfungen erstellt
+
+        f->mom->davor = f->temp;      //Von aktelle neu erzeugtem mom element das Feld davor ist temp, was der vorgänger ist ----
+        f->mom->danach = 0;           //Von aktelle neu erzeugtem mom element das Feld danach wird 0 gesetzt.                   |
+        if (f->temp == 0)             //erster Fall temp ist noch von der Initi auf 0                                           |
+            f->start = f->mom;        //erstes Element der Liste wird festgelegt                                                |
+        else                          //                                                                                        |
+            f->temp->danach = f->mom; //vom Vorgänger, das Zeigerelement "danach" wird der akutell neu erzeugt mom Zeiger       |
+        f->temp = f->mom;
+    } //temp Zeiger wird der aktuelle neu erzeugte mom zeiger       <----------------------------
 }
 void up_hex(t_feld *f)
 {
@@ -139,7 +146,7 @@ void up_hex(t_feld *f)
     while (f->mom)     //wiederhole solange das Ende nicht ereicht wurde
     {                  //gebe die Zeiger des aktuellen Listenelements aus
         printf("\n %-10s mom Zeiger: %10X   mom DAVOR : %10X  mom DANACH : %10X", f->mom->email, f->mom, f->mom->davor, f->mom->danach);
-        f->mom = f->mom->danach; //gehe zum
+        f->mom = f->mom->danach; //gehe zum nächsten Element
     }
     printf("\nWeiter mit Enter Taste ...");
     getchar();
@@ -511,9 +518,17 @@ void up_entferne_datensatz(t_feld *f)
     {
     case 1:
     {
+        f->mom = f->start;
+        while (f->mom)
+        {
+            free(f->mom->davor);     //Leert den Speicher des Listenelementes starte bei dem hinter dir,
+            f->mom = f->mom->danach; // Wenn du das aktuelle löschen würdest dann kannst du nicht mehr die Liste durchgehen
+        }
         f->mom = 0;
         f->start = 0;
         f->temp = 0;
+        printf("\n Liste und Arbeitsspeicher wurde geleert\n Weiter mit Enter");
+        getchar();
         break;
     }
 
@@ -554,30 +569,34 @@ void up_entferne_datensatz(t_feld *f)
                     f->mom->email[0] = '0'; //leert das E-Mail feld, damit die E-Mail nicht mehr in einer Liste steht
                     if (f->mom->davor == 0) //Erstes element wurde getroffen
                     {
+
                         f->mom->danach->davor = 0;
                         f->start = f->mom->danach; // im vorherigen element wird der danach zeiger auf 0 gesetzt
-                        f->temp = f->mom;
                         printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                         geloescht = 1;
+                        free(f->mom);
                         break;
                     }
                     if (f->mom->danach == 0) // Letzes Element wurde getroffen
                     {
+
                         f->mom->davor->danach = 0;
                         f->temp = f->mom->davor; //<-- Wichtig das vorletzte Element wird nun das zwischen element,
                         //damit beim löschen des Letzten elements immer noch welche hinzugefügt werden können, durch up_liste_Add
                         printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                         geloescht = 1; // im vorherigen element wird der danach zeiger auf 0 gesetzt
+                        free(f->mom);
                         break;
                     }
 
                     else // Element mittendrinne wurde getroffen
                     {
+
                         f->mom->davor->danach = f->mom->danach; //Setze den Nachfolger des Vorgängers auf den übernächsten Zeiger
                         f->mom->danach->davor = f->mom->davor;  //Setze den Vorgänger der Nachfolgers auf den vorherigen Zeiger ein Element dahinter
-
                         printf("\n\tFolgender Nutzer wurde entfernt %s", eingabe);
                         geloescht = 1;
+                        free(f->mom);
                         break;
                     }
                 }
@@ -664,7 +683,7 @@ void up_sortieren(t_feld *f)
                 for (j = 0; j < zaehler - 1; j++)
                 {
                     if (strcmp(f->mom->vorname, f->mom->danach->vorname) > 0)
-                        zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
+                        up_zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
                     f->mom = f->mom->danach;
                 }
             }
@@ -682,7 +701,7 @@ void up_sortieren(t_feld *f)
                 for (j = 0; j < zaehler - 1; j++)
                 {
                     if (strcmp(f->mom->vorname, f->mom->danach->vorname) < 0)
-                        zeiger_tausch(f); //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
+                        up_zeiger_tausch(f); //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
                     f->mom = f->mom->danach;
                 }
             }
@@ -711,7 +730,7 @@ void up_sortieren(t_feld *f)
                 for (j = 0; j < zaehler - 1; j++)
                 {
                     if (strcmp(f->mom->nachname, f->mom->danach->nachname) > 0)
-                        zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
+                        up_zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
                     f->mom = f->mom->danach;
                 }
             }
@@ -729,7 +748,7 @@ void up_sortieren(t_feld *f)
                 for (j = 0; j < zaehler - 1; j++)
                 {
                     if (strcmp(f->mom->nachname, f->mom->danach->nachname) < 0)
-                        zeiger_tausch(f); //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
+                        up_zeiger_tausch(f); //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
                     f->mom = f->mom->danach;
                 }
             }
@@ -760,7 +779,7 @@ void up_sortieren(t_feld *f)
                 for (j = 0; j < zaehler - 1; j++)
                 {
                     if (strcmp(f->mom->kursnummer, f->mom->danach->kursnummer) > 0)
-                        zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
+                        up_zeiger_tausch(f); //Wenn die erste Stelle größer ist als die zweite, sollen sie vertauscht werden
                     f->mom = f->mom->danach;
                 }
             }
@@ -778,7 +797,7 @@ void up_sortieren(t_feld *f)
                 for (j = 0; j < zaehler - 1; j++)
                 {
                     if (strcmp(f->mom->kursnummer, f->mom->danach->kursnummer) < 0)
-                        zeiger_tausch(f);    //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
+                        up_zeiger_tausch(f); //Wenn die erste Stelle kleiner ist als die zweite, sollen sie vertauscht werden
                     f->mom = f->mom->danach; //Nächstes Element
                 }
             }
@@ -794,10 +813,10 @@ void up_sortieren(t_feld *f)
         break;
     }
 }
-void zeiger_tausch(t_feld *f)
+void up_zeiger_tausch(t_feld *f)
 {
     int zeigerspeichen;
-    zeigerspeichen = f->mom; // merke dir die aktuelle position vor der vertauschung
+    //zeigerspeichen = f->mom; // merke dir die aktuelle position vor der vertauschung
     int temp;
 
     //Hier passiert die Magie des Vertauschen 2er aufeinanderfolgenden Elemente einer Liste:
@@ -856,28 +875,29 @@ void zeiger_tausch(t_feld *f)
     //muss dieses um eine stelle reduziert werden.
     //der Momentanzeiger liegt ja bisher auf dem nächste index  (eben durch die Vertauschung)
     //damit nun nicht doppelt hochgezählt wird wird der hier reduziert und erst auserhalb der Methode hochgezählt)
-    f->mom = zeigerspeichen;
-    f->mom = f->mom->davor;
+    // f->mom = zeigerspeichen;
+    f->mom = f->mom->davor; //setzte aktuellen Zeiger um eine stelle zurück
 }
-int verschluesseln(t_feld *f)
+int up_verschluesseln(t_feld *f)
 {
-    //E-Mail wird verschlüsselt
-
+    //E-Mail prefix wird verschlüsselt
+    char eingabe_key[10] = {0};
     const MOD = 60;
-
-    int i, eingabe_key, key;
+    int passwort; //Das eingegebene Passwort in eine Ganzzahl gespeichert
+    int i, key = 0;
+    f->mom = f->start;
     printf("Code zum Verschluesseln eingeben\n");
-    scanf("%d", &eingabe_key);
+    scanf("%s", &eingabe_key); //Passwort kann alle zeichen enthalten
     fflush(stdin);
 
-    if (eingabe_key < 0)
-        eingabe_key = eingabe_key * (-1);
+    for (i = 0; i < 10; i++) //wandelt das eingebene Passwort in eine Ganzzahl, in dem die ASCIIwerte der einzellnen Ziffern zusammengezählt werden
+        passwort = passwort + eingabe_key[i];
 
     // Für die berechnung des wertes das auf den klartext addiert wird
-    f->mom = f->start;
-    key = eingabe_key % MOD + 65; // 65 weil, verschlüsseltes Zeichen, soll kein @ enthalten, daher fangen wir beim asci code 1 weiter an
-    //Algorithumu
-    //Cäsar Verfahren addiere auf den char ASCI wert eine geheime Zahl drauf. Daruf wird ein anderes Zeichen ausgegeben
+
+    key = passwort % MOD + 65; // 65 weil, verschlüsseltes Zeichen, soll kein @ enthalten, daher fangen wir beim asci code 1 weiter an
+    //Algorithumus
+    //Cäsar Verfahren addiere auf den char ASCII-Wert eine geheime Zahl drauf. Daruf wird ein anderes Zeichen ausgegeben
 
     while (f->mom) // gehe die Liste durch
     {
@@ -892,25 +912,30 @@ int verschluesseln(t_feld *f)
     }
     printf("\n alle E-Mails wurden verschluesselt,\n");
     printf("\n\nWeiter mit Enter Taste ...");
+
     getchar();
-    return eingabe_key;
+    return passwort; //die Passwort im klartext wird returnt
 }
-void entschluesseln(t_feld *f, int key)
+void up_entschluesseln(t_feld *f, int passwort)
 {
+    //Methode um zu entschlüsseln enthält als Übergabeparameter das Passwort, dass bei der Methode up_verschluesseln verwendet wurde
     const MOD = 60; // Für die berechnung des wertes das auf den klartext addiert wird
 
-    int i, eingabe_key;
+    int key;
+    int i, input_passwort = 0;
+    char eingabe_key[10] = {0};
+    //   int key;
     printf("Code zum Entschluesseln eingeben\n");
-    scanf("%d", &eingabe_key);
+    scanf("%s", &eingabe_key);
     fflush(stdin);
 
-    if (eingabe_key < 0)
-        eingabe_key = eingabe_key * (-1);
+    for (i = 0; i < 10; i++) //wandelt das eingebene Passwort in eine Ganzzahl, in dem die ASCIIwerte der einzellnen Ziffern zusammengezählt werden
+        input_passwort = input_passwort + eingabe_key[i];
 
-    f->mom = f->start; //setzte start
-    if (key == eingabe_key)
+    f->mom = f->start;              //setzte start
+    if (passwort == input_passwort) //Nur wenn das eingebene Passwort den richtigen Passwort (das der Methode übergeben) entspricht, dann wird entschlüsselt
     {
-        key = key % MOD + 65;
+        key = passwort % MOD + 65;
         while (f->mom) //Geht die Liste durch
         {
             for (i = 0; i < 45; i++) //ENTSCHLÜSSLEN
@@ -928,7 +953,11 @@ void entschluesseln(t_feld *f, int key)
         getchar();
     }
     else
+    {
         printf("Der Code War falsch");
+        printf("\n\nWeiter mit Enter Taste ...");
+        getchar();
+    }
 }
 void up_char_init(char *array, int lange)
 {

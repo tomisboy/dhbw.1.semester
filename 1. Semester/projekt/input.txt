@@ -8,4 +8,12 @@ Kim                 Niethammer          0050000   Kim.Niethammer@uni.de         
 Caroline            Ingelfinger         0004000   Caroline.Ingelfinger@uni.de                  010
 Erica               Degner              0900401   Erika.Degner@uni.de                          010
 Johnatan            Bernsteinfeld       8850000   Johnatan.Bernsteinfeld@uni.de                185
-Leonardo            Amtmannmus          9950000   Leonard.Amtmannmus@uni.de                    100            
+Leonardo            Amtmannmus          9950000   Leonard.Amtmannmus@uni.de                    100
+Thomas              Alpert              1001002   Thomas.Alpert@uni.de                         100
+Nico                Flister             1100000   Nico.Flister@uni.dee                         100
+Anna                Juhn                0900401   Anna.Juhn@uni.de.dee                         343
+Florian             Alpert              0900400   Florian.Alpert@uni.de                        100
+Andre               Kurs                0900400   Andre.Kurs@uni.dei.de                        213
+Nils                Klaubaer            0050000   Nils.Klaubaer@uni.dee                        010
+Killian             Speckers            0050000   Killian.Speckers@uni.de                      445
+           
