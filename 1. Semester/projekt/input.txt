@@ -13,7 +13,7 @@ Thomas              Alpert              1001002   Thomas.Alpert@uni.de          
 Nico                Flister             1100000   Nico.Flister@uni.de                          100
 Anna                Juhn                0900401   Anna.Juhn@uni.de.de                          343
 Florian             Alpert              0900400   Florian.Alpert@uni.de                        100
-Andre               Kurs                0900400   Andre.Kurs@uni.dei.de                        213
+Andre               Kurs                0900400   Andre.Kurs@uni.de                            213
 Nils                Klaubaer            0050000   Nils.Klaubaer@uni.de                         010
 Killian             Speckers            0050000   Killian.Speckers@uni.de                      445
 Melanie             Miller              5580000   Melanie.Miller@uni.de                        123

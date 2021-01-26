@@ -1,16 +1,17 @@
+//Thomas Alpert
 #include "header.h"
 int up_menu(t_feld *f)
 {
     int passwort, auswahl;
-    // system("cls");
+    system("cls");
     printf("\n\tWillkommen im Hauptprogramm\n");
     printf("\nDu kannst folgene Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
-    printf("\n 1: Einlesen der input.txt (Dies speichert automatisch die Felder in verketten Listen");
-    printf("\n 2: Manuelles eingeben von Daten");
+    printf("\n 1: Einlesen der input.txt ");
+    printf("\n 2: Anlegen eines neuen Studentens");
     printf("\n 3: Sortierung");
-    printf("\n 4: Anzeigen der Daten ");
-    printf("\n 5: Entfernen eines Datensatzes ");
-    printf("\n 6: Speichern der Datei");
+    printf("\n 4: Anzeigen: Listet alle Studenten ");
+    printf("\n 5: Entfernen eines Studenten oder der ganzen Liste");
+    printf("\n 6: Speichern der Datei in die output.txt");
     printf("\n 7: Anzeige der Zeiger");
     printf("\n 8: Verschluesseln");
     printf("\n 9: Entschluesseln");
@@ -58,14 +59,14 @@ int up_menu(t_feld *f)
 }
 void up_anzeige_daten(t_feld *f)
 {
-    int index = 0, zaehler = 0;
+    int zaehler = 0;
     f->mom = f->start; //Starte beim ersten Listenelement
     printf("\n  Vorname             Nachname             Kurs       E-Mail                                       ECTS    Index");
     printf("\n________________________________________________________________________________________________________________");
     while (f->mom) // gehe solange die liste durch bis du das ende = 0 erreichst
     {
         //Gibt aktuellen Listenelemente formatiert aus
-        printf("\n|%-18s|%-18s|%-10s|%-24s|%s|%7d|", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects, index += 1);
+        printf("\n|%-18s|%-18s|%-10s|%-24s|%s|", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
         f->mom = f->mom->danach; //setzte den Zeiger auf den nachfolger, auf das nächste Listenelement
         if (zaehler != 25)       //Überprüfe ob bereits 25 Zeilen ausgegeben wurden
             zaehler++;           //Zähle die ausgebenen Listen aus
@@ -153,7 +154,7 @@ void up_text_zu_Liste(t_feld *f, char text[99 + 1])
     //In dieser Methode wird der eingelesene Text aufgeteil in die Listenelemente:
     //vorname, nachname, kursnummer, email, ects gespeichert
 
-    //Der eingelesene Text ist eine ganze Zeile und wird der Methode als char text[99 + 1] mitgebenen.
+    //Der eingelesene Text ist eine ganze Zeile und wird der Methode als char text[99 + 1] mitgegeben.
 
     strncpy(f->mom->vorname, text, 20); //kopiert den Vornamen, von der korrekten stelle des übergebenen Textes, in die aktuelle Liste an die passende Stelle (vorname)
     f->mom->vorname[20] = '\0';
@@ -173,8 +174,6 @@ void up_text_zu_Liste(t_feld *f, char text[99 + 1])
 void up_speichern(t_feld *f)
 {
     //Mehode um Inhalte der Struckturierten Liste in ein output.txt File zu schreiben. output.txt muss vorhanden sein
-
-    int i;
     FILE *einlesen;
     einlesen = fopen("output.txt", "w+"); //öffnen und erstelltmit parameter w "leert" die Datei. Öffnen und leert die datei
 
@@ -182,10 +181,6 @@ void up_speichern(t_feld *f)
         printf("\n Datei nicht moeglich zu oeffnen");
     else
     {
-        //Initialisierung der Array, diese werden mit Leerzeichen die als als Trennsymbolen herhalten gefüllt
-        //  up_char_init(kurscharzeiger, sizeof(kurschar));
-        //  up_char_init(etcscharzeiger, sizeof(etcschar));
-
         f->mom = f->start; //setzte startzeiger auf anfang der Liste
 
         while (f->mom)
@@ -205,15 +200,15 @@ void up_speichern(t_feld *f)
 void up_eingabe_tastatur(t_feld *f)
 
 {
-    //Methode um Benutzer das anlegen eines Neuen Benutzers zu ermöglichen:
+    //Methode um Benutzer das Anlegen eines Nnuen Benutzers zu ermöglichen:
     //Der eingegebene Benutzer wird anschließend in der Verketteten Liste angefügt
 
     //Randbedingungen:
     //Eingaben erfolge nach Abfrage :
-    // Vorname      maximal 15 Zeichen (alphanumerisch) werden übernommen
-    // Nachname     maximal 15 Zeichen (alphanumerisch) werden übernommen
-    // Kursnummer   maximal 7 Zeichen (nur Zahlen) werden übernommen
-    // ECTS         maximal 3 stellige Zahl der ECTS-Punkt Anzahl wird übernommen
+    // Vorname      maximal 15 Zeichen (alphanumerisch) werden übernommen (erster Buchstaben wird in Großbuchstabe umgewandelt)
+    // Nachname     maximal 15 Zeichen (alphanumerisch) werden übernommen  (erster Buchstaben wird in Großbuchstabe umgewandelt)
+    // Kursnummer   maximal 7 Zeichen (nur Zahlen) werden übernommen (führende 0)
+    // ECTS         maximal 3 stellige Zahl der ECTS-Punkt Anzahl wird übernommen (führende 0)
     //die passende E-Mail-Adresse wird automatisch erstellt.
 
     int i, j, temp, fehler;
@@ -235,8 +230,6 @@ void up_eingabe_tastatur(t_feld *f)
 
     char tmpemail[50 + 1];        //45 zeichen der Email vorname.nachname@uni.de
     char *zeigeremail = tmpemail; //Zeiger auf tmpemail für methoden
-
-    //Fülle alle Arrays mit Leerzeichen, diese Zeichen sind für das getrennte ausgeben (trennungszeichen) da.
 
     printf("\nWillkommen zur Eingabe von neuen Studenten\nweiter mit Enter ...\n");
     getchar(); //warte auf ENTER
@@ -283,10 +276,8 @@ void up_eingabe_tastatur(t_feld *f)
             fehler = up_zahl_ueberpruefung(zeigerects, sizeof(tmpects)); //Überprüfung der Eingabe  auf Fehler
         } while (fehler != 0);
 
-        fehler = 0; //fehlercode wurde zurückgesetzt falls einmal eine Fehleingaben passierte wird der nun resettet:
-
         //Setze die E-Mail anhand des vor und nachnames zusammen dies ist das entscheidene merkmal eines users(primary Key)
-        //Überprüfe auch gleich ob diese E-Mail bereits vorkam
+        //Überprüfe auch gleich ob diese E-Mail bereits vorhanden ist (liefert Fehler zurück)
         fehler = up_emailfeld(f, zeigervorname, zeigernachname, zeigeremail, sizeof(tmpvorname), sizeof(tmpnachname));
 
         if (fehler == 0) //mache nur weiter wenn e-mail überprüfung eine 0 liefert wenn es keine doppelt vorkommende email gibt
@@ -316,7 +307,7 @@ void up_eingabe_tastatur(t_feld *f)
             printf("\nFolgender Student wurde erfolgreich eingelegt \n%s\n%s\n%s\n", f->mom->vorname, f->mom->nachname, f->mom->email);
         }
 
-        printf("\n\nWollen Sie weitere Werte eingeben, oder die Eingabe wiederholen , dann Taste: \"j\"\num abzubrechen eine beliebige Taste :\n");
+        printf("\n\nWollen Sie weitere Werte eingeben, oder die Eingabe wiederholen, dann Taste: \"j\"\num abzubrechen eine beliebige Taste :\n");
         scanf("%c", &eingabe);
         fflush(stdin);
 
@@ -324,7 +315,7 @@ void up_eingabe_tastatur(t_feld *f)
 }
 void up_bereinige(char *bekommenerZeiger, int langeArray)
 {
-    // Methode zur Bereinigung von char[] entferne von \n und einer vorzeitigen terminierenden \0
+    // Methode zur Bereinigung von char[] entferne von \n und/oder einer vorzeitigen terminierenden \0
     // überprüft ob innerhalb einer char[] bis zur vorletzten stelle ein \n oder eine \0 steht
     // Wenn ja dann wir dieses Zeichen und folgende (bis zur vorletzen stelle) durch ein " " (Leerzeichen) ersetzt
     // Text verarbeitung dadurch einfacher vereinfacht
@@ -332,13 +323,7 @@ void up_bereinige(char *bekommenerZeiger, int langeArray)
     for (i = 0; i < langeArray - 1; i++)                               //überprüfe bis zur vorletzen element ob eine termierende 0 oder \n vorkommt
         if ((bekommenerZeiger[i] == 10) || (bekommenerZeiger[i] == 0)) // Wenn ein \n oder \0 auftaucht, wir diesesdurch ein Leerezeichen ersetzt
             bekommenerZeiger[i] = 32;
-    bekommenerZeiger[i] = '\0'; // ersetze ungültiges Zeichen
-    //break;                    //beendet forschleife an der stelle der vorzeitigen terminierenden null
-    //}
-    /* for (i + 1; i < langeArray - 1; i++) //starte beim abgebrochen index der vorherigen schleife
-        bekommenerZeiger[i] = 32;        // fülle bis an die Vorletzte Stelle alles mit Leerzeichen auf
-*/
-    //bekommenerZeiger[i] = '\0'; //An die allerletzte stelle des char[] wird die terminierende \0 gesetzt
+    bekommenerZeiger[i] = '\0'; //An die allerletzte stelle des char[] wird die terminierende \0 gesetzt
 }
 int up_text_ueberpruefung(char *bekommenerZeiger, int langeArray)
 {
@@ -393,7 +378,7 @@ int up_zahl_ueberpruefung(char *bekommenerZeiger, int langeArray)
             {
                 fehler = 1; // Fehler weil char array nicht die notwendige Anzahl der Stellen erfüllt
                 printf("\nEingaben enthielt zu wenig Stellen\n ");
-                printf("Sie müssen %d Stellen angeben (Wenn Eingabe kleiner als %d Stellen ist, geben sie 0 an den Anfang\n", langeArray - 1, langeArray - 1);
+                printf("Sie muessen %d Stellen angeben (Wenn Eingabe kleiner als %d Stellen ist, geben sie 0 an den Anfang\n", langeArray - 1, langeArray - 1);
                 printf("\nBitte nochmal probieren\n");
                 break;
             }
@@ -416,7 +401,7 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     //Überprüft auch ob diese E-Mail bereits vorhanden ist und gibt einen Fehler zurück
 
     //Zusatzinfos
-    //Es gibt bishier im Programm 2 möglichkeiten wie die char[] (vorname und nachname) gefüllt werden können:
+    //Es gibt bisher im Programm 2 Möglichkeiten, wie die char[] (vorname und nachname) gefüllt werden können:
 
     //1 Fall:
     //das Char Array wurde vollständig gefüllt bis an stelle 15 -->
@@ -424,7 +409,7 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     //[1]'h'
     //[...]'x'
     //[13]'e'
-    //[14]'\0'
+    //[14]'\0' <-- Terminierende 0 an der letzten (richtigen) Stelle
     //[15]' '<-- hier kommen noch die 5 Leerzeichen, als Trennungszeichen für die ausgaben später
     //[...]' '
     //[19]'\0'
@@ -435,12 +420,12 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     //[0]'t'
     //[1]'h'
     //[2]'\n'  <-- Vorzeitiges Ende wird mit \n gekennzeichnet
-    //[3]'\0'
+    //[3]'\0' <-- Terminierende 0 an der falschen (vorzeitige) Stelle
     //[4]' ' <-- hier kommen noch die 5 Leerzeichen, als Trennungszeichen für die ausgaben später
     //[...]' '
     //[19]'\0'
 
-    //Trittfall 2 auf muss beim kopieren nur zu der Stelle geschehen, bis das '\n' kommt
+    //Trittfall 2 auf,  muss beim Kopieren nur zu der Stelle geschehen, bis das '\n' kommt
 
     char mailzusatz[7 + 1] = {'@', 'u', 'n', 'i', '.', 'd', 'e'};
     int i, j, fehler = 0;
@@ -448,7 +433,7 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
     for (i = 0; i < (laengevorname - 5 - 1); i++) // gehe bis index 14 des vornamens. Eins vor der Terminierenden null, bis hierhin könnte Text stehen
     {
         //Kopiere jedes Zeichen vom Vonamen in das E-Mail Feld solange bis man eben entwerder ein vorzeitiges Ende (FALL 2) (\n) gefunden hat,
-        //oder man an der Vorletzten stelle ist
+        //oder man an der Vorletzten stelle ist (FALL 1)
         if (zeigervorname[i] != 10)            // 10 ist \n .
             zeigeremail[i] = zeigervorname[i]; //Kopiere nun die Zeichen des Vornamens in die E-Mail
         else
@@ -491,7 +476,7 @@ void up_entferne_datensatz(t_feld *f)
     int auswahl;
     printf("\n Was willstdu entfernen");
     printf("\n '1' Fure die leerung aller Listenelemente");
-    printf("\n '2' für die Entfernung einzelner Bentutzer");
+    printf("\n '2' fuer die Entfernung einzelner Bentutzer\n");
 
     scanf("%i", &auswahl);
     fflush(stdin);
@@ -506,6 +491,7 @@ void up_entferne_datensatz(t_feld *f)
             free(f->mom->davor);     //Leert den Speicher des Listenelementes starte bei dem hinter dir,
             f->mom = f->mom->danach; // Wenn du das aktuelle löschen würdest dann kannst du nicht mehr die Liste durchgehen
         }
+        free(f->mom);
         f->mom = 0;
         f->start = 0;
         f->temp = 0;
@@ -519,8 +505,8 @@ void up_entferne_datensatz(t_feld *f)
         ///////
         //gebe E-Mail ein
         //suche nach e-mail
-        ///vom voränger Zeiger muss der nachfolger auf den übernächsten gesetzt werden
-        //vom nachfolger Zeiger muss der voränger auf den vor vor letzten Zeiger
+        ///vom vorgänger Zeiger muss der nachfolger auf den übernächsten gesetzt werden
+        //vom nachfolger Zeiger muss der voränger auf den von vorletzten Zeiger
         char eingabe[45 + 1];
         char tmpeingabe[45 + 1];
         int i;
@@ -602,7 +588,7 @@ void up_entferne_datensatz(t_feld *f)
 int up_suche_doppelte_elemente(t_feld *f, char *zeigertext)
 {
     //Methode überprüft, ob die Inhalte der neu eingelesenen Zeile bereits in einer der Listenelementen vorkommt.
-    //Als entscheidendes kriterium,(und übergabe Paramter) wird die E-Mail benutze, da diese einmalig ist und nicht doppelt vorkommen darf/kann.
+    //Als entscheidendes Kriterium,(und Übergabeparamter) wird die E-Mail benutze, da diese einmalig ist und nicht doppelt vorkommen darf/kann.
 
     int fehler = 0;
     char temp[45 + 1];                 //Hier wird die E-Mail drinne gespeichert der eingelesenen Zeile
@@ -638,9 +624,9 @@ void up_sortieren(t_feld *f)
     f->mom = f->start; //gehe auf den Startzeiger
 
     printf("\n Du kannst nach folgenden Kriterien sortieren");
-    printf("\n '1' für die Sortierung des Vornamens");
-    printf("\n '2' für die Sortierung des Nachnames");
-    printf("\n '3' für die Sortierung der Kursnummer\n");
+    printf("\n '1' fuer die Sortierung des Vornamens");
+    printf("\n '2' fuer die Sortierung des Nachnames");
+    printf("\n '3' fuer die Sortierung der Kursnummer\n");
 
     scanf("%i", &auswahl);
     fflush(stdin);
@@ -649,14 +635,14 @@ void up_sortieren(t_feld *f)
     {
     case 1:
     {
-        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' für aufsteigend\n\t'2' für absteigend\n");
+        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' fuer aufsteigend\n\t'2' fuer absteigend\n");
         do
         {
             scanf("%i", &auswahl);
             fflush(stdin);
         } while (auswahl != 1 && auswahl != 2);
 
-        if (auswahl == 1) ///KURSNUMMER ABSTEIGEND###############################################
+        if (auswahl == 1) ///Vorname ABSTEIGEND###############################################
         {
             f->mom = f->start; //gehe auf den Startzeiger
             // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
@@ -670,14 +656,16 @@ void up_sortieren(t_feld *f)
                     f->mom = f->mom->danach;
                 }
             }
+            f->temp = f->mom; // Wichitg, das letzte Element der Liste wird nun das Temp element,
+            //sodass wenn ein neuer Benutzer angelegt wird dieser ans Ende der sortierten Liste kommt
+
             printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
             printf("\n\nWeiter mit Enter Taste ...");
             getchar();
         }
-        else ///KURSNUMMER AUFTEIGEND###############################################
+        else ///Vorname AUFTEIGEND###############################################
         {
-            f->mom = f->start; //gehe auf den Startzeiger
-            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            f->mom = f->start;                //gehe auf den Startzeiger
             for (i = 0; i < zaehler - 1; i++) // austeigend
             {
                 f->mom = f->start;
@@ -688,6 +676,9 @@ void up_sortieren(t_feld *f)
                     f->mom = f->mom->danach;
                 }
             }
+            f->temp = f->mom; // Wichitg, das letzte Element der Liste wird nun das Temp element,
+            //sodass wenn ein neuer Benutzer angelegt wird dieser ans Ende der sortierten Liste kommt
+
             printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
             printf("\n\nWeiter mit Enter Taste ...");
             getchar();
@@ -696,17 +687,16 @@ void up_sortieren(t_feld *f)
     }
     case 2:
     {
-        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' für aufsteigend\n\t'2' für absteigend\n");
+        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' fuer aufsteigend\n\t'2' fuer absteigend\n");
         do
         {
             scanf("%i", &auswahl);
             fflush(stdin);
         } while (auswahl != 1 && auswahl != 2);
 
-        if (auswahl == 1) ///KURSNUMMER ABSTEIGEND###############################################
+        if (auswahl == 1) ///Nachname ABSTEIGEND###############################################
         {
-            f->mom = f->start; //gehe auf den Startzeiger
-            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            f->mom = f->start;                //gehe auf den Startzeiger
             for (i = 0; i < zaehler - 1; i++) // absteigend
             {
                 f->mom = f->start;
@@ -717,14 +707,17 @@ void up_sortieren(t_feld *f)
                     f->mom = f->mom->danach;
                 }
             }
+
+            f->temp = f->mom; // Wichitg, das letzte Element der Liste wird nun das Temp element,
+            //sodass wenn ein neuer Benutzer angelegt wird dieser ans Ende der sortierten Liste kommt
+
             printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
             printf("\n\nWeiter mit Enter Taste ...");
             getchar();
         }
-        else ///KURSNUMMER AUFTEIGEND###############################################
+        else ///Nachname AUFTEIGEND###############################################
         {
-            f->mom = f->start; //gehe auf den Startzeiger
-            // Da die Kursnummer mit führenden 0 (Nullen) gefüllt ist , kann hier die StringCompare Funktion verwendet werde ,
+            f->mom = f->start;                //gehe auf den Startzeiger
             for (i = 0; i < zaehler - 1; i++) // austeigend
             {
                 f->mom = f->start;
@@ -735,6 +728,9 @@ void up_sortieren(t_feld *f)
                     f->mom = f->mom->danach;
                 }
             }
+            f->temp = f->mom; // Wichitg, das letzte Element der Liste wird nun das Temp element,
+            //sodass wenn ein neuer Benutzer angelegt wird dieser ans Ende der sortierten Liste kommt
+
             printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
             printf("\n\nWeiter mit Enter Taste ...");
             getchar();
@@ -745,7 +741,7 @@ void up_sortieren(t_feld *f)
 
     case 3:
     {
-        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' für aufsteigend\n\t'2' für absteigend\n");
+        printf("\n In welcher Reihenfolge, soll sortiert werden\n\t'1' fuer aufsteigend\n\t'2' fuer absteigend\n");
         do
         {
             scanf("%i", &auswahl);
@@ -766,6 +762,9 @@ void up_sortieren(t_feld *f)
                     f->mom = f->mom->danach;
                 }
             }
+            f->temp = f->mom; // Wichitg, das letzte Element der Liste wird nun das Temp element,
+            //sodass wenn ein neuer Benutzer angelegt wird dieser ans Ende der sortierten Liste kommt
+
             printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
             printf("\n\nWeiter mit Enter Taste ...");
             getchar();
@@ -784,6 +783,9 @@ void up_sortieren(t_feld *f)
                     f->mom = f->mom->danach; //Nächstes Element
                 }
             }
+            f->temp = f->mom; // Wichitg, das letzte Element der Liste wird nun das Temp element,
+            //sodass wenn ein neuer Benutzer angelegt wird dieser ans Ende der sortierten Liste kommt
+
             printf("\n Es wurde erfolgreich sortiert, schaue im Hauptprogramm unter Punkt 4 die Ausgabe an.");
             printf("\n\nWeiter mit Enter Taste ...");
             getchar();
@@ -863,7 +865,8 @@ void up_zeiger_tausch(t_feld *f)
 }
 int up_verschluesseln(t_feld *f)
 {
-    //E-Mail prefix wird verschlüsselt
+
+    //E-Mail prefix wird verschlüsselt, durch eingabe eines Passwortes
     char eingabe_key[10] = {0};
     const MOD = 60;
     int passwort; //Das eingegebene Passwort in eine Ganzzahl gespeichert
@@ -873,14 +876,13 @@ int up_verschluesseln(t_feld *f)
     scanf("%s", &eingabe_key); //Passwort kann alle zeichen enthalten
     fflush(stdin);
 
-    for (i = 0; i < 10; i++) //wandelt das eingebene Passwort in eine Ganzzahl, in dem die ASCIIwerte der einzellnen Ziffern zusammengezählt werden
+    for (i = 0; i < 10; i++) //wandelt das eingebene Passwort in eine Ganzzahl, in dem die ASCIIwerte der einzelnen Ziffern zusammengezählt werden
         passwort = passwort + eingabe_key[i];
 
-    // Für die berechnung des wertes das auf den klartext addiert wird
-
-    key = passwort % MOD + 65; // 65 weil, verschlüsseltes Zeichen, soll kein @ enthalten, daher fangen wir beim asci code 1 weiter an
     //Algorithumus
-    //Cäsar Verfahren addiere auf den char ASCII-Wert eine geheime Zahl drauf. Daruf wird ein anderes Zeichen ausgegeben
+    //Cäsar Verfahren addiere auf den char ASCII-Wert eine geheime Zahl drauf, dann wird es ein anderes Zeichen.
+    //Wir brauchen nur einen Wert (key), den wir auf den Ascii Code der jeweiligen Zeichen addieren
+    key = passwort % MOD + 65; // 65 weil, verschlüsseltes Zeichen, soll kein @ enthalten, daher fangen wir beim ascii code ab stelle 65 an
 
     while (f->mom) // gehe die Liste durch
     {
@@ -895,19 +897,19 @@ int up_verschluesseln(t_feld *f)
     }
     printf("\n alle E-Mails wurden verschluesselt,\n");
     printf("\n\nWeiter mit Enter Taste ...");
-
     getchar();
-    return passwort; //die Passwort im klartext wird returnt
+
+    return passwort; //das Passwort im Klartext wird returnt
 }
 void up_entschluesseln(t_feld *f, int passwort)
 {
-    //Methode um zu entschlüsseln enthält als Übergabeparameter das Passwort, dass bei der Methode up_verschluesseln verwendet wurde
+    //Methode um zu Entschlüsseln enthält als Übergabeparameter das Passwort, dass bei der Methode up_verschluesseln verwendet wurde
     const MOD = 60; // Für die berechnung des wertes das auf den klartext addiert wird
 
     int key;
     int i, input_passwort = 0;
     char eingabe_key[10] = {0};
-    //   int key;
+
     printf("Code zum Entschluesseln eingeben\n");
     scanf("%s", &eingabe_key);
     fflush(stdin);
@@ -937,7 +939,7 @@ void up_entschluesseln(t_feld *f, int passwort)
     }
     else
     {
-        printf("Der Code War falsch");
+        printf("Der Code war falsch");
         printf("\n\nWeiter mit Enter Taste ...");
         getchar();
     }

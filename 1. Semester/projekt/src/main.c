@@ -57,7 +57,7 @@
 //
 //  8.  Verschluesseln
 //          Der Benutzer kann die E-Mail aller Studenten durch die eingabe verschlüsseln
-//              Es wird nur der E-Mail präfix vertschlüsselt (alles vor dem @ Zeichen),,
+//              Es wird nur der E-Mail präfix verschlüsselt (alles vor dem @ Zeichen),,
 //
 //  9.  Entschluesseln
 //          Der Benutzer kann durch die Eingaben des richtigen Schlüssles alle E-Mails wieder entschlüsseln
