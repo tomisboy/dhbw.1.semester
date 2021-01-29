@@ -4,20 +4,21 @@
 int up_menu(t_feld *f)
 {
     int passwort, auswahl;
-    system("cls");
+    //system("cls");
     printf("\n\tWillkommen im Hauptprogramm\n");
     printf("\nDu kannst folgene Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
-    printf("\n 1: Einlesen der input.txt ");
-    printf("\n 2: Anlegen eines neuen Studentens");
-    printf("\n 3: Sortierung");
-    printf("\n 4: Anzeigen: Listet alle Studenten ");
-    printf("\n 5: Entfernen eines Studenten oder der ganzen Liste");
-    printf("\n 6: Speichern der Datei in die output.txt");
-    printf("\n 7: Anzeige der Zeiger");
-    printf("\n 8: Verschluesseln");
-    printf("\n 9: Entschluesseln");
+    printf("\n 1:  Einlesen der input.txt ");
+    printf("\n 2:  Anlegen eines neuen Studentens auf");
+    printf("\n 3:  Sortierung");
+    printf("\n 4:  Anzeigen: Listet alle Studenten ");
+    printf("\n 5:  Entfernen eines Studenten oder der ganzen Liste");
+    printf("\n 6:  Speichern der Datei in die output.txt");
+    printf("\n 7:  Suchen/Filtern");
+    printf("\n 8:  Verschluesseln");
+    printf("\n 9:  Entschluesseln");
+    printf("\n 10: Anzeige der Zeiger");
 
-    printf("\n \n Gebe nun bitte eine Zahl ein:\t");
+    printf("\n \nGebe nun bitte eine Zahl ein:\t");
     scanf("%i", &auswahl);
     fflush(stdin);
 
@@ -45,13 +46,16 @@ int up_menu(t_feld *f)
         up_speichern(f);
         break;
     case 7:
-        up_zeiger_anzeigen(f);
+        up_suche(f);
         break;
     case 8:
         passwort = up_verschluesseln(f);
         break;
     case 9:
         up_entschluesseln(f, passwort);
+        break;
+    case 10:
+        up_zeiger_anzeigen(f);
         break;
     default:
         break;
@@ -405,8 +409,8 @@ void up_anzeige_daten(t_feld *f)
 {
     int zaehler = 0;
     f->mom = f->start; //Starte beim ersten Listenelement
-    printf("\n  Vorname             Nachname             Kurs       E-Mail                                       ECTS    Index");
-    printf("\n________________________________________________________________________________________________________________");
+    printf("\n Vorname              Nachname             Kurs       E-Mail                                        ECTS");
+    printf("\n________________________________________________________________________________________________________");
     while (f->mom) // gehe solange die liste durch bis du das ende = 0 erreichst
     {
         //Gibt aktuellen Listenelemente formatiert aus
@@ -416,8 +420,7 @@ void up_anzeige_daten(t_feld *f)
             zaehler++;           //Zähle die ausgebenen Listen aus
         else
         { //Es wurden 25 Zeichen eingelesen
-            printf("\n\nEs wurden die 25 Zeilen ausgegeben\num weitere 25 Zeilen auszugeben bitte mit Enter weiter");
-            printf("\nWeiter mit Enter Taste ...");
+            printf("\n\nEs wurden die ersten 25 Zeilen ausgegeben. Um weitere 25 Zeilen auszugeben bitte mit Enter weiter");
             getchar();
             zaehler = 0; //Setzte Zähler zurück
         }
@@ -429,9 +432,9 @@ void up_anzeige_daten(t_feld *f)
 void up_entferne_datensatz(t_feld *f)
 {
     int auswahl;
-    printf("\n Was willstdu entfernen");
+    printf("\n Was wollen Sie entfernen");
     printf("\n '1' Fure die leerung aller Listenelemente");
-    printf("\n '2' fuer die Entfernung einzelner Bentutzer\n");
+    printf("\n '2' Fuer die Entfernung einzelner Studenten\n");
 
     scanf("%i", &auswahl);
     fflush(stdin);
@@ -565,6 +568,9 @@ void up_speichern(t_feld *f)
             f->mom = f->mom->danach; //nächsten Listenelement
         }
         fclose(einlesen); //Datei wird geschlossen
+
+        printf("\n Datei wurde erfolgreich gespeichert\n Weiter mit Enter");
+        getchar();
     }
 }
 
@@ -583,12 +589,19 @@ void up_zeiger_anzeigen(t_feld *f)
 int up_verschluesseln(t_feld *f)
 {
 
-    //E-Mail prefix wird verschlüsselt, durch eingabe eines Passwortes
+    //E-Mail Vor und Nachname wird verschlüsselt, durch Eingabe eines maximal 10 stelligen Passwortes (keine Einschränkung der Zeichen)
+    //Vorgehen:
+    //Benutzer gibt ein Passwort ein dieses char wir zeichenweise in eine Zahl umgewandelt
+    //Diese Zahl wird dann mod 60 gerechnet und dann um 1 erhöht damit haben wir unseren KEY für das Cäsar Verfahren
+    //Cäsar Verfahren addiere auf den char ASCII-Wert eine geheime Zahl (KEY) drauf, dann wird es ein anderes Zeichen.
+
     char eingabe_key[10] = {0};
     const MOD = 60;
     int passwort; //Das eingegebene Passwort in eine Ganzzahl gespeichert
     int i, key = 0;
     f->mom = f->start;
+    printf("\nWillkommen zurm Verschluesselungs Programmm, hiermit ist es moeglich die E-Mail der Studentens zu verschluesseln\n\nDas Passwort darf maximal aus 10 Zeichen bestehen und sollte nicht vergessen werden");
+
     printf("Code zum Verschluesseln eingeben\n");
     scanf("%s", &eingabe_key); //Passwort kann alle zeichen enthalten
     fflush(stdin);
@@ -596,19 +609,17 @@ int up_verschluesseln(t_feld *f)
     for (i = 0; i < 10; i++) //wandelt das eingebene Passwort in eine Ganzzahl, in dem die ASCIIwerte der einzelnen Ziffern zusammengezählt werden
         passwort = passwort + eingabe_key[i];
 
-    //Algorithumus
-    //Cäsar Verfahren addiere auf den char ASCII-Wert eine geheime Zahl drauf, dann wird es ein anderes Zeichen.
-    //Wir brauchen nur einen Wert (key), den wir auf den Ascii Code der jeweiligen Zeichen addieren
-    key = passwort % MOD + 65; // 65 weil, verschlüsseltes Zeichen, soll kein @ enthalten, daher fangen wir beim ascii code ab stelle 65 an
+    key = passwort % MOD + 1; // addiere 1, falls passwort ein vielfaches von 60 ist und so mit 0 addiert worden wäre
 
     while (f->mom) // gehe die Liste durch
     {
         for (i = 0; i < 45; i++)
+                f->mom->email[i] = f->mom->email[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) EMAIL
+
+        for (i = 0; i < 15; i++)
         {
-            if (f->mom->email[i] == 64) //Verschlüssele solange du bis auf das @ Zeichen triffst
-                break;
-            else
-                f->mom->email[i] = f->mom->email[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung )
+                f->mom->vorname[i] = f->mom->vorname[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) VORNAME
+                f->mom->nachname[i] = f->mom->nachname[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) NACHNAME
         }
         f->mom = f->mom->danach;
     }
@@ -638,16 +649,18 @@ void up_entschluesseln(t_feld *f, int passwort)
     f->mom = f->start;              //setzte start
     if (passwort == input_passwort) //Nur wenn das eingebene Passwort den richtigen Passwort (das der Methode übergeben) entspricht, dann wird entschlüsselt
     {
-        key = passwort % MOD + 65;
+        key = passwort % MOD + 1;
         while (f->mom) //Geht die Liste durch
         {
             for (i = 0; i < 45; i++) //ENTSCHLÜSSLEN
-            {
-                if (f->mom->email[i] == 64) // wenn du das "Klartext" "@" findest kannst du aufhören zu entschlüsseln
-                    break;
-                else
                     f->mom->email[i] = f->mom->email[i] - key; //entschlüsselung . Ziehe den zum verschlüsselung addierten wert nun wieder ab
-            }
+
+
+             for (i = 0; i < 15; i++)
+        {
+                f->mom->vorname[i] = f->mom->vorname[i] - key; 
+                f->mom->nachname[i] = f->mom->nachname[i] - key; 
+        }
             f->mom = f->mom->danach;
         }
 
@@ -663,4 +676,98 @@ void up_entschluesseln(t_feld *f, int passwort)
     }
 }
 
+void up_suche(t_feld *f)
+{
 
+    int auswahl;
+
+    char eingabe_name[20 + 1];
+    char *zeigereingabe_name = eingabe_name;
+
+    char eingabe_kurs[10 + 1];
+    char *zeigereingabe_kurs = eingabe_kurs;
+    int i, fehler = 0;
+
+    if (f->start == 0)
+        printf("\nACHTUNG !!! \nKeine Daten vorhanden, bitte erst Daten einlesen");
+    else
+    {
+        printf("Nach was soll gefilter bzw. gesucht werden\n'1' um nach Vor- oder Nachnamen zu suchen\n'2' um nach Kursnummer zu filtern: \n");
+
+        do
+        {
+            scanf("%i", &auswahl);
+            fflush(stdin);
+        } while (auswahl != 1 && auswahl != 2);
+
+        switch (auswahl)
+        {
+        case 1: //Suche bzw filtere nach Namen
+        {
+            up_char_init(zeigereingabe_name, sizeof(eingabe_name)); //Initialisiere die Eingabe mit Leerzeichen
+            do
+            {
+                printf("Bitte geben Sie einen Vor- oder Nachnamen ein, nachdem gesucht werden soll(max 15 Alphabetische-Zeichen keine Sonderzeichen erlaubt!!!):  ");
+                fgets(eingabe_name, sizeof(eingabe_name) - 5, stdin); //Nimm 15 Zeichen der Eingabe und speichere es in eingabe_name
+                fflush(stdin);
+                fehler = up_text_ueberpruefung(zeigereingabe_name, (sizeof(eingabe_name) - 5)); //Überprüfung der Eingabe auf Fehler
+            } while (fehler != 0);
+
+            up_bereinige(zeigereingabe_name, sizeof(eingabe_name)); //bereinigt die Eingabe, so wie sie in der Verketteten Liste stehen könnte
+            f->mom = f->start;
+
+            while (f->mom)
+            {
+                if (!(strcmp(eingabe_name, f->mom->vorname)) || !(strcmp(eingabe_name, f->mom->vorname))) //XOR
+                //Die Bedingung wird wahr wenn entweder der Vorname passt oder der Nachname
+                {
+                    printf("\n%-18s%-18s%-10s%-24s%s", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
+                    fehler = 1;
+                }
+                f->mom = f->mom->danach;
+            }
+
+            if (!fehler) //wenn nichts gefunden dann sag das dem User
+                printf("\nEs ist kein Student mit diesem Vor- oder Nachnamen vorhanden.\nGesuchter Name:\n%s", eingabe_name);
+            break;
+        }
+
+        case 2:
+        {
+            up_char_init(zeigereingabe_kurs, sizeof(eingabe_kurs)); //Initialisiere die Eingabe mit Leerzeichen
+            do
+            {
+                printf("Bitte geben Sie die Kursnummer an, nachder gesucht werden soll (7 stellige Zahl):  ");
+                fgets(eingabe_kurs, sizeof(eingabe_kurs) - 3, stdin); //Nimm 10-3 = 7 Zeichen der Eingabe und speichere es in
+                fflush(stdin);
+                fehler = up_zahl_ueberpruefung(zeigereingabe_kurs, (sizeof(eingabe_kurs) - 3)); //Überprüfung der Eingabe auf Fehler
+            } while (fehler != 0);
+
+            up_bereinige(zeigereingabe_kurs, sizeof(eingabe_kurs)); //bereinigt die Eingabe, so wie sie in der Verketteten Liste stehen könnte
+            f->mom = f->start;
+
+            while (f->mom)
+            {
+                if (!(strcmp(eingabe_kurs, f->mom->kursnummer))) // Wenn String gleich dann liefert es dieses mal eine 1
+                {
+                    printf("\n%-18s%-18s%-10s%-24s%s", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
+                    fehler = 1;
+                }
+                f->mom = f->mom->danach;
+            }
+
+            if (!fehler) //wenn nichts gefunden dann sag das dem User
+                printf("\nFolgender Kurs existiert nicht: %s\n", eingabe_kurs);
+            break;
+
+            break;
+        }
+
+        default:
+            break;
+        }
+    }
+
+    printf("\nWeiter mit Enter Taste ...");
+    getchar();
+}

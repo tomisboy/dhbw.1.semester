@@ -46,7 +46,6 @@ void up_text_zu_Liste(t_feld *f, char text[99 + 1])
     strncpy(f->mom->ects, text + 95, 5);
     f->mom->ects[5] = '\0'; //Speichert die, an der Stelle 95 stehenden 5 Zeichenelemente ,die die ECTSPunkte abbilden in die aktuelle Liste an die passende Stelle (ects)
 }
-
 void up_bereinige(char *bekommenerZeiger, int langeArray)
 {
     // Methode zur Bereinigung von char[] entferne von \n und/oder einer vorzeitigen terminierenden \0

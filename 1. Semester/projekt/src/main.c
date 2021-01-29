@@ -19,7 +19,7 @@
 // [VORNAME]           [NACHNAME]          [KURS ]   [E-MAIL]                                      [ECTS]   
 // Markus              Singer              1100000   Markus.Singer@uni.de                          050
 
-// input.txt und output.txt müssen sowohl vorhanden in dem selben pfad liegen in dem die main.exe läuft
+// input.txt und output.txt müssen in dem selben pfad liegen in dem die main.exe läuft
 
 //Folgende mindestanforderungungs Funktionen sind gegeben:
 //  1.  Einlesen einer Datei und Schreiben der Inhalte in eine Verkette Liste
@@ -52,8 +52,11 @@
 //  6.  Speichern der Datei
 //          Der Inhalt aller LIstenelemente wird formiert in eine output.txt geschrieben
 //
-//  7.  Anzeigen der Zeiger
-//          Listet alle Zeiger der Listenelemte auf.
+//  7.  Suche/Filtern
+//          Der Benutzer kann nach Datensätze Suchen und sich diese anzeigen lassen anhand folgender Kriterien:
+//              Dem Vor- beziehungsweise dem Nachnamen 
+//              Der Kursnummer (Listet alle Studenten eines Kurses auf)
+//                
 //
 //  8.  Verschluesseln
 //          Der Benutzer kann die E-Mail aller Studenten durch die eingabe verschlüsseln
@@ -61,7 +64,9 @@
 //
 //  9.  Entschluesseln
 //          Der Benutzer kann durch die Eingaben des richtigen Schlüssles alle E-Mails wieder entschlüsseln
-
+//
+//  10. Anzeigen der Zeiger
+//          Listet alle Zeiger der Listenelemte auf.
 int main(void)
 {
     int auswahl = 1;
@@ -69,11 +74,12 @@ int main(void)
     t_feld *f = &feld; //erstelle den Zeiger *f
 
     //Setze StartParameter der Zeiger
-    f->mom = 0; //Setze StartParameter der Zeiger
+    f->mom = 0; 
     f->start = 0;
     f->temp = 0;
 
     printf("Willkommen zur Studentenverwaltung\n\n");
+    
     while (auswahl != 0)
         auswahl = up_menu(f); //wiederhole solange den aufruf des Menus, bis die 0 Ausgewählt wird, diese Beendet das Programm
     return (42);

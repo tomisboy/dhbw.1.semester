@@ -55,3 +55,4 @@ int up_verschluesseln(t_feld *f);
 void up_entschluesseln(t_feld *f, int key);
 
 void up_char_init(char *array, int lange);
+void up_suche(t_feld *f);

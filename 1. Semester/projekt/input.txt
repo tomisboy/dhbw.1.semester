@@ -1,26 +1,25 @@
-*15-           -+5  15             +5   7      +3    40                                   +5
-Markus              Singer              1100000   Markus.Singer@uni.de                         050
-Hans                Maier               1200000   Hans.Maier@uni.de                            050
+Markus              Singer              1110000   Markus.Singer@uni.de                         050
+Hans                Maier               1110000   Hans.Maier@uni.de                            050
 Nico                Pos                 0900400   Nico.Pos@uni.de                              090
 Nicolas             Niethammer          0050000   Nicolas.Niethammer@uni.de                    000
 Robionsonson        Ameisenbaumsti      0900401   Robionsonson.Ameisenbaumsti@uni.de           185
 Kim                 Niethammer          0050000   Kim.Niethammer@uni.de                        000
-Caroline            Ingelfinger         0004000   Caroline.Ingelfinger@uni.de                  010
+Caroline            Ingelfinger         1110000   Caroline.Ingelfinger@uni.de                  010
 Erica               Degner              0900401   Erika.Degner@uni.de                          010
 Johnatan            Bernsteinfeld       8850000   Johnatan.Bernsteinfeld@uni.de                185
-Leonardo            Amtmannmus          9950000   Leonard.Amtmannmus@uni.de                    100
-Thomas              Alpert              1001002   Thomas.Alpert@uni.de                         100
-Nico                Flister             1100000   Nico.Flister@uni.de                          100
-Anna                Juhn                0900401   Anna.Juhn@uni.de.de                          343
+Leonardo            Amtmannmus          1110000   Leonard.Amtmannmus@uni.de                    100
+Thomas              Alpert              1110000   Thomas.Alpert@uni.de                         100
+Nico                Flister             1110000   Nico.Flister@uni.de                          100
+Anna                Juhn                0900401   Anna.Juhn@uni.de.de                          100
 Florian             Alpert              0900400   Florian.Alpert@uni.de                        100
 Andre               Kurs                0900400   Andre.Kurs@uni.de                            213
 Nils                Klaubaer            0050000   Nils.Klaubaer@uni.de                         010
-Killian             Speckers            0050000   Killian.Speckers@uni.de                      445
+Killian             Speckers            0050000   Killian.Speckers@uni.de                      213
 Melanie             Miller              5580000   Melanie.Miller@uni.de                        123
 Madlen              Reissen             5580000   Madlen.Reissen@uni.de                        030
 Marco               Marx                1002001   Marco.Marx@uni.dei.de                        210
-Alexander           Juneling            1111102   Alexander.Juneling@uni.de                    200
-Maximilian          Fillier             2133212   Maximilian.Fillier@uni.de                    070
+Alexander           Juneling            1110000   Alexander.Juneling@uni.de                    200
+Maximilian          Fillier             1110000   Maximilian.Fillier@uni.de                    070
 Mark                Lugenburg           1110000   Mark.Lugenburg@uni.de                        110
 Kevin               Roth                8850000   Kevin.Roth@uni.de                            213
 Phillip             Sander              8850000   Phillip.Sander@uni.de                        232
@@ -30,5 +29,6 @@ Anna                Uhurwerk            5580000   Anna.Uhurwerk@uni.de          
 Tamara              Webersons           0900401   Tamara.Webersons@uni.de                      233
 Likas               Flusterer           5580000   Likas.Flusterer@uni.de                       213
 Manfred             Billo               0900401   Manfred.Billo@uni.de                         123
-
-           
+Anna                Ramseloff           8850000   Anna.Ramseloff@uni.de                        070
+Kevin               Falke               5580000   Kevin.Falke@uni.de                           123
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
