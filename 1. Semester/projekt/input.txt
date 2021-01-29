@@ -1,5 +1,7 @@
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
 Markus              Singer              1110000   Markus.Singer@uni.de                         050
 Hans                Maier               1110000   Hans.Maier@uni.de                            050
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
 Nico                Pos                 0900400   Nico.Pos@uni.de                              090
 Nicolas             Niethammer          0050000   Nicolas.Niethammer@uni.de                    000
 Robionsonson        Ameisenbaumsti      0900401   Robionsonson.Ameisenbaumsti@uni.de           185
@@ -31,4 +33,7 @@ Likas               Flusterer           5580000   Likas.Flusterer@uni.de        
 Manfred             Billo               0900401   Manfred.Billo@uni.de                         123
 Anna                Ramseloff           8850000   Anna.Ramseloff@uni.de                        070
 Kevin               Falke               5580000   Kevin.Falke@uni.de                           123
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
 Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200

@@ -5,12 +5,13 @@ int up_menu(t_feld *f)
 {
     int passwort, auswahl;
     //system("cls");
-    printf("\n\tWillkommen im Hauptprogramm\n");
-    printf("\nDu kannst folgene Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
+    printf("\n\t\tWillkommen im Hauptprogramm\n");
+    printf("\n**********************************************************");
+    printf("\nDu kannst folgende Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
     printf("\n 1:  Einlesen der input.txt ");
     printf("\n 2:  Anlegen eines neuen Studentens auf");
     printf("\n 3:  Sortierung");
-    printf("\n 4:  Anzeigen: Listet alle Studenten ");
+    printf("\n 4:  Anzeigen: Listet alle Studenten auf ");
     printf("\n 5:  Entfernen eines Studenten oder der ganzen Liste");
     printf("\n 6:  Speichern der Datei in die output.txt");
     printf("\n 7:  Suchen/Filtern");
@@ -112,10 +113,9 @@ void up_eingabe_tastatur(t_feld *f)
     // ECTS         maximal 3 stellige Zahl der ECTS-Punkt Anzahl wird übernommen (führende 0)
     //die passende E-Mail-Adresse wird automatisch erstellt.
 
-    int i, j, temp, fehler;
+    int fehler;
     char eingabe;
-    char tmptext[99 + 1];      //text in dem die ganze eingabe zusammengebaut als eine zeile (wie in der Textdatei) gespeichert wird
-    char *zeigertxt = tmptext; // Zeiger auf tmptext für methoden
+    char tmptext[99 + 1]; //text in dem die ganze eingabe zusammengebaut als eine zeile (wie in der Textdatei) gespeichert wird
 
     char tmpvorname[20 + 1];          //15 Zeichen des Vornamens + 5 "trennzeichen"
     char *zeigervorname = tmpvorname; //Zeiger auf tmpvorname für methoden
@@ -433,7 +433,7 @@ void up_entferne_datensatz(t_feld *f)
 {
     int auswahl;
     printf("\n Was wollen Sie entfernen");
-    printf("\n '1' Fure die leerung aller Listenelemente");
+    printf("\n '1' Fure die Leerung aller Listenelemente");
     printf("\n '2' Fuer die Entfernung einzelner Studenten\n");
 
     scanf("%i", &auswahl);
@@ -466,7 +466,6 @@ void up_entferne_datensatz(t_feld *f)
         ///vom vorgänger Zeiger muss der nachfolger auf den übernächsten gesetzt werden
         //vom nachfolger Zeiger muss der voränger auf den von vorletzten Zeiger
         char eingabe[45 + 1];
-        char tmpeingabe[45 + 1];
         int i;
         int geloescht; //Überprüft ob ein Wert gelöscht worden ist
         char taste;    //eingabetaste für wiederholtes löschen von Datensätzen
@@ -600,7 +599,7 @@ int up_verschluesseln(t_feld *f)
     int passwort; //Das eingegebene Passwort in eine Ganzzahl gespeichert
     int i, key = 0;
     f->mom = f->start;
-    printf("\nWillkommen zurm Verschluesselungs Programmm, hiermit ist es moeglich die Namen und E-Mails der Studenten zu verschluesseln\n\nDas Passwort darf maximal aus 10 Zeichen bestehen und sollte nicht vergessen werden");
+    printf("\nWillkommen zurm Verschluesselungs Programmm.\nHiermit ist es moeglich die Namen und E-Mails der Studenten zu verschluesseln\n\nDas Passwort darf maximal aus 10 Zeichen bestehen und sollte nicht vergessen werden");
 
     printf("Code zum Verschluesseln eingeben\n");
     scanf("%s", &eingabe_key); //Passwort kann alle zeichen enthalten
@@ -614,12 +613,12 @@ int up_verschluesseln(t_feld *f)
     while (f->mom) // gehe die Liste durch
     {
         for (i = 0; i < 45; i++)
-                f->mom->email[i] = f->mom->email[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) EMAIL
+            f->mom->email[i] = f->mom->email[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) EMAIL
 
         for (i = 0; i < 15; i++)
         {
-                f->mom->vorname[i] = f->mom->vorname[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) VORNAME
-                f->mom->nachname[i] = f->mom->nachname[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) NACHNAME
+            f->mom->vorname[i] = f->mom->vorname[i] + key;   //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) VORNAME
+            f->mom->nachname[i] = f->mom->nachname[i] + key; //Hier wird der wert auf den asci Code addiert (die eigentlich Verschlüsselung ) NACHNAME
         }
         f->mom = f->mom->danach;
     }
@@ -652,15 +651,14 @@ void up_entschluesseln(t_feld *f, int passwort)
         key = passwort % MOD + 1;
         while (f->mom) //Geht die Liste durch
         {
-            for (i = 0; i < 45; i++) //ENTSCHLÜSSLEN
-                    f->mom->email[i] = f->mom->email[i] - key; //entschlüsselung . Ziehe den zum verschlüsselung addierten wert nun wieder ab
+            for (i = 0; i < 45; i++)                       //ENTSCHLÜSSLEN
+                f->mom->email[i] = f->mom->email[i] - key; //entschlüsselung . Ziehe den zum verschlüsselung addierten wert nun wieder ab
 
-
-             for (i = 0; i < 15; i++)
-        {
-                f->mom->vorname[i] = f->mom->vorname[i] - key; 
-                f->mom->nachname[i] = f->mom->nachname[i] - key; 
-        }
+            for (i = 0; i < 15; i++)
+            {
+                f->mom->vorname[i] = f->mom->vorname[i] - key;
+                f->mom->nachname[i] = f->mom->nachname[i] - key;
+            }
             f->mom = f->mom->danach;
         }
 

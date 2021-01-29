@@ -205,8 +205,6 @@ int up_emailfeld(t_feld *f, char *zeigervorname, char *zeigernachname, char *zei
 }
 void up_zeiger_tausch(t_feld *f)
 {
-    int zeigerspeichen;
-    //zeigerspeichen = f->mom; // merke dir die aktuelle position vor der vertauschung
     int temp;
 
     //Hier passiert die Magie des Vertauschen 2er aufeinanderfolgenden Elemente einer Liste:
@@ -265,7 +263,6 @@ void up_zeiger_tausch(t_feld *f)
     //muss dieses um eine stelle reduziert werden.
     //der Momentanzeiger liegt ja bisher auf dem nächste index  (eben durch die Vertauschung)
     //damit nun nicht doppelt hochgezählt wird wird der hier reduziert und erst auserhalb der Methode hochgezählt)
-    // f->mom = zeigerspeichen;
     f->mom = f->mom->davor; //setzte aktuellen Zeiger um eine stelle zurück
 }
 void up_char_init(char *array, int lange)
