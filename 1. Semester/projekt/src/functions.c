@@ -600,7 +600,7 @@ int up_verschluesseln(t_feld *f)
     int passwort; //Das eingegebene Passwort in eine Ganzzahl gespeichert
     int i, key = 0;
     f->mom = f->start;
-    printf("\nWillkommen zurm Verschluesselungs Programmm, hiermit ist es moeglich die E-Mail der Studentens zu verschluesseln\n\nDas Passwort darf maximal aus 10 Zeichen bestehen und sollte nicht vergessen werden");
+    printf("\nWillkommen zurm Verschluesselungs Programmm, hiermit ist es moeglich die Namen und E-Mails der Studenten zu verschluesseln\n\nDas Passwort darf maximal aus 10 Zeichen bestehen und sollte nicht vergessen werden");
 
     printf("Code zum Verschluesseln eingeben\n");
     scanf("%s", &eingabe_key); //Passwort kann alle zeichen enthalten

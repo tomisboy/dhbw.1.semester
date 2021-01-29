@@ -57,13 +57,11 @@
 //              Dem Vor- beziehungsweise dem Nachnamen 
 //              Der Kursnummer (Listet alle Studenten eines Kurses auf)
 //                
-//
 //  8.  Verschluesseln
-//          Der Benutzer kann die E-Mail aller Studenten durch die eingabe verschlüsseln
-//              Es wird nur der E-Mail präfix verschlüsselt (alles vor dem @ Zeichen),,
+//          Der Benutzer kann die E-Mail un den Vor und Nachname aller Studenten durch die Eingabe eines Passworetesverschlüsseln
 //
 //  9.  Entschluesseln
-//          Der Benutzer kann durch die Eingaben des richtigen Schlüssles alle E-Mails wieder entschlüsseln
+//          Der Benutzer kann durch die Eingaben des richtigen Schlüssles alles wieder entschlüsseln
 //
 //  10. Anzeigen der Zeiger
 //          Listet alle Zeiger der Listenelemte auf.
@@ -79,7 +77,7 @@ int main(void)
     f->temp = 0;
 
     printf("Willkommen zur Studentenverwaltung\n\n");
-    
+
     while (auswahl != 0)
         auswahl = up_menu(f); //wiederhole solange den aufruf des Menus, bis die 0 Ausgewählt wird, diese Beendet das Programm
     return (42);
