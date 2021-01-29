@@ -4,7 +4,7 @@
 int up_menu(t_feld *f)
 {
     int passwort, auswahl;
-    //system("cls");
+    system("cls");
     printf("\n\tWillkommen im Hauptprogramm\n");
     printf("\nDu kannst folgene Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
     printf("\n 1: Einlesen der input.txt ");
