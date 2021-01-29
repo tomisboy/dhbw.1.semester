@@ -5,12 +5,14 @@
 ###BLÖABLABLABLBALA
 
 --- BKABLJALKA
-Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
 Markus              Singer              1110000   Markus.Singer@uni.de                         050
 ''' DEN HIER MAG ICH NICHT --^
 Hans                Maier               1110000   Hans.Maier@uni.de                            050
 Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
 Nico                Pos                 0900400   Nico.Pos@uni.de                              090
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
+Nico                Infintrus           0900401   Nico.Infintrus@uni.de                        200
 Nicolas             Niethammer          0050000   Nicolas.Niethammer@uni.de                    000
 Robionsonson        Ameisenbaumsti      0900401   Robionsonson.Ameisenbaumsti@uni.de           185
 Kim                 Niethammer          0050000   Kim.Niethammer@uni.de                        000

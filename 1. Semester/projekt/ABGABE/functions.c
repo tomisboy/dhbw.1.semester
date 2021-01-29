@@ -4,7 +4,7 @@
 int up_menu(t_feld *f)
 {
     int passwort, auswahl;
-    system("cls");
+    //system("cls");
     printf("\n\t\tWillkommen im Hauptprogramm\n");
     printf("\n**********************************************************");
     printf("\nDu kannst folgende Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
@@ -716,7 +716,7 @@ void up_suche(t_feld *f)
 
             while (f->mom)
             {
-                if (!(strcmp(eingabe_name, f->mom->vorname)) || !(strcmp(eingabe_name, f->mom->nachname))) //XOR
+                if (!(strcmp(eingabe_name, f->mom->vorname)) || !(strcmp(eingabe_name, f->mom->vorname))) //XOR
                 //Die Bedingung wird wahr wenn entweder der Vorname passt oder der Nachname
                 {
                     printf("\n%-18s%-18s%-10s%-24s%s", f->mom->vorname, f->mom->nachname, f->mom->kursnummer, f->mom->email, f->mom->ects);
