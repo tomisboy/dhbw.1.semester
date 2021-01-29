@@ -1,7 +1,6 @@
 //Thomas Alpert
 #include "header.h"
 
-
 void up_neues_Listenelement(t_feld *f, char text[99 + 1])
 {
 
