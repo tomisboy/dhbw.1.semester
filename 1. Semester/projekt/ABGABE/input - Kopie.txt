@@ -1,5 +1,5 @@
 ***INFOS
-*** Inputdatei bei der noch Kommentare vorhanden sind und auch doppelte Einträge vorhanden sind!!!
+*** Inputdatei bei der noch Kommentar vorhanden sind und auch doppelte Einträge vorhanden sind!!!
 *** Sowohl die Kommentare, als auch die doppelten Einträge werden nicht eingelesen 
 &&&& nur Zeilen, die mit einem Großbuchstaben beginne, werden eingelesen 
 ###BLÖABLABLABLBALA

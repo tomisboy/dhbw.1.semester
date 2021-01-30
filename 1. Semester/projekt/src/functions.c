@@ -9,7 +9,7 @@ int up_menu(t_feld *f)
     printf("\n**********************************************************");
     printf("\nDu kannst folgende Auswahl treffen:\n(Die Eingabe \"0\" beendet das Programm)\n");
     printf("\n 1:  Einlesen der input.txt ");
-    printf("\n 2:  Anlegen eines neuen Studentens auf");
+    printf("\n 2:  Anlegen eines neuen Studentens");
     printf("\n 3:  Sortierung");
     printf("\n 4:  Anzeigen: Listet alle Studenten auf ");
     printf("\n 5:  Entfernen eines Studenten oder der ganzen Liste");
@@ -491,7 +491,7 @@ void up_entferne_datensatz(t_feld *f)
                 { //Strucelement das gelöscht werden soll wurde gefunden
                     //es gibt 3 möglichkeiten: Das ersten, letzte, oder mittendrinn soll gelöscht werden
 
-                    f->mom->email[0] = '0'; //leert das E-Mail feld, damit die E-Mail nicht mehr in einer Liste steht
+                
                     if (f->mom->davor == 0) //Erstes element wurde getroffen
                     {
 
@@ -601,7 +601,7 @@ int up_verschluesseln(t_feld *f)
     f->mom = f->start;
     printf("\nWillkommen zurm Verschluesselungs Programmm.\nHiermit ist es moeglich die Namen und E-Mails der Studenten zu verschluesseln\n\nDas Passwort darf maximal aus 10 Zeichen bestehen und sollte nicht vergessen werden");
 
-    printf("Code zum Verschluesseln eingeben\n");
+    printf("\nCode zum Verschluesseln eingeben\n");
     scanf("%s", &eingabe_key); //Passwort kann alle zeichen enthalten
     fflush(stdin);
 
